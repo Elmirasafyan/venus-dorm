@@ -3,35 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>اقامتگاه لوکس ونوس | Venus Dormitory</title>
+  <title>پانسیون لوکس ونوس | Venus Pension</title>
   
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <!-- Swiper.js Slider CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
-  <!-- Vazirmatn Font -->
   <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/misc/Farsi-Digits/font-face.css" rel="stylesheet" type="text/css" />
 
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: {
-            sans: ['Vazirmatn FD', 'sans-serif'],
-          },
+          fontFamily: { sans: ['Vazirmatn FD', 'sans-serif'] },
           colors: {
-            brand: {
-              50: '#fdf4ff',
-              100: '#fae8ff',
-              500: '#d946ef',
-              600: '#c026d3',
-              700: '#a21caf',
-            }
+            brand: { 500: '#ec4899', 600: '#db2777' }
           }
         }
       }
@@ -39,430 +24,142 @@
   </script>
 
   <style>
-    body {
-      font-family: 'Vazirmatn FD', sans-serif;
-      background-color: #090d16;
-      color: #e2e8f0;
-      overflow-x: hidden;
-    }
-    
-    .glow-bg {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(120px);
-      opacity: 0.35;
-      z-index: 0;
-      pointer-events: none;
-    }
-    
-    .glass-nav {
-      background: rgba(15, 23, 42, 0.75);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    
-    .glass-card {
-      background: rgba(30, 41, 59, 0.45);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    .glass-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(168, 85, 247, 0.4);
-      box-shadow: 0 20px 40px -15px rgba(168, 85, 247, 0.25);
-    }
-
-    .badge-glow {
-      box-shadow: 0 0 15px rgba(236, 72, 153, 0.4);
-    }
-
-    .swiper-pagination-bullet-active {
-      background: #d946ef !important;
-      width: 24px !important;
-      border-radius: 9999px !important;
-    }
-    .swiper-pagination-bullet {
-      background: #94a3b8;
-      transition: all 0.3s;
-    }
-
-    /* استایل دکمه‌های بارگذاری تصویر */
-    .upload-overlay-btn {
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    .img-container:hover .upload-overlay-btn,
-    .upload-overlay-btn.always-visible {
-      opacity: 1;
-    }
+    body { font-family: 'Vazirmatn FD', sans-serif; background-color: #11050a; color: #fce7f3; overflow-x: hidden; }
+    .glow-bg { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.25; z-index: 0; pointer-events: none; }
+    .glass-nav { background: rgba(88, 28, 135, 0.1); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(236, 72, 153, 0.2); }
+    .glass-card { background: rgba(131, 24, 67, 0.2); backdrop-filter: blur(12px); border: 1px solid rgba(236, 72, 153, 0.2); transition: all 0.4s; }
+    .glass-card:hover { border-color: #ec4899; box-shadow: 0 10px 30px -10px rgba(236, 72, 153, 0.3); }
+    .upload-overlay-btn { opacity: 0; transition: opacity 0.3s ease; }
+    .img-container:hover .upload-overlay-btn { opacity: 1; }
   </style>
 </head>
-<body class="relative selection:bg-fuchsia-500 selection:text-white">
+<body class="relative selection:bg-pink-500 selection:text-white">
 
-  <!-- پس‌زمینه‌های نورانی -->
-  <div class="glow-bg w-96 h-96 bg-purple-600 top-10 left-10"></div>
-  <div class="glow-bg w-96 h-96 bg-pink-600 top-1/3 right-10"></div>
-  <div class="glow-bg w-[30rem] h-[30rem] bg-indigo-600 bottom-10 left-1/3"></div>
+  <div class="glow-bg w-96 h-96 bg-pink-600 top-10 left-10"></div>
+  <div class="glow-bg w-96 h-96 bg-rose-600 bottom-10 right-10"></div>
 
   <!-- هدر -->
   <header class="sticky top-0 z-50 glass-nav">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
       <div class="flex items-center gap-3">
-        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-pink-500 via-purple-500 to-indigo-500 flex items-center justify-center text-white shadow-lg shadow-purple-500/30">
-          <i class="fa-solid fa-hotel text-lg"></i>
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-pink-500 to-rose-600 flex items-center justify-center text-white shadow-lg shadow-pink-500/30">
+          <i class="fa-solid fa-house-chimney-heart text-lg"></i>
         </div>
         <div>
-          <span class="text-xl font-black tracking-tight text-white block">اقامتگاه ونوس</span>
-          <span class="text-[10px] tracking-widest text-slate-400 font-semibold uppercase">Venus Residence</span>
+          <span class="text-xl font-black tracking-tight text-white block">پانسیون ونوس</span>
+          <span class="text-[10px] tracking-widest text-pink-300 font-semibold uppercase">Venus Pension</span>
         </div>
       </div>
-
-      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-        <a href="#gallery" class="hover:text-fuchsia-400 transition-colors">گالری تصاویر</a>
-        <a href="#rooms" class="hover:text-fuchsia-400 transition-colors">اتاق‌ها و امکانات</a>
-        <a href="#features" class="hover:text-fuchsia-400 transition-colors">مزایا</a>
-        <a href="#contact" class="hover:text-fuchsia-400 transition-colors">تماس با ما</a>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-pink-200">
+        <a href="#gallery" class="hover:text-white">گالری</a>
+        <a href="#rooms" class="hover:text-white">واحدها</a>
+        <a href="#contact" class="hover:text-white">تماس</a>
       </nav>
-
-      <a href="#contact" class="px-5 py-2.5 rounded-xl font-semibold text-xs tracking-wide bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 transition-all">
-        رزرو و پذیرش
-      </a>
+      <a href="#contact" class="px-5 py-2.5 rounded-xl text-xs font-bold bg-pink-600 text-white shadow-lg hover:bg-pink-700 transition-all">رزرو سریع</a>
     </div>
   </header>
 
   <!-- هیرو -->
   <section class="relative z-10 max-w-7xl mx-auto px-6 pt-16 pb-12 text-center">
-    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-fuchsia-500/30 bg-fuchsia-500/10 text-fuchsia-300 text-xs font-semibold mb-6 badge-glow">
-      <span class="inline-block w-2 h-2 rounded-full bg-fuchsia-400 animate-pulse"></span>
-      محیطی آرام، مدرن و متناسب با استانداردهای VIP
-    </div>
-    
-    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight max-w-4xl mx-auto mb-6">
-      تجربه اقامتی <span class="bg-clip-text text-transparent bg-gradient-to-r from-pink-400 via-fuchsia-400 to-indigo-400">آرام، لوکس و ممتاز</span> در قلب پایتخت
+    <h1 class="text-3xl sm:text-5xl font-black text-white mb-6 leading-tight">
+      تجربه اقامتی <span class="text-pink-500">آرام، لوکس و ممتاز</span><br> در قلب پایتخت
     </h1>
-
-    <p class="text-sm sm:text-base text-slate-400 max-w-2xl mx-auto mb-8 leading-relaxed">
-      فضایی ایده‌آل و آرام برای دانشجویان دوره‌های تکمیلی، پژوهشگران و افراد سخت‌پسند.
-    </p>
-
-    <div class="flex flex-wrap items-center justify-center gap-4">
-      <a href="#rooms" class="px-7 py-3.5 rounded-2xl bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold text-sm shadow-xl shadow-fuchsia-500/20 hover:scale-105 transition-all">
-        مشاهده و تنظیم اتاق‌ها
-      </a>
-      <a href="tel:09126801450" class="px-7 py-3.5 rounded-2xl glass-card text-slate-200 font-semibold text-sm hover:border-slate-500 hover:text-white transition-all flex items-center gap-2">
-        <i class="fa-solid fa-phone-volume text-fuchsia-400"></i>
-        <span>تماس مستقیم با مدیریت</span>
-      </a>
-    </div>
+    <p class="text-pink-200 max-w-2xl mx-auto mb-8">فضایی ایده‌آل و آرام برای دانشجویان دوره‌های تکمیلی و پژوهشگران سخت‌پسند.</p>
+    <a href="#rooms" class="px-8 py-4 rounded-2xl bg-gradient-to-r from-pink-500 to-rose-500 text-white font-bold hover:scale-105 transition-all inline-block">مشاهده واحدها</a>
   </section>
 
-  <!-- بخش اسلایدر تصاویر (اندازه متناسب و کوچک‌تر) -->
+  <!-- گالری -->
   <section id="gallery" class="relative z-10 max-w-4xl mx-auto px-6 py-8">
-    <div class="text-center mb-6">
-      <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-2">تصاویر مجموعه ونوس</h2>
-      <p class="text-slate-400 text-xs sm:text-sm">روی دکمه دوربین بالای هر اسلاید بزنید تا عکس دلخواهتان را بارگذاری کنید</p>
-    </div>
-
-    <div class="swiper myGallerySwiper rounded-3xl overflow-hidden border border-slate-800 shadow-2xl glass-card p-2 sm:p-4">
+    <div class="text-center mb-6"><h2 class="text-2xl font-extrabold text-white">تصاویر پانسیون</h2></div>
+    <div class="swiper myGallerySwiper rounded-3xl overflow-hidden border border-pink-500/20 glass-card p-2">
       <div class="swiper-wrapper">
-        
-        <!-- اسلاید ۱ -->
         <div class="swiper-slide">
-          <div class="img-container relative h-56 sm:h-80 w-full rounded-2xl overflow-hidden bg-slate-900">
-            <img id="img-gallery-1" src="" alt="فضای عمومی اقامتگاه" class="w-full h-full object-cover">
-            
-            <label class="upload-overlay-btn absolute top-3 left-3 cursor-pointer bg-black/70 hover:bg-fuchsia-600 text-white text-xs px-3 py-2 rounded-xl backdrop-blur-md border border-white/20 transition-all flex items-center gap-2 z-20">
-              <i class="fa-solid fa-camera"></i>
-              <span>بارگذاری عکس اسلاید ۱</span>
-              <input type="file" accept="image/*" class="hidden" onchange="handleImageUpload(event, 'img-gallery-1')">
-            </label>
-
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-6 pointer-events-none">
-              <span class="text-white font-bold text-base">فضای آرام و مجهز اقامتگاه</span>
-            </div>
+          <div class="img-container relative h-60 w-full rounded-2xl overflow-hidden bg-slate-900">
+            <img id="img-gallery-1" src="" alt="تصویر" class="w-full h-full object-cover">
+            <label class="upload-overlay-btn absolute top-3 left-3 cursor-pointer bg-black/60 text-white text-xs px-3 py-2 rounded-xl border border-white/20"><i class="fa-solid fa-camera ml-2"></i>تغییر عکس<input type="file" accept="image/*" class="hidden" onchange="handleImageUpload(event, 'img-gallery-1')"></label>
           </div>
         </div>
-
-        <!-- اسلاید ۲ -->
-        <div class="swiper-slide">
-          <div class="img-container relative h-56 sm:h-80 w-full rounded-2xl overflow-hidden bg-slate-900">
-            <img id="img-gallery-2" src="" alt="اتاق‌های اقامتگاه" class="w-full h-full object-cover">
-            
-            <label class="upload-overlay-btn absolute top-3 left-3 cursor-pointer bg-black/70 hover:bg-fuchsia-600 text-white text-xs px-3 py-2 rounded-xl backdrop-blur-md border border-white/20 transition-all flex items-center gap-2 z-20">
-              <i class="fa-solid fa-camera"></i>
-              <span>بارگذاری عکس اسلاید ۲</span>
-              <input type="file" accept="image/*" class="hidden" onchange="handleImageUpload(event, 'img-gallery-2')">
-            </label>
-
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-6 pointer-events-none">
-              <span class="text-white font-bold text-base">اتاق‌های استاندارد با چیدمان هتلی</span>
-            </div>
-          </div>
-        </div>
-
       </div>
-      <div class="swiper-pagination mt-4 !relative"></div>
     </div>
   </section>
 
-  <!-- اتاق‌ها -->
+  <!-- واحدها -->
   <section id="rooms" class="relative z-10 max-w-7xl mx-auto px-6 py-12">
-    <div class="text-center mb-12">
-      <h2 class="text-3xl font-extrabold text-white mb-2">اتاق‌ها و ظرفیت‌ها</h2>
-      <p class="text-slate-400 text-sm">می‌توانید مستقیماً روی هر اتاق کلیک کرده و عکس واقعی‌اش را بارگذاری نمایید</p>
-    </div>
-
     <div class="grid md:grid-cols-3 gap-8">
-      
-      <!-- اتاق ۱: اختصاصی -->
-      <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between border-t-4 border-t-pink-500 group">
-        <div>
-          <!-- کادر عکس کوچک‌تر و متناسب (h-48) -->
-          <div class="img-container h-48 w-full overflow-hidden relative bg-slate-800">
-            <img id="img-room-1" src="" alt="اتاق یک تخته" class="w-full h-full object-cover">
-            
-            <span class="absolute top-3 right-3 px-3 py-1 bg-pink-500/90 backdrop-blur-md text-white rounded-full text-xs font-bold z-10">VIP</span>
-            
-            <label class="upload-overlay-btn absolute bottom-3 left-3 right-3 cursor-pointer bg-black/75 hover:bg-pink-600 text-white text-xs py-2 px-3 rounded-xl backdrop-blur-md border border-white/20 transition-all flex items-center justify-center gap-2 z-20">
-              <i class="fa-solid fa-cloud-arrow-up text-pink-400"></i>
-              <span class="font-bold">بارگذاری عکس اتاق ۱ تخته</span>
-              <input type="file" accept="image/*" class="hidden" onchange="handleImageUpload(event, 'img-room-1')">
-            </label>
-          </div>
-
-          <div class="p-6">
-            <h3 class="text-xl font-bold text-white mb-2">اتاق ۱ تخته اختصاصی</h3>
-            <p class="text-xs text-slate-400 mb-4 leading-relaxed">فضای آرام و اختصاصی با کمد شخصی، میز مطالعه و یخچال مجزا.</p>
-            <ul class="text-xs text-slate-300 space-y-2 mb-6">
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-400"></i> میز مطالعه و کمد اختصاصی</li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-400"></i> یخچال هتلی اختصاصی</li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-400"></i> نورگیری عالی</li>
-            </ul>
-          </div>
+      <!-- کارت واحد -->
+      <div class="glass-card rounded-3xl overflow-hidden border-t-4 border-t-pink-500">
+        <div class="img-container h-48 w-full relative">
+          <img id="img-room-1" src="" alt="اتاق" class="w-full h-full object-cover">
+          <label class="upload-overlay-btn absolute inset-0 flex items-center justify-center bg-black/40 cursor-pointer text-white font-bold"><i class="fa-solid fa-camera mr-2"></i>بارگذاری تصویر<input type="file" accept="image/*" class="hidden" onchange="handleImageUpload(event, 'img-room-1')"></label>
         </div>
-        <div class="p-6 pt-0">
-          <a href="#contact" class="block w-full py-3 text-center rounded-xl bg-pink-500/10 hover:bg-pink-500 hover:text-white text-pink-300 text-xs font-bold border border-pink-500/30 transition-all">استعلام ظرفیت</a>
+        <div class="p-6">
+          <h3 class="text-lg font-bold text-white mb-2">اتاق اختصاصی VIP</h3>
+          <p class="text-xs text-pink-200">فضای اختصاصی با میز مطالعه و یخچال</p>
         </div>
       </div>
-
-      <!-- اتاق ۲: مستر دو تخته -->
-      <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between border-t-4 border-t-purple-500 group">
-        <div>
-          <div class="img-container h-48 w-full overflow-hidden relative bg-slate-800">
-            <img id="img-room-2" src="" alt="اتاق دو تخته مستر" class="w-full h-full object-cover">
-            
-            <span class="absolute top-3 right-3 px-3 py-1 bg-purple-500/90 backdrop-blur-md text-white rounded-full text-xs font-bold z-10">مستر</span>
-
-            <label class="upload-overlay-btn absolute bottom-3 left-3 right-3 cursor-pointer bg-black/75 hover:bg-purple-600 text-white text-xs py-2 px-3 rounded-xl backdrop-blur-md border border-white/20 transition-all flex items-center justify-center gap-2 z-20">
-              <i class="fa-solid fa-cloud-arrow-up text-purple-400"></i>
-              <span class="font-bold">بارگذاری عکس اتاق ۲ تخته</span>
-              <input type="file" accept="image/*" class="hidden" onchange="handleImageUpload(event, 'img-room-2')">
-            </label>
-          </div>
-
-          <div class="p-6">
-            <h3 class="text-xl font-bold text-white mb-2">اتاق ۲ تخته مستر</h3>
-            <p class="text-xs text-slate-400 mb-4 leading-relaxed">همراه با سرویس و حمام مستر داخل واحد برای راحتی دوچندان شما.</p>
-            <ul class="text-xs text-slate-300 space-y-2 mb-6">
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> سرویس و حمام مستر</li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> تشک‌های ارتوپدیک نو</li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> کمد جادار مجزا</li>
-            </ul>
-          </div>
+      <!-- کارت ۲ -->
+      <div class="glass-card rounded-3xl overflow-hidden border-t-4 border-t-pink-500">
+        <div class="img-container h-48 w-full relative">
+          <img id="img-room-2" src="" alt="اتاق" class="w-full h-full object-cover">
+          <label class="upload-overlay-btn absolute inset-0 flex items-center justify-center bg-black/40 cursor-pointer text-white font-bold"><i class="fa-solid fa-camera mr-2"></i>بارگذاری تصویر<input type="file" accept="image/*" class="hidden" onchange="handleImageUpload(event, 'img-room-2')"></label>
         </div>
-        <div class="p-6 pt-0">
-          <a href="#contact" class="block w-full py-3 text-center rounded-xl bg-purple-500/10 hover:bg-purple-500 hover:text-white text-purple-300 text-xs font-bold border border-purple-500/30 transition-all">استعلام ظرفیت</a>
+        <div class="p-6">
+          <h3 class="text-lg font-bold text-white mb-2">اتاق دو تخته مستر</h3>
+          <p class="text-xs text-pink-200">دارای سرویس بهداشتی مجزا</p>
         </div>
       </div>
-
-      <!-- اتاق ۳: سه تخته -->
-      <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between border-t-4 border-t-indigo-500 group">
-        <div>
-          <div class="img-container h-48 w-full overflow-hidden relative bg-slate-800">
-            <img id="img-room-3" src="" alt="اتاق سه تخته" class="w-full h-full object-cover">
-            
-            <span class="absolute top-3 right-3 px-3 py-1 bg-emerald-500/90 backdrop-blur-md text-white rounded-full text-xs font-bold z-10">پذیرش فعال</span>
-
-            <label class="upload-overlay-btn absolute bottom-3 left-3 right-3 cursor-pointer bg-black/75 hover:bg-indigo-600 text-white text-xs py-2 px-3 rounded-xl backdrop-blur-md border border-white/20 transition-all flex items-center justify-center gap-2 z-20">
-              <i class="fa-solid fa-cloud-arrow-up text-indigo-400"></i>
-              <span class="font-bold">بارگذاری عکس اتاق ۳ تخته</span>
-              <input type="file" accept="image/*" class="hidden" onchange="handleImageUpload(event, 'img-room-3')">
-            </label>
-          </div>
-
-          <div class="p-6">
-            <h3 class="text-xl font-bold text-white mb-2">اتاق ۳ تخته دلباز</h3>
-            <p class="text-xs text-slate-400 mb-4 leading-relaxed">فضای بزرگ، پنجره‌های قدی و نورگیری مناسب با کمد و امکانات مجزا.</p>
-            <ul class="text-xs text-slate-300 space-y-2 mb-6">
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-indigo-400"></i> بالکن و نور طبیعی</li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-indigo-400"></i> سیستم سرمایش و گرمایش مدرن</li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-indigo-400"></i> سکوت و نظم داخلی</li>
-            </ul>
-          </div>
+      <!-- کارت ۳ -->
+      <div class="glass-card rounded-3xl overflow-hidden border-t-4 border-t-pink-500">
+        <div class="img-container h-48 w-full relative">
+          <img id="img-room-3" src="" alt="اتاق" class="w-full h-full object-cover">
+          <label class="upload-overlay-btn absolute inset-0 flex items-center justify-center bg-black/40 cursor-pointer text-white font-bold"><i class="fa-solid fa-camera mr-2"></i>بارگذاری تصویر<input type="file" accept="image/*" class="hidden" onchange="handleImageUpload(event, 'img-room-3')"></label>
         </div>
-        <div class="p-6 pt-0">
-          <a href="#contact" class="block w-full py-3 text-center rounded-xl bg-indigo-500/10 hover:bg-indigo-500 hover:text-white text-indigo-300 text-xs font-bold border border-indigo-500/30 transition-all">استعلام ظرفیت</a>
+        <div class="p-6">
+          <h3 class="text-lg font-bold text-white mb-2">اتاق سه تخته</h3>
+          <p class="text-xs text-pink-200">دلباز و پرنور با بالکن</p>
         </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ویژگی‌ها -->
-  <section id="features" class="relative z-10 max-w-7xl mx-auto px-6 py-12">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-      <div class="glass-card p-6 rounded-3xl text-center">
-        <div class="w-12 h-12 mx-auto rounded-2xl bg-pink-500/10 border border-pink-500/20 flex items-center justify-center text-pink-400 text-xl mb-3">
-          <i class="fa-solid fa-shield-halved"></i>
-        </div>
-        <h4 class="text-white font-bold text-base mb-1">امنیت ۲۴ ساعته</h4>
-        <p class="text-xs text-slate-400">کنترل تردد هوشمند و کادر مراقبت مستقر</p>
-      </div>
-
-      <div class="glass-card p-6 rounded-3xl text-center">
-        <div class="w-12 h-12 mx-auto rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 text-xl mb-3">
-          <i class="fa-solid fa-wifi"></i>
-        </div>
-        <h4 class="text-white font-bold text-base mb-1">اینترنت پرسرعت</h4>
-        <p class="text-xs text-slate-400">پایداری عالی جهت امور آموزشی و دانشگاهی</p>
-      </div>
-
-      <div class="glass-card p-6 rounded-3xl text-center">
-        <div class="w-12 h-12 mx-auto rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 text-xl mb-3">
-          <i class="fa-solid fa-broom"></i>
-        </div>
-        <h4 class="text-white font-bold text-base mb-1">نظافت مداوم</h4>
-        <p class="text-xs text-slate-400">نظافت مستمر محیط‌های عمومی و بهداشتی</p>
-      </div>
-
-      <div class="glass-card p-6 rounded-3xl text-center">
-        <div class="w-12 h-12 mx-auto rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 text-xl mb-3">
-          <i class="fa-solid fa-location-dot"></i>
-        </div>
-        <h4 class="text-white font-bold text-base mb-1">موقعیت مرکزی</h4>
-        <p class="text-xs text-slate-400">دسترسی عالی به مترو و ایستگاه‌های اتوبوس</p>
       </div>
     </div>
   </section>
 
-  <!-- فوتر و اطلاعات تماس -->
-  <footer id="contact" class="relative z-10 border-t border-slate-800 bg-slate-950/80 pt-16 pb-12">
-    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12 text-right">
-      <div>
-        <h4 class="text-white font-bold text-lg mb-4 flex items-center gap-2">
-          <i class="fa-solid fa-location-dot text-pink-500"></i>
-          <span>نشانی مجموعه</span>
-        </h4>
-        <p class="text-sm text-slate-400 leading-relaxed">
-          تهران، میدان آرژانتین، کوچه چهاردهم شرقی، پلاک ۱۸
-        </p>
-      </div>
-
-      <div>
-        <h4 class="text-white font-bold text-lg mb-4 flex items-center gap-2">
-          <i class="fa-solid fa-headset text-purple-500"></i>
-          <span>شماره‌های تماس و پشتیبانی</span>
-        </h4>
-        <div class="text-sm space-y-3 text-slate-300">
-          <p class="flex items-center justify-between border-b border-slate-900 pb-2">
-            <span class="text-slate-400">مدیریت، خانم دلاوری:</span>
-            <a href="tel:09126801450" class="font-bold hover:text-fuchsia-400 transition-colors">۰۹۱۲۶۸۰۱۴۵۰</a>
-          </p>
-          <p class="flex items-center justify-between border-b border-slate-900 pb-2">
-            <span class="text-slate-400">آقای شکرچیان:</span>
-            <a href="tel:09128506405" class="font-bold hover:text-fuchsia-400 transition-colors">۰۹۱۲۸۵۰۶۴۰۵</a>
-          </p>
-          <p class="flex items-center justify-between">
-            <span class="text-slate-400">خانم فرزی:</span>
-            <a href="tel:09194841315" class="font-bold hover:text-fuchsia-400 transition-colors">۰۹۱۹۴۸۴۱۳۱۵</a>
-          </p>
-        </div>
-      </div>
-
-      <div>
-        <h4 class="text-white font-bold text-lg mb-4 flex items-center gap-2">
-          <i class="fa-solid fa-heart text-indigo-500"></i>
-          <span>درباره ونوس</span>
-        </h4>
-        <p class="text-sm text-slate-400 leading-relaxed">
-          «ما کیفیت را فدای کمیت نمی‌کنیم.» ایجاد بستری استاندارد، ایمن و شایسته اولویت بنیادین ماست.
-        </p>
-      </div>
-    </div>
-
-    <div class="max-w-7xl mx-auto px-6 mt-12 pt-6 border-t border-slate-900 text-center text-xs text-slate-500">
-      تمامی حقوق محفوظ است © اقامتگاه ونوس
-    </div>
+  <!-- فوتر -->
+  <footer id="contact" class="py-12 text-center text-pink-300 text-sm">
+    <p>© تمامی حقوق برای پانسیون ونوس محفوظ است.</p>
   </footer>
 
-  <!-- اسکریپت‌ها -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
-    var swiper = new Swiper(".myGallerySwiper", {
-      spaceBetween: 24,
-      centeredSlides: true,
-      autoplay: {
-        delay: 3500,
-        disableOnInteraction: false,
-      },
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-      },
-      loop: true,
-    });
-
-    const targetImageIds = ['img-gallery-1', 'img-gallery-2', 'img-room-1', 'img-room-2', 'img-room-3'];
-
-    const defaultPlaceholder = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'><rect width='800' height='500' fill='%231e293b'/><text x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%2364748b' font-family='sans-serif' font-size='22'>برای قرار دادن عکس کلیک کنید</text></svg>";
-
-    window.addEventListener('DOMContentLoaded', () => {
-      targetImageIds.forEach(id => {
-        const savedData = localStorage.getItem('venus_' + id);
-        const imgElement = document.getElementById(id);
-        if (imgElement) {
-          imgElement.src = savedData ? savedData : defaultPlaceholder;
-        }
-      });
-    });
-
-    // تابع فشرده‌ساز خودکار تصاویر
-    function handleImageUpload(event, imageElementId) {
+    var swiper = new Swiper(".myGallerySwiper", { autoplay: { delay: 3000 }, loop: true });
+    
+    // تابع فشرده‌سازی و بارگذاری
+    function handleImageUpload(event, id) {
       const file = event.target.files[0];
       if (!file) return;
-
       const reader = new FileReader();
       reader.onload = function(e) {
         const img = new Image();
         img.onload = function() {
           const canvas = document.createElement('canvas');
-          const MAX_WIDTH = 600; 
-          const scale = MAX_WIDTH / img.width;
-          
+          const MAX_WIDTH = 500; // فشرده‌سازی هوشمند
           canvas.width = MAX_WIDTH;
-          canvas.height = img.height * scale;
-
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-          const smallBase64 = canvas.toDataURL('image/jpeg', 0.7);
-          
-          document.getElementById(imageElementId).src = smallBase64;
-
-          try {
-            localStorage.setItem('venus_' + imageElementId, smallBase64);
-          } catch (err) {
-            alert('ظرفیت حافظه مرورگر پر شده است!');
-          }
+          canvas.height = img.height * (MAX_WIDTH / img.width);
+          canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+          const dataUrl = canvas.toDataURL('image/jpeg', 0.6);
+          document.getElementById(id).src = dataUrl;
+          localStorage.setItem('venus_' + id, dataUrl);
         };
         img.src = e.target.result;
       };
       reader.readAsDataURL(file);
     }
+
+    // لود خودکار تصاویر ذخیره شده
+    window.addEventListener('DOMContentLoaded', () => {
+      ['img-gallery-1', 'img-room-1', 'img-room-2', 'img-room-3'].forEach(id => {
+        const saved = localStorage.getItem('venus_' + id);
+        if (saved) document.getElementById(id).src = saved;
+      });
+    });
   </script>
 </body>
 </html>
