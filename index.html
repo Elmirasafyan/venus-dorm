@@ -24,15 +24,6 @@
           fontFamily: {
             sans: ['Vazirmatn FD', 'sans-serif'],
           },
-          colors: {
-            brand: {
-              50: '#fdf4ff',
-              100: '#fae8ff',
-              500: '#d946ef',
-              600: '#c026d3',
-              700: '#a21caf',
-            }
-          }
         }
       }
     }
@@ -71,7 +62,7 @@
     }
 
     .glass-card:hover {
-      transform: translateY(-6px);
+      transform: translateY(-4px);
       border-color: rgba(168, 85, 247, 0.4);
       box-shadow: 0 20px 40px -15px rgba(168, 85, 247, 0.25);
     }
@@ -116,11 +107,11 @@
         <a href="#gallery" class="hover:text-fuchsia-400 transition-colors">گالری تصاویر</a>
         <a href="#rooms" class="hover:text-fuchsia-400 transition-colors">اتاق‌ها و امکانات</a>
         <a href="#message" class="hover:text-fuchsia-400 transition-colors">پیام مدیریت</a>
-        <a href="#features" class="hover:text-fuchsia-400 transition-colors">مزایا</a>
+        <a href="#booking" class="hover:text-fuchsia-400 transition-colors">رزرو و پذیرش</a>
         <a href="#contact" class="hover:text-fuchsia-400 transition-colors">تماس با ما</a>
       </nav>
 
-      <a href="#contact" class="px-5 py-2.5 rounded-xl font-semibold text-xs tracking-wide bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 transition-all">
+      <a href="#booking" class="px-5 py-2.5 rounded-xl font-semibold text-xs tracking-wide bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 transition-all">
         رزرو و پذیرش
       </a>
     </div>
@@ -145,14 +136,14 @@
       <a href="#rooms" class="px-7 py-3.5 rounded-2xl bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold text-sm shadow-xl shadow-fuchsia-500/20 hover:scale-105 transition-all">
         مشاهده واحدها
       </a>
-      <a href="tel:09126801450" class="px-7 py-3.5 rounded-2xl glass-card text-slate-200 font-semibold text-sm hover:border-slate-500 hover:text-white transition-all flex items-center gap-2">
-        <i class="fa-solid fa-phone-volume text-fuchsia-400"></i>
-        <span>تماس مستقیم با مدیریت</span>
+      <a href="#booking" class="px-7 py-3.5 rounded-2xl glass-card text-slate-200 font-semibold text-sm hover:border-slate-500 hover:text-white transition-all flex items-center gap-2">
+        <i class="fa-solid fa-list-check text-fuchsia-400"></i>
+        <span>مشاهده جدول ظرفیت‌ها و نرخ‌ها</span>
       </a>
     </div>
   </section>
 
-  <!-- بخش اسلایدر تصاویر (با ارتفاع کنترل‌شده برای جلوگیری از پخ شدن) -->
+  <!-- اسلایدر -->
   <section id="gallery" class="relative z-10 max-w-4xl mx-auto px-6 py-8">
     <div class="text-center mb-6">
       <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-2">تصاویر مجموعه ونوس</h2>
@@ -215,21 +206,19 @@
         <div>
           <div class="h-56 w-full overflow-hidden relative bg-slate-950 flex items-center justify-center">
             <img src="room1.jpg" alt="اتاق یک تخته" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
-            <span class="absolute top-3 right-3 px-3 py-1 bg-pink-500/90 backdrop-blur-md text-white rounded-full text-xs font-bold z-10">VIP</span>
+            <span class="absolute top-3 right-3 px-3 py-1 bg-pink-500/95 backdrop-blur-md text-white rounded-full text-xs font-bold z-10">VIP</span>
           </div>
-
           <div class="p-6">
             <h3 class="text-xl font-bold text-white mb-2">اتاق ۱ تخته اختصاصی</h3>
             <p class="text-xs text-slate-400 mb-4 leading-relaxed">فضای آرام و اختصاصی با کمد شخصی، میز مطالعه و یخچال مجزا.</p>
             <ul class="text-xs text-slate-300 space-y-2 mb-6">
               <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-400"></i> میز مطالعه و کمد اختصاصی</li>
               <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-400"></i> یخچال هتلی اختصاصی</li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-400"></i> نورگیری عالی</li>
             </ul>
           </div>
         </div>
         <div class="p-6 pt-0">
-          <a href="#contact" class="block w-full py-3 text-center rounded-xl bg-pink-500/10 hover:bg-pink-500 hover:text-white text-pink-300 text-xs font-bold border border-pink-500/30 transition-all">استعلام ظرفیت</a>
+          <a href="#booking" class="block w-full py-3 text-center rounded-xl bg-pink-500/10 hover:bg-pink-500 hover:text-white text-pink-300 text-xs font-bold border border-pink-500/30 transition-all">بررسی ظرفیت و نرخ</a>
         </div>
       </div>
 
@@ -238,21 +227,19 @@
         <div>
           <div class="h-56 w-full overflow-hidden relative bg-slate-950 flex items-center justify-center">
             <img src="room2.jpg" alt="اتاق دو تخته مستر" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
-            <span class="absolute top-3 right-3 px-3 py-1 bg-purple-500/90 backdrop-blur-md text-white rounded-full text-xs font-bold z-10">مستر</span>
+            <span class="absolute top-3 right-3 px-3 py-1 bg-purple-500/95 backdrop-blur-md text-white rounded-full text-xs font-bold z-10">مستر</span>
           </div>
-
           <div class="p-6">
             <h3 class="text-xl font-bold text-white mb-2">اتاق ۲ تخته مستر</h3>
             <p class="text-xs text-slate-400 mb-4 leading-relaxed">همراه با سرویس و حمام مستر داخل واحد برای راحتی دوچندان شما.</p>
             <ul class="text-xs text-slate-300 space-y-2 mb-6">
               <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> سرویس و حمام مستر</li>
               <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> تشک‌های ارتوپدیک نو</li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> کمد جادار مجزا</li>
             </ul>
           </div>
         </div>
         <div class="p-6 pt-0">
-          <a href="#contact" class="block w-full py-3 text-center rounded-xl bg-purple-500/10 hover:bg-purple-500 hover:text-white text-purple-300 text-xs font-bold border border-purple-500/30 transition-all">استعلام ظرفیت</a>
+          <a href="#booking" class="block w-full py-3 text-center rounded-xl bg-purple-500/10 hover:bg-purple-500 hover:text-white text-purple-300 text-xs font-bold border border-purple-500/30 transition-all">بررسی ظرفیت و نرخ</a>
         </div>
       </div>
 
@@ -261,59 +248,132 @@
         <div>
           <div class="h-56 w-full overflow-hidden relative bg-slate-950 flex items-center justify-center">
             <img src="room3.jpg" alt="اتاق سه تخته" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
-            <span class="absolute top-3 right-3 px-3 py-1 bg-emerald-500/90 backdrop-blur-md text-white rounded-full text-xs font-bold z-10">پذیرش فعال</span>
+            <span class="absolute top-3 right-3 px-3 py-1 bg-indigo-500/95 backdrop-blur-md text-white rounded-full text-xs font-bold z-10">پذیرش فعال</span>
           </div>
-
           <div class="p-6">
             <h3 class="text-xl font-bold text-white mb-2">اتاق ۳ تخته دلباز</h3>
             <p class="text-xs text-slate-400 mb-4 leading-relaxed">فضای بزرگ، پنجره‌های قدی و نورگیری مناسب با کمد و امکانات مجزا.</p>
             <ul class="text-xs text-slate-300 space-y-2 mb-6">
               <li class="flex items-center gap-2"><i class="fa-solid fa-check text-indigo-400"></i> بالکن و نور طبیعی</li>
               <li class="flex items-center gap-2"><i class="fa-solid fa-check text-indigo-400"></i> سیستم سرمایش و گرمایش مدرن</li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-indigo-400"></i> سکوت و نظم داخلی</li>
             </ul>
           </div>
         </div>
         <div class="p-6 pt-0">
-          <a href="#contact" class="block w-full py-3 text-center rounded-xl bg-indigo-500/10 hover:bg-indigo-500 hover:text-white text-indigo-300 text-xs font-bold border border-indigo-500/30 transition-all">استعلام ظرفیت</a>
+          <a href="#booking" class="block w-full py-3 text-center rounded-xl bg-indigo-500/10 hover:bg-indigo-500 hover:text-white text-indigo-300 text-xs font-bold border border-indigo-500/30 transition-all">بررسی ظرفیت و نرخ</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ویژگی‌ها -->
-  <section id="features" class="relative z-10 max-w-7xl mx-auto px-6 py-12">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-      <div class="glass-card p-6 rounded-3xl text-center">
-        <div class="w-12 h-12 mx-auto rounded-2xl bg-pink-500/10 border border-pink-500/20 flex items-center justify-center text-pink-400 text-xl mb-3">
-          <i class="fa-solid fa-shield-halved"></i>
-        </div>
-        <h4 class="text-white font-bold text-base mb-1">امنیت ۲۴ ساعته</h4>
-        <p class="text-xs text-slate-400">کنترل تردد هوشمند و کادر مراقبت مستقر</p>
+  <!-- بخش رزرو و پذیرش همراه با جدول کشویی (Accordion) -->
+  <section id="booking" class="relative z-10 max-w-5xl mx-auto px-6 py-12">
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-pink-500/30 bg-pink-500/10 text-pink-300 text-xs font-semibold mb-3">
+        <i class="fa-solid fa-table-cells"></i> بخش اطلاعات رزرو
       </div>
+      <h2 class="text-3xl font-extrabold text-white mb-2">جدول ظرفیت‌ها و نرخ‌های مصوب</h2>
+      <p class="text-xs sm:text-sm text-slate-400">جهت مشاهده جزئیات ودیعه، اجاره و تخت‌های خالی، روی دکمه‌ی زیر کلیک کنید.</p>
+    </div>
 
-      <div class="glass-card p-6 rounded-3xl text-center">
-        <div class="w-12 h-12 mx-auto rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 text-xl mb-3">
-          <i class="fa-solid fa-wifi"></i>
+    <!-- کانتینر کشویی (Accordion) -->
+    <div class="glass-card rounded-3xl overflow-hidden border border-fuchsia-500/30">
+      <button onclick="toggleBookingTable()" class="w-full px-6 py-5 flex items-center justify-between bg-slate-900/60 hover:bg-slate-900/90 transition-all text-right">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-fuchsia-500/20 text-fuchsia-400 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-file-invoice-dollar"></i>
+          </div>
+          <div>
+            <span class="text-white font-bold text-base block">مشاهده جدول کامل اتاق‌ها، ودیعه و اجاره</span>
+            <span class="text-xs text-slate-400">به‌روزرسانی شده بر اساس آخرین وضعیت اقامتگاه</span>
+          </div>
         </div>
-        <h4 class="text-white font-bold text-base mb-1">اینترنت پرسرعت</h4>
-        <p class="text-xs text-slate-400">پایداری عالی جهت امور آموزشی و دانشگاهی</p>
-      </div>
+        <i id="toggleIcon" class="fa-solid fa-chevron-down text-fuchsia-400 transition-transform duration-300 text-lg"></i>
+      </button>
 
-      <div class="glass-card p-6 rounded-3xl text-center">
-        <div class="w-12 h-12 mx-auto rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 text-xl mb-3">
-          <i class="fa-solid fa-broom"></i>
+      <!-- محتوای کشویی جدول -->
+      <div id="bookingTableContent" class="hidden p-4 sm:p-6 border-t border-slate-800 bg-slate-950/40 overflow-x-auto">
+        <table class="w-full text-right text-xs sm:text-sm border-collapse min-w-[600px]">
+          <thead>
+            <tr class="border-b border-slate-800 text-fuchsia-400 font-bold bg-slate-900/50">
+              <th class="py-3 px-4 rounded-r-xl">نوع و شماره اتاق</th>
+              <th class="py-3 px-4">ودیعه (میلیون تومان)</th>
+              <th class="py-3 px-4">اجاره ماهانه</th>
+              <th class="py-3 px-4 rounded-l-xl">تخت خالی / تاریخ خالی</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-800/60 text-slate-300">
+            <tr class="hover:bg-slate-900/40 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-white">۳ تخته (شماره ۱۲)</td>
+              <td class="py-3.5 px-4">۱۲</td>
+              <td class="py-3.5 px-4">۱۲</td>
+              <td class="py-3.5 px-4 text-emerald-400 font-semibold">۱ تخت خالی</td>
+            </tr>
+            <tr class="hover:bg-slate-900/40 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-white">چهار تخته (شماره ۱۴)</td>
+              <td class="py-3.5 px-4">۱۰.۵</td>
+              <td class="py-3.5 px-4">۱۰.۵</td>
+              <td class="py-3.5 px-4 text-emerald-400 font-semibold">۱ تخت خالی</td>
+            </tr>
+            <tr class="hover:bg-slate-900/40 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-white">دو تخته (شماره ۲۳)</td>
+              <td class="py-3.5 px-4">۱۵</td>
+              <td class="py-3.5 px-4">۱۵</td>
+              <td class="py-3.5 px-4 text-emerald-400 font-semibold">۲ تخت خالی</td>
+            </tr>
+            <tr class="hover:bg-slate-900/40 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-white">شش تخته (شماره ۳۴)</td>
+              <td class="py-3.5 px-4">۱۰.۵</td>
+              <td class="py-3.5 px-4">۱۰.۵</td>
+              <td class="py-3.5 px-4 text-emerald-400 font-semibold">۳ تخت خالی</td>
+            </tr>
+            <tr class="hover:bg-slate-900/40 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-white">۲ تخته مستر (شماره ۳۱)</td>
+              <td class="py-3.5 px-4">۱۹</td>
+              <td class="py-3.5 px-4">۱۹</td>
+              <td class="py-3.5 px-4 text-emerald-400 font-semibold">۲ تخت خالی</td>
+            </tr>
+            <tr class="hover:bg-slate-900/40 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-white">۳ تخته مستر (شماره ۳۳)</td>
+              <td class="py-3.5 px-4">۱۵</td>
+              <td class="py-3.5 px-4">۱۵</td>
+              <td class="py-3.5 px-4 text-emerald-400 font-semibold">۱ تخت خالی</td>
+            </tr>
+            <tr class="hover:bg-slate-900/40 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-white">۴ تخته (شماره ۳۲)</td>
+              <td class="py-3.5 px-4">۱۰.۵</td>
+              <td class="py-3.5 px-4">۱۰.۵</td>
+              <td class="py-3.5 px-4 text-emerald-400 font-semibold">۱ تخت خالی</td>
+            </tr>
+            <tr class="hover:bg-slate-900/40 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-white">دو تخته (شماره ۱۶)</td>
+              <td class="py-3.5 px-4">۱۴.۵</td>
+              <td class="py-3.5 px-4">۱۴.۵</td>
+              <td class="py-3.5 px-4 text-amber-400 font-semibold">۲ تخت خالی (تاریخ: ۷/۱۸)</td>
+            </tr>
+            <tr class="hover:bg-slate-900/40 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-white">یک تخته (شماره ۲۱)</td>
+              <td class="py-3.5 px-4">۱۸</td>
+              <td class="py-3.5 px-4">۱۸</td>
+              <td class="py-3.5 px-4 text-amber-400 font-semibold">۱ تخت خالی (تاریخ: ۷/۲۵)</td>
+            </tr>
+            <tr class="hover:bg-slate-900/40 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-white">یک تخته (شماره ۴۱)</td>
+              <td class="py-3.5 px-4">۲۵</td>
+              <td class="py-3.5 px-4">۲۵</td>
+              <td class="py-3.5 px-4 text-amber-400 font-semibold">۱ تخت خالی (تاریخ: ۷/۱۸)</td>
+            </tr>
+            <tr class="hover:bg-slate-900/40 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-white">یک تخته (شماره ۲۷)</td>
+              <td class="py-3.5 px-4">۲۵</td>
+              <td class="py-3.5 px-4">۲۵</td>
+              <td class="py-3.5 px-4 text-amber-400 font-semibold">۱ تخت خالی (تاریخ: ۷/۱)</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="mt-4 text-center">
+          <p class="text-[11px] text-slate-400">برای قطعی کردن رزرو و هماهنگی نهایی، لطفاً با مدیر مجموعه تماس حاصل فرمایید.</p>
         </div>
-        <h4 class="text-white font-bold text-base mb-1">نظافت مداوم</h4>
-        <p class="text-xs text-slate-400">نظافت مستمر محیط‌های عمومی و بهداشتی</p>
-      </div>
-
-      <div class="glass-card p-6 rounded-3xl text-center">
-        <div class="w-12 h-12 mx-auto rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 text-xl mb-3">
-          <i class="fa-solid fa-location-dot"></i>
-        </div>
-        <h4 class="text-white font-bold text-base mb-1">موقعیت مرکزی</h4>
-        <p class="text-xs text-slate-400">دسترسی عالی به مترو و ایستگاه‌های اتوبوس</p>
       </div>
     </div>
   </section>
@@ -368,9 +428,10 @@
     </div>
   </footer>
 
-  <!-- Swiper.js -->
+  <!-- اسکریپت‌ها -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
+    // اسلایدر
     var swiper = new Swiper(".myGallerySwiper", {
       spaceBetween: 24,
       centeredSlides: true,
@@ -384,6 +445,15 @@
       },
       loop: true,
     });
+
+    // تابع باز و بسته کردن جدول کشویی رزرو
+    function toggleBookingTable() {
+      const content = document.getElementById('bookingTableContent');
+      const icon = document.getElementById('toggleIcon');
+      
+      content.classList.toggle('hidden');
+      icon.classList.toggle('rotate-180');
+    }
   </script>
 </body>
 </html>
