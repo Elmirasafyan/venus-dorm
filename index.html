@@ -93,6 +93,52 @@
   <div class="glow-bg w-96 h-96 bg-purple-600 top-10 left-10"></div>
   <div class="glow-bg w-96 h-96 bg-pink-600 top-1/3 right-10"></div>
   <div class="glow-bg w-[30rem] h-[30rem] bg-indigo-600 bottom-10 left-1/3"></div>
+  <!-- موقعیت مکانی اقامتگاه -->
+  <section id="map" class="relative z-10 max-w-7xl mx-auto px-6 py-12">
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 text-xs font-semibold mb-3">
+        <i class="fa-solid fa-location-dot"></i>
+        موقعیت مکانی
+      </div>
+
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-3">
+        اقامتگاه ونوس روی نقشه
+      </h2>
+
+      <p class="text-sm text-slate-400 leading-relaxed">
+        تهران، میدان آرژانتین، بلوار بیهقی، کوچه ۱۴ شرقی، پلاک ۱۸
+      </p>
+    </div>
+
+    <div class="glass-card rounded-3xl overflow-hidden border border-indigo-500/20 p-2 sm:p-3 shadow-2xl">
+      <div class="w-full h-80 sm:h-96 rounded-2xl overflow-hidden bg-slate-950">
+        <iframe
+          title="نقشه موقعیت اقامتگاه ونوس در تهران"
+          src="https://maps.google.com/maps?q=%D8%AA%D9%87%D8%B1%D8%A7%D9%86%D8%8C%20%D9%85%DB%8C%D8%AF%D8%A7%D9%86%20%D8%A2%D8%B1%DA%98%D8%A7%D9%86%D8%AA%DB%8C%D9%86%D8%8C%20%D8%A8%D9%84%D9%88%D8%A7%D8%B1%20%D8%A8%DB%8C%D9%87%D9%82%DB%8C%D8%8C%20کوچه%2014%20شرقی،%20پلاک%2018&t=&z=15&ie=UTF8&iwloc=&output=embed"
+          class="w-full h-full"
+          style="border:0"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen>
+        </iframe>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 px-2 pt-4 pb-1">
+        <span class="text-xs text-slate-400 text-center sm:text-right">
+          برای مسیریابی یا مشاهده نقشه در صفحه‌ای جداگانه، از دکمه زیر استفاده کنید.
+        </span>
+
+        <a
+          href="https://www.google.com/maps/search/?api=1&query=%D8%AA%D9%87%D8%B1%D8%A7%D9%86%D8%8C%20%D9%85%DB%8C%D8%AF%D8%A7%D9%86%20%D8%A2%D8%B1%DA%98%D8%A7%D9%86%D8%AA%DB%8C%D9%86%D8%8C%20%D8%A8%D9%84%D9%88%D8%A7%D8%B1%20%D8%A8%DB%8C%D9%87%D9%82%DB%8C%،%20کوچه%2014%20شرقی،%20پلاک%2018"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all">
+          <i class="fa-solid fa-map-location-dot"></i>
+          باز کردن در گوگل‌مپ
+        </a>
+      </div>
+    </div>
+  </section>
 
   <!-- هدر -->
   <header class="sticky top-0 z-50 glass-nav">
