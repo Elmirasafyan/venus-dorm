@@ -645,3 +645,28 @@
 
       <div class="flex flex-col sm:flex-row items-center justify-between gap-3 px-2 pt-4 pb-1">
         <span class="text-xs text-slate-400 text-center sm:text-right">
+          <!-- باکس آمار بازدید -->
+<div class="max-w-md mx-auto my-8 p-6 bg-slate-900/50 border border-slate-700 rounded-2xl backdrop-blur-sm shadow-xl">
+  <h3 class="text-center text-white font-medium mb-4">آمار بازدید اقامتگاه ونوس</h3>
+  
+  <div class="grid grid-cols-3 gap-3 text-center">
+    <!-- بازدید امروز -->
+    <div>
+      <span class="block text-[10px] text-slate-400 uppercase">امروز</span>
+      <strong id="visitorsToday" class="mt-1 block text-lg font-bold text-white">—</strong>
+    </div>
+
+    <!-- بازدید دیروز -->
+    <div class="border-x border-slate-700">
+      <span class="block text-[10px] text-slate-400 uppercase">دیروز</span>
+      <strong id="visitorsYesterday" class="mt-1 block text-lg font-bold text-white">—</strong>
+    </div>
+
+    <!-- کاربران آنلاین -->
+    <div>
+      <span class="block text-[10px] text-slate-400 uppercase">آنلاین</span>
+      <strong id="visitorsOnline" class="mt-1 block text-lg font-bold text-emerald-400">0</strong>
+    </div>
+  </div>
+</div>
+
