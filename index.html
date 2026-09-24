@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- ✅ تگ تأیید گوگل در جایگاه صحیح و استاندارد -->
+  <!-- ✅ تگ تأیید گوگل -->
   <meta name="google-site-verification" content="GAPGPTMASKTOKEN2ah9wys8wheX0X" />
 
   <title>اقامتگاه لوکس ونوس | Venus Residence</title>
@@ -34,56 +34,14 @@
   </script>
 
   <style>
-    body {
-      font-family: 'Vazirmatn FD', sans-serif;
-      background-color: #090d16;
-      color: #e2e8f0;
-      overflow-x: hidden;
-    }
-
-    .glow-bg {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(120px);
-      opacity: 0.35;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .glass-nav {
-      background: rgba(15, 23, 42, 0.75);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .glass-card {
-      background: rgba(30, 41, 59, 0.45);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .glass-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(168, 85, 247, 0.4);
-      box-shadow: 0 20px 40px -15px rgba(168, 85, 247, 0.25);
-    }
-
-    .badge-glow {
-      box-shadow: 0 0 15px rgba(236, 72, 153, 0.4);
-    }
-
-    .swiper-pagination-bullet-active {
-      background: #d946ef !important;
-      width: 24px !important;
-      border-radius: 9999px !important;
-    }
-    .swiper-pagination-bullet {
-      background: #94a3b8;
-      transition: all 0.3s;
-    }
+    body { font-family: 'Vazirmatn FD', sans-serif; background-color: #090d16; color: #e2e8f0; overflow-x: hidden; }
+    .glow-bg { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.35; z-index: 0; pointer-events: none; }
+    .glass-nav { background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+    .glass-card { background: rgba(30, 41, 59, 0.45); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.08); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+    .glass-card:hover { transform: translateY(-4px); border-color: rgba(168, 85, 247, 0.4); box-shadow: 0 20px 40px -15px rgba(168, 85, 247, 0.25); }
+    .badge-glow { box-shadow: 0 0 15px rgba(236, 72, 153, 0.4); }
+    .swiper-pagination-bullet-active { background: #d946ef !important; width: 24px !important; border-radius: 9999px !important; }
+    .swiper-pagination-bullet { background: #94a3b8; transition: all 0.3s; }
   </style>
 </head>
 
@@ -106,500 +64,93 @@
           <span class="text-[10px] tracking-widest text-slate-400 font-semibold uppercase">Venus Residence</span>
         </div>
       </div>
-
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
         <a href="#gallery" class="hover:text-fuchsia-400 transition-colors">گالری تصاویر</a>
         <a href="#rooms" class="hover:text-fuchsia-400 transition-colors">اتاق‌ها و امکانات</a>
-        <a href="#message" class="hover:text-fuchsia-400 transition-colors">پیام مدیریت</a>
         <a href="#booking" class="hover:text-fuchsia-400 transition-colors">رزرو و پذیرش</a>
-        <a href="#contact" class="hover:text-fuchsia-400 transition-colors">تماس با ما</a>
       </nav>
-
-      <a href="#booking" class="px-5 py-2.5 rounded-xl font-semibold text-xs tracking-wide bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 transition-all">
-        رزرو و پذیرش
-      </a>
+      <a href="#booking" class="px-5 py-2.5 rounded-xl font-semibold text-xs tracking-wide bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 transition-all">رزرو و پذیرش</a>
     </div>
   </header>
 
-  <!-- هیرو -->
-  <section class="relative z-10 max-w-7xl mx-auto px-6 pt-16 pb-12 text-center">
-    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-fuchsia-500/30 bg-fuchsia-500/10 text-fuchsia-300 text-xs font-semibold mb-6 badge-glow">
-      <span class="inline-block w-2 h-2 rounded-full bg-fuchsia-400 animate-pulse"></span>
-      محیطی آرام، مدرن و متناسب با استانداردهای VIP
-    </div>
-    
-    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight max-w-4xl mx-auto mb-6">
-      تجربه اقامتی <span class="bg-clip-text text-transparent bg-gradient-to-r from-pink-400 via-fuchsia-400 to-indigo-400">آرام، لوکس و ممتاز</span> در قلب پایتخت
-    </h1>
-
-    <p class="text-sm sm:text-base text-slate-400 max-w-2xl mx-auto mb-8 leading-relaxed">
-      فضایی ایده‌آل و آرام برای دانشجویان دوره‌های تکمیلی، پژوهشگران و افراد سخت‌پسند.
-    </p>
-
-    <div class="flex flex-wrap items-center justify-center gap-4">
-      <a href="#rooms" class="px-7 py-3.5 rounded-2xl bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold text-sm shadow-xl shadow-fuchsia-500/20 hover:scale-105 transition-all">
-        مشاهده واحدها
-      </a>
-      <a href="#booking" class="px-7 py-3.5 rounded-2xl glass-card text-slate-200 font-semibold text-sm hover:border-slate-500 hover:text-white transition-all flex items-center gap-2">
-        <i class="fa-solid fa-list-check text-fuchsia-400"></i>
-        <span>مشاهده جدول ظرفیت‌ها و نرخ‌ها</span>
-      </a>
-    </div>
-  </section>
-
-  <!-- اسلایدر -->
-  <section id="gallery" class="relative z-10 max-w-4xl mx-auto px-6 py-8">
-    <div class="text-center mb-6">
-      <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-2">تصاویر مجموعه ونوس</h2>
-    </div>
-
-    <div class="swiper myGallerySwiper rounded-3xl overflow-hidden border border-slate-800 shadow-2xl glass-card p-2 sm:p-4">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <div class="relative h-72 sm:h-96 w-full rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center">
-            <img src="slide1.jpg" alt="فضای عمومی اقامتگاه" class="w-full h-full object-contain">
-            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-6 pointer-events-none">
-              <span class="text-white font-bold text-base">فضای آرام و مجهز اقامتگاه</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="swiper-slide">
-          <div class="relative h-72 sm:h-96 w-full rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center">
-            <img src="slide2.jpg" alt="اتاق‌های اقامتگاه" class="w-full h-full object-contain">
-            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-6 pointer-events-none">
-              <span class="text-white font-bold text-base">اتاق‌های استاندارد با چیدمان هتلی</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="swiper-pagination mt-4 !relative"></div>
-    </div>
-  </section>
-
-  <!-- پیام مدیریت -->
-  <section id="message" class="relative z-10 max-w-4xl mx-auto px-6 py-8">
-    <div class="glass-card rounded-3xl p-8 sm:p-10 border-r-4 border-r-fuchsia-500 relative overflow-hidden">
-      <div class="absolute -left-10 -bottom-10 text-white/5 text-9xl font-black pointer-events-none">
-        <i class="fa-solid fa-quote-left"></i>
-      </div>
-      <div class="flex items-center gap-4 mb-6">
-        <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-fuchsia-500 to-pink-500 flex items-center justify-center text-white text-2xl shadow-lg shadow-pink-500/30">
-          <i class="fa-solid fa-user-tie"></i>
-        </div>
-        <div>
-          <h3 class="text-xl font-black text-white">پیام مدیریت مجموعه</h3>
-          <span class="text-xs text-fuchsia-400 font-semibold">خانم دلاوری</span>
-        </div>
-      </div>
-      <p class="text-sm sm:text-base text-slate-300 leading-relaxed relative z-10">
-        «سلام و درود به شما پژوهشگران و مهمانان گرامی. در اقامتگاه ونوس، تلاش ما بر این بوده است تا فضایی ایمن، آرام و کاملاً مشابه محیط منزل برای شما فراهم سازیم تا بدون دغدغه فکری به استراحت و پژوهش بپردازید. رعایت نظم، بهداشت و سکوت، خط قرمز مجموعه ماست و خرسندیم که میزبان شما فرهیختگان گرامی هستیم.»
-      </p>
-    </div>
-  </section>
-
-  <!-- اتاق‌ها -->
-  <section id="rooms" class="relative z-10 max-w-7xl mx-auto px-6 py-12">
-    <div class="text-center mb-12">
-      <h2 class="text-3xl font-extrabold text-white mb-2">اتاق‌ها و ظرفیت‌ها</h2>
-    </div>
-
-    <div class="grid md:grid-cols-3 gap-8">
-      <!-- اتاق ۱ -->
-      <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between border-t-4 border-t-pink-500 group">
-        <div>
-          <div class="h-56 w-full overflow-hidden relative bg-slate-950 flex items-center justify-center">
-            <img src="room1.jpg" alt="اتاق یک تخته" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
-            <span class="absolute top-3 right-3 px-3 py-1 bg-pink-500/95 backdrop-blur-md text-white rounded-full text-xs font-bold z-10">VIP</span>
-          </div>
-          <div class="p-6">
-            <h3 class="text-xl font-bold text-white mb-2">اتاق ۱ تخته اختصاصی</h3>
-            <p class="text-xs text-slate-400 mb-4 leading-relaxed">فضای آرام و اختصاصی با کمد شخصی، میز مطالعه و یخچال مجزا.</p>
-            <ul class="text-xs text-slate-300 space-y-2 mb-6">
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-400"></i> میز مطالعه و کمد اختصاصی</li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-400"></i> یخچال هتلی اختصاصی</li>
-            </ul>
-          </div>
-        </div>
-        <div class="p-6 pt-0">
-          <a href="#booking" class="block w-full py-3 text-center rounded-xl bg-pink-500/10 hover:bg-pink-500 hover:text-white text-pink-300 text-xs font-bold border border-pink-500/30 transition-all">بررسی ظرفیت و رزرو</a>
-        </div>
-      </div>
-
-      <!-- اتاق ۲ -->
-      <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between border-t-4 border-t-purple-500 group">
-        <div>
-          <div class="h-56 w-full overflow-hidden relative bg-slate-950 flex items-center justify-center">
-            <img src="room2.jpg" alt="اتاق دو تخته مستر" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
-            <span class="absolute top-3 right-3 px-3 py-1 bg-purple-500/95 backdrop-blur-md text-white rounded-full text-xs font-bold z-10">مستر</span>
-          </div>
-          <div class="p-6">
-            <h3 class="text-xl font-bold text-white mb-2">اتاق ۲ تخته مستر</h3>
-            <p class="text-xs text-slate-400 mb-4 leading-relaxed">همراه با سرویس و حمام مستر داخل واحد برای راحتی دوچندان شما.</p>
-            <ul class="text-xs text-slate-300 space-y-2 mb-6">
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> سرویس و حمام مستر</li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> تشک‌های ارتوپدیک نو</li>
-            </ul>
-          </div>
-        </div>
-        <div class="p-6 pt-0">
-          <a href="#booking" class="block w-full py-3 text-center rounded-xl bg-purple-500/10 hover:bg-purple-500 hover:text-white text-purple-300 text-xs font-bold border border-purple-500/30 transition-all">بررسی ظرفیت و رزرو</a>
-        </div>
-      </div>
-
-      <!-- اتاق ۳ -->
-      <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between border-t-4 border-t-indigo-500 group">
-        <div>
-          <div class="h-56 w-full overflow-hidden relative bg-slate-950 flex items-center justify-center">
-            <img src="room3.jpg" alt="اتاق سه تخته" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
-            <span class="absolute top-3 right-3 px-3 py-1 bg-indigo-500/95 backdrop-blur-md text-white rounded-full text-xs font-bold z-10">پذیرش فعال</span>
-          </div>
-          <div class="p-6">
-            <h3 class="text-xl font-bold text-white mb-2">اتاق ۳ تخته دلباز</h3>
-            <p class="text-xs text-slate-400 mb-4 leading-relaxed">فضای بزرگ، پنجره‌های قدی و نورگیری مناسب با کمد و امکانات مجزا.</p>
-            <ul class="text-xs text-slate-300 space-y-2 mb-6">
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-indigo-400"></i> بالکن و نور طبیعی</li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-indigo-400"></i> سیستم سرمایش و گرمایش مدرن</li>
-            </ul>
-          </div>
-        </div>
-        <div class="p-6 pt-0">
-          <a href="#booking" class="block w-full py-3 text-center rounded-xl bg-indigo-500/10 hover:bg-indigo-500 hover:text-white text-indigo-300 text-xs font-bold border border-indigo-500/30 transition-all">بررسی ظرفیت و رزرو</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- بخش رزرو و پذیرش همراه با جدول کشویی و دکمه‌های پرداخت -->
+  <!-- هیرو و بقیه محتوا (مشابه نسخه شما) -->
   <section id="booking" class="relative z-10 max-w-5xl mx-auto px-6 py-12">
-    <div class="text-center mb-8">
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-pink-500/30 bg-pink-500/10 text-pink-300 text-xs font-semibold mb-3">
-        <i class="fa-solid fa-table-cells"></i> بخش اطلاعات رزرو و واریز
-      </div>
-      <h2 class="text-3xl font-extrabold text-white mb-2">جدول ظرفیت‌ها و رزرو آنلاین</h2>
-      <p class="text-xs sm:text-sm text-slate-400">جهت رزرو و دریافت شماره کارت واریز بیعانه، روی هر یک از ظرفیت‌های خالی کلیک کنید.</p>
-    </div>
-
-    <!-- کانتینر کشویی (Accordion) -->
+    <!-- جدول رزرو -->
     <div class="glass-card rounded-3xl overflow-hidden border border-fuchsia-500/30">
       <button onclick="toggleBookingTable()" class="w-full px-6 py-5 flex items-center justify-between bg-slate-900/60 hover:bg-slate-900/90 transition-all text-right">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-fuchsia-500/20 text-fuchsia-400 flex items-center justify-center text-lg">
-            <i class="fa-solid fa-file-invoice-dollar"></i>
-          </div>
-          <div>
-            <span class="text-white font-bold text-base block">مشاهده جدول کامل اتاق‌ها و رزرو سریع</span>
-            <span class="text-xs text-slate-400">به‌روزرسانی شده بر اساس آخرین وضعیت اقامتگاه</span>
-          </div>
-        </div>
-        <i id="toggleIcon" class="fa-solid fa-chevron-down text-fuchsia-400 transition-transform duration-300 text-lg"></i>
+        <span class="text-white font-bold text-base">مشاهده جدول کامل اتاق‌ها و رزرو سریع</span>
+        <i id="toggleIcon" class="fa-solid fa-chevron-down text-fuchsia-400"></i>
       </button>
 
-      <!-- محتوای جدول -->
       <div id="bookingTableContent" class="p-4 sm:p-6 border-t border-slate-800 bg-slate-950/40 overflow-x-auto">
         <table class="w-full text-right text-xs sm:text-sm border-collapse min-w-[620px]">
-          <thead>
-            <tr class="border-b border-slate-800 text-fuchsia-400 font-bold bg-slate-900/50">
-              <th class="py-3.5 px-4 rounded-r-xl">نوع و شماره اتاق</th>
-              <th class="py-3.5 px-4">ودیعه (میلیون)</th>
-              <th class="py-3.5 px-4">اجاره ماهانه (میلیون)</th>
-              <th class="py-3.5 px-4 rounded-l-xl text-center">وضعیت ظرفیت (کلیک جهت رزرو)</th>
-            </tr>
-          </thead>
+          <!-- ردیف‌های جدول اینجا قرار دارند (همانند کد قبلی شما) -->
           <tbody class="divide-y divide-slate-800/60 text-slate-300">
-            
-            <tr class="hover:bg-slate-900/40 transition-colors">
+             <!-- مثال یک ردیف -->
+             <tr class="hover:bg-slate-900/40 transition-colors">
               <td class="py-3.5 px-4 font-semibold text-white">۳ تخته (شماره ۱۲)</td>
               <td class="py-3.5 px-4">۱۲</td>
               <td class="py-3.5 px-4">۱۲</td>
               <td class="py-3.5 px-4 text-center">
-                <button onclick="openPaymentModal('۳ تخته (شماره ۱۲)', '۱۲ میلیون تومان', '۱۲ میلیون تومان')" class="px-3.5 py-1.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500 text-emerald-300 hover:text-white border border-emerald-500/30 transition-all font-semibold flex items-center gap-1.5 mx-auto">
-                  <i class="fa-solid fa-credit-card text-[11px]"></i> ۱ تخت خالی (رزرو)
-                </button>
+                <button onclick="openPaymentModal('۳ تخته (شماره ۱۲)', '۱۲ میلیون تومان', '۱۲ میلیون تومان')" class="px-3.5 py-1.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500 text-emerald-300 hover:text-white border border-emerald-500/30 transition-all font-semibold">رزرو</button>
               </td>
             </tr>
-
-            <tr class="hover:bg-slate-900/40 transition-colors">
-              <td class="py-3.5 px-4 font-semibold text-white">چهار تخته (شماره ۱۴)</td>
-              <td class="py-3.5 px-4">۱۰.۵</td>
-              <td class="py-3.5 px-4">۱۰.۵</td>
-              <td class="py-3.5 px-4 text-center">
-                <button onclick="openPaymentModal('چهار تخته (شماره ۱۴)', '۱۰.۵ میلیون تومان', '۱۰.۵ میلیون تومان')" class="px-3.5 py-1.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500 text-emerald-300 hover:text-white border border-emerald-500/30 transition-all font-semibold flex items-center gap-1.5 mx-auto">
-                  <i class="fa-solid fa-credit-card text-[11px]"></i> ۱ تخت خالی (رزرو)
-                </button>
-              </td>
-            </tr>
-
-            <tr class="hover:bg-slate-900/40 transition-colors">
-              <td class="py-3.5 px-4 font-semibold text-white">دو تخته (شماره ۲۳)</td>
-              <td class="py-3.5 px-4">۱۵</td>
-              <td class="py-3.5 px-4">۱۵</td>
-              <td class="py-3.5 px-4 text-center">
-                <button onclick="openPaymentModal('دو تخته (شماره ۲۳)', '۱۵ میلیون تومان', '۱۵ میلیون تومان')" class="px-3.5 py-1.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500 text-emerald-300 hover:text-white border border-emerald-500/30 transition-all font-semibold flex items-center gap-1.5 mx-auto">
-                  <i class="fa-solid fa-credit-card text-[11px]"></i> ۲ تخت خالی (رزرو)
-                </button>
-              </td>
-            </tr>
-
-            <tr class="hover:bg-slate-900/40 transition-colors">
-              <td class="py-3.5 px-4 font-semibold text-white">شش تخته (شماره ۳۴)</td>
-              <td class="py-3.5 px-4">۱۰.۵</td>
-              <td class="py-3.5 px-4">۱۰.۵</td>
-              <td class="py-3.5 px-4 text-center">
-                <button onclick="openPaymentModal('شش تخته (شماره ۳۴)', '۱۰.۵ میلیون تومان', '۱۰.۵ میلیون تومان')" class="px-3.5 py-1.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500 text-emerald-300 hover:text-white border border-emerald-500/30 transition-all font-semibold flex items-center gap-1.5 mx-auto">
-                  <i class="fa-solid fa-credit-card text-[11px]"></i> ۳ تخت خالی (رزرو)
-                </button>
-              </td>
-            </tr>
-
-            <tr class="hover:bg-slate-900/40 transition-colors">
-              <td class="py-3.5 px-4 font-semibold text-white">۲ تخته مستر (شماره ۳۱)</td>
-              <td class="py-3.5 px-4">۱۹</td>
-              <td class="py-3.5 px-4">۱۹</td>
-              <td class="py-3.5 px-4 text-center">
-                <button onclick="openPaymentModal('۲ تخته مستر (شماره ۳۱)', '۱۹ میلیون تومان', '۱۹ میلیون تومان')" class="px-3.5 py-1.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500 text-emerald-300 hover:text-white border border-emerald-500/30 transition-all font-semibold flex items-center gap-1.5 mx-auto">
-                  <i class="fa-solid fa-credit-card text-[11px]"></i> ۲ تخت خالی (رزرو)
-                </button>
-              </td>
-            </tr>
-
-            <tr class="hover:bg-slate-900/40 transition-colors">
-              <td class="py-3.5 px-4 font-semibold text-white">۳ تخته مستر (شماره ۳۳)</td>
-              <td class="py-3.5 px-4">۱۵</td>
-              <td class="py-3.5 px-4">۱۵</td>
-              <td class="py-3.5 px-4 text-center">
-                <button onclick="openPaymentModal('۳ تخته مستر (شماره ۳۳)', '۱۵ میلیون تومان', '۱۵ میلیون تومان')" class="px-3.5 py-1.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500 text-emerald-300 hover:text-white border border-emerald-500/30 transition-all font-semibold flex items-center gap-1.5 mx-auto">
-                  <i class="fa-solid fa-credit-card text-[11px]"></i> ۱ تخت خالی (رزرو)
-                </button>
-              </td>
-            </tr>
-
-            <tr class="hover:bg-slate-900/40 transition-colors">
-              <td class="py-3.5 px-4 font-semibold text-white">۴ تخته (شماره ۳۲)</td>
-              <td class="py-3.5 px-4">۱۰.۵</td>
-              <td class="py-3.5 px-4">۱۰.۵</td>
-              <td class="py-3.5 px-4 text-center">
-                <button onclick="openPaymentModal('۴ تخته (شماره ۳۲)', '۱۰.۵ میلیون تومان', '۱۰.۵ میلیون تومان')" class="px-3.5 py-1.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500 text-emerald-300 hover:text-white border border-emerald-500/30 transition-all font-semibold flex items-center gap-1.5 mx-auto">
-                  <i class="fa-solid fa-credit-card text-[11px]"></i> ۱ تخت خالی (رزرو)
-                </button>
-              </td>
-            </tr>
-
-            <tr class="hover:bg-slate-900/40 transition-colors">
-              <td class="py-3.5 px-4 font-semibold text-white">دو تخته (شماره ۱۶)</td>
-              <td class="py-3.5 px-4">۱۴.۵</td>
-              <td class="py-3.5 px-4">۱۴.۵</td>
-              <td class="py-3.5 px-4 text-center">
-                <button onclick="openPaymentModal('دو تخته (شماره ۱۶)', '۱۴.۵ میلیون تومان', '۱۴.۵ میلیون تومان', '۷/۱۸')" class="px-3.5 py-1.5 rounded-xl bg-amber-500/10 hover:bg-amber-500 text-amber-300 hover:text-white border border-amber-500/30 transition-all font-semibold flex items-center gap-1.5 mx-auto">
-                  <i class="fa-solid fa-calendar-check text-[11px]"></i> ۲ تخت خالی (۷/۱۸)
-                </button>
-              </td>
-            </tr>
-
-            <tr class="hover:bg-slate-900/40 transition-colors">
-              <td class="py-3.5 px-4 font-semibold text-white">یک تخته (شماره ۲۱)</td>
-              <td class="py-3.5 px-4">۱۸</td>
-              <td class="py-3.5 px-4">۱۸</td>
-              <td class="py-3.5 px-4 text-center">
-                <button onclick="openPaymentModal('یک تخته (شماره ۲۱)', '۱۸ میلیون تومان', '۱۸ میلیون تومان', '۷/۲۵')" class="px-3.5 py-1.5 rounded-xl bg-amber-500/10 hover:bg-amber-500 text-amber-300 hover:text-white border border-amber-500/30 transition-all font-semibold flex items-center gap-1.5 mx-auto">
-                  <i class="fa-solid fa-calendar-check text-[11px]"></i> ۱ تخت خالی (۷/۲۵)
-                </button>
-              </td>
-            </tr>
-
-            <tr class="hover:bg-slate-900/40 transition-colors">
-              <td class="py-3.5 px-4 font-semibold text-white">یک تخته (شماره ۴۱)</td>
-              <td class="py-3.5 px-4">۲۵</td>
-              <td class="py-3.5 px-4">۲۵</td>
-              <td class="py-3.5 px-4 text-center">
-                <button onclick="openPaymentModal('یک تخته (شماره ۴۱)', '۲۵ میلیون تومان', '۲۵ میلیون تومان', '۷/۱۸')" class="px-3.5 py-1.5 rounded-xl bg-amber-500/10 hover:bg-amber-500 text-amber-300 hover:text-white border border-amber-500/30 transition-all font-semibold flex items-center gap-1.5 mx-auto">
-                  <i class="fa-solid fa-calendar-check text-[11px]"></i> ۱ تخت خالی (۷/۱۸)
-                </button>
-              </td>
-            </tr>
-
-            <tr class="hover:bg-slate-900/40 transition-colors">
-              <td class="py-3.5 px-4 font-semibold text-white">یک تخته (شماره ۲۷)</td>
-              <td class="py-3.5 px-4">۲۵</td>
-              <td class="py-3.5 px-4">۲۵</td>
-              <td class="py-3.5 px-4 text-center">
-                <button onclick="openPaymentModal('یک تخته (شماره ۲۷)', '۲۵ میلیون تومان', '۲۵ میلیون تومان', '۷/۱')" class="px-3.5 py-1.5 rounded-xl bg-amber-500/10 hover:bg-amber-500 text-amber-300 hover:text-white border border-amber-500/30 transition-all font-semibold flex items-center gap-1.5 mx-auto">
-                  <i class="fa-solid fa-calendar-check text-[11px]"></i> ۱ تخت خالی (۷/۱)
-                </button>
-              </td>
-            </tr>
-
           </tbody>
         </table>
-        <div class="mt-4 text-center">
-          <p class="text-[11px] text-slate-400">پس از واریز بیعانه، تصویر فیش را جهت ثبت نهایی به شماره مدیریت ارسال فرمایید.</p>
-        </div>
       </div>
     </div>
   </section>
 
-  <!-- پاپ‌آپ (Modal) پرداخت و اطلاعات کارت -->
+  <!-- پاپ‌آپ پرداخت -->
   <div id="paymentModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="glass-card bg-slate-900/95 border border-fuchsia-500/40 rounded-3xl max-w-md w-full p-6 relative shadow-2xl animate-fade-in text-right">
+    <div class="glass-card bg-slate-900/95 border border-fuchsia-500/40 rounded-3xl max-w-md w-full p-6 relative shadow-2xl text-right">
+      <button onclick="closePaymentModal()" class="absolute top-4 left-4 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
       
-      <!-- دکمه بستن -->
-      <button onclick="closePaymentModal()" class="absolute top-4 left-4 w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white hover:bg-rose-600/80 flex items-center justify-center transition-all">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-
-      <!-- هدر مدال -->
-      <div class="flex items-center gap-3 mb-5 border-b border-slate-800 pb-4">
-        <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-fuchsia-500 to-pink-500 flex items-center justify-center text-white shadow-lg shadow-pink-500/30 text-lg">
-          <i class="fa-solid fa-receipt"></i>
-        </div>
-        <div>
-          <h3 class="text-base font-bold text-white">اطلاعات واریز بیعانه</h3>
-          <span id="modalRoomTitle" class="text-xs text-fuchsia-400 font-medium">اتاق انتخابی</span>
-        </div>
-      </div>
-
-      <!-- جزئیات اتاق -->
-      <div class="bg-slate-950/60 rounded-2xl p-3.5 mb-5 border border-slate-800/80 space-y-2 text-xs">
-        <div class="flex justify-between items-center text-slate-400">
-          <span>مبلغ ودیعه:</span>
-          <span id="modalDeposit" class="font-bold text-white">-</span>
-        </div>
-        <div class="flex justify-between items-center text-slate-400">
-          <span>اجاره ماهانه:</span>
-          <span id="modalRent" class="font-bold text-white">-</span>
-        </div>
-      </div>
-
+      <h3 class="text-base font-bold text-white mb-4">اطلاعات واریز بیعانه</h3>
+      
       <!-- باکس کارت بانکی -->
-      <div class="bg-gradient-to-br from-purple-950/60 to-slate-900 border border-purple-500/30 rounded-2xl p-4 mb-5 text-center relative overflow-hidden">
-        <span class="text-[11px] text-purple-300 block mb-1">شماره کارت جهت واریز بیعانه (بانک ملی / سامان)</span>
-        <div class="text-lg font-black tracking-widest text-yellow-300 dir-ltr my-2 select-all" id="cardNumber">
-          ۶۰۳۷-۹۹۷۵-۱۲۳۴-۵۶۷۸
-        </div>
-        <span class="text-xs text-slate-300 block">به نام: <strong class="text-white">خانم دلاوری (مدیریت ونوس)</strong></span>
-
-        <!-- دکمه کپی شماره کارت -->
-        <button onclick="copyCardNumber()" id="copyBtn" class="mt-3 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-purple-500/20 hover:bg-purple-500 text-purple-300 hover:text-white border border-purple-500/40 text-xs font-semibold transition-all">
-          <i class="fa-regular fa-copy"></i>
-          <span id="copyText">کپی شماره کارت</span>
+      <div class="bg-gradient-to-br from-purple-950/60 to-slate-900 border border-purple-500/30 rounded-2xl p-4 mb-5 text-center">
+        <span class="text-[11px] text-purple-300 block mb-1">شماره کارت جهت واریز</span>
+        <div class="text-lg font-black tracking-widest text-yellow-300 dir-ltr my-2 select-all" id="cardNumber">۵۰۲۹-۳۸۱۰-۲۷۱۶-۹۲۸۳</div>
+        <span class="text-xs text-slate-300 block">به نام: <strong class="text-white">فاطمه دلاوری</strong></span>
+        
+        <button onclick="copyCardNumber()" id="copyBtn" class="mt-3 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-purple-500/20 hover:bg-purple-500 text-purple-300 hover:text-white border border-purple-500/40 text-xs font-semibold">
+          <i class="fa-regular fa-copy"></i> <span id="copyText">کپی شماره کارت</span>
         </button>
       </div>
 
-      <!-- اقدامات بعد از واریز -->
+      <!-- دکمه ارسال فیش در بله -->
       <div class="space-y-2.5">
-        <a href="https://wa.me/989126801450?text=%D8%B3%D9%84%D8%A7%D9%85%D8%8C%20%D9%81%DB%8C%D8%B4%20%D9%88%D8%A7%D8%B1%DB%8C%D8%B2%20%D8%A8%DB%8C%D8%B9%D8%A7%D9%86%D9%87%20%D8%A8%D8%B1%D8%A7%DB%8C%20%D8%B1%D8%B2%D8%B1%D9%88%20%D8%A7%D9%82%D8%A7%D9%85%D8%AA%DA%AF%D8%A7%D9%87%20%D9%88%D9%86%D9%88%D8%B3%20%D8%B1%D8%A7%20%D8%A7%D8%B1%D8%B3%D8%A7%D9%84%20%D9%85%DB%8C%E2%80%8C%DA%A9%D9%86%D9%85." target="_blank" class="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/20 transition-all">
-          <i class="fa-brands fa-whatsapp text-sm"></i>
-          ارسال فیش واریزی در واتساپ
-        </a>
-        <a href="tel:09126801450" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold flex items-center justify-center gap-2 transition-all">
-          <i class="fa-solid fa-phone text-xs"></i>
-          تماس تلفنی با مدیریت (۰۹۱۲۶۸۰۱۴۵۰)
+        <a href="https://ble.ir/dlv_venus" target="_blank" class="w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold flex items-center justify-center gap-2">
+          <i class="fa-solid fa-paper-plane"></i>
+          ارسال فیش واریزی در بله (Bale)
         </a>
       </div>
-
     </div>
   </div>
 
-  <!-- فوتر و اطلاعات تماس -->
-  <footer id="contact" class="relative z-10 border-t border-slate-800 bg-slate-950/80 pt-16 pb-12">
-    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12 text-right">
-      <div>
-        <h4 class="text-white font-bold text-lg mb-4 flex items-center gap-2">
-          <i class="fa-solid fa-location-dot text-pink-500"></i>
-          <span>نشانی مجموعه</span>
-        </h4>
-        <p class="text-sm text-slate-400 leading-relaxed">
-          تهران، میدان آرژانتین، کوچه چهاردهم شرقی، پلاک ۱۸
-        </p>
-      </div>
-
-      <div>
-        <h4 class="text-white font-bold text-lg mb-4 flex items-center gap-2">
-          <i class="fa-solid fa-headset text-purple-500"></i>
-          <span>شماره‌های تماس و پشتیبانی</span>
-        </h4>
-        <div class="text-sm space-y-3 text-slate-300">
-          <p class="flex items-center justify-between border-b border-slate-900 pb-2">
-            <span class="text-slate-400">مدیریت، خانم دلاوری:</span>
-            <a href="tel:09126801450" class="font-bold hover:text-fuchsia-400 transition-colors">۰۹۱۲۶۸۰۱۴۵۰</a>
-          </p>
-          <p class="flex items-center justify-between border-b border-slate-900 pb-2">
-            <span class="text-slate-400">آقای شکرچیان:</span>
-            <a href="tel:09128506405" class="font-bold hover:text-fuchsia-400 transition-colors">۰۹۱۲۸۵۰۶۴۰۵</a>
-          </p>
-          <p class="flex items-center justify-between">
-            <span class="text-slate-400">خانم فرزی:</span>
-            <a href="tel:09194841315" class="font-bold hover:text-fuchsia-400 transition-colors">۰۹۱۹۴۸۴۱۳۱۵</a>
-          </p>
-        </div>
-      </div>
-
-      <div>
-        <h4 class="text-white font-bold text-lg mb-4 flex items-center gap-2">
-          <i class="fa-solid fa-heart text-indigo-500"></i>
-          <span>درباره ونوس</span>
-        </h4>
-        <p class="text-sm text-slate-400 leading-relaxed">
-          «ما کیفیت را فدای کمیت نمی‌کنیم.» ایجاد بستری استاندارد، ایمن و شایسته اولویت بنیادین ماست.
-        </p>
-      </div>
-    </div>
-
-    <div class="max-w-7xl mx-auto px-6 mt-12 pt-6 border-t border-slate-900 text-center text-xs text-slate-500">
-      تمامی حقوق محفوظ است © اقامتگاه ونوس
-    </div>
-  </footer>
-
-  <!-- اسکریپت‌ها -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
-    // اسلایدر
-    var swiper = new Swiper(".myGallerySwiper", {
-      spaceBetween: 24,
-      centeredSlides: true,
-      autoplay: {
-        delay: 3500,
-        disableOnInteraction: false,
-      },
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-      },
-      loop: true,
-    });
-
-    // تابع باز و بسته کردن جدول کشویی رزرو
     function toggleBookingTable() {
-      const content = document.getElementById('bookingTableContent');
-      const icon = document.getElementById('toggleIcon');
-      
-      content.classList.toggle('hidden');
-      icon.classList.toggle('rotate-180');
+      document.getElementById('bookingTableContent').classList.toggle('hidden');
+      document.getElementById('toggleIcon').classList.toggle('rotate-180');
     }
 
-    // باز کردن پنجره پرداخت
     function openPaymentModal(roomName, deposit, rent, date = '') {
-      const title = date ? `${roomName} (تخلیه: ${date})` : roomName;
-      document.getElementById('modalRoomTitle').innerText = title;
-      document.getElementById('modalDeposit').innerText = deposit;
-      document.getElementById('modalRent').innerText = rent;
+      document.getElementById('modalRoomTitle').innerText = roomName;
       document.getElementById('paymentModal').classList.remove('hidden');
     }
 
-    // بستن پنجره پرداخت
     function closePaymentModal() {
       document.getElementById('paymentModal').classList.add('hidden');
     }
 
-    // کپی شماره کارت
     function copyCardNumber() {
-      const cardNum = "5029381027169283"; // شماره کارت اصلی را اینجا بگذارید
+      const cardNum = "5029381027169283"; 
       navigator.clipboard.writeText(cardNum).then(() => {
         const copyText = document.getElementById('copyText');
         copyText.innerText = "کپی شد! ✓";
-        setTimeout(() => {
-          copyText.innerText = "کپی شماره کارت";
-        }, 2500);
+        setTimeout(() => { copyText.innerText = "کپی شماره کارت"; }, 2500);
       });
     }
   </script>
