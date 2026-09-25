@@ -783,7 +783,7 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
         <p class="text-sm text-slate-400 mb-6">پذیرش اقامتگاه به‌صورت ۲۴ ساعته پاسخگوی شما عزیزان است.</p>
         <div class="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-indigo-600/10 border border-indigo-500/30 text-indigo-300 font-bold text-base">
           <i class="fa-solid fa-phone-volume"></i>
-          <span>۰۲۱-۸۸۸۸۸۸۸۸</span>
+          <span>021-88731810</span>
         </div>
       </div>
     </section>
@@ -792,7 +792,7 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
 
   <!-- فوتر -->
   <footer class="border-t border-slate-850 bg-slate-950/80 py-6 text-center text-xs text-slate-400">
-    <p>© ۱۴۰۳ تمامی حقوق برای اقامتگاه ونوس محفوظ است.</p>
+    <p>© 1405 تمامی حقوق برای اقامتگاه ونوس محفوظ است.</p>
   </footer>
 
   <!-- اسکریپت فعال‌سازی و تنظیم نقشه بدون نقص -->
@@ -830,45 +830,32 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
 
       <div class="flex flex-col sm:flex-row items-center justify-between gap-3 px-2 pt-4 pb-1">
         <span class="text-xs text-slate-400 text-center sm:text-right">
-        <!-- باکس آمار بازدید واقعی (با قابلیت شمارش خودکار) -->
-<div class="max-w-md mx-auto my-8 p-6 bg-slate-900/50 border border-slate-700 rounded-2xl backdrop-blur-sm shadow-xl">
-  <h3 class="text-center text-white font-medium mb-4">آمار بازدید اقامتگاه ونوس</h3>
-  
-  <div class="grid grid-cols-3 gap-3 text-center">
-    <!-- بازدید امروز -->
-    <div>
-      <span class="block text-[10px] text-slate-400 uppercase">امروز</span>
-      <strong id="visitorsToday" class="mt-1 block text-lg font-bold text-white">...</strong>
-    </div>
+   <!-- فوتر به همراه شمارنده بازدید -->
+  <footer class="border-t border-slate-800 bg-slate-950/80 py-8 text-center text-xs text-slate-400">
+    <p class="mb-3">© ۱۴۰۳ تمامی حقوق برای اقامتگاه ونوس محفوظ است.</p>
 
-    <!-- بازدید دیروز -->
-    <div class="border-x border-slate-700">
-      <span class="block text-[10px] text-slate-400 uppercase">دیروز</span>
-      <strong id="visitorsYesterday" class="mt-1 block text-lg font-bold text-white">۵۴</strong>
+    <!-- کادر نمایش آمار و شمارنده Statcounter -->
+    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900 border border-slate-800 text-slate-300">
+      <i class="fa-solid fa-eye text-indigo-400"></i>
+      <span>تعداد کل بازدیدها:</span>
+      
+      <!-- کد اصلاح‌شده Statcounter (نمایان) -->
+      <!-- Default Statcounter code for venus-dorm -->
+      <script type="text/javascript">
+        var sc_project = 13356731; 
+        var sc_invisible = 0; // روی 0 تنظیم شد تا عدد بازدید نمایش داده شود
+        var sc_security = "01159f06"; 
+      </script>
+      <script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
+      <noscript>
+        <div class="statcounter inline-block">
+          <a title="Web Analytics" href="https://statcounter.com/" target="_blank">
+            <img class="statcounter" src="https://c.statcounter.com/13356731/0/01159f06/1/" alt="Web Analytics" referrerpolicy="no-referrer-when-downgrade">
+          </a>
+        </div>
+      </noscript>
+      <!-- End of Statcounter Code -->
     </div>
+  </footer>
 
-    <!-- کاربران آنلاین -->
-    <div>
-      <span class="block text-[10px] text-slate-400 uppercase">آنلاین</span>
-      <strong id="visitorsOnline" class="mt-1 block text-lg font-bold text-emerald-400">۱</strong>
-    </div>
-  </div>
-</div>
-
-<!-- اسکریپت اتصال شمارنده واقعی -->
-<script>
-  // به محض باز شدن سایت، یک واحد به بازدید کل اضافه می‌شود و عدد جدید را می‌گیرد
-  fetch('https://api.counterapi.dev/v1/venus-residence/visits/up')
-    .then(response => response.json())
-    .then(data => {
-      if (data && data.count) {
-        // نمایش عدد در بخش امروز (یا کل بازدیدها)
-        document.getElementById('visitorsToday').innerText = data.count.toLocaleString('fa-IR');
-      }
-    })
-    .catch(error => {
-      console.error('خطا در دریافت آمار:', error);
-      document.getElementById('visitorsToday').innerText = '—';
-    });
-</script>
 
