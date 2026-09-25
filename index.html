@@ -631,59 +631,202 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
   </main>
 </body>
 </html>
-<!-- بخش موقعیت مکانی با لینک اختصاصی نشان -->
-<section id="location" class="relative z-10 max-w-5xl mx-auto px-6 py-12">
-  <div class="text-center mb-8">
-    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 text-xs font-semibold mb-3">
-      <i class="fa-solid fa-location-dot"></i> موقعیت مکانی
-    </div>
-    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-3">
-      موقعیت اقامتگاه ونوس روی نقشه
-    </h2>
-    <p class="text-sm text-slate-400 leading-relaxed">
-      تهران، میدان آرژانتین، بلوار بیهقی، کوچه ۱۴ شرقی، پلاک ۱۸
-    </p>
-  </div>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>اقامتگاه لوکس ونوس | تهران</title>
 
-  <div class="glass-card rounded-3xl overflow-hidden border border-indigo-500/20 p-3 sm:p-4 shadow-2xl">
-    <!-- کادر نقشه با مختصات دقیق ارسالی (35.735 , 51.425) -->
-    <div class="w-full h-80 sm:h-96 rounded-2xl overflow-hidden bg-slate-950 relative border border-slate-800">
-      <iframe
-        title="نقشه موقعیت اقامتگاه ونوس"
-        class="w-full h-full border-0"
-        src="https://www.openstreetmap.org/export/embed.html?bbox=51.4150%2C35.7300%2C51.4350%2C35.7400&amp;layer=mapnik&amp;marker=35.7350%2C51.4250"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        allowfullscreen>
-      </iframe>
-    </div>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- دکمه اختصاصی نشان و راهنمای دسترسی -->
-    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 px-2 pt-4 pb-2">
-      <div class="text-xs text-slate-400 text-center sm:text-right">
-        برای مشاهده در اپلیکیشن یا مسیریابی دقیق خودرو/پیاده کلیک کنید:
-      </div>
-      
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Leaflet Map CSS & JS (بدون تحریم، لود قطعی نقشه) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- استایل‌های فونت و طراحی شیشه‌ای (Glassmorphism) -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap');
+    
+    * {
+      font-family: 'Vazirmatn', sans-serif;
+    }
+
+    .glass-card {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    /* سفارشی‌سازی پاپ‌آپ نقشه */
+    .leaflet-popup-content-wrapper {
+      background: #0f172a !important;
+      color: #f8fafc !important;
+      border: 1px solid rgba(99, 102, 241, 0.3) !important;
+      border-radius: 12px !important;
+      font-family: 'Vazirmatn', sans-serif !important;
+      text-align: right !important;
+      direction: rtl !important;
+    }
+    .leaflet-popup-tip {
+      background: #0f172a !important;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen selection:bg-indigo-500 selection:text-white relative overflow-x-hidden">
+
+  <!-- گرادینت پس‌زمینه نوری -->
+  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-indigo-600/10 blur-[130px] pointer-events-none -z-10"></div>
+  <div class="fixed bottom-0 right-0 w-96 h-96 bg-purple-600/10 blur-[140px] pointer-events-none -z-10"></div>
+
+  <!-- نوبار (Header) -->
+  <header class="sticky top-0 z-40 w-full glass-card border-b border-slate-800/80">
+    <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
       <div class="flex items-center gap-3">
-        <!-- لینک دقیق صفحه اختصاصی شما در نشان -->
-        <a href="https://neshan.org/maps/municipal/b0c9db852d1d4bae9e158d23c92730f0#c35.735-51.425-15z-0p" 
-           target="_blank" 
-           rel="noopener noreferrer"
-           class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all flex items-center gap-2 shadow-lg shadow-indigo-600/30">
-          <i class="fa-solid fa-map-location-dot"></i> مشاهده مستقیم در نشان
-        </a>
-
-        <!-- لینک جایگزین گوگل‌مپ -->
-        <a href="https://maps.google.com/?q=35.735,51.425" 
-           target="_blank" 
-           rel="noopener noreferrer"
-           class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition-all flex items-center gap-2 border border-slate-700">
-          <i class="fa-brands fa-google"></i> گوگل مپ
-        </a>
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 to-purple-500 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30">
+          <i class="fa-solid fa-hotel text-lg"></i>
+        </div>
+        <div>
+          <h1 class="text-lg font-black tracking-wide text-white">اقامتگاه ونوس</h1>
+          <p class="text-[11px] text-indigo-400 font-medium">میدان آرژانتین، تهران</p>
+        </div>
       </div>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+        <a href="#about" class="hover:text-indigo-400 transition-colors">معرفی</a>
+        <a href="#rooms" class="hover:text-indigo-400 transition-colors">اتاق‌ها و امکانات</a>
+        <a href="#rates" class="hover:text-indigo-400 transition-colors">تعرفه‌ها</a>
+        <a href="#location" class="hover:text-indigo-400 transition-colors">موقعیت مکانی</a>
+        <a href="#contact" class="hover:text-indigo-400 transition-colors">تماس</a>
+      </nav>
+
+      <a href="#booking" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-xs font-bold shadow-lg shadow-indigo-600/25 transition-all">
+        رزرو آنلاین
+      </a>
     </div>
-  </div>
-</section>
+  </header>
+
+  <main class="space-y-16 py-8">
+
+    <!-- بخش معرفی (Hero Section) -->
+    <section id="about" class="max-w-6xl mx-auto px-6 pt-6">
+      <div class="glass-card rounded-3xl p-8 sm:p-12 border border-slate-800 relative overflow-hidden">
+        <div class="max-w-2xl space-y-5">
+          <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-semibold">
+            <i class="fa-solid fa-sparkles"></i> اقامتی امن، آرام و مجهز در قلب پایتخت
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+            تجربه اقامتی دلنشین و دسترسی بی‌نظیر در <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-400">اقامتگاه ونوس</span>
+          </h2>
+          <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+            واقع در یکی از آرام‌ترین و خوش‌مسیرترین مناطق تهران (میدان آرژانتین، بلوار بیهقی)، با دسترسی فوق‌العاده سریع به ایستگاه‌های بی‌آرتی، مترو مصلّی و میرزای شیرازی، بیمارستان‌ها و مراکز درمانی و سفارتخانه‌ها.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- بخش نقشه و موقعیت مکانی اختصاصی با Leaflet و نشان -->
+    <section id="location" class="relative z-10 max-w-6xl mx-auto px-6">
+      <div class="text-center mb-8">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 text-xs font-semibold mb-3">
+          <i class="fa-solid fa-location-dot"></i> موقعیت جغرافیایی
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-2">
+          موقعیت دقیق اقامتگاه ونوس
+        </h2>
+        <p class="text-sm text-slate-400">
+          تهران، میدان آرژانتین، بلوار بیهقی، کوچه ۱۴ شرقی، پلاک ۱۸
+        </p>
+      </div>
+
+      <div class="glass-card rounded-3xl overflow-hidden border border-indigo-500/20 p-3 sm:p-4 shadow-2xl">
+        <!-- کانتینر نقشه زنده با Leaflet -->
+        <div id="venus-map" class="w-full h-80 sm:h-[420px] rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 z-0"></div>
+
+        <!-- نوار ابزار و دکمه‌های هدایت به نشان و گوگل‌مپ -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 px-2 pt-5 pb-2">
+          <div class="text-xs text-slate-300 text-center sm:text-right flex items-center gap-2">
+            <i class="fa-solid fa-circle-info text-indigo-400"></i>
+            <span>برای مسیریابی خودرویی یا پیاده روی دکمه‌های زیر کلیک کنید:</span>
+          </div>
+          
+          <div class="flex flex-wrap items-center justify-center gap-3">
+            <!-- لینک صفحه اختصاصی در نشان -->
+            <a href="https://neshan.org/maps/municipal/b0c9db852d1d4bae9e158d23c92730f0#c35.735-51.425-15z-0p" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all flex items-center gap-2 shadow-lg shadow-indigo-600/30">
+              <i class="fa-solid fa-diamond-turn-right"></i> مشاهده و مسیریابی در نشان
+            </a>
+
+            <!-- لینک گوگل مپ -->
+            <a href="https://maps.google.com/?q=35.7348,51.4206" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition-all flex items-center gap-2 border border-slate-700">
+              <i class="fa-brands fa-google"></i> گوگل مپ
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- بخش اطلاعات تماس -->
+    <section id="contact" class="max-w-6xl mx-auto px-6">
+      <div class="glass-card rounded-3xl p-6 sm:p-8 border border-slate-800 text-center">
+        <h3 class="text-xl font-bold text-white mb-2">نیاز به راهنمایی یا رزرو تلفنی دارید؟</h3>
+        <p class="text-sm text-slate-400 mb-6">پذیرش اقامتگاه به‌صورت ۲۴ ساعته پاسخگوی شما عزیزان است.</p>
+        <div class="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-indigo-600/10 border border-indigo-500/30 text-indigo-300 font-bold text-base">
+          <i class="fa-solid fa-phone-volume"></i>
+          <span>۰۲۱-۸۸۸۸۸۸۸۸</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- فوتر -->
+  <footer class="border-t border-slate-850 bg-slate-950/80 py-6 text-center text-xs text-slate-400">
+    <p>© ۱۴۰۳ تمامی حقوق برای اقامتگاه ونوس محفوظ است.</p>
+  </footer>
+
+  <!-- اسکریپت فعال‌سازی و تنظیم نقشه بدون نقص -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // مختصات دقیق پلاک ۱۸ کوچه ۱۴ شرقی بیهقی
+      const lat = 35.7348;
+      const lng = 51.4206;
+
+      // ساخت نقشه با مرکزیت لوکیشن اقامتگاه
+      const map = L.map('venus-map', {
+        scrollWheelZoom: false // جلوگیری از اسکرول ناخواسته هنگام ورق زدن صفحه در موبایل
+      }).setView([lat, lng], 16);
+
+      // لایه نقشه استاندارد و سبک OpenStreetMap
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap'
+      }).addTo(map);
+
+      // افزودن پین مارکر و باز شدن پنجره اطلاعات اقامتگاه
+      const marker = L.marker([lat, lng]).addTo(map);
+      marker.bindPopup(`
+        <div style="line-height: 1.6;">
+          <strong style="color: #818cf8; font-size: 14px;">اقامتگاه ونوس</strong><br>
+          <span style="font-size: 12px; color: #cbd5e1;">میدان آرژانتین، بلوار بیهقی، کوچه ۱۴ شرقی، پلاک ۱۸</span>
+        </div>
+      `).openPopup();
+    });
+  </script>
+
+</body>
+</html>
+
 
       <div class="flex flex-col sm:flex-row items-center justify-between gap-3 px-2 pt-4 pb-1">
         <span class="text-xs text-slate-400 text-center sm:text-right">
