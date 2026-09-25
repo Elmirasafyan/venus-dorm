@@ -631,27 +631,25 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
   </main>
 </body>
 </html>
-
-موقعیت مکانی
-<!-- بخش موقعیت مکانی و نقشه -->
+<!-- بخش موقعیت مکانی با لینک اختصاصی نشان -->
 <section id="location" class="relative z-10 max-w-5xl mx-auto px-6 py-12">
   <div class="text-center mb-8">
     <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 text-xs font-semibold mb-3">
       <i class="fa-solid fa-location-dot"></i> موقعیت مکانی
     </div>
     <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-3">
-      اقامتگاه ونوس روی نقشه
+      موقعیت اقامتگاه ونوس روی نقشه
     </h2>
     <p class="text-sm text-slate-400 leading-relaxed">
       تهران، میدان آرژانتین، بلوار بیهقی، کوچه ۱۴ شرقی، پلاک ۱۸
     </p>
   </div>
 
-  <div class="glass-card rounded-3xl overflow-hidden border border-indigo-500/20 p-2 sm:p-3 shadow-2xl">
-    <!-- فریم نقشه با ابعاد کامل و تضمین نمایش -->
-    <div class="w-full h-80 sm:h-96 rounded-2xl overflow-hidden bg-slate-950 relative">
+  <div class="glass-card rounded-3xl overflow-hidden border border-indigo-500/20 p-3 sm:p-4 shadow-2xl">
+    <!-- کادر نقشه با مختصات دقیق ارسالی (35.735 , 51.425) -->
+    <div class="w-full h-80 sm:h-96 rounded-2xl overflow-hidden bg-slate-950 relative border border-slate-800">
       <iframe
-        title="نقشه موقعیت اقامتگاه ونوس در تهران"
+        title="نقشه موقعیت اقامتگاه ونوس"
         class="w-full h-full border-0"
         src="https://www.openstreetmap.org/export/embed.html?bbox=51.4150%2C35.7300%2C51.4350%2C35.7400&amp;layer=mapnik&amp;marker=35.7350%2C51.4250"
         loading="lazy"
@@ -660,25 +658,32 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
       </iframe>
     </div>
 
-    <!-- دکمه‌های باز کردن مستقیم در مسیریاب‌ها -->
-    <div class="flex flex-col sm:flex-row items-center justify-between gap-3 px-3 pt-4 pb-2">
-      <span class="text-xs text-slate-400 text-center sm:text-right">
-        دسترسی سریع به سامانه‌های حمل‌ونقل و مراکز درمانی و دانشگاهی
-      </span>
-      <div class="flex items-center gap-2">
-        <a href="https://nshn.ir/b0c9db852d1d4bae9e158d23c92730f0" target="_blank" rel="noopener noreferrer"
-           class="px-3.5 py-1.5 rounded-xl bg-indigo-500/10 hover:bg-indigo-500 text-indigo-300 hover:text-white border border-indigo-500/30 text-xs font-semibold transition-all flex items-center gap-1.5">
-          <i class="fa-solid fa-diamond-turn-right"></i> مسیریابی در نشان
+    <!-- دکمه اختصاصی نشان و راهنمای دسترسی -->
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4 px-2 pt-4 pb-2">
+      <div class="text-xs text-slate-400 text-center sm:text-right">
+        برای مشاهده در اپلیکیشن یا مسیریابی دقیق خودرو/پیاده کلیک کنید:
+      </div>
+      
+      <div class="flex items-center gap-3">
+        <!-- لینک دقیق صفحه اختصاصی شما در نشان -->
+        <a href="https://neshan.org/maps/municipal/b0c9db852d1d4bae9e158d23c92730f0#c35.735-51.425-15z-0p" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all flex items-center gap-2 shadow-lg shadow-indigo-600/30">
+          <i class="fa-solid fa-map-location-dot"></i> مشاهده مستقیم در نشان
         </a>
-        <a href="https://maps.google.com/?q=35.735,51.425" target="_blank" rel="noopener noreferrer"
-           class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition-all flex items-center gap-1.5">
+
+        <!-- لینک جایگزین گوگل‌مپ -->
+        <a href="https://maps.google.com/?q=35.735,51.425" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition-all flex items-center gap-2 border border-slate-700">
           <i class="fa-brands fa-google"></i> گوگل مپ
         </a>
       </div>
     </div>
   </div>
 </section>
-
 
       <div class="flex flex-col sm:flex-row items-center justify-between gap-3 px-2 pt-4 pb-1">
         <span class="text-xs text-slate-400 text-center sm:text-right">
