@@ -3,30 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>اقامتگاه لوکس ونوس | Venus Residence</title>
 
   <!-- مقدار تأیید گوگل -->
   <meta name="google-site-verification" content="GAPGPTMASKTOKEN2ah9wys8wheX0X">
-<!-- Default Statcounter code for venus-dorm
-https://elmirasafyan.github.io/venus-dorm/ -->
-<script type="text/javascript">
-var sc_project=13356731; 
-var sc_invisible=1; 
-var sc_security="01159f06"; 
-</script>
-<script type="text/javascript"
-src="https://www.statcounter.com/counter/counter.js" async></script>
-<noscript><div class="statcounter"><a title="Web Analytics Made Easy -
-Statcounter" href="https://statcounter.com/" target="_blank"><img
-class="statcounter" src="https://c.statcounter.com/13356731/0/01159f06/1/"
-alt="Web Analytics Made Easy - Statcounter"
-referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
-<!-- End of Statcounter Code -->
-  <title>اقامتگاه لوکس ونوس | Venus Residence</title>
 
+  <!-- Tailwind CSS & Icons -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
   <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/misc/Farsi-Digits/font-face.css" rel="stylesheet" type="text/css">
+
+  <!-- Leaflet Map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Google Analytics 4 (اختیاری) -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-YOUR_ID"></script> -->
 
   <script>
     tailwind.config = {
@@ -92,6 +85,19 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
       background: #94a3b8;
       transition: all 0.3s;
     }
+
+    .leaflet-popup-content-wrapper {
+      background: #0f172a !important;
+      color: #f8fafc !important;
+      border: 1px solid rgba(99, 102, 241, 0.3) !important;
+      border-radius: 12px !important;
+      font-family: 'Vazirmatn FD', sans-serif !important;
+      text-align: right !important;
+      direction: rtl !important;
+    }
+    .leaflet-popup-tip {
+      background: #0f172a !important;
+    }
   </style>
 </head>
 
@@ -118,13 +124,13 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
         <a href="#gallery" class="hover:text-fuchsia-400 transition-colors">گالری تصاویر</a>
         <a href="#rooms" class="hover:text-fuchsia-400 transition-colors">اتاق‌ها و امکانات</a>
-        <a href="#message" class="hover:text-fuchsia-400 transition-colors">پیام مدیریت</a>
         <a href="#booking" class="hover:text-fuchsia-400 transition-colors">رزرو و پذیرش</a>
+        <a href="#location" class="hover:text-fuchsia-400 transition-colors">موقعیت مکانی</a>
         <a href="#contact" class="hover:text-fuchsia-400 transition-colors">تماس با ما</a>
       </nav>
 
       <a href="#booking" class="px-5 py-2.5 rounded-xl font-semibold text-xs tracking-wide bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 transition-all">
-        رزرو و پذیرش
+        رزرو آنلاین
       </a>
     </div>
   </header>
@@ -241,7 +247,7 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
         <div>
           <div class="h-56 w-full overflow-hidden relative bg-slate-950 flex items-center justify-center">
             <img src="room2.jpg" alt="اتاق دو تخته مستر" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
-            <span class="absolute top-3 right-3 px-3 py-1 bg-purple-500/95 backdrop-blur-md text-white rounded-full text-xs font-bold z-10">مستر</span>
+            <span class="absolute top-3 right-3 bg-purple-500/95 backdrop-blur-md text-white rounded-full text-xs font-bold z-10">مستر</span>
           </div>
           <div class="p-6">
             <h3 class="text-xl font-bold text-white mb-2">اتاق ۲ تخته مستر</h3>
@@ -286,7 +292,7 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
         <i class="fa-solid fa-table-cells"></i> بخش اطلاعات رزرو و واریز
       </div>
       <h2 class="text-3xl font-extrabold text-white mb-2">جدول ظرفیت‌ها و رزرو آنلاین</h2>
-      <p class="text-xs sm:text-sm text-slate-400">جهت رزرو و دریافت شماره کارت واریز بیعانه، روی یکی از ظرفیت‌های خالی کلیک کنید.</p>
+      <p class="text-xs sm:text-sm text-slate-400">جهت رزرو و دریافت اطلاعات واریز بیعانه، روی یکی از ردیف‌های خالی کلیک کنید.</p>
     </div>
 
     <div class="glass-card rounded-3xl overflow-hidden border border-fuchsia-500/30">
@@ -445,8 +451,51 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
     </div>
   </section>
 
-  <!-- پنجره پرداخت -->
-  <div id="paymentModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm items-center justify-center p-4">
+  <!-- بخش نقشه و موقعیت مکانی -->
+  <section id="location" class="relative z-10 max-w-6xl mx-auto px-6 py-12">
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 text-xs font-semibold mb-3">
+        <i class="fa-solid fa-location-dot"></i> موقعیت جغرافیایی
+      </div>
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-2">
+        موقعیت دقیق اقامتگاه ونوس
+      </h2>
+      <p class="text-sm text-slate-400">
+        تهران، میدان آرژانتین، بلوار بیهقی، کوچه ۱۴ شرقی، پلاک ۱۸
+      </p>
+    </div>
+
+    <div class="glass-card rounded-3xl overflow-hidden border border-indigo-500/20 p-3 sm:p-4 shadow-2xl">
+      <!-- نقشه Leaflet -->
+      <div id="venus-map" class="w-full h-80 sm:h-[420px] rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 z-0"></div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 px-2 pt-5 pb-2">
+        <div class="text-xs text-slate-300 text-center sm:text-right flex items-center gap-2">
+          <i class="fa-solid fa-circle-info text-indigo-400"></i>
+          <span>برای مسیریابی خودرویی یا پیاده روی دکمه‌های زیر کلیک کنید:</span>
+        </div>
+        
+        <div class="flex flex-wrap items-center justify-center gap-3">
+          <a href="https://neshan.org/maps/municipal/b0c9db852d1d4bae9e158d23c92730f0#c35.735-51.425-15z-0p" 
+             target="_blank" 
+             rel="noopener noreferrer"
+             class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all flex items-center gap-2 shadow-lg shadow-indigo-600/30">
+            <i class="fa-solid fa-diamond-turn-right"></i> مشاهده در نشان
+          </a>
+
+          <a href="https://maps.google.com/?q=35.7348,51.4206" 
+             target="_blank" 
+             rel="noopener noreferrer"
+             class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition-all flex items-center gap-2 border border-slate-700">
+            <i class="fa-brands fa-google"></i> گوگل مپ
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- پنجره مودال پرداخت -->
+  <div id="paymentModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="glass-card bg-slate-900/95 border border-fuchsia-500/40 rounded-3xl max-w-md w-full p-6 relative shadow-2xl text-right">
       <button onclick="closePaymentModal()" class="absolute top-4 left-4 w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white hover:bg-rose-600/80 flex items-center justify-center transition-all" aria-label="بستن">
         <i class="fa-solid fa-xmark"></i>
@@ -473,26 +522,37 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
         </div>
       </div>
 
-      <div class="bg-gradient-to-br from-purple-950/60 to-slate-900 border border-purple-500/30 rounded-2xl p-4 mb-5 text-center relative overflow-hidden">
-        <span class="text-[11px] text-purple-300 block mb-1">شماره کارت جهت واریز بیعانه</span>
-        <span class="text-[11px] text-purple-300 block mb-1">شبا جهت واریز بیعانه</span>
-        <div class="text-lg font-black tracking-widest text-yellow-300 my-2 select-all" dir="ltr" id="cardNumber">
-          ۵۰۲۹-۳۸۱۰-۲۷۱۶-۹۲۸۳
+      <!-- کادر شماره کارت و شماره شبا مجزا -->
+      <div class="space-y-3 mb-5">
+        <!-- شماره کارت فاطمه دلاوری -->
+        <div class="bg-gradient-to-br from-purple-950/60 to-slate-900 border border-purple-500/30 rounded-2xl p-3.5 text-center">
+          <span class="text-[11px] text-purple-300 block mb-1">شماره کارت جهت واریز بیعانه</span>
+          <div class="text-base sm:text-lg font-black tracking-widest text-yellow-300 my-1 select-all" dir="ltr">
+            ۵۰۲۹-۳۸۱۰-۲۷۱۶-۹۲۸۳
+          </div>
+          <span class="text-xs text-slate-300 block mb-2">به نام: <strong class="text-white">خانم فاطمه دلاوری (مدیریت ونوس)</strong></span>
+          <button onclick="copyCardNumber()" id="copyCardBtn" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-purple-500/20 hover:bg-purple-500 text-purple-300 hover:text-white border border-purple-500/40 text-[11px] font-semibold transition-all">
+            <i class="fa-regular fa-copy"></i>
+            <span id="copyCardText">کپی شماره کارت</span>
+          </button>
         </div>
-        <div class="text-lg font-black tracking-widest text-yellow-300 my-2 select-all" dir="ltr" id="cardNumber">
-          080660000000204637576008
-        </div>
-        <span class="text-xs text-slate-300 block">به نام: <strong class="text-white">خانم فاطمه دلاوری (مدیریت ونوس)</strong></span>
-        <span class="text-xs text-slate-300 block">به نام: <strong class="text-white"> (مدیریت ونوس)سپهر شکرچیان</strong></span>
 
-        <button onclick="copyCardNumber()" id="copyBtn" class="mt-3 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-purple-500/20 hover:bg-purple-500 text-purple-300 hover:text-white border border-purple-500/40 text-xs font-semibold transition-all">
-          <i class="fa-regular fa-copy"></i>
-          <span id="copyText">کپی شماره کارت</span>
-        </button>
+        <!-- شماره شبا سپهر شکرچیان -->
+        <div class="bg-gradient-to-br from-indigo-950/60 to-slate-900 border border-indigo-500/30 rounded-2xl p-3.5 text-center">
+          <span class="text-[11px] text-indigo-300 block mb-1">شماره شبا جهت واریز پایا و ساتنا</span>
+          <div class="text-xs sm:text-sm font-black tracking-wider text-teal-300 my-1 select-all font-mono" dir="ltr">
+            IR080660000000204637576008
+          </div>
+          <span class="text-xs text-slate-300 block mb-2">به نام: <strong class="text-white">آقای سپهر شکرچیان</strong></span>
+          <button onclick="copyIbanNumber()" id="copyIbanBtn" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-indigo-500/20 hover:bg-indigo-500 text-indigo-300 hover:text-white border border-indigo-500/40 text-[11px] font-semibold transition-all">
+            <i class="fa-regular fa-copy"></i>
+            <span id="copyIbanText">کپی شماره شبا</span>
+          </button>
+        </div>
       </div>
 
       <div class="space-y-2.5">
-        <a href="https://wa.me/989126801450?text=%D8%B3%D9%84%D8%A7%D9%85%D8%8C%20%D9%81%DB%8C%D8%B4%20%D9%88%D8%A7%D8%B1%DB%8C%D8%B2%20%D8%A8%DB%8C%D8%B9%D8%A7%D9%86%D9%87%20%D8%A8%D8%B1%D8%A7%DB%8C%20%D8%B1%D8%B2%D8%B1%D9%88%20%D8%A7%D9%82%D8%A7%D9%85%D8%AA%DA%AF%D8%A7%D9%87%20%D9%88%D9%8BD8%A8%D9%88%D8%B3%20%D8%B1%D8%A7%20%D8%A7%D8%B1%D8%B3%D8%A7%D9%84%20%D9%85%DB%8C%E2%80%8C%DA%A9%D9%86%D9%85."
+        <a href="https://wa.me/989126801450?text=%D8%B3%D9%84%D8%A7%D9%85%D8%8C%20%D9%81%DB%8C%D8%B4%20%D9%88%D8%A7%D8%B1%DB%8C%D8%B2%20%D8%A8%DB%8C%D8%B9%D8%A7%D9%86%D9%87%20%D8%A8%D8%B1%D8%A7%DB%8C%20%D8%B1%D8%B2%D8%B1%D9%88%20%D8%A7%D9%82%D8%A7%D9%85%D8%AA%DA%AF%D8%A7%D9%87%20%D9%88%D9%86%D9%88%D8%B3%20%D8%B1%D8%A7%20%D8%A7%D8%B1%D8%B3%D8%A7%D9%84%20%D9%85%DB%8C%E2%80%8C%DA%A9%D9%86%D9%85."
            target="_blank" rel="noopener noreferrer"
            class="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/20 transition-all">
           <i class="fa-brands fa-whatsapp text-sm"></i>
@@ -508,7 +568,7 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
   </div>
 
   <!-- فوتر و اطلاعات تماس -->
-  <footer id="contact" class="relative z-10 border-t border-slate-800 bg-slate-950/80 pt-16 pb-12">
+  <footer id="contact" class="relative z-10 border-t border-slate-800 bg-slate-950/90 pt-16 pb-12">
     <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12 text-right">
       <div>
         <h4 class="text-white font-bold text-lg mb-4 flex items-center gap-2">
@@ -516,7 +576,7 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
           <span>نشانی مجموعه</span>
         </h4>
         <p class="text-sm text-slate-400 leading-relaxed">
-          تهران، میدان آرژانتین، کوچه چهاردهم شرقی، پلاک ۱۸
+          تهران، میدان آرژانتین، بلوار بیهقی، کوچه چهاردهم شرقی، پلاک ۱۸
         </p>
       </div>
 
@@ -547,13 +607,25 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
           <span>درباره ونوس</span>
         </h4>
         <p class="text-sm text-slate-400 leading-relaxed">
-          «ما کیفیت را فدای کمیت نمی‌کنیم.» ایجاد بستری استاندارد، ایمن و شایسته اولویت بنیادین ماست.
+          «ما کیفیت را فدای کمیت نمی‌کنیم.» ایجاد بستری استاندارد، آرام، ایمن و شایسته اولویت بنیادین ماست.
         </p>
       </div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-6 mt-12 pt-6 border-t border-slate-900 text-center text-xs text-slate-500">
-      تمامی حقوق محفوظ است © اقامتگاه ونوس
+    <div class="max-w-7xl mx-auto px-6 mt-12 pt-6 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+      <p>تمامی حقوق محفوظ است © اقامتگاه ونوس</p>
+      
+      <!-- شمارنده Statcounter -->
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-slate-400">
+        <i class="fa-solid fa-eye text-indigo-400"></i>
+        <span>بازدیدها:</span>
+        <script type="text/javascript">
+          var sc_project = 13356731; 
+          var sc_invisible = 0; 
+          var sc_security = "01159f06"; 
+        </script>
+        <script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
+      </div>
     </div>
   </footer>
 
@@ -561,7 +633,7 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
     // اسلایدر تصاویر
-    var swiper = new Swiper(".myGallerySwiper", {
+    new Swiper(".myGallerySwiper", {
       spaceBetween: 24,
       centeredSlides: true,
       autoplay: {
@@ -579,7 +651,6 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
     function toggleBookingTable() {
       const content = document.getElementById('bookingTableContent');
       const icon = document.getElementById('toggleIcon');
-
       content.classList.toggle('hidden');
       icon.classList.toggle('rotate-180');
     }
@@ -590,170 +661,56 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
       document.getElementById('modalRoomTitle').innerText = title;
       document.getElementById('modalDeposit').innerText = deposit;
       document.getElementById('modalRent').innerText = rent;
-      document.getElementById('paymentModal').classList.remove('hidden');
+      const modal = document.getElementById('paymentModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
     }
 
     // بستن پنجره پرداخت
     function closePaymentModal() {
-      document.getElementById('paymentModal').classList.add('hidden');
+      const modal = document.getElementById('paymentModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
     }
 
-    // کپی شماره کارت
+    // کپی شماره کارت (خانم دلاوری)
     function copyCardNumber() {
       const cardNum = "5029381027169283";
-      const cardNum = "080660000000204637576008";
       navigator.clipboard.writeText(cardNum).then(() => {
-        const copyText = document.getElementById('copyText');
+        const copyText = document.getElementById('copyCardText');
         copyText.innerText = "کپی شد! ✓";
         setTimeout(() => {
           copyText.innerText = "کپی شماره کارت";
-        }, 2500);
+        }, 2000);
       });
     }
-  </script>
-</body>
-</html>
-<!doctype html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>آمار بازدید سایت</title>
 
-  <!-- Google Analytics 4: شناسه را در هر دو محل جایگزین کن -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-شناسه‌واقعی"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-شناسه‌واقعی');
-  </script>
-</head>
-
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <!-- Leaflet Map CSS & JS (بدون تحریم، لود قطعی نقشه) -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-  <!-- استایل‌های فونت و طراحی شیشه‌ای (Glassmorphism) -->
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap');
-    
-    * {
-      font-family: 'Vazirmatn', sans-serif;
+    // کپی شماره شبا (آقای شکرچیان)
+    function copyIbanNumber() {
+      const ibanNum = "IR080660000000204637576008";
+      navigator.clipboard.writeText(ibanNum).then(() => {
+        const copyText = document.getElementById('copyIbanText');
+        copyText.innerText = "کپی شد! ✓";
+        setTimeout(() => {
+          copyText.innerText = "کپی شماره شبا";
+        }, 2000);
+      });
     }
 
-    .glass-card {
-      background: rgba(15, 23, 42, 0.75);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    /* سفارشی‌سازی پاپ‌آپ نقشه */
-    .leaflet-popup-content-wrapper {
-      background: #0f172a !important;
-      color: #f8fafc !important;
-      border: 1px solid rgba(99, 102, 241, 0.3) !important;
-      border-radius: 12px !important;
-      font-family: 'Vazirmatn', sans-serif !important;
-      text-align: right !important;
-      direction: rtl !important;
-    }
-    .leaflet-popup-tip {
-      background: #0f172a !important;
-    }
-  </style>
-</head>
-    <!-- بخش نقشه و موقعیت مکانی اختصاصی با Leaflet و نشان -->
-    <section id="location" class="relative z-10 max-w-6xl mx-auto px-6">
-      <div class="text-center mb-8">
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 text-xs font-semibold mb-3">
-          <i class="fa-solid fa-location-dot"></i> موقعیت جغرافیایی
-        </div>
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-2">
-          موقعیت دقیق اقامتگاه ونوس
-        </h2>
-        <p class="text-sm text-slate-400">
-          تهران، میدان آرژانتین، بلوار بیهقی، کوچه ۱۴ شرقی، پلاک ۱۸
-        </p>
-      </div>
-
-      <div class="glass-card rounded-3xl overflow-hidden border border-indigo-500/20 p-3 sm:p-4 shadow-2xl">
-        <!-- کانتینر نقشه زنده با Leaflet -->
-        <div id="venus-map" class="w-full h-80 sm:h-[420px] rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 z-0"></div>
-
-        <!-- نوار ابزار و دکمه‌های هدایت به نشان و گوگل‌مپ -->
-        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 px-2 pt-5 pb-2">
-          <div class="text-xs text-slate-300 text-center sm:text-right flex items-center gap-2">
-            <i class="fa-solid fa-circle-info text-indigo-400"></i>
-            <span>برای مسیریابی خودرویی یا پیاده روی دکمه‌های زیر کلیک کنید:</span>
-          </div>
-          
-          <div class="flex flex-wrap items-center justify-center gap-3">
-            <!-- لینک صفحه اختصاصی در نشان -->
-            <a href="https://neshan.org/maps/municipal/b0c9db852d1d4bae9e158d23c92730f0#c35.735-51.425-15z-0p" 
-               target="_blank" 
-               rel="noopener noreferrer"
-               class="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all flex items-center gap-2 shadow-lg shadow-indigo-600/30">
-              <i class="fa-solid fa-diamond-turn-right"></i> مشاهده و مسیریابی در نشان
-            </a>
-
-            <!-- لینک گوگل مپ -->
-            <a href="https://maps.google.com/?q=35.7348,51.4206" 
-               target="_blank" 
-               rel="noopener noreferrer"
-               class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition-all flex items-center gap-2 border border-slate-700">
-              <i class="fa-brands fa-google"></i> گوگل مپ
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- بخش اطلاعات تماس -->
-    <section id="contact" class="max-w-6xl mx-auto px-6">
-      <div class="glass-card rounded-3xl p-6 sm:p-8 border border-slate-800 text-center">
-        <h3 class="text-xl font-bold text-white mb-2">نیاز به راهنمایی یا رزرو تلفنی دارید؟</h3>
-        <p class="text-sm text-slate-400 mb-6">پذیرش اقامتگاه به‌صورت ۲۴ ساعته پاسخگوی شما عزیزان است.</p>
-        <div class="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-indigo-600/10 border border-indigo-500/30 text-indigo-300 font-bold text-base">
-          <i class="fa-solid fa-phone-volume"></i>
-          <span>021-88731810</span>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- فوتر -->
-  <footer class="border-t border-slate-850 bg-slate-950/80 py-6 text-center text-xs text-slate-400">
-    <p>© 1405 تمامی حقوق برای اقامتگاه ونوس محفوظ است.</p>
-  </footer>
-
-  <!-- اسکریپت فعال‌سازی و تنظیم نقشه بدون نقص -->
-  <script>
+    // تنظیمات نقشه Leaflet
     document.addEventListener("DOMContentLoaded", function () {
-      // مختصات دقیق پلاک ۱۸ کوچه ۱۴ شرقی بیهقی
       const lat = 35.7348;
       const lng = 51.4206;
 
-      // ساخت نقشه با مرکزیت لوکیشن اقامتگاه
       const map = L.map('venus-map', {
-        scrollWheelZoom: false // جلوگیری از اسکرول ناخواسته هنگام ورق زدن صفحه در موبایل
+        scrollWheelZoom: false
       }).setView([lat, lng], 16);
 
-      // لایه نقشه استاندارد و سبک OpenStreetMap
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '© OpenStreetMap'
       }).addTo(map);
 
-      // افزودن پین مارکر و باز شدن پنجره اطلاعات اقامتگاه
       const marker = L.marker([lat, lng]).addTo(map);
       marker.bindPopup(`
         <div style="line-height: 1.6;">
@@ -763,37 +720,5 @@ referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
       `).openPopup();
     });
   </script>
-
 </body>
 </html>
-
-      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 px-2 pt-4 pb-1">
-        <span class="text-xs text-slate-400 text-center sm:text-right">
-   <!-- فوتر به همراه شمارنده بازدید -->
-  <footer class="border-t border-slate-800 bg-slate-950/80 py-8 text-center text-xs text-slate-400">
-    <p class="mb-3">© ۱۴۰۳ تمامی حقوق برای اقامتگاه ونوس محفوظ است.</p>
-
-    <!-- کادر نمایش آمار و شمارنده Statcounter -->
-    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900 border border-slate-800 text-slate-300">
-      <i class="fa-solid fa-eye text-indigo-400"></i>
-      <span>تعداد کل بازدیدها:</span>
-      
-      <!-- کد اصلاح‌شده Statcounter (نمایان) -->
-      <!-- Default Statcounter code for venus-dorm -->
-      <script type="text/javascript">
-        var sc_project = 13356731; 
-        var sc_invisible = 0; // روی 0 تنظیم شد تا عدد بازدید نمایش داده شود
-        var sc_security = "01159f06"; 
-      </script>
-      <script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
-      <noscript>
-        <div class="statcounter inline-block">
-          <a title="Web Analytics" href="https://statcounter.com/" target="_blank">
-            <img class="statcounter" src="https://c.statcounter.com/13356731/0/01159f06/1/" alt="Web Analytics" referrerpolicy="no-referrer-when-downgrade">
-          </a>
-        </div>
-      </noscript>
-      <!-- End of Statcounter Code -->
-    </div>
-  </footer>
-
