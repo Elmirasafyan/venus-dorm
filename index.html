@@ -1,894 +1,100 @@
-1. اضافه شدن تگ‌های استاندارد `<!DOCTYPE html>` و `<html lang="fa" dir="rtl">` و متاتگ‌های ضروری.
-2. اعمال قواعد سراسری RTL در استایل و روی بدنه (`<body dir="rtl" class="... text-right">`).
-3. اصلاح کلاس‌های فاصله‌دهی آیکون‌ها از `ml-1` به `me-1` برای پیشگیری از به‌هم‌ریختگی در جهت فارسی.
-4. اصلاح لبه‌های جدول نرخ‌ها و ظرفیت‌ها به کلاس‌های منطقی (`rounded-s-xl` و `rounded-e-xl`).
-5. حفظ فرمت چپ‌به‌راست (`dir="ltr"`) برای شماره تلفن‌ها، شماره کارت و شماره شبا.
-
----
-
-```html
+@@ -1,11 +1,4 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa" dir="rtl" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>پانسیون دخترانه ونوس تهران | اقامتگاه دانشجویی و کارمندی میدان آرژانتین</title>
-    <meta name="description" content="اقامتگاه و پانسیون دخترانه لوکس ونوس در بهترین لوکیشن تهران (میدان آرژانتین، خیابان وزرا). دسترسی سریع به مترو میرزای شیرازی، امکانات کامل رفاهی، پذیرش شبانه‌روزی.">
-    <meta name="keywords" content="پانسیون دخترانه تهران, خوابگاه دخترانه آرژانتین, اقامتگاه دانشجویی وزرا, پانسیون کارمندی لوکس, خوابگاه میرزای شیرازی, پانسیون ونوس">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://venusgirlsresidence.com/">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Open Graph / Social Media -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="پانسیون دخترانه ونوس تهران | لوکس، امن و آرام">
-    <meta property="og:description" content="اقامتگاه لوکس دانشجویی و کارمندی در قلب تهران، میدان آرژانتین. امکانات رفاهی کامل، اتاق‌های مستر و نظافت روزانه.">
-    <meta property="og:locale" content="fa_IR">
+  <!-- مقدار تأیید مالکیت گوگل -->
+  <meta name="google-site-verification" content="GAPGPTMASKTOKEN2ah9wys8wheX0X">
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
+  <title>پانسیون دخترانه لوکس ونوس | Venus Residence</title>
 
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+@@ -157,10 +150,7 @@ <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight
+      در قلب پایتخت
+    </h1>
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Vazirmatn FD', 'Vazirmatn', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            gold: '#D4AF37',
-                            dark: '#0f172a',
-                            card: '#1e293b',
-                            accent: '#ec4899',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <p class="text-sm sm:text-base text-slate-400 max-w-2xl mx-auto mb-8 leading-relaxed">
+      فضایی ایده‌آل و آرام برای دانشجویان دوره‌های تکمیلی، پژوهشگران و بانوان شاغل موجه در میدان آرژانتین تهران با مدیریت مجرب خوابگاه‌های زنجیره‌ای آوین، جردن و ونوس.
+    </p>
 
-    <style>
-        html, body {
-            direction: rtl;
-            text-align: right;
-            font-family: 'Vazirmatn FD', 'Vazirmatn', sans-serif;
-            scroll-behavior: smooth;
-        }
-        
-        .gold-gradient-text {
-            background: linear-gradient(135deg, #FDE047 0%, #D4AF37 50%, #CA8A04 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+  
+    <div class="flex flex-wrap items-center justify-center gap-4">
+      <a href="#rooms" class="px-7 py-3.5 rounded-2xl bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold text-sm shadow-xl shadow-fuchsia-500/20 hover:scale-105 transition-all">
+        مشاهده واحدها
+@@ -812,30 +802,55 @@ <h2 class="text-3xl font-extrabold text-white mb-2">موقعیت دقیق و د
+        </p>
+      </div>
 
-        .gold-border-gradient {
-            border-image: linear-gradient(to bottom right, #D4AF37, transparent, #D4AF37) 1;
-        }
-
-        .glass-nav {
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
-        }
-
-        .hero-pattern {
-            background-color: #0b0f19;
-            background-image: radial-gradient(rgba(212, 175, 55, 0.12) 1px, transparent 0);
-            background-size: 28px 28px;
-            background-position: -19px -19px;
-        }
-
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0f172a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #D4AF37;
-        }
-
-        /* Leaflet custom dark style */
-        .leaflet-popup-content-wrapper {
-            background: #1e293b !important;
-            color: #fff !important;
-            border-radius: 12px !important;
-            border: 1px solid #D4AF37 !important;
-            direction: rtl !important;
-            text-align: right !important;
-            font-family: inherit !important;
-        }
-        .leaflet-popup-tip {
-            background: #1e293b !important;
-        }
-    </style>
-</head>
-<body dir="rtl" class="relative selection:bg-fuchsia-500 selection:text-white text-right">
-
-    <!-- Header / Navbar -->
-    <header class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300" id="main-header">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                
-                <!-- Logo & Brand -->
-                <div class="flex items-center gap-3">
-                    <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-amber-500 to-yellow-300 p-0.5 shadow-lg shadow-amber-500/20">
-                        <div class="w-full h-full bg-slate-900 rounded-full flex items-center justify-center">
-                            <span class="text-amber-400 font-extrabold text-xl tracking-tighter">V</span>
-                        </div>
-                    </div>
-                    <div>
-                        <span class="text-xl font-black tracking-tight text-white block">اقامتگاه دخترانه <span class="gold-gradient-text">ونوس</span></span>
-                        <span class="text-xs text-slate-400 font-medium">میدان آرژانتین، تهران</span>
-                    </div>
-                </div>
-
-                <!-- Desktop Menu -->
-                <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-300">
-                    <a href="#about" class="hover:text-amber-400 transition-colors">معرفی اقامتگاه</a>
-                    <a href="#rooms" class="hover:text-amber-400 transition-colors">اتاق‌ها و نرخ‌ها</a>
-                    <a href="#facilities" class="hover:text-amber-400 transition-colors">امکانات رفاهی</a>
-                    <a href="#location" class="hover:text-amber-400 transition-colors">موقعیت و دسترسی</a>
-                    <a href="#rules" class="hover:text-amber-400 transition-colors">قوانین و مقررات</a>
-                    <a href="#faq" class="hover:text-amber-400 transition-colors">سوالات متداول</a>
-                </nav>
-
-                <!-- Phone CTA (Desktop) -->
-                <div class="hidden md:flex items-center gap-3">
-                    <a href="tel:02188731810" class="flex items-center gap-2 bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 font-bold px-4 py-2.5 rounded-full hover:shadow-lg hover:shadow-amber-500/20 hover:scale-105 transition-all text-xs lg:text-sm">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                        <span>پذیرش ۲۴ ساعته:</span>
-                        <span dir="ltr">02188731810</span>
-                    </a>
-                </div>
-
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-slate-300 hover:text-white focus:outline-none p-2" aria-label="منوی موبایل">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Mobile Menu Dropdown -->
-        <div id="mobile-menu" class="hidden md:hidden bg-slate-900/95 border-b border-slate-800 px-4 pt-2 pb-6 space-y-3">
-            <a href="#about" class="block py-2 text-slate-300 hover:text-amber-400 font-medium">معرفی اقامتگاه</a>
-            <a href="#rooms" class="block py-2 text-slate-300 hover:text-amber-400 font-medium">اتاق‌ها و نرخ‌ها</a>
-            <a href="#facilities" class="block py-2 text-slate-300 hover:text-amber-400 font-medium">امکانات رفاهی</a>
-            <a href="#location" class="block py-2 text-slate-300 hover:text-amber-400 font-medium">موقعیت و دسترسی</a>
-            <a href="#rules" class="block py-2 text-slate-300 hover:text-amber-400 font-medium">قوانین و مقررات</a>
-            <a href="#faq" class="block py-2 text-slate-300 hover:text-amber-400 font-medium">سوالات متداول</a>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero-pattern pt-32 pb-20 md:pt-40 md:pb-28 border-b border-slate-800/80 relative overflow-hidden">
-        <div class="absolute -top-24 -left-24 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-fuchsia-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-            
-            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/20 text-amber-400 text-xs sm:text-sm font-semibold mb-6 animate-pulse">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 inline-block"></span>
-                <span>پذیرش فعال دانشجویی و کارمندی سال ۱۴۰۳ - ۱۴۰۴</span>
-            </div>
-
-            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white leading-tight mb-6">
-                تجربه اقامتی لوکس، امن و آرامش‌بخش<br class="hidden sm:inline"> در 
-                <span class="gold-gradient-text">پانسیون دخترانه ونوس</span>
-            </h1>
-
-            <p class="max-w-3xl mx-auto text-slate-300 text-base sm:text-lg leading-relaxed mb-10">
-                واقع در بهترین لوکیشن مرکزی تهران (میدان آرژانتین، خیابان وزرا). دارای تمامی امکانات استاندارد هتلینگ، نظافت تخصصی روزانه، گیت‌های ورود و خروج هوشمند و دسترسی عالی به خط ۳ مترو.
-            </p>
-
-            <!-- Quick Features Pills -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-10">
-                <div class="bg-slate-800/60 backdrop-blur border border-slate-700/60 p-4 rounded-2xl flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-amber-400/10 flex items-center justify-center text-amber-400 shrink-0">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-                    </div>
-                    <div class="text-right">
-                        <h4 class="text-xs font-bold text-white">امنیت تضمینی</h4>
-                        <p class="text-[11px] text-slate-400">سرپرستی ۲۴ساعته و دوربین</p>
-                    </div>
-                </div>
-
-                <div class="bg-slate-800/60 backdrop-blur border border-slate-700/60 p-4 rounded-2xl flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-amber-400/10 flex items-center justify-center text-amber-400 shrink-0">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    </div>
-                    <div class="text-right">
-                        <h4 class="text-xs font-bold text-white">دسترسی فوق‌العاده</h4>
-                        <p class="text-[11px] text-slate-400">۵ دقیقه تا مترو میرزای شیرازی</p>
-                    </div>
-                </div>
-
-                <div class="bg-slate-800/60 backdrop-blur border border-slate-700/60 p-4 rounded-2xl flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-amber-400/10 flex items-center justify-center text-amber-400 shrink-0">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                    </div>
-                    <div class="text-right">
-                        <h4 class="text-xs font-bold text-white">اینترنت پرسرعت</h4>
-                        <p class="text-[11px] text-slate-400">وای‌فای نامحدود در همه طبقات</p>
-                    </div>
-                </div>
-
-                <div class="bg-slate-800/60 backdrop-blur border border-slate-700/60 p-4 rounded-2xl flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-amber-400/10 flex items-center justify-center text-amber-400 shrink-0">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
-                    </div>
-                    <div class="text-right">
-                        <h4 class="text-xs font-bold text-white">نظافت دائمی</h4>
-                        <p class="text-[11px] text-slate-400">نظافت روزانه فضاهای عمومی</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-20 bg-slate-900/60 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div>
-                    <span class="text-amber-400 text-sm font-bold tracking-wider uppercase">درباره اقامتگاه دخترانه ونوس</span>
-                    <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-2 mb-6">محیطی امن و آرام همانند خانه خودتان</h2>
-                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-4">
-                        پانسیون دخترانه ونوس با هدف ارتقای استانداردهای اقامتی برای دانشجویان پرتلاش، اساتید، و شاغلین محترم طراحی شده است. ما با درک عمیق از دغدغه‌های خانواده‌ها و بانوان عزیز، محیطی کاملاً آرام، صمیمی، فرهنگی و با سطح امنیت حداکثری مهیا کرده‌ایم.
-                    </p>
-                    <p class="text-slate-400 text-sm sm:text-base leading-relaxed mb-6">
-                        ساختمان اقامتگاه با جدیدترین استانداردهای معماری و رفاهی مجهز شده است. نظارت و سرپرستی شبانه‌روزی، سیستم ثبت تردد هوشمند و کادر اجرایی کارآزموده، آرامش خاطر شما و خانواده محترمتان را تضمین می‌کند.
-                    </p>
-                    
-                    <div class="grid grid-cols-2 gap-4 border-t border-slate-800 pt-6">
-                        <div>
-                            <span class="block text-2xl font-black text-amber-400">۱۰۰٪</span>
-                            <span class="text-xs text-slate-400">رضایت اقامت‌جویان از نظم و بهداشت</span>
-                        </div>
-                        <div>
-                            <span class="block text-2xl font-black text-amber-400">۲۴ / ۷</span>
-                            <span class="text-xs text-slate-400">پذیرش، امنیت و پشتیبانی مستقر</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="relative">
-                    <div class="w-full h-80 sm:h-96 rounded-3xl overflow-hidden shadow-2xl border border-slate-700 relative bg-slate-800 flex items-center justify-center">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent z-10"></div>
-                        <img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=80" alt="اتاق پانسیون ونوس" class="w-full h-full object-cover">
-                        <div class="absolute bottom-6 right-6 left-6 z-20">
-                            <span class="px-3 py-1 bg-amber-500/90 text-slate-950 rounded-lg text-xs font-bold mb-2 inline-block">استاندارد هتلینگ</span>
-                            <h3 class="text-lg font-bold text-white">فضایی مدرن و پرنور با دکوراسیون دلنشین</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Rooms & Rates Section -->
-    <section id="rooms" class="py-20 bg-slate-950 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-amber-400 text-sm font-bold tracking-wider uppercase">انتخاب نوع اتاق</span>
-                <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-2 mb-4">انواع اتاق‌ها و ظرفیت‌های پانسیون ونوس</h2>
-                <p class="text-slate-400 text-sm sm:text-base">
-                    تمامی اتاق‌ها مجهز به تشک‌های طبی رویال، یخچال شخصی/واحد، کمدهای قفل‌دار، میز مطالعه و سیستم سرمایش/گرمایش مجزا می‌باشند.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-                <!-- Room Card 1 -->
-                <div class="bg-slate-900 rounded-3xl border border-slate-800 hover:border-amber-400/50 transition-all duration-300 overflow-hidden flex flex-col group">
-                    <div class="h-48 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=600&q=80" alt="اتاق یک تخته و دو تخته" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute top-3 right-3 bg-amber-500 text-slate-950 text-xs font-bold px-2.5 py-1 rounded-full">اتاق اختصاصی و VIP</div>
-                    </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between">
-                        <div>
-                            <h3 class="text-lg font-bold text-white mb-2">اتاق ۱ تخته و ۲ تخته (VIP)</h3>
-                            <p class="text-slate-400 text-xs leading-relaxed mb-4">حداکثر خلوتی و آرامش، مناسب برای دانشجویان مقاطع دکتری، پژوهشگران و مدیران شاغل.</p>
-                            <ul class="text-xs text-slate-300 space-y-2 mb-6">
-                                <li class="flex items-center gap-2">✓ بالکن اختصاصی در برخی واحدها</li>
-                                <li class="flex items-center gap-2">✓ کمد دیواری بزرگ و جادار</li>
-                                <li class="flex items-center gap-2">✓ میز و صندلی مطالعه ارگونومیک</li>
-                            </ul>
-                        </div>
-                        <div class="border-t border-slate-800 pt-4 flex items-center justify-between">
-                            <div>
-                                <span class="text-xs text-slate-400 block">شروع اجاره ماهانه:</span>
-                                <span class="text-amber-400 font-extrabold text-sm sm:text-base">از ۷٬۰۰۰٬۰۰۰ تومان</span>
-                            </div>
-                            <a href="tel:09126801450" class="text-xs bg-slate-800 hover:bg-amber-400 hover:text-slate-950 text-white font-bold py-2 px-3 rounded-xl transition">استعلام رزرو</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Room Card 2 -->
-                <div class="bg-slate-900 rounded-3xl border-2 border-amber-500/40 relative hover:border-amber-400 transition-all duration-300 overflow-hidden flex flex-col group shadow-xl shadow-amber-500/5">
-                    <div class="absolute top-0 right-0 left-0 bg-amber-500 text-slate-950 text-[11px] font-black text-center py-1 uppercase tracking-wider">محبوب‌ترین انتخاب</div>
-                    <div class="h-48 overflow-hidden relative mt-6">
-                        <img src="https://images.unsplash.com/photo-1540518614846-7ede433c4ef7?auto=format&fit=crop&w=600&q=80" alt="اتاق چهار تخته" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute top-3 right-3 bg-slate-950/80 text-amber-400 text-xs font-bold px-2.5 py-1 rounded-full border border-amber-400/30">تعادل قیمت و آرامش</div>
-                    </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between">
-                        <div>
-                            <h3 class="text-lg font-bold text-white mb-2">اتاق ۴ تخته استاندارد</h3>
-                            <p class="text-slate-400 text-xs leading-relaxed mb-4">نورگیر عالی، چیدمان باز با فضای حرکتی ایده‌آل و کمد شخصی قفل‌دار برای هر نفر.</p>
-                            <ul class="text-xs text-slate-300 space-y-2 mb-6">
-                                <li class="flex items-center gap-2">✓ تخت‌های تک‌طبقه یا دوطبقه استاندارد</li>
-                                <li class="flex items-center gap-2">✓ یخچال مجزا داخل هر اتاق</li>
-                                <li class="flex items-center gap-2">✓ نور طبیعی عالی و پنجره دوجداره</li>
-                            </ul>
-                        </div>
-                        <div class="border-t border-slate-800 pt-4 flex items-center justify-between">
-                            <div>
-                                <span class="text-xs text-slate-400 block">شروع اجاره ماهانه:</span>
-                                <span class="text-amber-400 font-extrabold text-sm sm:text-base">از ۵٬۵۰۰٬۰۰۰ تومان</span>
-                            </div>
-                            <a href="tel:09126801450" class="text-xs bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-2 px-3 rounded-xl transition">استعلام رزرو</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Room Card 3 -->
-                <div class="bg-slate-900 rounded-3xl border border-slate-800 hover:border-amber-400/50 transition-all duration-300 overflow-hidden flex flex-col group">
-                    <div class="h-48 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=600&q=80" alt="اتاق شش و هشت تخته" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute top-3 right-3 bg-slate-950/80 text-white text-xs font-bold px-2.5 py-1 rounded-full border border-slate-700">اقتصادی و باصرفه</div>
-                    </div>
-                    <div class="p-6 flex-1 flex flex-col justify-between">
-                        <div>
-                            <h3 class="text-lg font-bold text-white mb-2">اتاق ۶ و ۸ تخته اقتصادی</h3>
-                            <p class="text-slate-400 text-xs leading-relaxed mb-4">مناسب دانشجویانی که به دنبال هزینه مناسب در کنار حفظ اصول بهداشت و نظم هستند.</p>
-                            <ul class="text-xs text-slate-300 space-y-2 mb-6">
-                                <li class="flex items-center gap-2">✓ فضای نشیمن دلباز و تهویه مطلوب</li>
-                                <li class="flex items-center gap-2">✓ کمدهای فلزی جادار با قفل اختصاصی</li>
-                                <li class="flex items-center gap-2">✓ دسترسی مستقیم به امکانات بهداشتی طبقه</li>
-                            </ul>
-                        </div>
-                        <div class="border-t border-slate-800 pt-4 flex items-center justify-between">
-                            <div>
-                                <span class="text-xs text-slate-400 block">شروع اجاره ماهانه:</span>
-                                <span class="text-amber-400 font-extrabold text-sm sm:text-base">از ۴٬۰۰۰٬۰۰۰ تومان</span>
-                            </div>
-                            <a href="tel:09126801450" class="text-xs bg-slate-800 hover:bg-amber-400 hover:text-slate-950 text-white font-bold py-2 px-3 rounded-xl transition">استعلام رزرو</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Detailed Rates Table Component -->
-            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8">
-                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-6 border-b border-slate-800 gap-4">
-                    <div>
-                        <h3 class="text-lg font-bold text-white">جدول ظرفیت‌ها و برآورد ودیعه / اجاره‌بها (ماهانه)</h3>
-                        <p class="text-xs text-slate-400 mt-1">ودیعه‌ها بسته به طبقه و مدت قرارداد قابل تبدیل می‌باشند. جهت دریافت آخرین استعلام تماس بگیرید.</p>
-                    </div>
-                    <a href="tel:02188731810" class="inline-flex items-center gap-2 text-xs font-bold text-amber-400 bg-amber-400/10 border border-amber-400/20 px-3.5 py-2 rounded-xl hover:bg-amber-400/20 transition">
-                        <span>پذیرش و مشاوره فوری</span>
-                    </a>
-                </div>
-
-                <div class="overflow-x-auto mt-6">
-                    <table class="w-full text-right text-xs sm:text-sm">
-                        <thead class="bg-slate-800/60 text-slate-400">
-                            <tr>
-                                <th class="p-3 sm:p-4 rounded-s-xl font-bold">نوع اتاق / ظرفیت</th>
-                                <th class="p-3 sm:p-4 font-bold">امکانات ویژه</th>
-                                <th class="p-3 sm:p-4 font-bold">ودیعه (تومان)</th>
-                                <th class="p-3 sm:p-4 font-bold">اجاره بها ماهانه</th>
-                                <th class="p-3 sm:p-4 rounded-e-xl font-bold">وضعیت رزرو</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-800 text-slate-300">
-                            <tr class="hover:bg-slate-800/30 transition">
-                                <td class="p-3 sm:p-4 font-bold text-white">اتاق ۱ تخته مستر (مستقل)</td>
-                                <td class="p-3 sm:p-4 text-xs text-slate-400">یخچال، سرویس مجزا، تلویزیون</td>
-                                <td class="p-3 sm:p-4">تماس بگیرید</td>
-                                <td class="p-3 sm:p-4 font-bold text-amber-400">تماس بگیرید</td>
-                                <td class="p-3 sm:p-4"><span class="px-2 py-1 rounded bg-amber-500/10 text-amber-400 text-xs">ظرفیت محدود</span></td>
-                            </tr>
-                            <tr class="hover:bg-slate-800/30 transition">
-                                <td class="p-3 sm:p-4 font-bold text-white">اتاق ۲ تخته مستر</td>
-                                <td class="p-3 sm:p-4 text-xs text-slate-400">حمام اختصاصی، کمد دیواری</td>
-                                <td class="p-3 sm:p-4">۸٬۰۰۰٬۰۰۰</td>
-                                <td class="p-3 sm:p-4 font-bold text-amber-400">۷٬۵۰۰٬۰۰۰</td>
-                                <td class="p-3 sm:p-4"><span class="px-2 py-1 rounded bg-emerald-500/10 text-emerald-400 text-xs">پذیرش فعال</span></td>
-                            </tr>
-                            <tr class="hover:bg-slate-800/30 transition">
-                                <td class="p-3 sm:p-4 font-bold text-white">اتاق ۴ تخته معمولی</td>
-                                <td class="p-3 sm:p-4 text-xs text-slate-400">نورگیر عالی، یخچال اختصاصی</td>
-                                <td class="p-3 sm:p-4">۶٬۰۰۰٬۰۰۰</td>
-                                <td class="p-3 sm:p-4 font-bold text-amber-400">۵٬۸۰۰٬۰۰۰</td>
-                                <td class="p-3 sm:p-4"><span class="px-2 py-1 rounded bg-emerald-500/10 text-emerald-400 text-xs">پذیرش فعال</span></td>
-                            </tr>
-                            <tr class="hover:bg-slate-800/30 transition">
-                                <td class="p-3 sm:p-4 font-bold text-white">اتاق ۶ تخته</td>
-                                <td class="p-3 sm:p-4 text-xs text-slate-400">تخت استاندارد چوبی، کمد قفل‌دار</td>
-                                <td class="p-3 sm:p-4">۵٬۰۰۰٬۰۰۰</td>
-                                <td class="p-3 sm:p-4 font-bold text-amber-400">۴٬۷۰۰٬۰۰۰</td>
-                                <td class="p-3 sm:p-4"><span class="px-2 py-1 rounded bg-emerald-500/10 text-emerald-400 text-xs">پذیرش فعال</span></td>
-                            </tr>
-                            <tr class="hover:bg-slate-800/30 transition">
-                                <td class="p-3 sm:p-4 font-bold text-white">اتاق ۸ تخته اقتصادی</td>
-                                <td class="p-3 sm:p-4 text-xs text-slate-400">مقرون‌به‌صرفه، سالن مطالعه اختصاصی</td>
-                                <td class="p-3 sm:p-4">۴٬۰۰۰٬۰۰۰</td>
-                                <td class="p-3 sm:p-4 font-bold text-amber-400">۳٬۹۰۰٬۰۰۰</td>
-                                <td class="p-3 sm:p-4"><span class="px-2 py-1 rounded bg-emerald-500/10 text-emerald-400 text-xs">پذیرش فعال</span></td>
-                            </tr>
-                            <tr class="hover:bg-slate-800/30 transition">
-                                <td class="p-3 sm:p-4 font-bold text-white">پذیرش مهمان (شبانه‌روزی)</td>
-                                <td class="p-3 sm:p-4 text-xs text-slate-400">همراه با ملحفه هتلی و وسایل بهداشتی</td>
-                                <td class="p-3 sm:p-4">-</td>
-                                <td class="p-3 sm:p-4 font-bold text-amber-400">شبی ۳۵۰٬۰۰۰</td>
-                                <td class="p-3 sm:p-4"><span class="px-2 py-1 rounded bg-blue-500/10 text-blue-400 text-xs">با هماهنگی قبلی</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Facilities & Services -->
-    <section id="facilities" class="py-20 bg-slate-900/60 relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-amber-400 text-sm font-bold tracking-wider uppercase">امکانات درجه یک</span>
-                <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-2 mb-4">آسایش کامل با استانداردهای نوین هتلی</h2>
-                <p class="text-slate-400 text-sm sm:text-base">در پانسیون ونوس تمام جزئیات برای ایجاد فضایی آسوده، تمیز و کارآمد جهت استراحت و پیشرفت شما پیش‌بینی شده است.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Facility 1 -->
-                <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex gap-4 hover:border-slate-700 transition">
-                    <div class="w-12 h-12 rounded-xl bg-amber-400/10 text-amber-400 flex items-center justify-center shrink-0">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
-                    </div>
-                    <div>
-                        <h4 class="text-base font-bold text-white mb-2">سالن مطالعه اختصاصی و آرام</h4>
-                        <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">دارای میزهای مطالعه مجزا و نورپردازی استاندارد و پریز برق اختصاصی برای لپ‌تاپ جهت مطالعه مفید و بدون دغدغه.</p>
-                    </div>
-                </div>
-
-                <!-- Facility 2 -->
-                <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex gap-4 hover:border-slate-700 transition">
-                    <div class="w-12 h-12 rounded-xl bg-amber-400/10 text-amber-400 flex items-center justify-center shrink-0">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
-                    </div>
-                    <div>
-                        <h4 class="text-base font-bold text-white mb-2">آشپزخانه‌های مدرن در هر طبقه</h4>
-                        <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">مجهز به اجاق‌های گاز صنعتی، ماکروویو، چای‌ساز برقی، هودهای پرقدرت و کابینت‌های شخصی برای هر نفر.</p>
-                    </div>
-                </div>
-
-                <!-- Facility 3 -->
-                <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex gap-4 hover:border-slate-700 transition">
-                    <div class="w-12 h-12 rounded-xl bg-amber-400/10 text-amber-400 flex items-center justify-center shrink-0">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
-                    </div>
-                    <div>
-                        <h4 class="text-base font-bold text-white mb-2">لاندری تمام‌اتوماتیک و اتو</h4>
-                        <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">ماشین‌های لباسشویی اتوماتیک، فضای خشک‌کن مجزا و رخت‌آویزهای متعدد به همراه میز اتو در اختیار مقیمان.</p>
-                    </div>
-                </div>
-
-                <!-- Facility 4 -->
-                <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex gap-4 hover:border-slate-700 transition">
-                    <div class="w-12 h-12 rounded-xl bg-amber-400/10 text-amber-400 flex items-center justify-center shrink-0">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                    </div>
-                    <div>
-                        <h4 class="text-base font-bold text-white mb-2">نظافت دائمی و روزانه</h4>
-                        <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">پرسنل خدمات متعهد جهت نظافت روزمره سرویس‌های بهداشتی، آشپزخانه‌ها، لابی و راهروها با شوینده‌های ضدعفونی‌کننده.</p>
-                    </div>
-                </div>
-
-                <!-- Facility 5 -->
-                <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex gap-4 hover:border-slate-700 transition">
-                    <div class="w-12 h-12 rounded-xl bg-amber-400/10 text-amber-400 flex items-center justify-center shrink-0">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
-                    </div>
-                    <div>
-                        <h4 class="text-base font-bold text-white mb-2">اینترنت فیبر نوری پرسرعت</h4>
-                        <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">پوشش یکدست و پایدار در تمام طبقات و اتاق‌ها جهت شرکت در کلاس‌های آنلاین و وبینارها.</p>
-                    </div>
-                </div>
-
-                <!-- Facility 6 -->
-                <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex gap-4 hover:border-slate-700 transition">
-                    <div class="w-12 h-12 rounded-xl bg-amber-400/10 text-amber-400 flex items-center justify-center shrink-0">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                    </div>
-                    <div>
-                        <h4 class="text-base font-bold text-white mb-2">سیستم سرمایش و گرمایش مطلوب</h4>
-                        <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">مجهز به چیلر مرکزی، کولرهای گازی اسپلیت، شوفاژ و پکیج جهت آسایش حرارتی کامل در تمام فصول سال.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Location & Leaflet Interactive Map -->
-    <section id="location" class="py-20 bg-slate-950 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
-                <div class="lg:col-span-1">
-                    <span class="text-amber-400 text-sm font-bold tracking-wider uppercase">موقعیت و دسترسی عالی</span>
-                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-2 mb-4">مرکز دسترسی پایتخت؛ میدان آرژانتین</h2>
-                    <p class="text-slate-300 text-sm leading-relaxed mb-6">
-                        پانسیون ونوس در یکی از بهترین و بااصالت‌ترین مناطق اداری و فرهنگی تهران واقع شده است. دسترسی کم‌نظیر به خطوط اصلی حمل‌ونقل شهری موجب صرفه‌جویی اساسی در زمان روزانه شما می‌شود.
-                    </p>
-
-                    <div class="space-y-4">
-                        <div class="flex items-start gap-3">
-                            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs shrink-0 mt-0.5">✓</span>
-                            <div>
-                                <h5 class="text-white text-sm font-bold">ایستگاه مترو میرزای شیرازی (خط ۳)</h5>
-                                <p class="text-slate-400 text-xs">تنها ۵ دقیقه پیاده‌روی سریع</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs shrink-0 mt-0.5">✓</span>
-                            <div>
-                                <h5 class="text-white text-sm font-bold">پایانه اتوبوس‌رانی و تاکسیرانی بیهقی</h5>
-                                <p class="text-slate-400 text-xs">دسترسی مستقیم بین‌استانی و خطوط بی‌آرتی ولیعصر</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs shrink-0 mt-0.5">✓</span>
-                            <div>
-                                <h5 class="text-white text-sm font-bold">مراکز درمانی، اداری و رفاهی</h5>
-                                <p class="text-slate-400 text-xs">نزدیک بیمارستان کسری، گاندی، فروشگاه شهروند آرژانتین و سفارتخانه‌ها</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-8">
-                        <a href="https://maps.google.com/?q=35.7335,51.4172" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold py-2.5 px-4 rounded-xl border border-slate-700 transition">
-                            <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-                            <span>مسیریابی در Google Maps</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Leaflet Map Container -->
-                <div class="lg:col-span-2">
-                    <div class="rounded-3xl overflow-hidden border border-slate-800 shadow-2xl h-[420px] relative z-0">
-                        <div id="residence-map" class="w-full h-full"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Rules & Regulations Section -->
-    <section id="rules" class="py-20 bg-slate-900/60 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-amber-400 text-sm font-bold tracking-wider uppercase">حفظ آرامش جمعی</span>
-                <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-2 mb-4">قوانین و مقررات انضباطی اقامتگاه ونوس</h2>
-                <p class="text-slate-400 text-sm sm:text-base">رعایت قوانین زیر به جهت تضمین آسایش خاطر، امنیت فردی و ایجاد محیطی فرهنگی برای همه عزیزان الزامی است.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl">
-                    <div class="text-amber-400 text-2xl font-black mb-3">۰۱</div>
-                    <h4 class="text-white font-bold text-base mb-2">ساعت ورود و خروج</h4>
-                    <p class="text-slate-400 text-xs leading-relaxed">
-                        درب ورودی ساعت ۲۳:۰۰ شب بسته می‌شود. هرگونه تأخیر موجه صرفاً با هماهنگی قبلی و رضایت مکتوب یا تلفنی سرپرست امکان‌پذیر است.
-                    </p>
-                </div>
-
-                <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl">
-                    <div class="text-amber-400 text-2xl font-black mb-3">۰۲</div>
-                    <h4 class="text-white font-bold text-base mb-2">مدارک لازم پذیرش</h4>
-                    <p class="text-slate-400 text-xs leading-relaxed">
-                        ارائه اصل کارت ملی، شناسنامه عکس‌دار، گواهی اشتغال به تحصیل یا گواهی معتبر اشتغال به کار برای ثبت قرارداد قطعی ضروری است.
-                    </p>
-                </div>
-
-                <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl">
-                    <div class="text-amber-400 text-2xl font-black mb-3">۰۳</div>
-                    <h4 class="text-white font-bold text-base mb-2">ممنوعیت دخانیات</h4>
-                    <p class="text-slate-400 text-xs leading-relaxed">
-                        استعمال هرگونه سیگار، قلیان و دخانیات در تمامی اتاق‌ها، راهروها و سرویس‌ها مطلقاً ممنوع بوده و موجب لغو فوری قرارداد می‌گردد.
-                    </p>
-                </div>
-
-                <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl">
-                    <div class="text-amber-400 text-2xl font-black mb-3">۰۴</div>
-                    <h4 class="text-white font-bold text-base mb-2">پذیرش میهمان</h4>
-                    <p class="text-slate-400 text-xs leading-relaxed">
-                        پذیرش مهمان خانم صرفاً با احراز هویت و هماهنگی قبلی با سرپرستی مقدور می‌باشد. ورود هرگونه مهمان آقا به مجموعه کاملاً ممنوع است.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Accordion -->
-    <section id="faq" class="py-20 bg-slate-950 border-t border-slate-800">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <span class="text-amber-400 text-sm font-bold tracking-wider uppercase">پاسخ به سوالات</span>
-                <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-2 mb-4">پرسش‌های پرتکرار متقاضیان</h2>
-            </div>
-
-            <div class="space-y-4">
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
-                    <button class="w-full p-5 text-right font-bold text-white flex justify-between items-center faq-toggle" onclick="toggleFaq(this)">
-                        <span>شرایط تمدید و یا فسخ قرارداد چگونه است؟</span>
-                        <svg class="w-5 h-5 text-amber-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                    </button>
-                    <div class="p-5 pt-0 text-xs sm:text-sm text-slate-400 leading-relaxed hidden faq-content">
-                        قراردادها به صورت ماهانه، سه‌ماهه، شش‌ماهه و یک‌ساله منعقد می‌شوند. جهت تخلیه یا فسخ، اطلاع‌رسانی حداقل ۲۰ روز قبل از اتمام موعد قرارداد به مدیریت مجموعه الزامی است تا مبلغ ودیعه فوراً تسویه گردد.
-                    </div>
-                </div>
-
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
-                    <button class="w-full p-5 text-right font-bold text-white flex justify-between items-center faq-toggle" onclick="toggleFaq(this)">
-                        <span>آیا برای ثبت‌نام نیاز به پرداخت بیعانه است؟</span>
-                        <svg class="w-5 h-5 text-amber-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                    </button>
-                    <div class="p-5 pt-0 text-xs sm:text-sm text-slate-400 leading-relaxed hidden faq-content">
-                        بله، برای نگهداری تخت و اتاق مورد نظر به مدت حداکثر ۴۸ ساعت، پرداخت مبلغ بیعانه به شماره حساب رسمی مدیریت مجموعه همراه با ارسال فیش واریزی در واتساپ الزامی می‌باشد.
-                    </div>
-                </div>
-
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden">
-                    <button class="w-full p-5 text-right font-bold text-white flex justify-between items-center faq-toggle" onclick="toggleFaq(this)">
-                        <span>وضعیت پارکینگ خودرو و موتور چگونه است؟</span>
-                        <svg class="w-5 h-5 text-amber-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                    </button>
-                    <div class="p-5 pt-0 text-xs sm:text-sm text-slate-400 leading-relaxed hidden faq-content">
-                        پارکینگ اختصاصی سرپوشیده با ظرفیت محدود موجود بوده و با هزینه جداگانه واگذار می‌گردد. همچنین پارکینگ عمومی شبانه‌روزی بیهقی با فاصله ۳۰۰ متری در دسترس است.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-slate-950 border-t border-slate-800 pt-16 pb-12 text-slate-400 text-xs sm:text-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
-                <div class="md:col-span-2">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-amber-500 to-yellow-300 p-0.5">
-                            <div class="w-full h-full bg-slate-900 rounded-full flex items-center justify-center">
-                                <span class="text-amber-400 font-extrabold text-base">V</span>
-                            </div>
-                        </div>
-                        <span class="text-lg font-bold text-white">پانسیون دخترانه ونوس</span>
-                    </div>
-                    <p class="text-slate-400 text-xs leading-relaxed max-w-md mb-6">
-                        اقامتگاهی لوکس، مدرن و امن مخصوص دانشجویان و شاغلین در منطقه آرژانتین و وزرای تهران با امکانات رفاهی کامل، نظافت هتلینگ و کادر سرپرستی مجرب و دلسوز.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-3">
-                        <button onclick="openPaymentModal()" class="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-slate-950 font-black px-4 py-2.5 rounded-xl shadow-lg shadow-amber-500/10 transition-all text-xs">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
-                            <span>مشاهده شماره کارت و پرداخت ودیعه</span>
-                        </button>
-                    </div>
-                    <p class="text-[11px] text-slate-400 mt-2 flex items-center">
-                        <svg class="w-3.5 h-3.5 text-amber-400 me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                        <span>واریز صرفاً پس از تایید سرپرستی و استعلام ظرفیت خالی انجام گیرد.</span>
-                    </p>
-                </div>
-
-                <div>
-                    <h4 class="text-white font-bold text-sm mb-4">دسترسی سریع</h4>
-                    <ul class="space-y-2 text-xs">
-                        <li><a href="#about" class="hover:text-amber-400 transition">درباره اقامتگاه</a></li>
-                        <li><a href="#rooms" class="hover:text-amber-400 transition">لیست اتاق‌ها و هزینه‌ها</a></li>
-                        <li><a href="#facilities" class="hover:text-amber-400 transition">امکانات رفاهی</a></li>
-                        <li><a href="#location" class="hover:text-amber-400 transition">نقشه و دسترسی‌ها</a></li>
-                        <li><a href="#rules" class="hover:text-amber-400 transition">قوانین و آیین‌نامه انضباطی</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="text-white font-bold text-sm mb-4">ارتباط و نشانی</h4>
-                    <ul class="space-y-3 text-xs">
-                        <li class="flex items-start">
-                            <svg class="w-4 h-4 text-amber-400 me-1 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                            <span>تهران، میدان آرژانتین، خیابان خالد اسلامبولی (وزرا)، کوچه بیست و سوم، پلاک ۴</span>
-                        </li>
-                        <li class="flex items-center">
-                            <span class="text-slate-400">تلفن ثابت:</span>
-                            <a href="tel:02188731810" class="text-amber-400 font-bold hover:underline" dir="ltr">۰۲۱-۸۸۷۳۱۸۱۰</a>
-                        </li>
-                        <li class="flex items-center">
-                            <span class="text-slate-400">مدیریت (خانم دلاوری):</span>
-                            <a href="tel:09126801450" class="text-white hover:text-amber-400 mr-1" dir="ltr">۰۹۱۲۶۸۰۱۴۵۰</a>
-                        </li>
-                        <li class="flex items-center">
-                            <span class="text-slate-400">پشتیبانی و پذیرش (آقای شکرچیان):</span>
-                            <a href="tel:09128506405" class="text-white hover:text-amber-400 mr-1" dir="ltr">۰۹۱۲۸۵۰۶۴۰۵</a>
-                        </li>
-                        <li class="flex items-center">
-                            <span class="text-slate-400">سرپرستی و اسکان (خانم فرزی):</span>
-                            <a href="tel:09194841315" class="text-white hover:text-amber-400 mr-1" dir="ltr">۰۹۱۹۴۸۴۱۳۱۵</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="border-t border-slate-800/80 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
-                <p>© کلیه حقوق برای پانسیون دخترانه ونوس تهران محفوظ است.</p>
-                <div class="flex items-center gap-4">
-                    <span>محیط اختصاصی بانوان</span>
-                    <span>•</span>
-                    <span>پذیرش شبانه‌روزی</span>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Payment & Account Modal -->
-    <div id="payment-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
-        <div class="bg-slate-900 border border-amber-500/30 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative transform transition-transform duration-300 scale-95" id="modal-container">
-            <button onclick="closePaymentModal()" class="absolute top-4 left-4 text-slate-400 hover:text-white bg-slate-800 rounded-full w-8 h-8 flex items-center justify-center">
-                ✕
-            </button>
-
-            <div class="text-center mb-6">
-                <div class="w-12 h-12 bg-amber-400/10 text-amber-400 rounded-2xl flex items-center justify-center mx-auto mb-3">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
-                </div>
-                <h3 class="text-lg font-bold text-white">اطلاعات حساب و واریز ودیعه</h3>
-                <p class="text-xs text-slate-400 mt-1">جهت نهایی‌سازی رزرو تخت، پس از هماهنگی با پذیرش واریز نمایید.</p>
-            </div>
-
-            <!-- Card Box -->
-            <div class="bg-gradient-to-br from-slate-800 to-slate-850 p-5 rounded-2xl border border-slate-700 mb-4 text-right">
-                <span class="text-xs text-slate-400 block mb-1">شماره کارت بانک سامان (به نام فاطمه دلاوری)</span>
-                <div class="flex items-center justify-between bg-slate-950/60 p-3 rounded-xl border border-slate-800">
-                    <span class="font-mono text-base sm:text-lg text-amber-400 font-bold tracking-wider" id="card-number" dir="ltr">6219 8619 4099 2404</span>
-                    <button onclick="copyToClipboard('6219861940992404', this)" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-2.5 py-1.5 rounded-lg border border-slate-700 transition">
-                        کپی شماره
-                    </button>
-                </div>
-            </div>
-
-            <!-- IBAN Box -->
-            <div class="bg-gradient-to-br from-slate-800 to-slate-850 p-5 rounded-2xl border border-slate-700 mb-6 text-right">
-                <span class="text-xs text-slate-400 block mb-1">شماره شبا (IBAN)</span>
-                <div class="flex items-center justify-between bg-slate-950/60 p-3 rounded-xl border border-slate-800">
-                    <span class="font-mono text-xs sm:text-sm text-slate-300 font-bold" id="iban-number" dir="ltr">IR64 0560 6219 8619 4099 2404</span>
-                    <button onclick="copyToClipboard('IR6405606219861940992404', this)" class="text-xs bg-slate-800 hover:bg-slate-700 text-white px-2.5 py-1.5 rounded-lg border border-slate-700 transition">
-                        کپی شبا
-                    </button>
-                </div>
-            </div>
-
-            <!-- Notice -->
-            <div class="bg-amber-500/10 border border-amber-500/20 rounded-xl p-3.5 mb-6 text-xs text-amber-300 text-right leading-relaxed">
-                ⚠️ پس از انجام واریز، حتماً تصویر فیش واریزی را همراه با نام و نام خانوادگی متقاضی به شماره واتساپ پشتیبانی ارسال فرمایید.
-            </div>
-
-            <div class="flex gap-3">
-                <a href="https://wa.me/989126801450?text=%D8%B3%D9%84%D8%A7%D9%85%D8%8C%20%D9%81%DB%8C%D8%B4%20%D9%88%D8%A7%D8%B1%DB%8C%D8%B2%DB%8C%20%D9%88%D8%AF%DB%8C%D8%B9%D9%87%20%D8%A7%D9%82%D8%A7%D9%85%D8%AA%DA%AF%D8%A7%D9%87%20%D9%88%D9%86%D9%88%D8%B3%20%D8%B1%D8%A7%20%D8%A7%D8%B1%D8%B3%D8%A7%D9%84%20%D9%85%DB%8C%E2%80%8C%DA%A9%D9%86%D9%85." target="_blank" rel="noopener noreferrer" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl text-center text-xs transition flex items-center justify-center gap-2">
-                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-                    <span>ارسال فیش در واتساپ</span>
+      <!-- ستون ۲ -->
+      <div>
+        <h4 class="text-sm font-bold text-white mb-4 border-b border-slate-800 pb-2 flex items-center gap-2">
+          <i class="fa-solid fa-phone text-fuchsia-400"></i> شماره‌های تماس مستقیم
+        </h4>
+        <ul class="space-y-2.5 text-xs text-slate-300">
+          <li class="flex items-center justify-between">
+            <span>مدیریت (خانم دلاوری):</span>
+            <a href="tel:09126801450" class="hover:text-fuchsia-400 font-semibold" dir="ltr">09126801450</a>
+          </li>
+          <li class="flex items-center justify-between">
+            <span>پشتیبانی (آقای شکرچیان):</span>
+            <a href="tel:09128506405" class="hover:text-fuchsia-400 font-semibold" dir="ltr">09128506405</a>
+          </li>
+          <li class="flex items-center justify-between">
+            <span>پشتیبانی (خانم فرزی):</span>
+            <a href="tel:09144841315" class="hover:text-fuchsia-400 font-semibold" dir="ltr">09144841315</a>
+          </li>
+          <li class="flex items-center justify-between text-emerald-400 font-bold pt-2 border-t border-slate-900">
+            <span>تلفن ثابت (۲۴ ساعته):</span>
+            <a href="tel:+982188731810" class="hover:text-emerald-300" dir="ltr">02188731810</a>
+          </li>
+        </ul>
+      </div>
+     <div>
+    <h4 class="text-white font-bold text-base mb-4 border-b border-white/10 pb-2">شماره‌های تماس مستقیم</h4>
+    <ul class="space-y-3.5 text-sm text-slate-400">
+        <!-- مدیریت -->
+        <li class="flex flex-col gap-1 border-b border-white/5 pb-2">
+            <span class="text-xs text-amber-400/90 font-medium">مدیریت (خانم فاطمه دلاوری)</span>
+            <div class="flex items-center justify-between">
+                <span class="text-slate-300">خوابگاه‌های ونوس، جردن و آوین</span>
+                <a href="tel:09126801450" class="text-slate-200 hover:text-amber-400 transition-colors font-mono font-bold dir-ltr">
+                    ۰۹۱۲ ۶۸۰ ۱۴۵۰
                 </a>
-                <button onclick="closePaymentModal()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-3 px-5 rounded-xl text-xs transition">
-                    بستن
-                </button>
             </div>
-        </div>
-    </div>
+        </li>
 
-    <!-- Scripts -->
-    <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script>
-        // Leaflet Map Initialization
-        document.addEventListener('DOMContentLoaded', function () {
-            // Latitude and Longitude for Argentina Sq. / Vozara, Tehran
-            const lat = 35.7335;
-            const lng = 51.4172;
+        <!-- پشتیبانی و پذیرش (آقای شکرچیان) -->
+        <li class="flex flex-col gap-1 border-b border-white/5 pb-2">
+            <span class="text-xs text-amber-400/90 font-medium">پشتیبانی و امور پذیرش (آقای شکرچیان)</span>
+            <div class="flex items-center justify-between">
+                <span class="text-slate-300">پاسخگویی و هماهنگی</span>
+                <a href="tel:09128506405" class="text-slate-200 hover:text-amber-400 transition-colors font-mono font-bold dir-ltr">
+                    ۰۹۱۲ ۸۵۰ ۶۴۰۵
+                </a>
+            </div>
+        </li>
 
-            const map = L.map('residence-map', {
-                center: [lat, lng],
-                zoom: 16,
-                zoomControl: true,
-                scrollWheelZoom: false
-            });
+        <!-- پشتیبانی و امور اسکان (خانم فرزی) -->
+        <li class="flex flex-col gap-1 border-b border-white/5 pb-2">
+            <span class="text-xs text-amber-400/90 font-medium">پشتیبانی و امور اسکان (خانم فرزی)</span>
+            <div class="flex items-center justify-between">
+                <span class="text-slate-300">پاسخگویی مقیمین</span>
+                <a href="tel:09194841315" class="text-slate-200 hover:text-amber-400 transition-colors font-mono font-bold dir-ltr">
+                    ۰۹۱۹ ۴۸۴ ۱۳۱۵
+                </a>
+            </div>
+        </li>
 
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; OpenStreetMap contributors'
-            }).addTo(map);
-
-            // Custom Marker
-            const marker = L.marker([lat, lng]).addTo(map);
-            marker.bindPopup(`
-                <div class="text-right p-1">
-                    <strong class="text-amber-400 block mb-1">اقامتگاه دخترانه ونوس</strong>
-                    <span class="text-xs text-slate-300">میدان آرژانتین، خیابان وزرا، کوچه بیست و سوم، پلاک ۴</span>
-                </div>
-            `).openPopup();
-        });
-
-        // FAQ Toggle Logic
-        function toggleFaq(button) {
-            const content = button.nextElementSibling;
-            const icon = button.querySelector('svg');
-            
-            if (content.classList.contains('hidden')) {
-                content.classList.remove('hidden');
-                icon.classList.add('rotate-180');
-            } else {
-                content.classList.add('hidden');
-                icon.classList.remove('rotate-180');
-            }
-        }
-
-        // Mobile Menu Toggle
-        const menuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Payment Modal Functions
-        function openPaymentModal() {
-            const modal = document.getElementById('payment-modal');
-            const container = document.getElementById('modal-container');
-            modal.classList.remove('hidden');
-            setTimeout(() => {
-                modal.classList.remove('opacity-0');
-                container.classList.remove('scale-95');
-                container.classList.add('scale-100');
-            }, 10);
-        }
-
-        function closePaymentModal() {
-            const modal = document.getElementById('payment-modal');
-            const container = document.getElementById('modal-container');
-            modal.classList.add('opacity-0');
-            container.classList.remove('scale-100');
-            container.classList.add('scale-95');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-            }, 300);
-        }
-
-        // Copy to clipboard helper
-        function copyToClipboard(text, btnElement) {
-            navigator.clipboard.writeText(text).then(() => {
-                const originalText = btnElement.innerText;
-                btnElement.innerText = 'کپی شد!';
-                btnElement.classList.add('bg-emerald-600', 'text-white');
-                setTimeout(() => {
-                    btnElement.innerText = originalText;
-                    btnElement.classList.remove('bg-emerald-600', 'text-white');
-                }, 2000);
-            }).catch(err => {
-                console.error('Failed to copy: ', err);
-            });
-        }
-    </script>
-</body>
-</html>
+        <!-- پذیرش شبانه‌روزی / تلفن ثابت -->
+        <li class="flex flex-col gap-1 pt-1">
+            <span class="text-xs text-amber-400/90 font-medium">پذیرش شبانه‌روزی (تلفن ثابت)</span>
+            <div class="flex items-center justify-between">
+                <span class="text-slate-300">پاسخگویی ۲۴ ساعته</span>
+                <a href="tel:02188731810" class="text-slate-200 hover:text-amber-400 transition-colors font-mono font-bold dir-ltr">
+                    ۰۲۱ ۸۸۷۳ ۱۸۱۰
+                </a>
+            </div>
+        </li>
+    </ul>
+</div>
