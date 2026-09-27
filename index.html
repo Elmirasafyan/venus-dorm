@@ -1,465 +1,1075 @@
-1. **جهت و ساختار راست‌چین (RTL):** سند به‌صورت استاندارد با تگ‌های `<!DOCTYPE html>`، `<html lang="fa" dir="rtl">` و فونت‌های استاندارد فارسی مرتب شد.
-2. **پالت رنگی صورتی ملایم، شیک و لوکس:**
-   - صورتی اصلی (رز/سرخابی متین): `#d84b76`
-   - صورتی روشن پس‌زمینه و کارت‌ها: `#fff0f5` و `#ffe4ec`
-   - متون و تیترها با کنتراست بالا و کاملاً خوانا (رنگ تمشکی تیره `#4a1226`)
-3. **حذف تکرار داده‌ها در پایین صفحه:**
-   - اطلاعات تماس و آدرس که چند بار در بخش تماس، پاپ‌آپ نقشه و فوتر تکرار شده بودند، در فوتر تمیزسازی و تجمیع شدند تا صفحه شلوغ و تکراری نباشد.
 
-کد کامل HTML را می‌توانید مستقیماً کپی کرده و در یک فایل با پسوند `.html` ذخیره نمایید:
 
-```html
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>پانسیون دخترانه لوکس ونوس</title>
-  
-  <!-- فونت وزیرمتن و آیکون‌ها -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
+  <title>پانسیون دخترانه لوکس ونوس | Venus Residence</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome & Swiper & Vazirmatn -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/misc/Farsi-Digits/font-face.css" rel="stylesheet" type="text/css">
+
+  <!-- Leaflet Map (نقشه زنده) -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Vazirmatn FD', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
 
   <style>
-    :root {
-      --primary: #d84b76;
-      --primary-hover: #b8325a;
-      --secondary: #ff85a2;
-      --accent: #f52d56;
-      --bg-light: #fff5f8;
-      --card-bg: #ffffff;
-      --text-main: #3d1a24;
-      --text-muted: #7a505d;
-      --border-color: #f7d2dc;
-      --shadow: 0 4px 20px rgba(216, 75, 118, 0.08);
-      --radius: 14px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Vazirmatn', sans-serif;
-    }
-
     body {
-      background-color: var(--bg-light);
-      color: var(--text-main);
-      line-height: 1.8;
-      direction: rtl;
-      text-align: right;
+      font-family: 'Vazirmatn FD', sans-serif;
+      background-color: #090d16;
+      color: #e2e8f0;
+      overflow-x: hidden;
     }
 
-    header {
-      background: #ffffff;
-      border-bottom: 2px solid var(--border-color);
-      padding: 1rem 2rem;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    .glow-bg {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.35;
+      z-index: 0;
+      pointer-events: none;
     }
 
-    .nav-container {
-      max-width: 1200px;
-      margin: auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
+    .glass-nav {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    .brand {
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: var(--primary);
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    .glass-card {
+      background: rgba(30, 41, 59, 0.45);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    nav ul {
-      display: flex;
-      list-style: none;
-      gap: 1.5rem;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: var(--text-main);
-      font-weight: 600;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: var(--primary);
-    }
-
-    .btn-contact {
-      background-color: var(--primary);
-      color: #fff;
-      padding: 8px 18px;
-      border-radius: 20px;
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: background 0.3s;
-    }
-
-    .btn-contact:hover {
-      background-color: var(--primary-hover);
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: auto;
-      padding: 2.5rem 1.5rem;
-    }
-
-    .hero {
-      text-align: center;
-      padding: 4rem 1rem;
-      background: linear-gradient(135deg, #ffeef2 0%, #ffd6e0 100%);
-      border-radius: var(--radius);
-      margin-bottom: 2.5rem;
-    }
-
-    .hero h1 {
-      font-size: 2.3rem;
-      color: var(--primary);
-      margin-bottom: 1rem;
-    }
-
-    .hero p {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      max-width: 700px;
-      margin: auto;
-    }
-
-    .section-title {
-      font-size: 1.7rem;
-      color: var(--primary);
-      text-align: center;
-      margin-bottom: 2rem;
-      position: relative;
-    }
-
-    .section-title::after {
-      content: "";
-      display: block;
-      width: 60px;
-      height: 3px;
-      background: var(--secondary);
-      margin: 8px auto 0;
-      border-radius: 2px;
-    }
-
-    /* کارت‌ها و امکانات */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 3rem;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      box-shadow: var(--shadow);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .card:hover {
+    .glass-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 8px 25px rgba(216, 75, 118, 0.15);
+      border-color: rgba(168, 85, 247, 0.4);
+      box-shadow: 0 20px 40px -15px rgba(168, 85, 247, 0.25);
     }
 
-    .card-icon {
-      font-size: 2rem;
-      color: var(--primary);
-      margin-bottom: 0.8rem;
+    .badge-glow {
+      box-shadow: 0 0 15px rgba(236, 72, 153, 0.4);
     }
 
-    /* جدول تعرفه‌ها */
-    .table-container {
-      overflow-x: auto;
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      border: 1px solid var(--border-color);
-      margin-bottom: 3rem;
+    .swiper-pagination-bullet-active {
+      background: #d946ef !important;
+      width: 24px !important;
+      border-radius: 9999px !important;
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: center;
+    .swiper-pagination-bullet {
+      background: #94a3b8;
+      transition: all 0.3s;
     }
 
-    th, td {
-      padding: 1rem;
-      border-bottom: 1px solid var(--border-color);
+    .leaflet-popup-content-wrapper {
+      background: #0f172a !important;
+      color: #f8fafc !important;
+      border: 1px solid rgba(168, 85, 247, 0.4) !important;
+      border-radius: 12px !important;
+      font-family: 'Vazirmatn FD', sans-serif !important;
+      text-align: right !important;
+      direction: rtl !important;
     }
-
-    th {
-      background-color: #ffdce5;
-      color: var(--text-main);
-      font-weight: 700;
-    }
-
-    tr:last-child td {
-      border-bottom: none;
-    }
-
-    /* بخش قوانین و سوالات متداول */
-    .accordion-item {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 10px;
-      margin-bottom: 0.8rem;
-      overflow: hidden;
-    }
-
-    .accordion-header {
-      padding: 1rem 1.2rem;
-      font-weight: bold;
-      cursor: pointer;
-      background: #fff;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .accordion-content {
-      padding: 1rem 1.2rem;
-      display: none;
-      background: #fffafb;
-      border-top: 1px solid var(--border-color);
-      color: var(--text-muted);
-    }
-
-    /* نقشه و آدرس */
-    #map {
-      height: 350px;
-      border-radius: var(--radius);
-      border: 1px solid var(--border-color);
-      margin-bottom: 2rem;
-    }
-
-    /* فوتر یکپارچه و بهینه‌شده بدون تکرار */
-    footer {
-      background: #2b1118;
-      color: #ffdce5;
-      padding: 2.5rem 1.5rem 1.5rem;
-      border-top: 4px solid var(--primary);
-    }
-
-    .footer-content {
-      max-width: 1200px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      margin-bottom: 2rem;
-    }
-
-    .footer-content h4 {
-      color: #fff;
-      margin-bottom: 1rem;
-      font-size: 1.1rem;
-    }
-
-    .footer-content p, .footer-content li {
-      font-size: 0.95rem;
-      color: #e5b9c6;
-      line-height: 2;
-    }
-
-    .footer-bottom {
-      text-align: center;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      padding-top: 1.2rem;
-      font-size: 0.85rem;
-      color: #c993a4;
+    .leaflet-popup-tip {
+      background: #0f172a !important;
     }
   </style>
 </head>
-<body>
 
-  <!-- هدر سایت -->
-  <header>
-    <div class="nav-container">
-      <div class="brand">
-        <i class="fa-solid fa-hotel"></i> پانسیون دخترانه لوکس ونوس
+<body class="relative selection:bg-fuchsia-500 selection:text-white">
+
+  <!-- پس‌زمینه‌های نورانی -->
+  <div class="glow-bg w-96 h-96 bg-purple-600 top-10 left-10"></div>
+  <div class="glow-bg w-96 h-96 bg-pink-600 top-1/3 right-10"></div>
+  <div class="glow-bg w-[30rem] h-[30rem] bg-indigo-600 bottom-10 left-1/3"></div>
+
+  <!-- نوبار هدر -->
+  <header class="sticky top-0 z-50 glass-nav">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-pink-500 via-purple-500 to-indigo-500 flex items-center justify-center text-white shadow-lg shadow-purple-500/30">
+          <i class="fa-solid fa-hotel text-lg"></i>
+        </div>
+        <div>
+          <span class="text-xl font-black tracking-tight text-white block">اقامتگاه دخترانه ونوس</span>
+          <span class="text-[10px] tracking-widest text-slate-400 font-semibold uppercase">Venus Girls Residence</span>
+        </div>
       </div>
-      <nav>
-        <ul>
-          <li><a href="#about">درباره ما</a></li>
-          <li><a href="#features">امکانات</a></li>
-          <li><a href="#prices">تعرفه‌ها</a></li>
-          <li><a href="#rules">قوانین</a></li>
-          <li><a href="#location">موقعیت و تماس</a></li>
-        </ul>
+
+      <nav class="hidden lg:flex items-center gap-6 text-xs sm:text-sm font-medium text-slate-300">
+        <a href="#gallery" class="hover:text-fuchsia-400 transition-colors">گالری</a>
+        <a href="#amenities" class="hover:text-fuchsia-400 transition-colors">امکانات</a>
+        <a href="#rooms" class="hover:text-fuchsia-400 transition-colors">اتاق‌ها</a>
+        <a href="#booking" class="hover:text-fuchsia-400 transition-colors">جدول ظرفیت و رزرو</a>
+        <a href="#rules" class="hover:text-fuchsia-400 transition-colors">قوانین</a>
+        <a href="#faq" class="hover:text-fuchsia-400 transition-colors">سؤالات متداول</a>
+        <a href="#contacts" class="hover:text-fuchsia-400 transition-colors">تماس با ما</a>
+        <a href="#location" class="hover:text-fuchsia-400 transition-colors">موقعیت و نقشه</a>
       </nav>
-      <a href="tel:02188731810" class="btn-contact"><i class="fa-solid fa-phone"></i> ۰۲۱-۸۸۷۳۱۸۱۰</a>
+
+      <div class="flex items-center gap-3">
+        <a href="tel:+982188731810" class="hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-slate-700 bg-slate-900/70 text-slate-300 hover:text-white hover:border-fuchsia-500 text-xs font-medium transition-all" title="پاسخگویی ۲۴ ساعته">
+          <i class="fa-solid fa-phone-volume text-fuchsia-400"></i>
+          <span dir="ltr">02188731810</span>
+        </a>
+        <a href="#booking" class="px-5 py-2.5 rounded-xl font-semibold text-xs tracking-wide bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 transition-all">
+          رزرو و پذیرش
+        </a>
+      </div>
     </div>
   </header>
 
-  <div class="container">
-    <!-- بخش بنر اصلی -->
-    <section class="hero" id="about">
-      <h1>اقامتی امن، آرام و شیک در قلب تهران</h1>
-      <p>پانسیون دخترانه ونوس ویژه دانشجویان تحصیلات تکمیلی، اساتید، پزشکان و کارمندان فرهیخته با گزینش دقیق و امکانات VIP.</p>
-    </section>
+  <!-- بخش معرفی (Hero Section) -->
+  <section class="relative z-10 max-w-7xl mx-auto px-6 pt-16 pb-12 text-center">
+    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-fuchsia-500/30 bg-fuchsia-500/10 text-fuchsia-300 text-xs font-semibold mb-6 badge-glow">
+      <span class="inline-block w-2 h-2 rounded-full bg-fuchsia-400 animate-pulse"></span>
+      محیطی آرام، لوکس و گزینش‌شده متناسب با استانداردهای VIP
+    </div>
 
-    <!-- امکانات پانسیون -->
-    <section id="features">
-      <h2 class="section-title">امکانات رفاهی و امنیتی</h2>
-      <div class="grid">
-        <div class="card">
-          <div class="card-icon"><i class="fa-solid fa-wifi"></i></div>
-          <h3>اینترنت پرسرعت</h3>
-          <p>وای‌فای فیبر نوری اختصاصی و پرسرعت برای هر طبقه جهت سهولت امور پژوهشی و کاری.</p>
+    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight max-w-4xl mx-auto mb-6">
+      تجربه اقامتی
+      <span class="bg-clip-text text-transparent bg-gradient-to-r from-pink-400 via-fuchsia-400 to-indigo-400">آرام، امن و ممتاز</span>
+      در قلب پایتخت
+    </h1>
+
+  
+    <div class="flex flex-wrap items-center justify-center gap-4">
+      <a href="#rooms" class="px-7 py-3.5 rounded-2xl bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold text-sm shadow-xl shadow-fuchsia-500/20 hover:scale-105 transition-all">
+        مشاهده واحدها
+      </a>
+      <a href="#booking" class="px-7 py-3.5 rounded-2xl glass-card text-slate-200 font-semibold text-sm hover:border-slate-500 hover:text-white transition-all flex items-center gap-2">
+        <i class="fa-solid fa-list-check text-fuchsia-400"></i>
+        <span>مشاهده جدول ظرفیت‌ها و نرخ‌ها</span>
+      </a>
+      <a href="tel:+982188731810" class="px-7 py-3.5 rounded-2xl bg-slate-800/80 hover:bg-slate-800 text-fuchsia-300 font-semibold text-sm border border-fuchsia-500/30 transition-all flex items-center gap-2">
+        <i class="fa-solid fa-headset text-fuchsia-400"></i>
+        <span>پذیرش ۲۴ ساعته: <span dir="ltr">02188731810</span></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- گالری تصاویر -->
+  <section id="gallery" class="relative z-10 max-w-4xl mx-auto px-6 py-8">
+    <div class="text-center mb-6">
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-2">تصاویر مجموعه ونوس</h2>
+      <p class="text-xs text-slate-400">فضایی پاکیزه، نورگیر و طراحی‌شده برای آسایش شما</p>
+    </div>
+
+    <div class="swiper myGallerySwiper rounded-3xl overflow-hidden border border-slate-800 shadow-2xl glass-card p-2 sm:p-4">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="relative h-72 sm:h-96 w-full rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center">
+            <img src="slide1.jpg" alt="فضای عمومی اقامتگاه ونوس" class="w-full h-full object-contain">
+            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-6 pointer-events-none">
+              <span class="text-white font-bold text-base">فضای آرام و مجهز اقامتگاه</span>
+            </div>
+          </div>
         </div>
-        <div class="card">
-          <div class="card-icon"><i class="fa-solid fa-shield-cat"></i></div>
-          <h3>امنیت کامل و گیت ورود</h3>
-          <p>مجهز به دوربین‌های مداربسته مشاعات، گیت هوشمند و نظارت ۲۴ ساعته سرپرستی مجرب.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon"><i class="fa-solid fa-broom"></i></div>
-          <h3>نظافت روزانه</h3>
-          <p>نظافت مستمر فضاهای عمومی، راهروها و سرویس‌ها با استانداردهای بالای بهداشتی.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon"><i class="fa-solid fa-kitchen-set"></i></div>
-          <h3>آشپزخانه مجهز و اتاق مطالعه</h3>
-          <p>امکانات پخت‌وپز اختصاصی در هر طبقه به همراه سالن مطالعه مجهز و محیطی بی‌صدا.</p>
+
+        <div class="swiper-slide">
+          <div class="relative h-72 sm:h-96 w-full rounded-2xl overflow-hidden bg-slate-950 flex items-center justify-center">
+            <img src="slide2.jpg" alt="اتاق‌های اقامتگاه ونوس" class="w-full h-full object-contain">
+            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-6 pointer-events-none">
+              <span class="text-white font-bold text-base">اتاق‌های استاندارد با چیدمان هتلی</span>
+            </div>
+          </div>
         </div>
       </div>
-    </section>
+      <div class="swiper-pagination mt-4 !relative"></div>
+    </div>
+  </section>
 
-    <!-- جدول ظرفیت و تعرفه‌ها -->
-    <section id="prices">
-      <h2 class="section-title">جدول ظرفیت و نرخ اتاق‌ها</h2>
-      <div class="table-container">
-        <table>
+  <!-- بخش امکانات رفاهی و خدمات ویژه -->
+  <section id="amenities" class="relative z-10 max-w-7xl mx-auto px-6 py-12">
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-300 text-xs font-semibold mb-3">
+        <i class="fa-solid fa-wand-magic-sparkles"></i> امکانات و تسهیلات
+      </div>
+      <h2 class="text-3xl font-extrabold text-white mb-2">امکانات رفاهی اقامتگاه ونوس</h2>
+      <p class="text-xs sm:text-sm text-slate-400">تمام آنچه برای یک زندگی آرام، بی‌دغدغه و متمرکز بر تحصیل و کار نیاز دارید</p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+      <div class="glass-card p-5 rounded-2xl text-center">
+        <div class="w-12 h-12 mx-auto rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-xl mb-3">
+          <i class="fa-solid fa-wifi"></i>
+        </div>
+        <h4 class="text-sm font-bold text-white mb-1">اینترنت پرسرعت</h4>
+        <p class="text-[11px] text-slate-400">وای‌فای پایدار فیبر نوری اختصاصی</p>
+      </div>
+
+      <div class="glass-card p-5 rounded-2xl text-center">
+        <div class="w-12 h-12 mx-auto rounded-xl bg-pink-500/20 text-pink-400 flex items-center justify-center text-xl mb-3">
+          <i class="fa-solid fa-book-open-reader"></i>
+        </div>
+        <h4 class="text-sm font-bold text-white mb-1">سالن مطالعه مجزا</h4>
+        <p class="text-[11px] text-slate-400">محیطی بدون سر و صدا با نورپردازی مهندسی</p>
+      </div>
+
+      <div class="glass-card p-5 rounded-2xl text-center">
+        <div class="w-12 h-12 mx-auto rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center text-xl mb-3">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+        <h4 class="text-sm font-bold text-white mb-1">امنیت و حراست ۲۴ ساعته</h4>
+        <p class="text-[11px] text-slate-400">سرپرست مقیم، ورود و خروج کنترل‌شده</p>
+      </div>
+
+      <div class="glass-card p-5 rounded-2xl text-center">
+        <div class="w-12 h-12 mx-auto rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl mb-3">
+          <i class="fa-solid fa-broom"></i>
+        </div>
+        <h4 class="text-sm font-bold text-white mb-1">نظافت دائمی هتلینگ</h4>
+        <p class="text-[11px] text-slate-400">ضدعفونی و پاکیزگی منظم مشاعات</p>
+      </div>
+
+      <div class="glass-card p-5 rounded-2xl text-center">
+        <div class="w-12 h-12 mx-auto rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl mb-3">
+          <i class="fa-solid fa-kitchen-set"></i>
+        </div>
+        <h4 class="text-sm font-bold text-white mb-1">آشپزخانه‌های مدرن</h4>
+        <p class="text-[11px] text-slate-400">مایکروویو، اجاق، چای‌ساز و فضاهای مجزا</p>
+      </div>
+
+      <div class="glass-card p-5 rounded-2xl text-center">
+        <div class="w-12 h-12 mx-auto rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xl mb-3">
+          <i class="fa-solid fa-shirt"></i>
+        </div>
+        <h4 class="text-sm font-bold text-white mb-1">لاندری و شستشو</h4>
+        <p class="text-[11px] text-slate-400">ماشین‌های لباسشویی اتوماتیک و اتو</p>
+      </div>
+
+      <div class="glass-card p-5 rounded-2xl text-center">
+        <div class="w-12 h-12 mx-auto rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center text-xl mb-3">
+          <i class="fa-solid fa-snowflake"></i>
+        </div>
+        <h4 class="text-sm font-bold text-white mb-1">سیستم سرمایش و گرمایش</h4>
+        <p class="text-[11px] text-slate-400">اسپلیت مدرن و پکیج جهت آسایش فصلی</p>
+      </div>
+
+      <div class="glass-card p-5 rounded-2xl text-center">
+        <div class="w-12 h-12 mx-auto rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-xl mb-3">
+          <i class="fa-solid fa-bed"></i>
+        </div>
+        <h4 class="text-sm font-bold text-white mb-1">تجهیزات نو و استاندارد</h4>
+        <p class="text-[11px] text-slate-400">تشک‌های طبی نو، کمد شخصی و قفل‌های ایمن</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- پیام مدیریت -->
+  <section id="message" class="relative z-10 max-w-4xl mx-auto px-6 py-8">
+    <div class="glass-card rounded-3xl p-8 sm:p-10 border-r-4 border-r-fuchsia-500 relative overflow-hidden">
+      <div class="absolute -left-10 -bottom-10 text-white/5 text-9xl font-black pointer-events-none">
+        <i class="fa-solid fa-quote-left"></i>
+      </div>
+
+      <div class="flex items-center gap-4 mb-6">
+        <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-fuchsia-500 to-pink-500 flex items-center justify-center text-white text-2xl shadow-lg shadow-pink-500/30">
+          <i class="fa-solid fa-user-tie"></i>
+        </div>
+        <div>
+          <h3 class="text-xl font-black text-white">پیام مدیریت مجموعه</h3>
+          <span class="text-xs text-fuchsia-400 font-semibold">خانم فاطمه دلاوری (مدیریت خوابگاه‌های زنجیره‌ای آوین، جردن و ونوس)</span>
+        </div>
+      </div>
+
+      <p class="text-sm sm:text-base text-slate-300 leading-relaxed relative z-10">
+        «سلام و درود به شما پژوهشگران، دانشجویان و مهمانان گرامی. در پانسیون دخترانه ونوس، تمام تلاش ما بر این متمرکز بوده تا محیطی کاملاً امن، آرام و شبیه به خانه شخصی برای شما فراهم سازیم تا با خیالی آسوده به تحصیل و کار بپردازید. رعایت نظم، بهداشت و سکوت، اولویت قطعی مجموعه ماست و خرسندیم که میزبان شما فرهیختگان گرامی هستیم.»
+      </p>
+    </div>
+  </section>
+
+  <!-- اتاق‌ها -->
+  <section id="rooms" class="relative z-10 max-w-7xl mx-auto px-6 py-12">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-extrabold text-white mb-2">اتاق‌ها و ظرفیت‌ها</h2>
+      <p class="text-xs sm:text-sm text-slate-400">تنوع اتاق‌های تک‌تخته، مستر و چندتخته با امکانات مجزا</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between border-t-4 border-t-pink-500 group">
+        <div>
+          <div class="h-56 w-full overflow-hidden relative bg-slate-950 flex items-center justify-center">
+            <img src="room1.jpg" alt="اتاق یک تخته" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
+            <span class="absolute top-3 right-3 px-3 py-1 bg-pink-500/95 backdrop-blur-md text-white rounded-full text-xs font-bold z-10">VIP</span>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-white mb-2">اتاق ۱ تخته اختصاصی</h3>
+            <p class="text-xs text-slate-400 mb-4 leading-relaxed">فضای آرام و کاملاً مستقل با کمد اختصاصی، میز مطالعه و یخچال مجزا.</p>
+            <ul class="text-xs text-slate-300 space-y-2 mb-6">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-400"></i> میز مطالعه و کمد اختصاصی</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-pink-400"></i> یخچال هتلی اختصاصی</li>
+            </ul>
+          </div>
+        </div>
+        <div class="p-6 pt-0">
+          <a href="#booking" class="block w-full py-3 text-center rounded-xl bg-pink-500/10 hover:bg-pink-500 hover:text-white text-pink-300 text-xs font-bold border border-pink-500/30 transition-all">بررسی ظرفیت و رزرو</a>
+        </div>
+      </div>
+
+      <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between border-t-4 border-t-purple-500 group">
+        <div>
+          <div class="h-56 w-full overflow-hidden relative bg-slate-950 flex items-center justify-center">
+            <img src="room2.jpg" alt="اتاق دو تخته مستر" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
+            <span class="absolute top-3 right-3 px-3 py-1 bg-purple-500/95 backdrop-blur-md text-white rounded-full text-xs font-bold z-10">مستر</span>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-white mb-2">اتاق ۲ تخته مستر</h3>
+            <p class="text-xs text-slate-400 mb-4 leading-relaxed">همراه با سرویس بهداشتی و حمام مستر داخل واحد برای راحتی دوچندان شما.</p>
+            <ul class="text-xs text-slate-300 space-y-2 mb-6">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> سرویس و حمام مستر داخل اتاق</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400"></i> تشک‌های ارتوپدیک نو و استاندارد</li>
+            </ul>
+          </div>
+        </div>
+        <div class="p-6 pt-0">
+          <a href="#booking" class="block w-full py-3 text-center rounded-xl bg-purple-500/10 hover:bg-purple-500 hover:text-white text-purple-300 text-xs font-bold border border-purple-500/30 transition-all">بررسی ظرفیت و رزرو</a>
+        </div>
+      </div>
+
+      <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between border-t-4 border-t-indigo-500 group">
+        <div>
+          <div class="h-56 w-full overflow-hidden relative bg-slate-950 flex items-center justify-center">
+            <img src="room3.jpg" alt="اتاق سه تخته" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
+            <span class="absolute top-3 right-3 px-3 py-1 bg-indigo-500/95 backdrop-blur-md text-white rounded-full text-xs font-bold z-10">پذیرش فعال</span>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-white mb-2">اتاق ۳ تخته دلباز</h3>
+            <p class="text-xs text-slate-400 mb-4 leading-relaxed">فضای بزرگ، پنجره‌های قدی و نورگیری عالی به همراه کمدهای اختصاصی جادار.</p>
+            <ul class="text-xs text-slate-300 space-y-2 mb-6">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-indigo-400"></i> بالکن و نور طبیعی عالی</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-indigo-400"></i> سیستم سرمایش و گرمایش مدرن</li>
+            </ul>
+          </div>
+        </div>
+        <div class="p-6 pt-0">
+          <a href="#booking" class="block w-full py-3 text-center rounded-xl bg-indigo-500/10 hover:bg-indigo-500 hover:text-white text-indigo-300 text-xs font-bold border border-indigo-500/30 transition-all">بررسی ظرفیت و رزرو</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- رزرو و جدول ظرفیت‌ها -->
+  <section id="booking" class="relative z-10 max-w-5xl mx-auto px-6 py-12">
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-pink-500/30 bg-pink-500/10 text-pink-300 text-xs font-semibold mb-3">
+        <i class="fa-solid fa-table-cells"></i> بخش اطلاعات رزرو و واریز
+      </div>
+      <h2 class="text-3xl font-extrabold text-white mb-2">جدول ظرفیت‌ها و رزرو آنلاین</h2>
+      <p class="text-xs sm:text-sm text-slate-400">جهت رزرو و دریافت اطلاعات واریز بیعانه، روی دکمه رزرو تخت مورد نظر کلیک کنید.</p>
+    </div>
+
+    <div class="glass-card rounded-3xl overflow-hidden border border-fuchsia-500/30">
+      <button onclick="toggleBookingTable()" class="w-full px-6 py-5 flex items-center justify-between bg-slate-900/60 hover:bg-slate-900/90 transition-all text-right">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-fuchsia-500/20 text-fuchsia-400 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-file-invoice-dollar"></i>
+          </div>
+          <div>
+            <span class="text-white font-bold text-base block">مشاهده جدول کامل اتاق‌ها و رزرو سریع</span>
+            <span class="text-xs text-slate-400">بر اساس آخرین وضعیت اعلام‌شده اقامتگاه</span>
+          </div>
+        </div>
+        <i id="toggleIcon" class="fa-solid fa-chevron-down text-fuchsia-400 transition-transform duration-300 text-lg"></i>
+      </button>
+
+      <div id="bookingTableContent" class="p-4 sm:p-6 border-t border-slate-800 bg-slate-950/40 overflow-x-auto">
+        <table class="w-full text-right text-xs sm:text-sm border-collapse min-w-[620px]">
           <thead>
-            <tr>
-              <th>نوع اتاق</th>
-              <th>ودیعه (تومان)</th>
-              <th>اجاره ماهیانه (تومان)</th>
-              <th>امکانات ویژه</th>
+            <tr class="border-b border-slate-800 text-fuchsia-400 font-bold bg-slate-900/50">
+              <th class="py-3.5 px-4 rounded-r-xl">نوع و شماره اتاق</th>
+              <th class="py-3.5 px-4">ودیعه (میلیون)</th>
+              <th class="py-3.5 px-4">اجاره ماهانه (میلیون)</th>
+              <th class="py-3.5 px-4 rounded-l-xl text-center">وضعیت ظرفیت (جهت رزرو کلیک کنید)</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>یک‌تخته (مستر VIP)</td>
-              <td>۱۰,۰۰۰,۰۰۰</td>
-              <td>۱۲,۰۰۰,۰۰۰</td>
-              <td>یخچال اختصاصی، کمد دیواری، بالکن</td>
+
+          <tbody class="divide-y divide-slate-800/60 text-slate-300">
+            <tr class="hover:bg-slate-900/40 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-white">۳ تخته (شماره ۱۲)</td>
+              <td class="py-3.5 px-4">۱۲</td>
+              <td class="py-3.5 px-4">۱۲</td>
+              <td class="py-3.5 px-4 text-center">
+                <button onclick="openPaymentModal('۳ تخته (شماره ۱۲)', '۱۲ میلیون تومان', '۱۲ میلیون تومان')" class="px-3.5 py-1.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500 text-emerald-300 hover:text-white border border-emerald-500/30 transition-all font-semibold">
+                  <i class="fa-solid fa-credit-card text-[11px]"></i> ۱ تخت خالی (رزرو)
+                </button>
+              </td>
             </tr>
-            <tr>
-              <td>دو تخته</td>
-              <td>۷,۰۰۰,۰۰۰</td>
-              <td>۷,۵۰۰,۰۰۰</td>
-              <td>تخت استاندارد، میز تحریر مجزا</td>
+
+            <tr class="hover:bg-slate-900/40 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-white">چهار تخته (شماره ۱۴)</td>
+              <td class="py-3.5 px-4">۱۰.۵</td>
+              <td class="py-3.5 px-4">۱۰.۵</td>
+              <td class="py-3.5 px-4 text-center">
+                <button onclick="openPaymentModal('چهار تخته (شماره ۱۴)', '۱۰.۵ میلیون تومان', '۱۰.۵ میلیون تومان')" class="px-3.5 py-1.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500 text-emerald-300 hover:text-white border border-emerald-500/30 transition-all font-semibold">
+                  <i class="fa-solid fa-credit-card text-[11px]"></i> ۱ تخت خالی (رزرو)
+                </button>
+              </td>
             </tr>
-            <tr>
-              <td>چهار تخته</td>
-              <td>۵,۰۰۰,۰۰۰</td>
-              <td>۵,۲۰۰,۰۰۰</td>
-              <td>کمد جادار، فضای استاندارد و نورگیر</td>
+
+            <tr class="hover:bg-slate-900/40 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-white">دو تخته (شماره ۲۳)</td>
+              <td class="py-3.5 px-4">۱۵</td>
+              <td class="py-3.5 px-4">۱۵</td>
+              <td class="py-3.5 px-4 text-center">
+                <button onclick="openPaymentModal('دو تخته (شماره ۲۳)', '۱۵ میلیون تومان', '۱۵ میلیون تومان')" class="px-3.5 py-1.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500 text-emerald-300 hover:text-white border border-emerald-500/30 transition-all font-semibold">
+                  <i class="fa-solid fa-credit-card text-[11px]"></i> ۲ تخت خالی (رزرو)
+                </button>
+              </td>
             </tr>
-            <tr>
-              <td>شش تخته</td>
-              <td>۴,۰۰۰,۰۰۰</td>
-              <td>۳,۹۰۰,۰۰۰</td>
-              <td>محیط دانشجویی و اقتصادی</td>
+
+            <tr class="hover:bg-slate-900/40 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-white">شش تخته (شماره ۳۴)</td>
+              <td class="py-3.5 px-4">۱۰.۵</td>
+              <td class="py-3.5 px-4">۱۰.۵</td>
+              <td class="py-3.5 px-4 text-center">
+                <button onclick="openPaymentModal('شش تخته (شماره ۳۴)', '۱۰.۵ میلیون تومان', '۱۰.۵ میلیون تومان')" class="px-3.5 py-1.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500 text-emerald-300 hover:text-white border border-emerald-500/30 transition-all font-semibold">
+                  <i class="fa-solid fa-credit-card text-[11px]"></i> ۳ تخت خالی (رزرو)
+                </button>
+              </td>
+            </tr>
+
+            <tr class="hover:bg-slate-900/40 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-white">۲ تخته مستر (شماره ۳۱)</td>
+              <td class="py-3.5 px-4">۱۹</td>
+              <td class="py-3.5 px-4">۱۹</td>
+              <td class="py-3.5 px-4 text-center">
+                <button onclick="openPaymentModal('۲ تخته مستر (شماره ۳۱)', '۱۹ میلیون تومان', '۱۹ میلیون تومان')" class="px-3.5 py-1.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500 text-emerald-300 hover:text-white border border-emerald-500/30 transition-all font-semibold">
+                  <i class="fa-solid fa-credit-card text-[11px]"></i> ۲ تخت خالی (رزرو)
+                </button>
+              </td>
+            </tr>
+
+            <tr class="hover:bg-slate-900/40 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-white">۳ تخته مستر (شماره ۳۳)</td>
+              <td class="py-3.5 px-4">۱۵</td>
+              <td class="py-3.5 px-4">۱۵</td>
+              <td class="py-3.5 px-4 text-center">
+                <button onclick="openPaymentModal('۳ تخته مستر (شماره ۳۳)', '۱۵ میلیون تومان', '۱۵ میلیون تومان')" class="px-3.5 py-1.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500 text-emerald-300 hover:text-white border border-emerald-500/30 transition-all font-semibold">
+                  <i class="fa-solid fa-credit-card text-[11px]"></i> ۱ تخت خالی (رزرو)
+                </button>
+              </td>
+            </tr>
+
+            <tr class="hover:bg-slate-900/40 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-white">۴ تخته (شماره ۳۲)</td>
+              <td class="py-3.5 px-4">۱۰.۵</td>
+              <td class="py-3.5 px-4">۱۰.۵</td>
+              <td class="py-3.5 px-4 text-center">
+                <button onclick="openPaymentModal('۴ تخته (شماره ۳۲)', '۱۰.۵ میلیون تومان', '۱۰.۵ میلیون تومان')" class="px-3.5 py-1.5 rounded-xl bg-emerald-500/10 hover:bg-emerald-500 text-emerald-300 hover:text-white border border-emerald-500/30 transition-all font-semibold">
+                  <i class="fa-solid fa-credit-card text-[11px]"></i> ۱ تخت خالی (رزرو)
+                </button>
+              </td>
+            </tr>
+
+            <tr class="hover:bg-slate-900/40 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-white">دو تخته (شماره ۱۶)</td>
+              <td class="py-3.5 px-4">۱۴.۵</td>
+              <td class="py-3.5 px-4">۱۴.۵</td>
+              <td class="py-3.5 px-4 text-center">
+                <button onclick="openPaymentModal('دو تخته (شماره ۱۶)', '۱۴.۵ میلیون تومان', '۱۴.۵ میلیون تومان', '۷/۱۸')" class="px-3.5 py-1.5 rounded-xl bg-amber-500/10 hover:bg-amber-500 text-amber-300 hover:text-white border border-amber-500/30 transition-all font-semibold">
+                  <i class="fa-solid fa-calendar-check text-[11px]"></i> ۲ تخت خالی (تحویل ۷/۱۸)
+                </button>
+              </td>
+            </tr>
+
+            <tr class="hover:bg-slate-900/40 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-white">یک تخته (شماره ۲۱)</td>
+              <td class="py-3.5 px-4">۱۸</td>
+              <td class="py-3.5 px-4">۱۸</td>
+              <td class="py-3.5 px-4 text-center">
+                <button onclick="openPaymentModal('یک تخته (شماره ۲۱)', '۱۸ میلیون تومان', '۱۸ میلیون تومان', '۷/۲۵')" class="px-3.5 py-1.5 rounded-xl bg-amber-500/10 hover:bg-amber-500 text-amber-300 hover:text-white border border-amber-500/30 transition-all font-semibold">
+                  <i class="fa-solid fa-calendar-check text-[11px]"></i> ۱ تخت خالی (تحویل ۷/۲۵)
+                </button>
+              </td>
+            </tr>
+
+            <tr class="hover:bg-slate-900/40 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-white">یک تخته (شماره ۴۱)</td>
+              <td class="py-3.5 px-4">۲۵</td>
+              <td class="py-3.5 px-4">۲۵</td>
+              <td class="py-3.5 px-4 text-center">
+                <button onclick="openPaymentModal('یک تخته (شماره ۴۱)', '۲۵ میلیون تومان', '۲۵ میلیون تومان', '۷/۱۸')" class="px-3.5 py-1.5 rounded-xl bg-amber-500/10 hover:bg-amber-500 text-amber-300 hover:text-white border border-amber-500/30 transition-all font-semibold">
+                  <i class="fa-solid fa-calendar-check text-[11px]"></i> ۱ تخت خالی (تحویل ۷/۱۸)
+                </button>
+              </td>
+            </tr>
+
+            <tr class="hover:bg-slate-900/40 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-white">یک تخته (شماره ۲۷)</td>
+              <td class="py-3.5 px-4">۲۵</td>
+              <td class="py-3.5 px-4">۲۵</td>
+              <td class="py-3.5 px-4 text-center">
+                <button onclick="openPaymentModal('یک تخته (شماره ۲۷)', '۲۵ میلیون تومان', '۲۵ میلیون تومان', '۷/۱')" class="px-3.5 py-1.5 rounded-xl bg-amber-500/10 hover:bg-amber-500 text-amber-300 hover:text-white border border-amber-500/30 transition-all font-semibold">
+                  <i class="fa-solid fa-calendar-check text-[11px]"></i> ۱ تخت خالی (تحویل ۷/۱)
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>
-      </div>
-    </section>
 
-    <!-- قوانین و مقررات / سوالات -->
-    <section id="rules">
-      <h2 class="section-title">قوانین و سوالات متداول</h2>
-      <div class="accordion-item">
-        <div class="accordion-header" onclick="toggleAcc(this)">
-          ساعت ورود و خروج به پانسیون به چه صورت است؟
-          <i class="fa-solid fa-chevron-down"></i>
+        <div class="mt-4 text-center">
+          <p class="text-[11px] text-slate-400">پس از واریز بیعانه، تصویر فیش را جهت ثبت نهایی به شماره همراه مدیریت ارسال فرمایید.</p>
         </div>
-        <div class="accordion-content">
-          ساعت بازگشایی ۶:۰۰ صبح و پایان تردد مجاز شبانه ساعت ۲۲:۳۰ می‌باشد. تغییرات استثنایی با هماهنگی مدیریت و ثبت کتبی امکان‌پذیر است.
-        </div>
-      </div>
-      <div class="accordion-item">
-        <div class="accordion-header" onclick="toggleAcc(this)">
-          مدارک لازم جهت پذیرش و ثبت‌نام چیست؟
-          <i class="fa-solid fa-chevron-down"></i>
-        </div>
-        <div class="accordion-content">
-          ارائه اصل کارت ملی، شناسنامه، گواهی اشتغال به تحصیل یا معرفی‌نامه معتبر شغلی و فرم تعهدنامه انضباطی الزامی است.
-        </div>
-      </div>
-    </section>
-
-    <!-- نقشه و موقعیت مکانی -->
-    <section id="location">
-      <h2 class="section-title">موقعیت مکانی</h2>
-      <div id="map"></div>
-    </section>
-  </div>
-
-  <!-- فوتر بدون تکرار داده‌ها -->
-  <footer>
-    <div class="footer-content">
-      <div>
-        <h4>درباره مجموعه ونوس</h4>
-        <p>پانسیون دخترانه لوکس ونوس وابسته به مجموعه خوابگاه‌های زنجیره‌ای، محیطی آرام، مدرن و با دسترسی فوق‌العاده به مترو و BRT را برای متقاضیان فراهم ساخته است.</p>
-      </div>
-      <div>
-        <h4>ارتباط با مدیریت و پذیرش</h4>
-        <p><i class="fa-solid fa-phone"></i> تلفن ثابت: ۰۲۱-۸۸۷۳۱۸۱۰</p>
-        <p><i class="fa-solid fa-mobile-screen"></i> مدیریت (خانم دلاوری): ۰۹۱۲۶۸۰۱۴۵۰</p>
-        <p><i class="fa-solid fa-headset"></i> پشتیبانی: ۰۹۱۲۸۵۰۶۴۰۵</p>
-      </div>
-      <div>
-        <h4>نشانی دقیق</h4>
-        <p><i class="fa-solid fa-location-dot"></i> تهران، میدان آرژانتین، بلوار بیهقی، کوچه ۱۴ شرقی، پلاک ۱۸</p>
-        <p style="margin-top: 8px;"><i class="fa-solid fa-clock"></i> ساعات پاسخگویی: ۸ الی ۲۱</p>
       </div>
     </div>
-    <div class="footer-bottom">
-      &copy; کلیه حقوق برای پانسیون دخترانه لوکس ونوس محفوظ است.
+  </section>
+
+  <!-- بخش قوانین و مقررات پذیرش -->
+  <section id="rules" class="relative z-10 max-w-5xl mx-auto px-6 py-12">
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-rose-500/30 bg-rose-500/10 text-rose-300 text-xs font-semibold mb-3">
+        <i class="fa-solid fa-scale-balanced"></i> اصول و انضباط مجموعه
+      </div>
+      <h2 class="text-3xl font-extrabold text-white mb-2">قوانین و استانداردهای پذیرش</h2>
+      <p class="text-xs sm:text-sm text-slate-400">رعایت این اصول ضامن آرامش و آسایش پایدار تمام ساکنین محترم است</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-4">
+      <div class="glass-card p-5 rounded-2xl flex items-start gap-4">
+        <div class="w-10 h-10 rounded-xl bg-pink-500/20 text-pink-400 flex items-center justify-center shrink-0 text-base">
+          <i class="fa-solid fa-volume-xmark"></i>
+        </div>
+        <div>
+          <h4 class="text-sm font-bold text-white mb-1">سکوت و آرامش مطلق</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">رعایت سکوت در اتاق‌ها و راهروها به ویژه پس از ساعت ۲۳ الزامی است تا محیط مطالعه مختل نشود.</p>
+        </div>
+      </div>
+
+      <div class="glass-card p-5 rounded-2xl flex items-start gap-4">
+        <div class="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center shrink-0 text-base">
+          <i class="fa-solid fa-id-card"></i>
+        </div>
+        <div>
+          <h4 class="text-sm font-bold text-white mb-1">پذیرش گزینش‌شده</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">پذیرش منحصراً متعلق به دانشجویان تحصیلات تکمیلی، پژوهشگران و افراد شاغل موجه با مدارک معتبر است.</p>
+        </div>
+      </div>
+
+      <div class="glass-card p-5 rounded-2xl flex items-start gap-4">
+        <div class="w-10 h-10 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center shrink-0 text-base">
+          <i class="fa-solid fa-clock"></i>
+        </div>
+        <div>
+          <h4 class="text-sm font-bold text-white mb-1">ساعت تردد مجاز</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">ساعت بازگشایی درب صبح‌ها ساعت ۶:۰۰ و زمان بسته شدن درب شب‌ها ساعت ۲۳:۳۰ می‌باشد.</p>
+        </div>
+      </div>
+
+      <div class="glass-card p-5 rounded-2xl flex items-start gap-4">
+        <div class="w-10 h-10 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center shrink-0 text-base">
+          <i class="fa-solid fa-ban-smoking"></i>
+        </div>
+        <div>
+          <h4 class="text-sm font-bold text-white mb-1">محیط کاملاً پاک و سلامت</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">استعمال هرگونه دخانیات در تمامی اتاق‌ها و فضاهای بسته اقامتگاه اکیداً ممنوع می‌باشد.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- بخش سؤالات متداول (FAQ) -->
+  <section id="faq" class="relative z-10 max-w-4xl mx-auto px-6 py-12">
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 text-xs font-semibold mb-3">
+        <i class="fa-solid fa-circle-question"></i> راهنما و پاسخ‌ها
+      </div>
+      <h2 class="text-3xl font-extrabold text-white mb-2">پرسش‌های متداول شما</h2>
+      <p class="text-xs sm:text-sm text-slate-400">پاسخ به سوالات پرتکرار قبل از اقدام به رزرو</p>
+    </div>
+
+    <div class="space-y-3">
+      <div class="glass-card rounded-2xl overflow-hidden border border-slate-800">
+        <button onclick="toggleFaq(1)" class="w-full p-4 sm:p-5 flex items-center justify-between text-right hover:bg-slate-900/50 transition-colors">
+          <span class="text-sm font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-circle-dot text-fuchsia-400 text-xs"></i>
+            آیا امکان بازدید حضوری قبل از واریز بیعانه وجود دارد؟
+          </span>
+          <i id="faq-icon-1" class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-300"></i>
+        </button>
+        <div id="faq-ans-1" class="hidden px-5 pb-5 text-xs text-slate-300 leading-relaxed border-t border-slate-800/60 pt-3">
+          بله، با هماهنگی تلفنی قبلی با سرکار خانم دلاوری یا تیم پشتیبانی، همه‌روزه از ساعت ۱۰ صبح الی ۲۰ امکان بازدید حضوری از اتاق‌ها و امکانات فراهم است.
+        </div>
+      </div>
+
+      <div class="glass-card rounded-2xl overflow-hidden border border-slate-800">
+        <button onclick="toggleFaq(2)" class="w-full p-4 sm:p-5 flex items-center justify-between text-right hover:bg-slate-900/50 transition-colors">
+          <span class="text-sm font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-circle-dot text-fuchsia-400 text-xs"></i>
+            حداقل مدت قرارداد و شیوه پرداخت به چه صورت است؟
+          </span>
+          <i id="faq-icon-2" class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-300"></i>
+        </button>
+        <div id="faq-ans-2" class="hidden px-5 pb-5 text-xs text-slate-300 leading-relaxed border-t border-slate-800/60 pt-3">
+          قراردادها به صورت ماهانه، فصلی و سالانه تنظیم می‌شود. مبلغ ودیعه و اجاره ماه اول در بدو ورود و تسویه مابقی ماهانه انجام می‌پذیرد.
+        </div>
+      </div>
+
+      <div class="glass-card rounded-2xl overflow-hidden border border-slate-800">
+        <button onclick="toggleFaq(3)" class="w-full p-4 sm:p-5 flex items-center justify-between text-right hover:bg-slate-900/50 transition-colors">
+          <span class="text-sm font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-circle-dot text-fuchsia-400 text-xs"></i>
+            هزینه قبوض، شارژ و اینترنت به چه صورت محاسبه می‌شود؟
+          </span>
+          <i id="faq-icon-3" class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-300"></i>
+        </button>
+        <div id="faq-ans-3" class="hidden px-5 pb-5 text-xs text-slate-300 leading-relaxed border-t border-slate-800/60 pt-3">
+          کلیه هزینه‌های مصرفی (آب، برق، گاز، نظافت مستمر مشاعات و اینترنت فیبر نوری پرسرعت) در مبلغ اجاره لحاظ شده و هزینه مازادی دریافت نمی‌شود.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- بخش ارتباط و اطلاعات تماس مستقیم -->
+  <section id="contacts" class="relative z-10 max-w-7xl mx-auto px-6 py-12">
+    <div class="text-center mb-10">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-pink-500/30 bg-pink-500/10 text-pink-300 text-xs font-semibold mb-3">
+        <i class="fa-solid fa-address-book"></i> ارتباط با مسئولین مجموعه
+      </div>
+      <h2 class="text-3xl font-extrabold text-white mb-2">اطلاعات تماس و پشتیبانی</h2>
+      <p class="text-xs sm:text-sm text-slate-400">پاسخگویی سریع جهت مشاوره، رزرو و بازدید حضوری</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <!-- کارت مدیریت -->
+      <div class="glass-card p-6 rounded-3xl border-t-4 border-t-pink-500 text-center flex flex-col justify-between">
+        <div>
+          <div class="w-14 h-14 mx-auto rounded-2xl bg-pink-500/20 text-pink-400 flex items-center justify-center text-2xl mb-4">
+            <i class="fa-solid fa-user-gear"></i>
+          </div>
+          <h4 class="text-base font-bold text-white mb-1">مدیریت اقامتگاه</h4>
+          <p class="text-xs text-fuchsia-400 font-medium mb-1">خانم فاطمه دلاوری</p>
+          <p class="text-[11px] text-slate-400 mb-4">خوابگاه‌های زنجیره‌ای آوین، جردن و ونوس</p>
+        </div>
+        <div class="space-y-2 pt-2 border-t border-slate-800">
+          <a href="tel:09126801450" class="block w-full py-2.5 rounded-xl bg-pink-500 hover:bg-pink-600 text-white font-bold text-xs transition-all shadow-lg shadow-pink-500/20" dir="ltr">
+            <i class="fa-solid fa-phone mr-1"></i> 09126801450
+          </a>
+          <a href="https://wa.me/989126801450" target="_blank" rel="noopener noreferrer" class="block w-full py-2 rounded-xl bg-emerald-500/10 hover:bg-emerald-500 text-emerald-300 hover:text-white border border-emerald-500/30 font-semibold text-xs transition-all">
+            <i class="fa-brands fa-whatsapp ml-1"></i> پیام در واتساپ
+          </a>
+        </div>
+      </div>
+
+      <!-- کارت پشتیبانی آقای شکرچیان -->
+      <div class="glass-card p-6 rounded-3xl border-t-4 border-t-purple-500 text-center flex flex-col justify-between">
+        <div>
+          <div class="w-14 h-14 mx-auto rounded-2xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-2xl mb-4">
+            <i class="fa-solid fa-headset"></i>
+          </div>
+          <h4 class="text-base font-bold text-white mb-1">پشتیبانی و پذیرش</h4>
+          <p class="text-xs text-purple-400 font-medium mb-1">آقای شکرچیان</p>
+          <p class="text-[11px] text-slate-400 mb-4">پشتیبانی رزرو و مسائل مالی</p>
+        </div>
+        <div class="space-y-2 pt-2 border-t border-slate-800">
+          <a href="tel:09128506405" class="block w-full py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs transition-all shadow-lg shadow-purple-600/20" dir="ltr">
+            <i class="fa-solid fa-phone mr-1"></i> 09128506405
+          </a>
+          <a href="https://wa.me/989128506405" target="_blank" rel="noopener noreferrer" class="block w-full py-2 rounded-xl bg-purple-500/10 hover:bg-purple-500 text-purple-300 hover:text-white border border-purple-500/30 font-semibold text-xs transition-all">
+            <i class="fa-brands fa-whatsapp ml-1"></i> پیام در واتساپ
+          </a>
+        </div>
+      </div>
+
+      <!-- کارت پشتیبانی خانم فرزی -->
+      <div class="glass-card p-6 rounded-3xl border-t-4 border-t-indigo-500 text-center flex flex-col justify-between">
+        <div>
+          <div class="w-14 h-14 mx-auto rounded-2xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-2xl mb-4">
+            <i class="fa-solid fa-clipboard-user"></i>
+          </div>
+          <h4 class="text-base font-bold text-white mb-1">پشتیبانی و اسکان</h4>
+          <p class="text-xs text-indigo-400 font-medium mb-1">خانم فرزی</p>
+          <p class="text-[11px] text-slate-400 mb-4">هماهنگی بازدید و امور اقامتگاه</p>
+        </div>
+        <div class="space-y-2 pt-2 border-t border-slate-800">
+          <a href="tel:09144841315" class="block w-full py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs transition-all shadow-lg shadow-indigo-600/20" dir="ltr">
+            <i class="fa-solid fa-phone mr-1"></i> 09194841315
+          </a>
+          <a href="https://wa.me/989144841315" target="_blank" rel="noopener noreferrer" class="block w-full py-2 rounded-xl bg-indigo-500/10 hover:bg-indigo-500 text-indigo-300 hover:text-white border border-indigo-500/30 font-semibold text-xs transition-all">
+            <i class="fa-brands fa-whatsapp ml-1"></i> پیام در واتساپ
+          </a>
+        </div>
+      </div>
+
+      <!-- کارت تلفن ثابت ۲۴ ساعته -->
+      <div class="glass-card p-6 rounded-3xl border-t-4 border-t-emerald-500 text-center flex flex-col justify-between">
+        <div>
+          <div class="w-14 h-14 mx-auto rounded-2xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-2xl mb-4">
+            <i class="fa-solid fa-phone-volume"></i>
+          </div>
+          <h4 class="text-base font-bold text-white mb-1">تلفن ثابت مجموعه</h4>
+          <p class="text-xs text-emerald-400 font-medium mb-1">پذیرش شبانه‌روزی</p>
+          <p class="text-[11px] text-slate-400 mb-4">پاسخگویی ۲۴ ساعته به سوالات</p>
+        </div>
+        <div class="space-y-2 pt-2 border-t border-slate-800">
+          <a href="tel:+982188731810" class="block w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition-all shadow-lg shadow-emerald-600/20" dir="ltr">
+            <i class="fa-solid fa-phone mr-1"></i> 02188731810
+          </a>
+          <span class="inline-flex items-center justify-center gap-1.5 w-full py-2 rounded-xl bg-slate-900/60 text-slate-400 text-[11px]">
+            <i class="fa-solid fa-clock text-emerald-400"></i> شبانه‌روزی ۲۴/۷
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- بخش موقعیت مکانی و نقشه دقیق ونوس + دسترسی‌ها -->
+  <section id="location" class="relative z-10 max-w-5xl mx-auto px-6 py-12">
+    <div class="text-center mb-8">
+      <h2 class="text-3xl font-extrabold text-white mb-2">موقعیت دقیق و دسترسی‌های شهری</h2>
+      <p class="text-xs sm:text-sm text-slate-400">تهران، میدان آرژانتین، بلوار بیهقی، کوچه ۱۴ شرقی، پلاک ۱۸</p>
+    </div>
+
+    <!-- باکس کارت دسترسی‌های شاخص -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+      <div class="glass-card p-3 rounded-xl text-center">
+        <span class="text-fuchsia-400 text-xs font-bold block mb-1"><i class="fa-solid fa-train-subway"></i> مترو مصلی</span>
+        <span class="text-[11px] text-slate-400">کمتر از ۵ دقیقه پیاده</span>
+      </div>
+      <div class="glass-card p-3 rounded-xl text-center">
+        <span class="text-blue-400 text-xs font-bold block mb-1"><i class="fa-solid fa-bus-simple"></i> پایانه بیهقی (BRT)</span>
+        <span class="text-[11px] text-slate-400">دسترسی مستقیم و آسان</span>
+      </div>
+      <div class="glass-card p-3 rounded-xl text-center">
+        <span class="text-emerald-400 text-xs font-bold block mb-1"><i class="fa-solid fa-hospital"></i> مراکز درمانی</span>
+        <span class="text-[11px] text-slate-400">بیمارستان کسری و گاندی</span>
+      </div>
+      <div class="glass-card p-3 rounded-xl text-center">
+        <span class="text-amber-400 text-xs font-bold block mb-1"><i class="fa-solid fa-bag-shopping"></i> مراکز رفاهی و کافه‌ها</span>
+        <span class="text-[11px] text-slate-400">سوپرمارکت و نانوایی در دسترس</span>
+      </div>
+    </div>
+
+    <div class="glass-card rounded-3xl border border-fuchsia-500/20 p-3 sm:p-4 shadow-2xl">
+      <!-- لود نقشه -->
+      <div id="venus-map" class="w-full h-80 sm:h-96 rounded-2xl bg-slate-900 border border-slate-800 z-0"></div>
+
+      <!-- دکمه‌های هدایت به نشان و گوگل مپ -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 px-2 pt-5 pb-2">
+        <span class="text-xs text-slate-400 text-center sm:text-right">
+          <i class="fa-solid fa-circle-info text-blue-400 ml-1"></i> برای مسیریابی خودرویی یا پیاده روی دکمه‌های زیر را انتخاب کنید:
+        </span>
+        <div class="flex items-center gap-3">
+          <a href="https://neshan.org/maps/municipal/b0c9db852d1d4bae9e158d23c92730f0#c35.735-51.425-15z-0p" 
+             target="_blank" rel="noopener noreferrer"
+             class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold transition-all flex items-center gap-2 shadow-lg shadow-indigo-600/20">
+            <i class="fa-solid fa-diamond-turn-right"></i> مشاهده در نشان
+          </a>
+          <a href="https://maps.google.com/?q=35.7348,51.4206" 
+             target="_blank" rel="noopener noreferrer"
+             class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition-all flex items-center gap-2 border border-slate-700">
+            <i class="fa-brands fa-google"></i> گوگل مپ
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- فوتر کامل و ساختاریافته -->
+  <footer class="relative z-10 border-t border-slate-800 bg-slate-950/95 pt-12 pb-8 text-xs text-slate-400">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 mb-10 text-right">
+      <!-- ستون ۱ -->
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-pink-500 to-purple-600 flex items-center justify-center text-white text-lg">
+            <i class="fa-solid fa-hotel"></i>
+          </div>
+          <span class="text-base font-black text-white">پانسیون دخترانه ونوس</span>
+        </div>
+        <p class="text-xs text-slate-400 leading-relaxed mb-4">
+          اقامتگاهی لوکس، مدرن و گزینش‌شده ویژه دانشجویان تحصیلات تکمیلی و شاغلین موجه با دسترسی کم‌نظیر به مترو مصلی و بی‌آرتی بیهقی.
+        </p>
+        <p class="text-xs text-slate-400">
+          <i class="fa-solid fa-location-dot text-fuchsia-400 ml-1"></i> تهران، میدان آرژانتین، بلوار بیهقی، کوچه ۱۴ شرقی، پلاک ۱۸
+        </p>
+      </div>
+
+     <div>
+    <h4 class="text-white font-bold text-base mb-4 border-b border-white/10 pb-2">شماره‌های تماس مستقیم</h4>
+    <ul class="space-y-3.5 text-sm text-slate-400">
+        <!-- مدیریت -->
+        <li class="flex flex-col gap-1 border-b border-white/5 pb-2">
+            <span class="text-xs text-amber-400/90 font-medium">مدیریت (خانم فاطمه دلاوری)</span>
+            <div class="flex items-center justify-between">
+                <span class="text-slate-300">خوابگاه‌های ونوس، جردن و آوین</span>
+                <a href="tel:09126801450" class="text-slate-200 hover:text-amber-400 transition-colors font-mono font-bold dir-ltr">
+                    ۰۹۱۲ ۶۸۰ ۱۴۵۰
+                </a>
+            </div>
+        </li>
+
+        <!-- پشتیبانی و پذیرش (آقای شکرچیان) -->
+        <li class="flex flex-col gap-1 border-b border-white/5 pb-2">
+            <span class="text-xs text-amber-400/90 font-medium">پشتیبانی و امور پذیرش (آقای شکرچیان)</span>
+            <div class="flex items-center justify-between">
+                <span class="text-slate-300">پاسخگویی و هماهنگی</span>
+                <a href="tel:09128506405" class="text-slate-200 hover:text-amber-400 transition-colors font-mono font-bold dir-ltr">
+                    ۰۹۱۲ ۸۵۰ ۶۴۰۵
+                </a>
+            </div>
+        </li>
+
+        <!-- پشتیبانی و امور اسکان (خانم فرزی) -->
+        <li class="flex flex-col gap-1 border-b border-white/5 pb-2">
+            <span class="text-xs text-amber-400/90 font-medium">پشتیبانی و امور اسکان (خانم فرزی)</span>
+            <div class="flex items-center justify-between">
+                <span class="text-slate-300">پاسخگویی مقیمین</span>
+                <a href="tel:09194841315" class="text-slate-200 hover:text-amber-400 transition-colors font-mono font-bold dir-ltr">
+                    ۰۹۱۹ ۴۸۴ ۱۳۱۵
+                </a>
+            </div>
+        </li>
+
+        <!-- پذیرش شبانه‌روزی / تلفن ثابت -->
+        <li class="flex flex-col gap-1 pt-1">
+            <span class="text-xs text-amber-400/90 font-medium">پذیرش شبانه‌روزی (تلفن ثابت)</span>
+            <div class="flex items-center justify-between">
+                <span class="text-slate-300">پاسخگویی ۲۴ ساعته</span>
+                <a href="tel:02188731810" class="text-slate-200 hover:text-amber-400 transition-colors font-mono font-bold dir-ltr">
+                    ۰۲۱ ۸۸۷۳ ۱۸۱۰
+                </a>
+            </div>
+        </li>
+    </ul>
+</div>
+
+
+      <!-- ستون ۳ -->
+      <div>
+        <h4 class="text-sm font-bold text-white mb-4 border-b border-slate-800 pb-2 flex items-center gap-2">
+          <i class="fa-solid fa-link text-fuchsia-400"></i> دسترسی سریع
+        </h4>
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <a href="#gallery" class="hover:text-fuchsia-400 py-1 transition-colors">گالری تصاویر</a>
+          <a href="#amenities" class="hover:text-fuchsia-400 py-1 transition-colors">امکانات رفاهی</a>
+          <a href="#rooms" class="hover:text-fuchsia-400 py-1 transition-colors">اتاق‌ها و واحدها</a>
+          <a href="#booking" class="hover:text-fuchsia-400 py-1 transition-colors">جدول ظرفیت و رزرو</a>
+          <a href="#rules" class="hover:text-fuchsia-400 py-1 transition-colors">قوانین تردد و اسکان</a>
+          <a href="#faq" class="hover:text-fuchsia-400 py-1 transition-colors">پرسش‌های متداول</a>
+          <a href="#location" class="hover:text-fuchsia-400 py-1 transition-colors">موقعیت و مسیریابی</a>
+          <a href="https://wa.me/989126801450" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:text-emerald-300 py-1 transition-colors">ارسال پیام در واتساپ</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 border-t border-slate-900 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-right">
+      <p>© کلیه حقوق برای پانسیون دخترانه لوکس ونوس محفوظ است.</p>
+      <p class="text-slate-500 text-[11px]">مجموعه خوابگاه‌های زنجیره‌ای آوین، جردن و ونوس</p>
     </div>
   </footer>
 
-  <!-- اسکریپت نقشه و عملکرد آکاردئون -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- دکمه‌های شناور تماس و واتساپ گوشه صفحه -->
+  <div class="fixed bottom-6 left-6 z-40 flex flex-col gap-3">
+    <a href="https://wa.me/989126801450" target="_blank" rel="noopener noreferrer" 
+       class="w-12 h-12 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white shadow-xl shadow-emerald-500/40 flex items-center justify-center transition-all transform hover:scale-110" 
+       title="ارتباط در واتساپ مدیریت">
+      <i class="fa-brands fa-whatsapp text-2xl"></i>
+    </a>
+    <a href="tel:+982188731810" 
+       class="w-12 h-12 rounded-full bg-slate-900 border border-emerald-500/50 hover:bg-emerald-600 text-emerald-300 hover:text-white shadow-xl shadow-emerald-500/30 flex items-center justify-center transition-all transform hover:scale-110" 
+       title="تماس ۲۴ ساعته (02188731810)">
+      <i class="fa-solid fa-phone-volume text-base"></i>
+    </a>
+    <a href="tel:09126801450" 
+       class="w-12 h-12 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-xl shadow-purple-500/40 flex items-center justify-center transition-all transform hover:scale-110" 
+       title="تماس مستقیم با مدیریت">
+      <i class="fa-solid fa-phone text-lg"></i>
+    </a>
+  </div>
+
+  <!-- پنجره مودال پرداخت و اطلاعات واریز -->
+  <div id="paymentModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm items-center justify-center p-4">
+    <div class="glass-card bg-[#121124] border border-purple-500/30 rounded-3xl max-w-md w-full p-6 relative shadow-2xl text-right">
+      <button onclick="closePaymentModal()" class="absolute top-4 left-4 w-8 h-8 rounded-full bg-slate-800/80 text-slate-400 hover:text-white flex items-center justify-center transition-all" aria-label="بستن">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-5 border-b border-slate-800/80 pb-4">
+        <div class="w-10 h-10 rounded-xl bg-pink-500 flex items-center justify-center text-white shadow-lg shadow-pink-500/40 text-lg">
+          <i class="fa-solid fa-receipt"></i>
+        </div>
+        <div>
+          <h3 class="text-base font-bold text-white">اطلاعات واریز بیعانه</h3>
+          <span id="modalRoomTitle" class="text-xs text-pink-400 font-medium">۳ تخته (شماره ۱۲)</span>
+        </div>
+      </div>
+
+      <!-- ودیعه و اجاره -->
+      <div class="bg-slate-950/40 rounded-2xl p-4 mb-4 border border-slate-800 space-y-2 text-xs">
+        <div class="flex justify-between items-center text-slate-400">
+          <span>مبلغ ودیعه:</span>
+          <span id="modalDeposit" class="font-bold text-white">۱۲ میلیون تومان</span>
+        </div>
+        <div class="flex justify-between items-center text-slate-400">
+          <span>اجاره ماهانه:</span>
+          <span id="modalRent" class="font-bold text-white">۱۲ میلیون تومان</span>
+        </div>
+      </div>
+
+      <!-- شماره کارت -->
+      <div class="bg-purple-950/40 border border-purple-500/30 rounded-2xl p-4 mb-4 text-center">
+        <span class="text-[11px] text-purple-300 block mb-1">شماره کارت جهت واریز بیعانه</span>
+        <div class="text-lg font-black tracking-widest text-amber-300 my-1 select-all" dir="ltr" id="cardNumber">
+          ۵۰۲۹-۳۸۱۰-۲۷۱۶-۹۲۸۳
+        </div>
+        <span class="text-xs text-slate-300 block mb-3">به نام: <strong class="text-white">خانم فاطمه دلاوری (مدیریت ونوس)</strong></span>
+        <button onclick="copyCardNumber()" id="copyBtn" class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-xl bg-purple-600/30 hover:bg-purple-600 text-purple-200 hover:text-white border border-purple-500/40 text-xs font-semibold transition-all">
+          <i class="fa-regular fa-copy"></i>
+          <span id="copyText">کپی شماره کارت</span>
+        </button>
+      </div>
+
+      <!-- شماره شبا -->
+      <div class="bg-blue-950/30 border border-blue-500/20 rounded-2xl p-4 mb-5 text-center">
+        <span class="text-[11px] text-blue-300 block mb-1">شماره شبا جهت واریز پایا و ساتنا</span>
+        <div class="text-sm font-mono font-bold tracking-wider text-teal-400 my-1 select-all" dir="ltr" id="shabaNumber">
+          IR080660000000204637576008
+        </div>
+        <span class="text-xs text-slate-300 block mb-3">به نام: <strong class="text-white">آقای سپهر شکرچیان</strong></span>
+        <button onclick="copyShabaNumber()" id="copyShabaBtn" class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-xl bg-blue-600/30 hover:bg-blue-600 text-blue-200 hover:text-white border border-blue-500/40 text-xs font-semibold transition-all">
+          <i class="fa-regular fa-copy"></i>
+          <span id="copyShabaText">کپی شماره شبا</span>
+        </button>
+      </div>
+
+      <!-- دکمه‌های اقدام -->
+      <div class="space-y-2">
+        <a id="whatsappLink" href="https://wa.me/989126801450?text=%D8%B3%D9%84%D8%A7%D9%85%D8%8C%20%D9%81%DB%8C%D8%B4%20%D9%88%D8%A7%D8%B1%DB%8C%D8%B2%20%D8%A8%DB%8C%D8%B9%D8%A7%D9%86%D9%87%20%D8%B1%D8%A7%20%D8%A7%D8%B1%D8%B3%D8%A7%D9%84%20%D9%85%DB%8C%E2%80%8C%DA%A9%D9%86%D9%85" target="_blank" rel="noopener noreferrer" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-lg shadow-emerald-600/20">
+          <i class="fa-brands fa-whatsapp text-base"></i> ارسال فیش واریزی در واتساپ
+        </a>
+        <a href="tel:09126801450" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs flex items-center justify-center gap-2 transition-all border border-slate-700">
+          <i class="fa-solid fa-phone text-xs"></i> تماس مستقیم با مدیریت (۰۹۱۲۶۸۰۱۴۵۰)
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- اسکریپت‌ها -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
-    function toggleAcc(el) {
-      const content = el.nextElementSibling;
-      const isVisible = content.style.display === 'block';
-      content.style.display = isVisible ? 'none' : 'block';
+    // راه‌اندازی گالری Swiper
+    var swiper = new Swiper(".myGallerySwiper", {
+      loop: true,
+      autoplay: { delay: 4000, disableOnInteraction: false },
+      pagination: { el: ".swiper-pagination", clickable: true },
+    });
+
+    // باز و بسته کردن جدول
+    function toggleBookingTable() {
+      const content = document.getElementById('bookingTableContent');
+      const icon = document.getElementById('toggleIcon');
+      if (content.classList.contains('hidden')) {
+        content.classList.remove('hidden');
+        icon.classList.remove('rotate-180');
+      } else {
+        content.classList.add('hidden');
+        icon.classList.add('rotate-180');
+      }
     }
 
-    // لود نقشه با مختصات میدان آرژانتین
-    document.addEventListener("DOMContentLoaded", function() {
-      const map = L.map('map').setView([35.7365, 51.4172], 15);
+    // باز و بسته کردن آکاردئون سؤالات متداول
+    function toggleFaq(id) {
+      const ans = document.getElementById(`faq-ans-${id}`);
+      const icon = document.getElementById(`faq-icon-${id}`);
+      if (ans.classList.contains('hidden')) {
+        ans.classList.remove('hidden');
+        icon.classList.add('rotate-180');
+      } else {
+        ans.classList.add('hidden');
+        icon.classList.remove('rotate-180');
+      }
+    }
+
+    // کنترل مودال پرداخت
+    function openPaymentModal(roomTitle, deposit, rent, date = '') {
+      document.getElementById('modalRoomTitle').innerText = roomTitle + (date ? ` (تحویل ${date})` : '');
+      document.getElementById('modalDeposit').innerText = deposit;
+      document.getElementById('modalRent').innerText = rent;
+      
+      const text = encodeURIComponent(`سلام، فیش واریز بیعانه برای ${roomTitle} را ارسال می‌کنم.`);
+      document.getElementById('whatsappLink').href = `https://wa.me/989126801450?text=${text}`;
+      
+      const modal = document.getElementById('paymentModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closePaymentModal() {
+      const modal = document.getElementById('paymentModal');
+      modal.classList.remove('flex');
+      modal.classList.add('hidden');
+    }
+
+    // کپی شماره کارت
+    function copyCardNumber() {
+      navigator.clipboard.writeText("5029381027169283").then(() => {
+        const textSpan = document.getElementById('copyText');
+        textSpan.innerText = "کپی شد!";
+        setTimeout(() => { textSpan.innerText = "کپی شماره کارت"; }, 2000);
+      });
+    }
+
+    // کپی شماره شبا
+    function copyShabaNumber() {
+      navigator.clipboard.writeText("IR080660000000204637576008").then(() => {
+        const textSpan = document.getElementById('copyShabaText');
+        textSpan.innerText = "کپی شد!";
+        setTimeout(() => { textSpan.innerText = "کپی شماره شبا"; }, 2000);
+      });
+    }
+
+    // لود نقشه Leaflet
+    document.addEventListener("DOMContentLoaded", function () {
+      const lat = 35.7348;
+      const lng = 51.4206;
+      const map = L.map('venus-map').setView([lat, lng], 16);
+
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap'
       }).addTo(map);
 
-      L.marker([35.7365, 51.4172]).addTo(map)
-        .bindPopup('<b>پانسیون دخترانه ونوس</b><br>میدان آرژانتین، بلوار بیهقی')
-        .openPopup();
+      const customPopup = `
+        <div style="font-weight: bold; margin-bottom: 4px; color: #fff;">پانسیون لوکس ونوس</div>
+        <div style="font-size: 11px; color: #cbd5e1;">تهران، میدان آرژانتین، بلوار بیهقی، کوچه ۱۴ شرقی، پلاک ۱۸</div>
+      `;
+
+      L.marker([lat, lng]).addTo(map).bindPopup(customPopup).openPopup();
     });
   </script>
+
+  <!-- Default Statcounter code for venus-dorm -->
+  <script type="text/javascript">
+    var sc_project = 13356731;
+    var sc_invisible = 1;
+    var sc_security = "01159f06";
+  </script>
+  <script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
+  <noscript>
+    <div class="statcounter">
+      <a title="Web Analytics Made Easy - Statcounter" href="https://statcounter.com/" target="_blank" rel="noopener">
+        <img class="statcounter" src="https://c.statcounter.com/13356731/0/01159f06/1/" alt="Web Analytics Made Easy - Statcounter" referrerpolicy="no-referrer-when-downgrade">
+      </a>
+    </div>
+  </noscript>
+  <!-- End of Statcounter Code -->
+
 </body>
 </html>
