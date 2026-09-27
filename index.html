@@ -27,73 +27,62 @@
     }
   </script>
     <style>
-      body {
+        <style>
+    /* ۱. رنگ پس‌زمینه کل صفحه */
+    html, body {
       direction: rtl;
       text-align: right;
       font-family: 'Vazirmatn FD', sans-serif;
-      background-color: #090d16;
-      color: #e2e8f0;
+      background-color: #ffffff !important;
+      color: #0f172a !important;
       overflow-x: hidden;
     }
 
-
-    .glow-bg {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(120px);
-      opacity: 0.35;
-      z-index: 0;
-      pointer-events: none;
+    /* ۲. تبدیل تمام بخش‌ها و سکشن‌های تیره به سفید */
+    section, header, footer, main,
+    [class*="bg-slate-900"],
+    [class*="bg-slate-800"],
+    [class*="bg-gray-900"],
+    [class*="bg-[#0"] {
+      background-color: #ffffff !important;
     }
 
+    /* ۳. منوی بالای صفحه (هدر سفید شیشه‌ای و شیک) */
     .glass-nav {
-      background: rgba(15, 23, 42, 0.85);
+      background: rgba(255, 255, 255, 0.92) !important;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid #e2e8f0 !important;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.04) !important;
     }
 
+    /* ۴. کارت‌ها (باکس‌های اتاق‌ها، امکانات و قوانین) */
     .glass-card {
-      background: rgba(30, 41, 59, 0.45);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05) !important;
     }
 
     .glass-card:hover {
       transform: translateY(-4px);
-      border-color: rgba(168, 85, 247, 0.4);
-      box-shadow: 0 20px 40px -15px rgba(168, 85, 247, 0.25);
+      border-color: #ec4899 !important; /* کادر صورتی ملایم هنگام هاور */
+      box-shadow: 0 12px 25px -5px rgba(236, 72, 153, 0.15) !important;
     }
 
-    .badge-glow {
-      box-shadow: 0 0 15px rgba(236, 72, 153, 0.4);
+    /* ۵. ملایم کردن هاله‌های نور پس‌زمینه */
+    .glow-bg {
+      opacity: 0.12 !important;
     }
 
-    .swiper-pagination-bullet-active {
-      background: #d946ef !important;
-      width: 24px !important;
-      border-radius: 9999px !important;
-    }
-
-    .swiper-pagination-bullet {
-      background: #94a3b8;
-      transition: all 0.3s;
-    }
-
+    /* ۶. پاپ‌آپ نقشه در حالت تم روشن */
     .leaflet-popup-content-wrapper {
-      background: #0f172a !important;
-      color: #f8fafc !important;
-      border: 1px solid rgba(168, 85, 247, 0.4) !important;
-      border-radius: 12px !important;
-      font-family: 'Vazirmatn FD', sans-serif !important;
-      text-align: right !important;
-      direction: rtl !important;
+      background: #ffffff !important;
+      color: #0f172a !important;
+      border: 1px solid #e2e8f0 !important;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1) !important;
     }
-    .leaflet-popup-tip {
-      background: #0f172a !important;
-    }
+  </style>
+
   </style>
 </head>
 <body class="relative selection:bg-fuchsia-500 selection:text-white">
