@@ -101,47 +101,66 @@
   </style>
 </head>
 <body class="relative selection:bg-pink-100 selection:text-pink-900">
+<!-- هدر شیشه‌ای و ناوبری اصلی -->
+<header class="sticky top-0 z-50 glass-nav border-b border-rose-100/60 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+            
+            <!-- لوگو و برند -->
+            <a href="#" class="flex items-center gap-3 group focus:outline-none">
+                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-rose-500 to-pink-400 flex items-center justify-center text-white shadow-md shadow-rose-500/20 group-hover:scale-105 transition-transform duration-200">
+                    <i class="fas fa-venus text-lg"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-extrabold text-lg text-slate-800 tracking-tight leading-tight">پانسیون دخترانه ونوس</span>
+                    <span class="text-xs text-rose-500 font-medium">اقامتگاهی امن و مدرن</span>
+                </div>
+            </a>
 
+            <!-- منوی اصلی دسکتاپ (تک‌ردیفه و تمیز) -->
+            <nav class="hidden lg:flex items-center gap-1 font-medium text-sm text-slate-600">
+                <a href="#hero" class="px-3.5 py-2 rounded-xl hover:text-rose-600 hover:bg-rose-50/80 transition-colors duration-150">صفحه اصلی</a>
+                <a href="#amenities" class="px-3.5 py-2 rounded-xl hover:text-rose-600 hover:bg-rose-50/80 transition-colors duration-150">امکانات</a>
+                <a href="#rooms" class="px-3.5 py-2 rounded-xl hover:text-rose-600 hover:bg-rose-50/80 transition-colors duration-150">اتاق‌ها و قیمت</a>
+                
+                <!-- منوی کشویی راهنما و اطلاعات -->
+                <div class="relative group">
+                    <button type="button" class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl hover:text-rose-600 hover:bg-rose-50/80 transition-colors duration-150 focus:outline-none">
+                        <span>راهنما و اطلاعات</span>
+                        <i class="fas fa-chevron-down text-xs text-slate-400 group-hover:text-rose-500 group-hover:rotate-180 transition-transform duration-200"></i>
+                    </button>
+                    <!-- زیرمنوی بازشونده با هاور -->
+                    <div class="absolute right-0 mt-1 w-48 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border border-rose-100 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 z-50">
+                        <a href="#rules" class="flex items-center gap-2.5 px-4 py-2.5 text-xs text-slate-700 hover:bg-rose-50 hover:text-rose-600 transition-colors">
+                            <i class="fas fa-clipboard-list text-rose-400 text-sm w-4"></i>
+                            <span>قوانین و مقررات</span>
+                        </a>
+                        <a href="#location" class="flex items-center gap-2.5 px-4 py-2.5 text-xs text-slate-700 hover:bg-rose-50 hover:text-rose-600 transition-colors">
+                            <i class="fas fa-map-marked-alt text-rose-400 text-sm w-4"></i>
+                            <span>موقعیت مکانی</span>
+                        </a>
+                        <a href="#contacts" class="flex items-center gap-2.5 px-4 py-2.5 text-xs text-slate-700 hover:bg-rose-50 hover:text-rose-600 transition-colors">
+                            <i class="fas fa-headset text-rose-400 text-sm w-4"></i>
+                            <span>تماس با ما</span>
+                        </a>
+                    </div>
+                </div>
+            </nav>
 
+            <!-- بخش اکشن‌ها و رزرو سمت چپ -->
+            <div class="flex items-center gap-3">
+                <a href="#booking" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-rose-600 bg-rose-50 hover:bg-rose-100 rounded-xl transition-colors">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>پیش‌ثبت‌نام</span>
+                </a>
+                <a href="tel:09123456789" class="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 rounded-xl shadow-sm shadow-rose-500/20 transition-all hover:shadow-md">
+                    <i class="fas fa-phone"></i>
+                    <span>تماس فوری</span>
+                </a>
+            </div>
 
-      <!-- منوی کشویی راهنما و اطلاعات -->
-      <div class="relative group py-4">
-        <button class="flex items-center gap-1 hover:text-pink-600 transition-colors focus:outline-none">
-          <span>اطلاعات و راهنما</span>
-          <i class="fa-solid fa-chevron-down text-xs transition-transform duration-200 group-hover:rotate-180"></i>
-        </button>
-        <!-- لیست بازشونده کشویی -->
-        <div class="absolute right-0 top-full hidden group-hover:block w-48 bg-white rounded-2xl shadow-xl border border-gray-100 py-2 z-50 transition-all">
-          <a href="#rules" class="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-pink-50 hover:text-pink-600">
-            <i class="fa-solid fa-shield-halved text-xs text-pink-500"></i>
-            قوانین و مقررات
-          </a>
-          <a href="#faq" class="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-pink-50 hover:text-pink-600">
-            <i class="fa-solid fa-circle-question text-xs text-pink-500"></i>
-            سوالات متداول
-          </a>
-          <a href="#location" class="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-pink-50 hover:text-pink-600">
-            <i class="fa-solid fa-map-location-dot text-xs text-pink-500"></i>
-            موقعیت و نقشه
-          </a>
         </div>
-      </div>
-
-      <a href="#contact" class="hover:text-pink-600 transition-colors">تماس با ما</a>
-    </nav>
-
-    <!-- دکمه‌های سمت چپ (شماره و رزرو) -->
-    <div class="flex items-center gap-3">
-      <a href="tel:02188731810" class="hidden sm:inline-flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold text-gray-800 bg-gray-100 hover:bg-gray-200 transition-all">
-        <i class="fa-solid fa-phone text-pink-600"></i>
-        <span>02188731810</span>
-      </a>
-      <a href="#booking" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold text-white bg-gradient-to-r from-pink-500 to-purple-600 hover:opacity-95 shadow-md shadow-pink-500/20 transition-all">
-        رزرو و پذیرش
-      </a>
     </div>
-
-  </div>
 </header>
 
         <!-- لوگوی آیکون -->
