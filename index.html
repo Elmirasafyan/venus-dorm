@@ -27,40 +27,25 @@
         }
       }
     }
-  <!-- بارگذاری قلم حرفه‌ای و مدرن با اعداد فارسی -->
-  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/shabnam-font@v5.6.1/dist/font-face.css" rel="stylesheet" type="text/css" />
-  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/misc/Farsi-Digits/font-face.css" rel="stylesheet" type="text/css" />
+  </script>
 
   <style>
-    /* ۱. تعریف قلم لوکس و بسیار خوانا برای کل سایت */
-    * {
-      font-family: 'Shabnam FD', 'Vazirmatn FD', 'IRANSans', system-ui, -apple-system, sans-serif !important;
-      letter-spacing: -0.02em;
-    }
-
-    /* ۲. پس‌زمینه سفید خالص و متن‌های کاملاً مشکی */
+    /* ۱. پس‌زمینه کاملاً سفید یکدست و فونت سراسری */
     html, body {
       direction: rtl;
       text-align: right;
+      font-family: 'Vazirmatn FD', sans-serif;
       background-color: #ffffff !important;
-      color: #09090b !important; /* مشکی بسیار شیک و عمیق */
-      overflow-x: hidden;
-      line-height: 1.8;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ۳. تنظیم وزن و زیبایی تیترها و متون */
-    h1, h2, h3, h4, h5, h6 {
-      font-weight: 800 !important;
       color: #000000 !important;
-      letter-spacing: -0.03em;
+      overflow-x: hidden;
     }
 
-    p, span, li, a, td, th, div, label {
-      color: #18181b !important;
+    /* ۲. تمام متون و قلم‌ها کاملاً مشکی خالص */
+    *, h1, h2, h3, h4, h5, h6, p, span, li, a, td, th, div, label, input, textarea {
+      color: #000000 !important;
     }
 
-    /* ۴. سفید و مینیمال کردن تمامی بخش‌ها و پس‌زمینه‌ها */
+    /* ۳. تبدیل همه بخش‌ها و کادرهای تیره به سفید خالص */
     section, header, footer, main, nav,
     [class*="bg-slate-"],
     [class*="bg-gray-"],
@@ -70,53 +55,41 @@
       background-image: none !important;
     }
 
-    /* ۵. منوی بالا (هدر سفید شیشه‌ای بسیار لوکس) */
+    /* ۴. هدر بالایی (سفید شیشه‌ای با کادر ملایم) */
     .glass-nav {
-      background: rgba(255, 255, 255, 0.96) !important;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid #f1f5f9 !important;
-      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.03) !important;
+      background: rgba(255, 255, 255, 0.95) !important;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid #e2e8f0 !important;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03) !important;
     }
 
-    /* ۶. کارت‌های اتاق‌ها و ویژگی‌ها با استایل مدرن و سایه مخملی */
+    /* ۵. کارت‌های اتاق‌ها و ویژگی‌ها (سفید حرفه‌ای با سایه و خط ملایم) */
     .glass-card {
       background: #ffffff !important;
-      border: 1px solid #f1f5f9 !important;
-      border-radius: 20px !important;
-      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.04) !important;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 1px solid #e2e8f0 !important;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04) !important;
+      transition: all 0.3s ease;
     }
 
     .glass-card:hover {
-      transform: translateY(-4px);
-      border-color: #f472b6 !important; /* کادر صورتی ظریف */
-      box-shadow: 0 20px 35px -10px rgba(244, 114, 182, 0.18) !important;
+      transform: translateY(-3px);
+      border-color: #ec4899 !important; /* کادر صورتی ملایم در هاور */
+      box-shadow: 0 10px 25px rgba(236, 72, 153, 0.1) !important;
     }
 
-    /* ۷. مخفی کردن لکه‌های رنگی قدیمی */
+    /* ۶. غیرفعال‌کردن هاله‌های رنگی برای سفید شدن یکدست صفحه */
     .glow-bg {
       display: none !important;
     }
 
-    /* ۸. حفظ رنگ سفید برای نوشته‌های روی دکمه‌های اصلی (واتساپ، رزرو، پرداخت) */
+    /* ۷. حفظ خوانایی دکمه‌های اقدام (مثل رزرو، پرداخت و واتساپ) */
     a.bg-emerald-500, a.bg-emerald-500 *,
     button.bg-fuchsia-600, button.bg-fuchsia-600 *,
     a.bg-fuchsia-600, a.bg-fuchsia-600 *,
     .bg-gradient-to-r *, .bg-gradient-to-tr * {
       color: #ffffff !important;
-      font-weight: 700 !important;
     }
-
-    /* ۹. استایل نقشه و پاپ‌آپ */
-    .leaflet-popup-content-wrapper {
-      background: #ffffff !important;
-      border: 1px solid #e2e8f0 !important;
-      border-radius: 14px !important;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
-    }
-  </style>
-
 
     /* ۸. نقشه و پاپ‌آپ آن در تم روشن */
     .leaflet-popup-content-wrapper {
