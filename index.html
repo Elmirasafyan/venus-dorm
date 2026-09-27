@@ -27,12 +27,12 @@
     }
   </script>
     <style>
-     body {
+      body {
       direction: rtl;
       text-align: right;
       font-family: 'Vazirmatn FD', sans-serif;
-      background-color: #ffffff; /* پس‌زمینه کاملاً سفید */
-      color: #1e293b;            /* رنگ متن تیره و خوانا */
+      background-color: #090d16;
+      color: #e2e8f0;
       overflow-x: hidden;
     }
 
@@ -95,6 +95,8 @@
       background: #0f172a !important;
     }
   </style>
+</head>
+<body class="relative selection:bg-fuchsia-500 selection:text-white">
 
 
   <!-- پس‌زمینه‌های نورانی -->
@@ -784,6 +786,96 @@
     </div>
   </section>
 
+  <!-- فوتر کامل و ساختاریافته -->
+  <footer class="relative z-10 border-t border-slate-800 bg-slate-950/95 pt-12 pb-8 text-xs text-slate-400">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8 mb-10 text-right">
+      <!-- ستون ۱ -->
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-pink-500 to-purple-600 flex items-center justify-center text-white text-lg">
+            <i class="fa-solid fa-hotel"></i>
+          </div>
+          <span class="text-base font-black text-white">پانسیون دخترانه ونوس</span>
+        </div>
+        <p class="text-xs text-slate-400 leading-relaxed mb-4">
+          اقامتگاهی لوکس، مدرن و گزینش‌شده ویژه دانشجویان تحصیلات تکمیلی و شاغلین موجه با دسترسی کم‌نظیر به مترو مصلی و بی‌آرتی بیهقی.
+        </p>
+        <p class="text-xs text-slate-400">
+          <i class="fa-solid fa-location-dot text-fuchsia-400 ml-1"></i> تهران، میدان آرژانتین، بلوار بیهقی، کوچه ۱۴ شرقی، پلاک ۱۸
+        </p>
+   
+    
+      <!-- ستون ۳ -->
+      <div>
+        <h4 class="text-sm font-bold text-white mb-4 border-b border-slate-800 pb-2 flex items-center gap-2">
+          <i class="fa-solid fa-link text-fuchsia-400"></i> دسترسی سریع
+        </h4>
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <a href="#gallery" class="hover:text-fuchsia-400 py-1 transition-colors">گالری تصاویر</a>
+          <a href="#amenities" class="hover:text-fuchsia-400 py-1 transition-colors">امکانات رفاهی</a>
+          <a href="#rooms" class="hover:text-fuchsia-400 py-1 transition-colors">اتاق‌ها و واحدها</a>
+          <a href="#booking" class="hover:text-fuchsia-400 py-1 transition-colors">جدول ظرفیت و رزرو</a>
+          <a href="#rules" class="hover:text-fuchsia-400 py-1 transition-colors">قوانین تردد و اسکان</a>
+          <a href="#faq" class="hover:text-fuchsia-400 py-1 transition-colors">پرسش‌های متداول</a>
+          <a href="#location" class="hover:text-fuchsia-400 py-1 transition-colors">موقعیت و مسیریابی</a>
+          <a href="https://wa.me/989126801450" target="_blank" rel="noopener noreferrer" class="text-emerald-400 hover:text-emerald-300 py-1 transition-colors">ارسال پیام در واتساپ</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 border-t border-slate-900 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-right">
+      <p>© کلیه حقوق برای پانسیون دخترانه لوکس ونوس محفوظ است.</p>
+      <p class="text-slate-500 text-[11px]">مجموعه خوابگاه‌های زنجیره‌ای آوین، جردن و ونوس</p>
+    </div>
+  </footer>
+
+  <!-- دکمه‌های شناور تماس و واتساپ گوشه صفحه -->
+  <div class="fixed bottom-6 left-6 z-40 flex flex-col gap-3">
+    <a href="https://wa.me/989126801450" target="_blank" rel="noopener noreferrer" 
+       class="w-12 h-12 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white shadow-xl shadow-emerald-500/40 flex items-center justify-center transition-all transform hover:scale-110" 
+       title="ارتباط در واتساپ مدیریت">
+      <i class="fa-brands fa-whatsapp text-2xl"></i>
+    </a>
+    <a href="tel:+982188731810" 
+       class="w-12 h-12 rounded-full bg-slate-900 border border-emerald-500/50 hover:bg-emerald-600 text-emerald-300 hover:text-white shadow-xl shadow-emerald-500/30 flex items-center justify-center transition-all transform hover:scale-110" 
+       title="تماس ۲۴ ساعته (02188731810)">
+      <i class="fa-solid fa-phone-volume text-base"></i>
+    </a>
+    <a href="tel:09126801450" 
+       class="w-12 h-12 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white shadow-xl shadow-purple-500/40 flex items-center justify-center transition-all transform hover:scale-110" 
+       title="تماس مستقیم با مدیریت">
+      <i class="fa-solid fa-phone text-lg"></i>
+    </a>
+  </div>
+
+  <!-- پنجره مودال پرداخت و اطلاعات واریز -->
+  <div id="paymentModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm items-center justify-center p-4">
+    <div class="glass-card bg-[#121124] border border-purple-500/30 rounded-3xl max-w-md w-full p-6 relative shadow-2xl text-right">
+      <button onclick="closePaymentModal()" class="absolute top-4 left-4 w-8 h-8 rounded-full bg-slate-800/80 text-slate-400 hover:text-white flex items-center justify-center transition-all" aria-label="بستن">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-5 border-b border-slate-800/80 pb-4">
+        <div class="w-10 h-10 rounded-xl bg-pink-500 flex items-center justify-center text-white shadow-lg shadow-pink-500/40 text-lg">
+          <i class="fa-solid fa-receipt"></i>
+        </div>
+        <div>
+          <h3 class="text-base font-bold text-white">اطلاعات واریز بیعانه</h3>
+          <span id="modalRoomTitle" class="text-xs text-pink-400 font-medium">۳ تخته (شماره ۱۲)</span>
+        </div>
+      </div>
+
+      <!-- ودیعه و اجاره -->
+      <div class="bg-slate-950/40 rounded-2xl p-4 mb-4 border border-slate-800 space-y-2 text-xs">
+        <div class="flex justify-between items-center text-slate-400">
+          <span>مبلغ ودیعه:</span>
+          <span id="modalDeposit" class="font-bold text-white">۱۲ میلیون تومان</span>
+        </div>
+        <div class="flex justify-between items-center text-slate-400">
+          <span>اجاره ماهانه:</span>
+          <span id="modalRent" class="font-bold text-white">۱۲ میلیون تومان</span>
+        </div>
+      </div>
 
       <!-- شماره کارت -->
       <div class="bg-purple-950/40 border border-purple-500/30 rounded-2xl p-4 mb-4 text-center">
@@ -858,49 +950,33 @@
         icon.classList.remove('rotate-180');
       }
     }
-  <script>
-    // کنترل پاپ‌آپ (مدال) پرداخت و رزرو
-    function openPaymentModal(roomTitle, deposit, rent, date = '') {
-      const modal = document.getElementById('paymentModal');
-      if (!modal) return;
 
-      if (document.getElementById('modalRoomTitle')) {
-        document.getElementById('modalRoomTitle').innerText = roomTitle + (date ? ` (تحویل ${date})` : '');
-      }
-      if (document.getElementById('modalDeposit')) {
-        document.getElementById('modalDeposit').innerText = deposit;
-      }
-      if (document.getElementById('modalRent')) {
-        document.getElementById('modalRent').innerText = rent;
-      }
+    // کنترل مودال پرداخت
+    function openPaymentModal(roomTitle, deposit, rent, date = '') {
+      document.getElementById('modalRoomTitle').innerText = roomTitle + (date ? ` (تحویل ${date})` : '');
+      document.getElementById('modalDeposit').innerText = deposit;
+      document.getElementById('modalRent').innerText = rent;
       
       const text = encodeURIComponent(`سلام، فیش واریز بیعانه برای ${roomTitle} را ارسال می‌کنم.`);
-      const whatsappBtn = document.getElementById('whatsappLink');
-      if (whatsappBtn) {
-        whatsappBtn.href = `https://wa.me/989126801450?text=${text}`;
-      }
+      document.getElementById('whatsappLink').href = `https://wa.me/989126801450?text=${text}`;
       
+      const modal = document.getElementById('paymentModal');
       modal.classList.remove('hidden');
       modal.classList.add('flex');
-      modal.style.display = 'flex';
     }
 
     function closePaymentModal() {
       const modal = document.getElementById('paymentModal');
-      if (!modal) return;
       modal.classList.remove('flex');
       modal.classList.add('hidden');
-      modal.style.display = 'none';
     }
 
     // کپی شماره کارت
     function copyCardNumber() {
       navigator.clipboard.writeText("5029381027169283").then(() => {
         const textSpan = document.getElementById('copyText');
-        if (textSpan) {
-          textSpan.innerText = "کپی شد!";
-          setTimeout(() => { textSpan.innerText = "کپی شماره کارت"; }, 2000);
-        }
+        textSpan.innerText = "کپی شد!";
+        setTimeout(() => { textSpan.innerText = "کپی شماره کارت"; }, 2000);
       });
     }
 
@@ -908,32 +984,27 @@
     function copyShabaNumber() {
       navigator.clipboard.writeText("IR080660000000204637576008").then(() => {
         const textSpan = document.getElementById('copyShabaText');
-        if (textSpan) {
-          textSpan.innerText = "کپی شد!";
-          setTimeout(() => { textSpan.innerText = "کپی شماره شبا"; }, 2000);
-        }
+        textSpan.innerText = "کپی شد!";
+        setTimeout(() => { textSpan.innerText = "کپی شماره شبا"; }, 2000);
       });
     }
 
     // لود نقشه Leaflet
     document.addEventListener("DOMContentLoaded", function () {
-      const mapElement = document.getElementById('venus-map');
-      if (mapElement && typeof L !== 'undefined') {
-        const lat = 35.7348;
-        const lng = 51.4206;
-        const map = L.map('venus-map').setView([lat, lng], 16);
+      const lat = 35.7348;
+      const lng = 51.4206;
+      const map = L.map('venus-map').setView([lat, lng], 16);
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '© OpenStreetMap'
-        }).addTo(map);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap'
+      }).addTo(map);
 
-        const customPopup = `
-          <div style="font-weight: bold; margin-bottom: 4px; color: #fff;">پانسیون لوکس ونوس</div>
-          <div style="font-size: 11px; color: #cbd5e1;">تهران، میدان آرژانتین، بلوار بیهقی، کوچه ۱۴ شرقی، پلاک ۱۸</div>
-        `;
+      const customPopup = `
+        <div style="font-weight: bold; margin-bottom: 4px; color: #fff;">پانسیون لوکس ونوس</div>
+        <div style="font-size: 11px; color: #cbd5e1;">تهران، میدان آرژانتین، بلوار بیهقی، کوچه ۱۴ شرقی، پلاک ۱۸</div>
+      `;
 
-        L.marker([lat, lng]).addTo(map).bindPopup(customPopup).openPopup();
-      }
+      L.marker([lat, lng]).addTo(map).bindPopup(customPopup).openPopup();
     });
   </script>
 
