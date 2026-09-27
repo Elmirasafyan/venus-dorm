@@ -858,33 +858,49 @@
         icon.classList.remove('rotate-180');
       }
     }
-
-    // کنترل مودال پرداخت
+  <script>
+    // کنترل پاپ‌آپ (مدال) پرداخت و رزرو
     function openPaymentModal(roomTitle, deposit, rent, date = '') {
-      document.getElementById('modalRoomTitle').innerText = roomTitle + (date ? ` (تحویل ${date})` : '');
-      document.getElementById('modalDeposit').innerText = deposit;
-      document.getElementById('modalRent').innerText = rent;
+      const modal = document.getElementById('paymentModal');
+      if (!modal) return;
+
+      if (document.getElementById('modalRoomTitle')) {
+        document.getElementById('modalRoomTitle').innerText = roomTitle + (date ? ` (تحویل ${date})` : '');
+      }
+      if (document.getElementById('modalDeposit')) {
+        document.getElementById('modalDeposit').innerText = deposit;
+      }
+      if (document.getElementById('modalRent')) {
+        document.getElementById('modalRent').innerText = rent;
+      }
       
       const text = encodeURIComponent(`سلام، فیش واریز بیعانه برای ${roomTitle} را ارسال می‌کنم.`);
-      document.getElementById('whatsappLink').href = `https://wa.me/989126801450?text=${text}`;
+      const whatsappBtn = document.getElementById('whatsappLink');
+      if (whatsappBtn) {
+        whatsappBtn.href = `https://wa.me/989126801450?text=${text}`;
+      }
       
-      const modal = document.getElementById('paymentModal');
       modal.classList.remove('hidden');
       modal.classList.add('flex');
+      modal.style.display = 'flex';
     }
 
     function closePaymentModal() {
       const modal = document.getElementById('paymentModal');
+      if (!modal) return;
       modal.classList.remove('flex');
       modal.classList.add('hidden');
+      modal.style.display = 'none';
     }
 
     // کپی شماره کارت
     function copyCardNumber() {
       navigator.clipboard.writeText("5029381027169283").then(() => {
         const textSpan = document.getElementById('copyText');
-        textSpan.innerText = "کپی شد!";
-        setTimeout(() => { textSpan.innerText = "کپی شماره کارت"; }, 2000);
+        if (textSpan) {
+          textSpan.innerText = "کپی شد!";
+          setTimeout(() => { textSpan.innerText = "کپی شماره کارت"; }, 2000);
+        }
       });
     }
 
@@ -892,28 +908,32 @@
     function copyShabaNumber() {
       navigator.clipboard.writeText("IR080660000000204637576008").then(() => {
         const textSpan = document.getElementById('copyShabaText');
-        textSpan.innerText = "کپی شد!";
-        setTimeout(() => { textSpan.innerText = "کپی شماره شبا"; }, 2000);
+        if (textSpan) {
+          textSpan.innerText = "کپی شد!";
+          setTimeout(() => { textSpan.innerText = "کپی شماره شبا"; }, 2000);
+        }
       });
     }
-     <div id="paymentModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm items-center justify-center p-4">
 
     // لود نقشه Leaflet
     document.addEventListener("DOMContentLoaded", function () {
-      const lat = 35.7348;
-      const lng = 51.4206;
-      const map = L.map('venus-map').setView([lat, lng], 16);
+      const mapElement = document.getElementById('venus-map');
+      if (mapElement && typeof L !== 'undefined') {
+        const lat = 35.7348;
+        const lng = 51.4206;
+        const map = L.map('venus-map').setView([lat, lng], 16);
 
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap'
-      }).addTo(map);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '© OpenStreetMap'
+        }).addTo(map);
 
-      const customPopup = `
-        <div style="font-weight: bold; margin-bottom: 4px; color: #fff;">پانسیون لوکس ونوس</div>
-        <div style="font-size: 11px; color: #cbd5e1;">تهران، میدان آرژانتین، بلوار بیهقی، کوچه ۱۴ شرقی، پلاک ۱۸</div>
-      `;
+        const customPopup = `
+          <div style="font-weight: bold; margin-bottom: 4px; color: #fff;">پانسیون لوکس ونوس</div>
+          <div style="font-size: 11px; color: #cbd5e1;">تهران، میدان آرژانتین، بلوار بیهقی، کوچه ۱۴ شرقی، پلاک ۱۸</div>
+        `;
 
-      L.marker([lat, lng]).addTo(map).bindPopup(customPopup).openPopup();
+        L.marker([lat, lng]).addTo(map).bindPopup(customPopup).openPopup();
+      }
     });
   </script>
 
