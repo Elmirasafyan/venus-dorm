@@ -6,7 +6,7 @@
   <title>پانسیون دخترانه لوکس ونوس | Venus Residence</title>
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23e6b8c9'/%3E%3Ctext x='50' y='70' font-size='60' text-anchor='middle' fill='%237d4b5c' font-family='Arial'%3E♡%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/png" href="venus-logo.png">
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -16,533 +16,1086 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
   <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/misc/Farsi-Digits/font-face.css" rel="stylesheet" type="text/css">
 
-  <!-- Leaflet Map CSS -->
+  <!-- Leaflet Map -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Vazirmatn FD', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
 
   <style>
-    * {
-      font-family: 'Vazirmatn', 'Vazir', 'Segoe UI', Tahoma, sans-serif;
-    }
-
-    body {
-      background: #fdf8f5;
+    html, body {
+      direction: rtl;
+      text-align: right;
+      font-family: 'Vazirmatn FD', 'Tahoma', sans-serif;
+      background-color: #fdfaf3 !important;
+      color: #3d2f1a !important;
       overflow-x: hidden;
+      font-feature-settings: "ss02";
+      letter-spacing: 0.2px;
     }
 
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #f5e6e8;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #c99a9e;
-      border-radius: 10px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #b07a80;
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 800;
+      letter-spacing: -0.3px;
     }
 
-    .swiper-pagination-bullet {
-      background: #d4a5a9 !important;
-      opacity: 0.5 !important;
-    }
-    .swiper-pagination-bullet-active {
-      background: #b5838a !important;
-      opacity: 1 !important;
-    }
-    .swiper-button-next,
-    .swiper-button-prev {
-      color: #b5838a !important;
-      background: rgba(255, 255, 255, 0.7);
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      backdrop-filter: blur(4px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-    }
-    .swiper-button-next:after,
-    .swiper-button-prev:after {
-      font-size: 16px !important;
-      font-weight: bold;
-    }
-
-    #map {
-      height: 280px;
-      width: 100%;
-      border-radius: 1.5rem;
-      z-index: 0;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
-    }
-
-    .elegant-underline {
-      position: relative;
-      display: inline-block;
-    }
-    .elegant-underline::after {
-      content: '';
-      position: absolute;
-      bottom: -6px;
-      right: 0;
-      width: 60%;
-      height: 3px;
-      background: linear-gradient(90deg, #e6b8c9, #d4a5a9);
-      border-radius: 10px;
+    p, span, li, a, td, th, label {
+      font-weight: 500;
+      line-height: 1.9;
     }
 
     .glass-card {
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.5);
+      background: #ffffff !important;
+      border: 1px solid #f0e4c8 !important;
+      box-shadow: 0 4px 15px rgba(184, 134, 11, 0.06) !important;
       transition: all 0.3s ease;
     }
     .glass-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 35px -8px rgba(183, 110, 120, 0.2);
-      border-color: #e6b8c9;
+      transform: translateY(-3px);
+      border-color: #d4b96a !important;
+      box-shadow: 0 10px 25px rgba(184, 134, 11, 0.12) !important;
     }
 
-    .leaflet-marker-icon {
-      filter: hue-rotate(320deg) saturate(1.4);
+    .glass-nav {
+      background: rgba(253, 250, 243, 0.96) !important;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid #f0e4c8 !important;
+      box-shadow: 0 2px 10px rgba(184, 134, 11, 0.04) !important;
     }
+
+    a.bg-emerald-500, a.bg-emerald-500 *,
+    button.bg-fuchsia-600, button.bg-fuchsia-600 *,
+    a.bg-fuchsia-600, a.bg-fuchsia-600 *,
+    .bg-gradient-to-r *, .bg-gradient-to-tr *, .bg-gradient-to-l *,
+    .bg-pink-500, .bg-pink-500 *,
+    .bg-purple-600, .bg-purple-600 *,
+    .bg-indigo-600, .bg-indigo-600 *,
+    .bg-emerald-600, .bg-emerald-600 *,
+    .bg-rose-500, .bg-rose-500 * {
+      color: #ffffff !important;
+    }
+
+    .leaflet-popup-content-wrapper {
+      background: #ffffff !important;
+      border: 1px solid #f0e4c8 !important;
+      border-radius: 12px !important;
+      box-shadow: 0 10px 25px rgba(184, 134, 11, 0.1) !important;
+    }
+
+    .footer-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 0;
+      font-size: 0.92rem;
+      color: #3d2f1a;
+      border-bottom: 1px solid #f0e4c8;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .footer-link:hover { color: #b8860b; }
+    .footer-link i {
+      font-size: 0.75rem;
+      color: #b8860b;
+      transition: transform 0.25s ease;
+    }
+    .footer-link.open i {
+      transform: rotate(180deg);
+      color: #b8860b;
+    }
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+      font-size: 0.85rem;
+      color: #6b5a3e;
+      line-height: 2;
+      padding: 0 0.2rem;
+    }
+    .accordion-content.open {
+      max-height: 400px;
+      padding: 0.8rem 0.2rem 1.2rem;
+    }
+
+    .form-accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, padding 0.4s ease;
+    }
+    .form-accordion-content.open {
+      max-height: 1200px;
+      padding-top: 1.5rem;
+    }
+
+    .text-gold { color: #b8860b; }
+    .bg-gold { background-color: #b8860b; }
+    .border-gold { border-color: #d4b96a; }
+    .bg-cream { background-color: #faf5e6; }
   </style>
 </head>
-<body class="text-gray-700">
 
-  <!-- ==================== HEADER / NAV ==================== -->
-  <header class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md shadow-sm border-b border-rose-100/60">
-    <div class="container mx-auto px-5 py-3 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-rose-200 to-pink-300 flex items-center justify-center text-white text-xl font-bold shadow-md">♡</div>
-        <div>
-          <h1 class="text-lg font-bold text-rose-800/90 leading-tight">پانسیون ونوس</h1>
-          <p class="text-[10px] text-rose-400/80 tracking-wide">Venus Luxury Residence</p>
+<body class="min-h-screen">
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="fixed top-0 inset-x-0 z-50 glass-nav">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <!-- منوی دسکتاپ -->
+      <nav class="hidden lg:flex items-center gap-1 font-medium text-sm text-amber-800">
+        <a href="#hero" class="px-3.5 py-2 rounded-xl hover:text-amber-600 hover:bg-amber-50 transition-colors">صفحه اصلی</a>
+        <a href="#amenities" class="px-3.5 py-2 rounded-xl hover:text-amber-600 hover:bg-amber-50 transition-colors">امکانات</a>
+        <a href="#rooms" class="px-3.5 py-2 rounded-xl hover:text-amber-600 hover:bg-amber-50 transition-colors">اتاق‌ها و قیمت</a>
+
+        <div class="relative group">
+          <button type="button" class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl hover:text-amber-600 hover:bg-amber-50 transition-colors focus:outline-none">
+            <span>راهنما و اطلاعات</span>
+            <i class="fas fa-chevron-down text-xs text-amber-400 group-hover:text-amber-600 group-hover:rotate-180 transition-transform duration-200"></i>
+          </button>
+          <div class="absolute right-0 mt-1 w-48 bg-white/98 backdrop-blur-md rounded-2xl shadow-xl border border-amber-100 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 z-50">
+            <a href="#rules" class="flex items-center gap-2.5 px-4 py-2.5 text-xs text-amber-900 hover:bg-amber-50 hover:text-amber-700 transition-colors">
+              <i class="fas fa-clipboard-list text-amber-500 text-sm w-4"></i> قوانین و مقررات
+            </a>
+            <a href="#location" class="flex items-center gap-2.5 px-4 py-2.5 text-xs text-amber-900 hover:bg-amber-50 hover:text-amber-700 transition-colors">
+              <i class="fas fa-map-marked-alt text-amber-500 text-sm w-4"></i> موقعیت مکانی
+            </a>
+            <a href="#contacts" class="flex items-center gap-2.5 px-4 py-2.5 text-xs text-amber-900 hover:bg-amber-50 hover:text-amber-700 transition-colors">
+              <i class="fas fa-headset text-amber-500 text-sm w-4"></i> تماس با ما
+            </a>
+          </div>
         </div>
-      </div>
-
-      <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-gray-600">
-        <a href="#home" class="hover:text-rose-500 transition">خانه</a>
-        <a href="#features" class="hover:text-rose-500 transition">امکانات</a>
-        <a href="#gallery" class="hover:text-rose-500 transition">گالری</a>
-        <a href="#location" class="hover:text-rose-500 transition">موقعیت</a>
-        <a href="#contact" class="hover:text-rose-500 transition">تماس</a>
       </nav>
 
+      <!-- اکشن‌ها -->
       <div class="flex items-center gap-3">
-        <a href="#contact" class="hidden sm:inline-block bg-gradient-to-r from-rose-300 to-pink-300 hover:from-rose-400 hover:to-pink-400 text-white text-sm px-5 py-2 rounded-full shadow-md transition-all duration-300">
-          <i class="fa-regular fa-calendar-check ml-1"></i> رزرو
+        <a href="#request-form" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-amber-700 bg-amber-50 hover:bg-amber-100 rounded-xl transition-colors border border-amber-200">
+          <i class="fas fa-calendar-check"></i> پیش‌ثبت‌نام
         </a>
-        <button id="burger" class="md:hidden text-rose-400 text-2xl focus:outline-none">
-          <i class="fa-solid fa-bars"></i>
-        </button>
+        <a href="tel:88731810" class="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-700 hover:to-amber-600 rounded-xl shadow-sm shadow-amber-500/20 transition-all hover:shadow-md">
+          <i class="fas fa-phone"></i> تماس فوری
+        </a>
       </div>
-    </div>
-
-    <div id="mobileMenu" class="hidden md:hidden bg-white/95 backdrop-blur-sm border-t border-rose-100/60 px-5 py-4 flex flex-col gap-3 text-sm text-gray-600">
-      <a href="#home" class="hover:text-rose-500 py-1">خانه</a>
-      <a href="#features" class="hover:text-rose-500 py-1">امکانات</a>
-      <a href="#gallery" class="hover:text-rose-500 py-1">گالری</a>
-      <a href="#location" class="hover:text-rose-500 py-1">موقعیت</a>
-      <a href="#contact" class="hover:text-rose-500 py-1">تماس</a>
-      <a href="#contact" class="bg-rose-300 text-white text-center py-2 rounded-full mt-1">رزرو</a>
     </div>
   </header>
 
-  <!-- ==================== HERO ==================== -->
-  <section id="home" class="relative pt-28 pb-16 md:pt-36 md:pb-20 overflow-hidden">
-    <div class="absolute -top-20 -left-20 w-72 h-72 bg-rose-100/50 rounded-full blur-3xl -z-10"></div>
-    <div class="absolute -bottom-20 -right-20 w-80 h-80 bg-pink-100/60 rounded-full blur-3xl -z-10"></div>
+  <div class="h-16"></div>
 
-    <div class="container mx-auto px-5 flex flex-col-reverse lg:flex-row items-center gap-10 lg:gap-16">
-      <div class="w-full lg:w-1/2 text-center lg:text-right">
-        <span class="inline-block bg-rose-100/80 text-rose-600 text-xs px-4 py-1.5 rounded-full mb-5 tracking-wide">
-          <i class="fa-regular fa-star ml-1"></i> لوکس‌ترین پانسیون دخترانه
-        </span>
-        <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-rose-900/80 leading-[1.3] mb-5">
-          اقامتی <span class="text-rose-500">آرام</span> و <span class="text-rose-500">لوکس</span><br>
-          برای دختران عزیز
-        </h2>
-        <p class="text-gray-500/90 text-base sm:text-lg leading-relaxed max-w-lg mx-auto lg:mx-0 mb-8">
-          پانسیون دخترانه ونوس با فضایی دنج، امن و مدرن، تجربه‌ای متفاوت از زندگی دانشجویی را برای شما رقم می‌زند.
-        </p>
+  <!-- ===================== ۱. HERO (خوش‌آمدگویی) ===================== -->
+  <section id="hero" class="max-w-7xl mx-auto px-6 pt-16 pb-12 text-center">
+    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-amber-200 bg-amber-50 text-amber-700 text-xs font-semibold mb-6">
+      <span class="inline-block w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+       پانسیون ونوس محیطی آرام، لوکس و گزینش‌شده متناسب با استانداردهای  VIP
+    </div>
 
-        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4">
-          <a href="#contact" class="bg-gradient-to-r from-rose-400 to-pink-400 hover:from-rose-500 hover:to-pink-500 text-white px-8 py-3 rounded-full shadow-lg shadow-rose-200 transition-all duration-300 text-sm font-medium">
-            <i class="fa-regular fa-heart ml-1"></i> همین حالا رزرو کن
-          </a>
-          <a href="#gallery" class="border border-rose-200 hover:border-rose-300 text-rose-500 px-8 py-3 rounded-full transition-all duration-300 text-sm font-medium bg-white/60 backdrop-blur-sm">
-            <i class="fa-regular fa-images ml-1"></i> گالری
-          </a>
+  
+
+  <!-- ===================== ۲. GALLERY ===================== -->
+  <section id="gallery" class="max-w-4xl mx-auto px-6 py-8">
+    <div class="text-center mb-6">
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-amber-900 mb-2">تصاویر مجموعه ونوس</h2>
+      <p class="text-xs text-amber-600">فضایی پاکیزه، نورگیر و طراحی‌شده برای آسایش شما</p>
+    </div>
+
+    <div class="swiper myGallerySwiper rounded-3xl overflow-hidden border border-amber-100 shadow-2xl glass-card p-2 sm:p-4">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="relative h-72 sm:h-96 w-full rounded-2xl overflow-hidden bg-amber-50 flex items-center justify-center">
+            <img src="slide1.jpg" alt="فضای عمومی اقامتگاه ونوس" class="w-full h-full object-contain">
+            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-amber-900/80 via-amber-900/30 to-transparent p-6 pointer-events-none">
+              <span class="text-white font-bold text-base">فضای آرام و مجهز اقامتگاه</span>
+            </div>
+          </div>
         </div>
-
-        <div class="flex items-center justify-center lg:justify-start gap-8 mt-10 text-sm text-gray-500">
-          <div class="text-center">
-            <p class="text-xl font-bold text-rose-600">+۸۰</p>
-            <p class="text-xs">اتاق مجهز</p>
-          </div>
-          <div class="w-px h-8 bg-rose-200/70"></div>
-          <div class="text-center">
-            <p class="text-xl font-bold text-rose-600">۲۴/۷</p>
-            <p class="text-xs">پشتیبانی</p>
-          </div>
-          <div class="w-px h-8 bg-rose-200/70"></div>
-          <div class="text-center">
-            <p class="text-xl font-bold text-rose-600">+۵۰۰</p>
-            <p class="text-xs">دانشجو</p>
+        <div class="swiper-slide">
+          <div class="relative h-72 sm:h-96 w-full rounded-2xl overflow-hidden bg-amber-50 flex items-center justify-center">
+            <img src="slide2.jpg" alt="اتاق‌های اقامتگاه ونوس" class="w-full h-full object-contain">
+            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-amber-900/80 via-amber-900/30 to-transparent p-6 pointer-events-none">
+              <span class="text-white font-bold text-base">اتاق‌های استاندارد با چیدمان هتلی</span>
+            </div>
           </div>
         </div>
       </div>
+      <div class="swiper-pagination mt-4 !relative"></div>
+    </div>
+  </section>
 
-      <div class="w-full lg:w-1/2 relative">
-        <div class="swiper heroSwiper rounded-[2.5rem] shadow-2xl shadow-rose-200/60 overflow-hidden">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=800&h=600&fit=crop&auto=format&q=80" alt="اتاق لوکس" class="w-full h-72 sm:h-96 object-cover" loading="lazy">
-            </div>
-            <div class="swiper-slide">
-              <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&h=600&fit=crop&auto=format&q=80" alt="فضای نشیمن" class="w-full h-72 sm:h-96 object-cover" loading="lazy">
-            </div>
-            <div class="swiper-slide">
-              <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&h=600&fit=crop&auto=format&q=80" alt="آشپزخانه" class="w-full h-72 sm:h-96 object-cover" loading="lazy">
-            </div>
-          </div>
-          <div class="swiper-pagination !bottom-4"></div>
-          <div class="swiper-button-next !text-sm"></div>
-          <div class="swiper-button-prev !text-sm"></div>
+  <!-- ===================== ۳. پیام مدیریت (بعد از خوش‌آمد) ===================== -->
+  <section id="message" class="max-w-4xl mx-auto px-6 py-8">
+    <div class="glass-card rounded-3xl p-8 sm:p-10 border-r-4 border-r-amber-500 relative overflow-hidden">
+      <div class="absolute -left-10 -bottom-10 text-amber-100 text-9xl font-black pointer-events-none">
+        <i class="fa-solid fa-quote-left"></i>
+      </div>
+
+      <div class="flex items-center gap-4 mb-6">
+        <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-amber-600 to-amber-400 flex items-center justify-center text-white text-2xl shadow-lg shadow-amber-500/30">
+          <i class="fa-solid fa-user-tie"></i>
         </div>
-        <div class="absolute -bottom-5 -right-3 bg-white/90 backdrop-blur-sm rounded-2xl shadow-lg px-5 py-3 border border-rose-100 flex items-center gap-3">
-          <div class="w-9 h-9 rounded-full bg-rose-100 flex items-center justify-center text-rose-500">
-            <i class="fa-solid fa-shield-heart"></i>
+        <div>
+          <h3 class="text-xl font-black text-amber-900">پیام مدیریت مجموعه</h3>
+          <span class="text-xs text-amber-600 font-semibold">خانم فاطمه دلاوری (مدیریت خوابگاه‌های زنجیره‌ای آوین، جردن و ونوس)</span>
+        </div>
+      </div>
+
+      <p class="text-sm sm:text-base text-amber-800 leading-loose relative z-10">
+        «سلام و درود به شما پژوهشگران، دانشجویان و مهمانان گرامی. در پانسیون دخترانه ونوس، تمام تلاش ما بر این متمرکز بوده تا محیطی کاملاً امن، آرام و شبیه به خانه شخصی برای شما فراهم سازیم تا با خیالی آسوده به تحصیل و کار بپردازید. رعایت نظم، بهداشت و سکوت، اولویت قطعی مجموعه ماست و خرسندیم که میزبان شما فرهیختگان گرامی هستیم.»
+      </p>
+    </div>
+  </section>
+
+  <!-- ===================== ۴. AMENITIES ===================== -->
+  <section id="amenities" class="max-w-7xl mx-auto px-6 py-12">
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-amber-200 bg-amber-50 text-amber-700 text-xs font-semibold mb-3">
+        <i class="fa-solid fa-wand-magic-sparkles"></i> امکانات و تسهیلات
+      </div>
+      <h2 class="text-3xl font-extrabold text-amber-900 mb-2">امکانات رفاهی اقامتگاه ونوس</h2>
+      <p class="text-xs sm:text-sm text-amber-600">تمام آنچه برای یک زندگی آرام، بی‌دغدغه و متمرکز بر تحصیل و کار نیاز دارید</p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+      <div class="glass-card p-5 rounded-2xl text-center">
+        <div class="w-12 h-12 mx-auto rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl mb-3"><i class="fa-solid fa-wifi"></i></div>
+        <h4 class="text-sm font-bold text-amber-900 mb-1">اینترنت پرسرعت</h4>
+        <p class="text-[11px] text-amber-600">وای‌فای پایدار فیبر نوری اختصاصی</p>
+      </div>
+      <div class="glass-card p-5 rounded-2xl text-center">
+        <div class="w-12 h-12 mx-auto rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl mb-3"><i class="fa-solid fa-book-open-reader"></i></div>
+        <h4 class="text-sm font-bold text-amber-900 mb-1">سالن مطالعه مجزا</h4>
+        <p class="text-[11px] text-amber-600">محیطی بدون سر و صدا با نورپردازی مهندسی</p>
+      </div>
+      <div class="glass-card p-5 rounded-2xl text-center">
+        <div class="w-12 h-12 mx-auto rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl mb-3"><i class="fa-solid fa-shield-halved"></i></div>
+        <h4 class="text-sm font-bold text-amber-900 mb-1">امنیت و حراست ۲۴ ساعته</h4>
+        <p class="text-[11px] text-amber-600">سرپرست مقیم، ورود و خروج کنترل‌شده</p>
+      </div>
+      <div class="glass-card p-5 rounded-2xl text-center">
+        <div class="w-12 h-12 mx-auto rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl mb-3"><i class="fa-solid fa-broom"></i></div>
+        <h4 class="text-sm font-bold text-amber-900 mb-1">نظافت دائمی هتلینگ</h4>
+        <p class="text-[11px] text-amber-600">ضدعفونی و پاکیزگی منظم مشاعات</p>
+      </div>
+      <div class="glass-card p-5 rounded-2xl text-center">
+        <div class="w-12 h-12 mx-auto rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl mb-3"><i class="fa-solid fa-kitchen-set"></i></div>
+        <h4 class="text-sm font-bold text-amber-900 mb-1">آشپزخانه‌های مدرن</h4>
+        <p class="text-[11px] text-amber-600">مایکروویو، اجاق، چای‌ساز و فضاهای مجزا</p>
+      </div>
+      <div class="glass-card p-5 rounded-2xl text-center">
+        <div class="w-12 h-12 mx-auto rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl mb-3"><i class="fa-solid fa-shirt"></i></div>
+        <h4 class="text-sm font-bold text-amber-900 mb-1">لاندری و شستشو</h4>
+        <p class="text-[11px] text-amber-600">ماشین‌های لباسشویی اتوماتیک و اتو</p>
+      </div>
+      <div class="glass-card p-5 rounded-2xl text-center">
+        <div class="w-12 h-12 mx-auto rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl mb-3"><i class="fa-solid fa-snowflake"></i></div>
+        <h4 class="text-sm font-bold text-amber-900 mb-1">سرمایش و گرمایش</h4>
+        <p class="text-[11px] text-amber-600">اسپلیت مدرن و پکیج جهت آسایش فصلی</p>
+      </div>
+      <div class="glass-card p-5 rounded-2xl text-center">
+        <div class="w-12 h-12 mx-auto rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl mb-3"><i class="fa-solid fa-bed"></i></div>
+        <h4 class="text-sm font-bold text-amber-900 mb-1">تجهیزات نو و استاندارد</h4>
+        <p class="text-[11px] text-amber-600">تشک‌های طبی نو، کمد شخصی و قفل ایمن</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ۵. ROOMS ===================== -->
+  <section id="rooms" class="max-w-7xl mx-auto px-6 py-12">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-extrabold text-amber-900 mb-2">اتاق‌ها و ظرفیت‌ها</h2>
+      <p class="text-xs sm:text-sm text-amber-600">تنوع اتاق‌های تک‌تخته، مستر و چندتخته با امکانات مجزا</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between border-t-4 border-t-amber-500 group">
+        <div>
+          <div class="h-56 w-full overflow-hidden relative bg-amber-50 flex items-center justify-center">
+            <img src="room1.jpg" alt="اتاق یک تخته" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
+            <span class="absolute top-3 right-3 px-3 py-1 bg-amber-500 text-white rounded-full text-xs font-bold z-10">VIP</span>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-amber-900 mb-2">اتاق ۱ تخته اختصاصی</h3>
+            <p class="text-xs text-amber-600 mb-4 leading-relaxed">فضای آرام و کاملاً مستقل با کمد اختصاصی، میز مطالعه و یخچال مجزا.</p>
+            <ul class="text-xs text-amber-800 space-y-2 mb-6">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-500"></i> میز مطالعه و کمد اختصاصی</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-500"></i> یخچال هتلی اختصاصی</li>
+            </ul>
+          </div>
+        </div>
+        <div class="p-6 pt-0">
+          <a href="#booking" class="block w-full py-3 text-center rounded-xl bg-amber-50 hover:bg-amber-500 hover:text-white text-amber-700 text-xs font-bold border border-amber-200 transition-all">بررسی ظرفیت و رزرو</a>
+        </div>
+      </div>
+
+      <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between border-t-4 border-t-amber-600 group">
+        <div>
+          <div class="h-56 w-full overflow-hidden relative bg-amber-50 flex items-center justify-center">
+            <img src="room2.jpg" alt="اتاق دو تخته مستر" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
+            <span class="absolute top-3 right-3 px-3 py-1 bg-amber-600 text-white rounded-full text-xs font-bold z-10">مستر</span>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-amber-900 mb-2">اتاق ۲ تخته مستر</h3>
+            <p class="text-xs text-amber-600 mb-4 leading-relaxed">همراه با سرویس بهداشتی و حمام مستر داخل واحد برای راحتی دوچندان شما.</p>
+            <ul class="text-xs text-amber-800 space-y-2 mb-6">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-600"></i> سرویس و حمام مستر داخل اتاق</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-600"></i> تشک‌های ارتوپدیک نو و استاندارد</li>
+            </ul>
+          </div>
+        </div>
+        <div class="p-6 pt-0">
+          <a href="#booking" class="block w-full py-3 text-center rounded-xl bg-amber-50 hover:bg-amber-600 hover:text-white text-amber-700 text-xs font-bold border border-amber-200 transition-all">بررسی ظرفیت و رزرو</a>
+        </div>
+      </div>
+
+      <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between border-t-4 border-t-amber-400 group">
+        <div>
+          <div class="h-56 w-full overflow-hidden relative bg-amber-50 flex items-center justify-center">
+            <img src="room3.jpg" alt="اتاق سه تخته" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
+            <span class="absolute top-3 right-3 px-3 py-1 bg-amber-400 text-white rounded-full text-xs font-bold z-10">پذیرش فعال</span>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-amber-900 mb-2">اتاق ۳ تخته دلباز</h3>
+            <p class="text-xs text-amber-600 mb-4 leading-relaxed">فضای بزرگ، پنجره‌های قدی و نورگیری عالی به همراه کمدهای اختصاصی جادار.</p>
+            <ul class="text-xs text-amber-800 space-y-2 mb-6">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> بالکن و نور طبیعی عالی</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> سیستم سرمایش و گرمایش مدرن</li>
+            </ul>
+          </div>
+        </div>
+        <div class="p-6 pt-0">
+          <a href="#booking" class="block w-full py-3 text-center rounded-xl bg-amber-50 hover:bg-amber-400 hover:text-white text-amber-700 text-xs font-bold border border-amber-200 transition-all">بررسی ظرفیت و رزرو</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ۶. BOOKING TABLE (ظرفیت‌ها) ===================== -->
+  <section id="booking" class="max-w-5xl mx-auto px-6 py-12">
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-amber-200 bg-amber-50 text-amber-700 text-xs font-semibold mb-3">
+        <i class="fa-solid fa-table-cells"></i> بخش اطلاعات رزرو و واریز
+      </div>
+      <h2 class="text-3xl font-extrabold text-amber-900 mb-2">جدول ظرفیت‌ها و رزرو آنلاین</h2>
+      <p class="text-xs sm:text-sm text-amber-600">جهت رزرو و دریافت اطلاعات واریز بیعانه، روی دکمه رزرو تخت مورد نظر کلیک کنید.</p>
+    </div>
+
+    <div class="glass-card rounded-3xl overflow-hidden border border-amber-200">
+      <button onclick="toggleBookingTable()" class="w-full px-6 py-5 flex items-center justify-between bg-amber-50/50 hover:bg-amber-50 transition-all text-right">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-file-invoice-dollar"></i>
           </div>
           <div>
-            <p class="text-xs font-bold text-gray-700">امنیت کامل</p>
-            <p class="text-[10px] text-gray-400">دوربین مداربسته ۲۴ساعته</p>
+            <span class="text-amber-900 font-bold text-base block">مشاهده جدول کامل اتاق‌ها و رزرو سریع</span>
+            <span class="text-xs text-amber-600">بر اساس آخرین وضعیت اعلام‌شده اقامتگاه</span>
           </div>
+        </div>
+        <i id="toggleIcon" class="fa-solid fa-chevron-down text-amber-600 transition-transform duration-300 text-lg"></i>
+      </button>
+
+      <div id="bookingTableContent" class="p-4 sm:p-6 border-t border-amber-100 bg-white overflow-x-auto">
+        <table class="w-full text-right text-xs sm:text-sm border-collapse min-w-[620px]">
+          <thead>
+            <tr class="border-b border-amber-200 text-amber-700 font-bold bg-amber-50">
+              <th class="py-3.5 px-4 rounded-r-xl">نوع و شماره اتاق</th>
+              <th class="py-3.5 px-4">ودیعه (میلیون)</th>
+              <th class="py-3.5 px-4">اجاره ماهانه (میلیون)</th>
+              <th class="py-3.5 px-4 rounded-l-xl text-center">وضعیت ظرفیت</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-amber-100 text-amber-800">
+            <tr class="hover:bg-amber-50/50 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-amber-900">۳ تخته (شماره ۱۲)</td>
+              <td class="py-3.5 px-4">۱۲</td>
+              <td class="py-3.5 px-4">۱۲</td>
+              <td class="py-3.5 px-4 text-center">
+                <button onclick="openPaymentModal('۳ تخته (شماره ۱۲)', '۱۲ میلیون تومان', '۱۲ میلیون تومان')" class="px-3.5 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-500 text-emerald-700 hover:text-white border border-emerald-200 transition-all font-semibold">
+                  <i class="fa-solid fa-credit-card text-[11px]"></i> ۱ تخت خالی (رزرو)
+                </button>
+              </td>
+            </tr>
+            <tr class="hover:bg-amber-50/50 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-amber-900">چهار تخته (شماره ۱۴)</td>
+              <td class="py-3.5 px-4">۱۰.۵</td>
+              <td class="py-3.5 px-4">۱۰.۵</td>
+              <td class="py-3.5 px-4 text-center">
+                <button onclick="openPaymentModal('چهار تخته (شماره ۱۴)', '۱۰.۵ میلیون تومان', '۱۰.۵ میلیون تومان')" class="px-3.5 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-500 text-emerald-700 hover:text-white border border-emerald-200 transition-all font-semibold">
+                  <i class="fa-solid fa-credit-card text-[11px]"></i> ۱ تخت خالی (رزرو)
+                </button>
+              </td>
+            </tr>
+            <tr class="hover:bg-amber-50/50 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-amber-900">دو تخته (شماره ۲۳)</td>
+              <td class="py-3.5 px-4">۱۵</td>
+              <td class="py-3.5 px-4">۱۵</td>
+              <td class="py-3.5 px-4 text-center">
+                <button onclick="openPaymentModal('دو تخته (شماره ۲۳)', '۱۵ میلیون تومان', '۱۵ میلیون تومان')" class="px-3.5 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-500 text-emerald-700 hover:text-white border border-emerald-200 transition-all font-semibold">
+                  <i class="fa-solid fa-credit-card text-[11px]"></i> ۲ تخت خالی (رزرو)
+                </button>
+              </td>
+            </tr>
+            <tr class="hover:bg-amber-50/50 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-amber-900">شش تخته (شماره ۳۴)</td>
+              <td class="py-3.5 px-4">۱۰.۵</td>
+              <td class="py-3.5 px-4">۱۰.۵</td>
+              <td class="py-3.5 px-4 text-center">
+                <button onclick="openPaymentModal('شش تخته (شماره ۳۴)', '۱۰.۵ میلیون تومان', '۱۰.۵ میلیون تومان')" class="px-3.5 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-500 text-emerald-700 hover:text-white border border-emerald-200 transition-all font-semibold">
+                  <i class="fa-solid fa-credit-card text-[11px]"></i> ۳ تخت خالی (رزرو)
+                </button>
+              </td>
+            </tr>
+            <tr class="hover:bg-amber-50/50 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-amber-900">۲ تخته مستر (شماره ۳۱)</td>
+              <td class="py-3.5 px-4">۱۹</td>
+              <td class="py-3.5 px-4">۱۹</td>
+              <td class="py-3.5 px-4 text-center">
+                <button onclick="openPaymentModal('۲ تخته مستر (شماره ۳۱)', '۱۹ میلیون تومان', '۱۹ میلیون تومان')" class="px-3.5 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-500 text-emerald-700 hover:text-white border border-emerald-200 transition-all font-semibold">
+                  <i class="fa-solid fa-credit-card text-[11px]"></i> ۲ تخت خالی (رزرو)
+                </button>
+              </td>
+            </tr>
+            <tr class="hover:bg-amber-50/50 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-amber-900">۳ تخته مستر (شماره ۳۳)</td>
+              <td class="py-3.5 px-4">۱۵</td>
+              <td class="py-3.5 px-4">۱۵</td>
+              <td class="py-3.5 px-4 text-center">
+                <button onclick="openPaymentModal('۳ تخته مستر (شماره ۳۳)', '۱۵ میلیون تومان', '۱۵ میلیون تومان')" class="px-3.5 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-500 text-emerald-700 hover:text-white border border-emerald-200 transition-all font-semibold">
+                  <i class="fa-solid fa-credit-card text-[11px]"></i> ۱ تخت خالی (رزرو)
+                </button>
+              </td>
+            </tr>
+            <tr class="hover:bg-amber-50/50 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-amber-900">۴ تخته (شماره ۳۲)</td>
+              <td class="py-3.5 px-4">۱۰.۵</td>
+              <td class="py-3.5 px-4">۱۰.۵</td>
+              <td class="py-3.5 px-4 text-center">
+                <button onclick="openPaymentModal('۴ تخته (شماره ۳۲)', '۱۰.۵ میلیون تومان', '۱۰.۵ میلیون تومان')" class="px-3.5 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-500 text-emerald-700 hover:text-white border border-emerald-200 transition-all font-semibold">
+                  <i class="fa-solid fa-credit-card text-[11px]"></i> ۱ تخت خالی (رزرو)
+                </button>
+              </td>
+            </tr>
+            <tr class="hover:bg-amber-50/50 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-amber-900">دو تخته (شماره ۱۶)</td>
+              <td class="py-3.5 px-4">۱۴.۵</td>
+              <td class="py-3.5 px-4">۱۴.۵</td>
+              <td class="py-3.5 px-4 text-center">
+                <button onclick="openPaymentModal('دو تخته (شماره ۱۶)', '۱۴.۵ میلیون تومان', '۱۴.۵ میلیون تومان', '۷/۱۸')" class="px-3.5 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-500 text-amber-700 hover:text-white border border-amber-200 transition-all font-semibold">
+                  <i class="fa-solid fa-calendar-check text-[11px]"></i> ۲ تخت خالی (تحویل ۷/۱۸)
+                </button>
+              </td>
+            </tr>
+            <tr class="hover:bg-amber-50/50 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-amber-900">یک تخته (شماره ۲۱)</td>
+              <td class="py-3.5 px-4">۱۸</td>
+              <td class="py-3.5 px-4">۱۸</td>
+              <td class="py-3.5 px-4 text-center">
+                <button onclick="openPaymentModal('یک تخته (شماره ۲۱)', '۱۸ میلیون تومان', '۱۸ میلیون تومان', '۷/۲۵')" class="px-3.5 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-500 text-amber-700 hover:text-white border border-amber-200 transition-all font-semibold">
+                  <i class="fa-solid fa-calendar-check text-[11px]"></i> ۱ تخت خالی (تحویل ۷/۲۵)
+                </button>
+              </td>
+            </tr>
+            <tr class="hover:bg-amber-50/50 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-amber-900">یک تخته (شماره ۴۱)</td>
+              <td class="py-3.5 px-4">۲۵</td>
+              <td class="py-3.5 px-4">۲۵</td>
+              <td class="py-3.5 px-4 text-center">
+                <button onclick="openPaymentModal('یک تخته (شماره ۴۱)', '۲۵ میلیون تومان', '۲۵ میلیون تومان', '۷/۱۸')" class="px-3.5 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-500 text-amber-700 hover:text-white border border-amber-200 transition-all font-semibold">
+                  <i class="fa-solid fa-calendar-check text-[11px]"></i> ۱ تخت خالی (تحویل ۷/۱۸)
+                </button>
+              </td>
+            </tr>
+            <tr class="hover:bg-amber-50/50 transition-colors">
+              <td class="py-3.5 px-4 font-semibold text-amber-900">یک تخته (شماره ۲۷)</td>
+              <td class="py-3.5 px-4">۲۵</td>
+              <td class="py-3.5 px-4">۲۵</td>
+              <td class="py-3.5 px-4 text-center">
+                <button onclick="openPaymentModal('یک تخته (شماره ۲۷)', '۲۵ میلیون تومان', '۲۵ میلیون تومان', '۷/۱')" class="px-3.5 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-500 text-amber-700 hover:text-white border border-amber-200 transition-all font-semibold">
+                  <i class="fa-solid fa-calendar-check text-[11px]"></i> ۱ تخت خالی (تحویل ۷/۱)
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="mt-4 text-center">
+          <p class="text-[11px] text-amber-600">پس از واریز بیعانه، تصویر فیش را جهت ثبت نهایی به شماره همراه مدیریت ارسال فرمایید.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ==================== FEATURES ==================== -->
-  <section id="features" class="py-16 md:py-20 bg-white/60">
-    <div class="container mx-auto px-5">
-      <div class="text-center mb-12">
-        <h3 class="text-2xl md:text-3xl font-bold text-rose-900/70 elegant-underline inline-block">امکانات پانسیون</h3>
-        <p class="text-gray-400 text-sm mt-6 max-w-md mx-auto">همه چیز برای یک زندگی راحت و بی‌دغدغه در دوران تحصیل</p>
-      </div>
+  <!-- ===================== ۷. فرم پیش‌ثبت‌نام (کشویی — بعد از ظرفیت‌ها) ===================== -->
+  <section id="request-form" class="max-w-2xl mx-auto px-6 py-12">
+    <div class="bg-white rounded-3xl shadow-xl border border-amber-100 overflow-hidden">
 
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-7">
-        <div class="glass-card rounded-3xl p-5 text-center shadow-sm">
-          <div class="w-14 h-14 mx-auto rounded-2xl bg-rose-100 flex items-center justify-center text-rose-500 text-2xl mb-4">
-            <i class="fa-solid fa-wifi"></i>
+      <button onclick="toggleFormAccordion()" class="w-full px-6 sm:px-8 py-5 flex items-center justify-between hover:bg-amber-50/50 transition-all text-right">
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-lg">
+            <i class="fa-solid fa-file-pen"></i>
           </div>
-          <h4 class="font-bold text-sm text-gray-700">اینترنت پرسرعت</h4>
-          <p class="text-[11px] text-gray-400 mt-1">فیبر نوری اختصاصی</p>
-        </div>
-        <div class="glass-card rounded-3xl p-5 text-center shadow-sm">
-          <div class="w-14 h-14 mx-auto rounded-2xl bg-rose-100 flex items-center justify-center text-rose-500 text-2xl mb-4">
-            <i class="fa-solid fa-utensils"></i>
+          <div>
+            <h2 class="text-lg font-extrabold text-amber-900">فرم پیش‌ثبت‌نام</h2>
+            <p class="text-xs text-amber-600 mt-0.5">برای تکمیل فرم کلیک کنید</p>
           </div>
-          <h4 class="font-bold text-sm text-gray-700">غذای خانگی</h4>
-          <p class="text-[11px] text-gray-400 mt-1">صبحانه و شام</p>
         </div>
-        <div class="glass-card rounded-3xl p-5 text-center shadow-sm">
-          <div class="w-14 h-14 mx-auto rounded-2xl bg-rose-100 flex items-center justify-center text-rose-500 text-2xl mb-4">
-            <i class="fa-solid fa-spa"></i>
-          </div>
-          <h4 class="font-bold text-sm text-gray-700">سالن زیبایی</h4>
-          <p class="text-[11px] text-gray-400 mt-1">آرایشگاه و ماساژ</p>
-        </div>
-        <div class="glass-card rounded-3xl p-5 text-center shadow-sm">
-          <div class="w-14 h-14 mx-auto rounded-2xl bg-rose-100 flex items-center justify-center text-rose-500 text-2xl mb-4">
-            <i class="fa-solid fa-book-open"></i>
-          </div>
-          <h4 class="font-bold text-sm text-gray-700">سالن مطالعه</h4>
-          <p class="text-[11px] text-gray-400 mt-1">فضای آرام و مجزا</p>
-        </div>
-        <div class="glass-card rounded-3xl p-5 text-center shadow-sm">
-          <div class="w-14 h-14 mx-auto rounded-2xl bg-rose-100 flex items-center justify-center text-rose-500 text-2xl mb-4">
-            <i class="fa-solid fa-dumbbell"></i>
-          </div>
-          <h4 class="font-bold text-sm text-gray-700">باشگاه ورزشی</h4>
-          <p class="text-[11px] text-gray-400 mt-1">تجهیزات مدرن</p>
-        </div>
-        <div class="glass-card rounded-3xl p-5 text-center shadow-sm">
-          <div class="w-14 h-14 mx-auto rounded-2xl bg-rose-100 flex items-center justify-center text-rose-500 text-2xl mb-4">
-            <i class="fa-solid fa-car"></i>
-          </div>
-          <h4 class="font-bold text-sm text-gray-700">پارکینگ اختصاصی</h4>
-          <p class="text-[11px] text-gray-400 mt-1">برای خودرو شخصی</p>
-        </div>
-        <div class="glass-card rounded-3xl p-5 text-center shadow-sm">
-          <div class="w-14 h-14 mx-auto rounded-2xl bg-rose-100 flex items-center justify-center text-rose-500 text-2xl mb-4">
-            <i class="fa-solid fa-shirt"></i>
-          </div>
-          <h4 class="font-bold text-sm text-gray-700">خشکشویی</h4>
-          <p class="text-[11px] text-gray-400 mt-1">هفتگی</p>
-        </div>
-        <div class="glass-card rounded-3xl p-5 text-center shadow-sm">
-          <div class="w-14 h-14 mx-auto rounded-2xl bg-rose-100 flex items-center justify-center text-rose-500 text-2xl mb-4">
-            <i class="fa-solid fa-couch"></i>
-          </div>
-          <h4 class="font-bold text-sm text-gray-700">لابی لوکس</h4>
-          <p class="text-[11px] text-gray-400 mt-1">فضای پذیرایی</p>
-        </div>
-      </div>
-    </div>
-  </section>
+        <i id="formToggleIcon" class="fa-solid fa-chevron-down text-amber-600 text-lg transition-transform duration-300"></i>
+      </button>
 
-  <!-- ==================== GALLERY ==================== -->
-  <section id="gallery" class="py-16 md:py-20">
-    <div class="container mx-auto px-5">
-      <div class="text-center mb-12">
-        <h3 class="text-2xl md:text-3xl font-bold text-rose-900/70 elegant-underline inline-block">گالری تصاویر</h3>
-        <p class="text-gray-400 text-sm mt-6 max-w-md mx-auto">نگاهی به فضای دلنشین پانسیون ونوس</p>
-      </div>
+      <div id="requestFormContent" class="form-accordion-content px-6 sm:px-8">
+        <form class="space-y-5 text-right pb-8">
 
-      <div class="swiper gallerySwiper rounded-3xl overflow-hidden shadow-lg shadow-rose-100/50">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <img src="https://images.unsplash.com/photo-1540518614846-7eded433c457?w=800&h=600&fit=crop&auto=format&q=80" alt="اتاق خواب" class="w-full h-64 sm:h-80 object-cover" loading="lazy">
+          <div>
+            <label class="block text-sm font-bold text-amber-900 mb-2">شعبه مورد نظر</label>
+            <div class="relative">
+              <select class="w-full appearance-none bg-white border-2 border-amber-400 rounded-xl px-4 py-3 text-sm text-amber-800 font-medium focus:outline-none focus:border-amber-600 transition-all cursor-pointer">
+                <option value="venus">پانسیون دخترانه ونوس</option>
+                <option value="avin">خوابگاه آوین</option>
+                <option value="jordan">خوابگاه جردن</option>
+              </select>
+              <div class="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none text-amber-500">
+                <i class="fa-solid fa-chevron-down text-xs"></i>
+              </div>
+            </div>
           </div>
-          <div class="swiper-slide">
-            <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop&auto=format&q=80" alt="نشیمن" class="w-full h-64 sm:h-80 object-cover" loading="lazy">
-          </div>
-          <div class="swiper-slide">
-            <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop&auto=format&q=80" alt="آشپزخانه" class="w-full h-64 sm:h-80 object-cover" loading="lazy">
-          </div>
-          <div class="swiper-slide">
-            <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=800&h=600&fit=crop&auto=format&q=80" alt="فضای کار" class="w-full h-64 sm:h-80 object-cover" loading="lazy">
-          </div>
-          <div class="swiper-slide">
-            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop&auto=format&q=80" alt="نمای بیرونی" class="w-full h-64 sm:h-80 object-cover" loading="lazy">
-          </div>
-        </div>
-        <div class="swiper-pagination"></div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ==================== LOCATION ==================== -->
-  <section id="location" class="py-16 md:py-20 bg-gradient-to-b from-white/80 to-rose-50/40">
-    <div class="container mx-auto px-5">
-      <div class="text-center mb-12">
-        <h3 class="text-2xl md:text-3xl font-bold text-rose-900/70 elegant-underline inline-block">موقعیت مکانی</h3>
-        <p class="text-gray-400 text-sm mt-6 max-w-md mx-auto">دسترسی آسان به دانشگاه‌های معتبر و مراکز شهر</p>
-      </div>
-
-      <div class="flex flex-col lg:flex-row items-center gap-10">
-        <div class="w-full lg:w-2/3 rounded-[2rem] overflow-hidden shadow-xl shadow-rose-100/60 border border-white/60">
-          <div id="map"></div>
-        </div>
-
-        <div class="w-full lg:w-1/3 space-y-5">
-          <div class="glass-card rounded-2xl p-5 flex items-start gap-4">
-            <div class="w-10 h-10 rounded-full bg-rose-100 flex items-center justify-center text-rose-500 shrink-0">
-              <i class="fa-solid fa-location-dot"></i>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div>
+              <label class="block text-sm font-bold text-amber-900 mb-2">نام و نام خانوادگی</label>
+              <input type="text" placeholder="" class="w-full bg-white border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-200 transition-all placeholder:text-amber-300">
             </div>
             <div>
-              <h4 class="font-bold text-sm text-gray-700">آدرس</h4>
-              <p class="text-xs text-gray-500 mt-1 leading-relaxed">تهران، خیابان کارگر شمالی، کوچه شهید فلاح، پلاک ۲۴، پانسیون ونوس</p>
+              <label class="block text-sm font-bold text-amber-900 mb-2">شماره موبایل</label>
+              <input type="tel" placeholder="۰۹۱۲۳۴۵۶۷۸" dir="ltr" class="w-full bg-white border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 text-left focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-200 transition-all placeholder:text-amber-300">
             </div>
           </div>
-          <div class="glass-card rounded-2xl p-5 flex items-start gap-4">
-            <div class="w-10 h-10 rounded-full bg-rose-100 flex items-center justify-center text-rose-500 shrink-0">
-              <i class="fa-solid fa-phone"></i>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div>
+              <label class="block text-sm font-bold text-amber-900 mb-2">نوع اتاق</label>
+              <div class="relative">
+                <select class="w-full appearance-none bg-white border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 focus:outline-none focus:border-amber-500 transition-all cursor-pointer">
+                  <option value="">چهار تخته (روزانه)</option>
+                  <option value="single">یک تخته اختصاصی</option>
+                  <option value="double">دو تخته مستر</option>
+                  <option value="triple">سه تخته</option>
+                  <option value="shared">چهار تخته</option>
+                </select>
+                <div class="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none text-amber-500">
+                  <i class="fa-solid fa-chevron-down text-xs"></i>
+                </div>
+              </div>
             </div>
             <div>
-              <h4 class="font-bold text-sm text-gray-700">تلفن تماس</h4>
-              <p class="text-xs text-gray-500 mt-1" dir="ltr">۰۲۱ - ۸۸۹۹ ۷۷۶۶</p>
-              <p class="text-xs text-gray-500" dir="ltr">۰۹۱۲ ۳۴۵ ۶۷۸۹</p>
+              <label class="block text-sm font-bold text-amber-900 mb-2">تعداد نفرات</label>
+              <div class="relative">
+                <select class="w-full appearance-none bg-white border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 focus:outline-none focus:border-amber-500 transition-all cursor-pointer">
+                  <option value="1">۱ نفر</option>
+                  <option value="2">۲ نفر</option>
+                  <option value="3">۳ نفر</option>
+                </select>
+                <div class="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none text-amber-500">
+                  <i class="fa-solid fa-chevron-down text-xs"></i>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="glass-card rounded-2xl p-5 flex items-start gap-4">
-            <div class="w-10 h-10 rounded-full bg-rose-100 flex items-center justify-center text-rose-500 shrink-0">
-              <i class="fa-regular fa-clock"></i>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div>
+              <label class="block text-sm font-bold text-amber-900 mb-2">زمان ورود</label>
+              <div class="relative">
+                <select class="w-full appearance-none bg-white border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 focus:outline-none focus:border-amber-500 transition-all cursor-pointer">
+                  <option value="">هرچه سریع‌تر</option>
+                  <option value="mordad">تیر و مرداد</option>
+                  <option value="shahrivar">شهریور</option>
+                  <option value="mehr">مهر ماه</option>
+                </select>
+                <div class="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none text-amber-500">
+                  <i class="fa-solid fa-chevron-down text-xs"></i>
+                </div>
+              </div>
             </div>
             <div>
-              <h4 class="font-bold text-sm text-gray-700">ساعات بازدید</h4>
-              <p class="text-xs text-gray-500 mt-1">شنبه تا پنجشنبه: ۹ صبح تا ۷ عصر</p>
+              <label class="block text-sm font-bold text-amber-900 mb-2">مدت اقامت</label>
+              <div class="relative">
+                <select class="w-full appearance-none bg-white border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 focus:outline-none focus:border-amber-500 transition-all cursor-pointer">
+                  <option value="">مشخص نیست</option>
+                  <option value="1month">۱ ماه</option>
+                  <option value="3month">۳ ماه</option>
+                  <option value="6month">۶ ماه</option>
+                  <option value="1year">۱ سال</option>
+                </select>
+                <div class="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none text-amber-500">
+                  <i class="fa-solid fa-chevron-down text-xs"></i>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ==================== CONTACT / RESERVE ==================== -->
-  <section id="contact" class="py-16 md:py-20 bg-white/70">
-    <div class="container mx-auto px-5">
-      <div class="max-w-3xl mx-auto text-center mb-12">
-        <h3 class="text-2xl md:text-3xl font-bold text-rose-900/70 elegant-underline inline-block">رزرو و تماس</h3>
-        <p class="text-gray-400 text-sm mt-6">برای دریافت مشاوره و رزرو اتاق، فرم زیر را پر کنید</p>
-      </div>
-
-      <div class="max-w-2xl mx-auto glass-card rounded-[2rem] p-6 md:p-10 shadow-lg border border-rose-100/70">
-        <!-- ✅ فرم متصل به Formspree -->
-        <form id="reserveForm"
-              action="https://formspree.io/f/xppwkpae"
-              method="POST"
-              class="grid grid-cols-1 md:grid-cols-2 gap-5">
-
-          <div class="md:col-span-1">
-            <label class="block text-xs font-medium text-gray-500 mb-1.5">نام و نام خانوادگی</label>
-            <input type="text" name="fullname" required
-                   class="w-full bg-white/70 border border-rose-200/70 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-rose-300/60 focus:border-transparent transition"
-                   placeholder="مثال: سارا محمدی">
+          <div>
+            <label class="block text-sm font-bold text-amber-900 mb-2">توضیحات (اختیاری)</label>
+            <textarea rows="4" placeholder="مثلاً نیاز به بازدید حضوری، شغل یا دانشگاه..." class="w-full bg-white border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-200 transition-all resize-none placeholder:text-amber-300"></textarea>
           </div>
 
-          <div class="md:col-span-1">
-            <label class="block text-xs font-medium text-gray-500 mb-1.5">شماره تماس</label>
-            <input type="tel" name="phone" required
-                   class="w-full bg-white/70 border border-rose-200/70 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-rose-300/60 focus:border-transparent transition"
-                   placeholder="۰۹۱۲xxxxxxx" dir="ltr">
-          </div>
+          <button type="submit" class="w-full py-4 rounded-2xl bg-gradient-to-l from-amber-600 to-amber-500 hover:from-amber-700 hover:to-amber-600 text-white font-extrabold text-sm shadow-lg shadow-amber-500/30 transition-all flex items-center justify-center gap-2 mt-4">
+            <i class="fa-regular fa-calendar-check"></i>
+            ثبت درخواست پیش‌ثبت‌نام
+          </button>
 
-          <div class="md:col-span-2">
-            <label class="block text-xs font-medium text-gray-500 mb-1.5">پیام یا درخواست خاص</label>
-            <textarea name="message" rows="3"
-                      class="w-full bg-white/70 border border-rose-200/70 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-rose-300/60 focus:border-transparent transition resize-none"
-                      placeholder="نوع اتاق، تاریخ ورود و ..."></textarea>
-          </div>
+          <p class="text-[11px] text-amber-600 text-center leading-relaxed mt-2">
+            ثبت پیش‌ثبت‌نام رایگان است و پرداختی ندارد. با ارسال فرم،
+            <a href="#" class="text-amber-700 underline hover:text-amber-900 font-bold">قوانین و حریم خصوصی</a>
+            را می‌پذیرید.
+          </p>
 
-          <div class="md:col-span-2 text-center mt-2">
-            <button type="submit"
-                    class="bg-gradient-to-r from-rose-400 to-pink-400 hover:from-rose-500 hover:to-pink-500 text-white px-10 py-3 rounded-full shadow-md shadow-rose-200 transition-all duration-300 text-sm font-medium w-full md:w-auto">
-              <i class="fa-regular fa-paper-plane ml-1"></i> ارسال درخواست
-            </button>
-            <p id="formFeedback" class="text-xs text-green-600 mt-3 hidden">
-              <i class="fa-regular fa-circle-check ml-1"></i> درخواست شما ثبت شد. به زودی با شما تماس می‌گیریم.
-            </p>
-          </div>
         </form>
       </div>
     </div>
   </section>
 
-  <!-- ==================== FOOTER ==================== -->
-  <footer class="bg-rose-900/5 border-t border-rose-100/70 pt-12 pb-6">
-    <div class="container mx-auto px-5">
-      <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-full bg-gradient-to-br from-rose-200 to-pink-300 flex items-center justify-center text-white text-sm font-bold">♡</div>
-          <div>
-            <p class="text-sm font-bold text-rose-800/80">پانسیون دخترانه ونوس</p>
-            <p class="text-[10px] text-rose-400/70">Venus Luxury Residence</p>
+  <!-- ===================== ۸. CONTACTS (اطلاعات تماس — بعد از ظرفیت‌ها) ===================== -->
+  <section id="contacts" class="max-w-7xl mx-auto px-6 py-12">
+    <div class="text-center mb-10">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-amber-200 bg-amber-50 text-amber-700 text-xs font-semibold mb-3">
+        <i class="fa-solid fa-address-book"></i> ارتباط با مسئولین مجموعه
+      </div>
+      <h2 class="text-3xl font-extrabold text-amber-900 mb-2">اطلاعات تماس و پشتیبانی</h2>
+      <p class="text-xs sm:text-sm text-amber-600">پاسخگویی سریع جهت مشاوره، رزرو و بازدید حضوری</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div class="glass-card p-6 rounded-3xl border-t-4 border-t-amber-500 text-center flex flex-col justify-between">
+        <div>
+          <div class="w-14 h-14 mx-auto rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-2xl mb-4">
+            <i class="fa-solid fa-user-gear"></i>
           </div>
+          <h4 class="text-base font-bold text-amber-900 mb-1">مدیریت اقامتگاه</h4>
+          <p class="text-xs text-amber-600 font-medium mb-1">خانم فاطمه دلاوری</p>
+          <p class="text-[11px] text-amber-500 mb-4">خوابگاه‌های زنجیره‌ای آوین، جردن و ونوس</p>
         </div>
-
-        <div class="flex items-center gap-4 text-rose-400/80">
-          <a href="#" class="w-9 h-9 rounded-full bg-white/70 flex items-center justify-center hover:bg-rose-200/70 hover:text-rose-600 transition"><i class="fa-brands fa-instagram"></i></a>
-          <a href="#" class="w-9 h-9 rounded-full bg-white/70 flex items-center justify-center hover:bg-rose-200/70 hover:text-rose-600 transition"><i class="fa-brands fa-telegram"></i></a>
-          <a href="#" class="w-9 h-9 rounded-full bg-white/70 flex items-center justify-center hover:bg-rose-200/70 hover:text-rose-600 transition"><i class="fa-brands fa-whatsapp"></i></a>
+        <div class="space-y-2 pt-2 border-t border-amber-100">
+          <a href="tel:09126801450" class="block w-full py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs transition-all shadow-lg shadow-amber-600/20" dir="ltr">
+            <i class="fa-solid fa-phone mr-1"></i> 09126801450
+          </a>
+          <a href="https://wa.me/989126801450" target="_blank" rel="noopener noreferrer" class="block w-full py-2 rounded-xl bg-emerald-50 hover:bg-emerald-500 text-emerald-700 hover:text-white border border-emerald-200 font-semibold text-xs transition-all">
+            <i class="fa-brands fa-whatsapp ml-1"></i> پیام در واتساپ
+          </a>
         </div>
+      </div>
 
-        <p class="text-[11px] text-gray-400">© ۱۴۰۴ پانسیون ونوس. تمامی حقوق محفوظ است.</p>
+      <div class="glass-card p-6 rounded-3xl border-t-4 border-t-amber-600 text-center flex flex-col justify-between">
+        <div>
+          <div class="w-14 h-14 mx-auto rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-2xl mb-4">
+            <i class="fa-solid fa-headset"></i>
+          </div>
+          <h4 class="text-base font-bold text-amber-900 mb-1">پشتیبانی و پذیرش</h4>
+          <p class="text-xs text-amber-600 font-medium mb-1">آقای شکرچیان</p>
+          <p class="text-[11px] text-amber-500 mb-4">پشتیبانی رزرو و مسائل مالی</p>
+        </div>
+        <div class="space-y-2 pt-2 border-t border-amber-100">
+          <a href="tel:09128506405" class="block w-full py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs transition-all shadow-lg shadow-amber-600/20" dir="ltr">
+            <i class="fa-solid fa-phone mr-1"></i> 09128506405
+          </a>
+          <a href="https://wa.me/989128506405" target="_blank" rel="noopener noreferrer" class="block w-full py-2 rounded-xl bg-emerald-50 hover:bg-emerald-500 text-emerald-700 hover:text-white border border-emerald-200 font-semibold text-xs transition-all">
+            <i class="fa-brands fa-whatsapp ml-1"></i> پیام در واتساپ
+          </a>
+        </div>
+      </div>
+
+      <div class="glass-card p-6 rounded-3xl border-t-4 border-t-amber-400 text-center flex flex-col justify-between">
+        <div>
+          <div class="w-14 h-14 mx-auto rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-2xl mb-4">
+            <i class="fa-solid fa-clipboard-user"></i>
+          </div>
+          <h4 class="text-base font-bold text-amber-900 mb-1">پشتیبانی و اسکان</h4>
+          <p class="text-xs text-amber-600 font-medium mb-1">خانم فرزی</p>
+          <p class="text-[11px] text-amber-500 mb-4">هماهنگی بازدید و امور اقامتگاه</p>
+        </div>
+        <div class="space-y-2 pt-2 border-t border-amber-100">
+          <a href="tel:09144841315" class="block w-full py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs transition-all shadow-lg shadow-amber-500/20" dir="ltr">
+            <i class="fa-solid fa-phone mr-1"></i> 09194841315
+          </a>
+          <a href="https://wa.me/989144841315" target="_blank" rel="noopener noreferrer" class="block w-full py-2 rounded-xl bg-emerald-50 hover:bg-emerald-500 text-emerald-700 hover:text-white border border-emerald-200 font-semibold text-xs transition-all">
+            <i class="fa-brands fa-whatsapp ml-1"></i> پیام در واتساپ
+          </a>
+        </div>
+      </div>
+
+      <div class="glass-card p-6 rounded-3xl border-t-4 border-t-emerald-500 text-center flex flex-col justify-between">
+        <div>
+          <div class="w-14 h-14 mx-auto rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl mb-4">
+            <i class="fa-solid fa-phone-volume"></i>
+          </div>
+          <h4 class="text-base font-bold text-amber-900 mb-1">تلفن ثابت مجموعه</h4>
+          <p class="text-xs text-emerald-600 font-medium mb-1">پذیرش شبانه‌روزی</p>
+          <p class="text-[11px] text-amber-500 mb-4">پاسخگویی ۲۴ ساعته به سوالات</p>
+        </div>
+        <div class="space-y-2 pt-2 border-t border-amber-100">
+          <a href="tel:+982188731810" class="block w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition-all shadow-lg shadow-emerald-600/20" dir="ltr">
+            <i class="fa-solid fa-phone mr-1"></i> 02188731810
+          </a>
+          <span class="inline-flex items-center justify-center gap-1.5 w-full py-2 rounded-xl bg-amber-50 text-amber-600 text-[11px]">
+            <i class="fa-solid fa-clock text-emerald-500"></i> شبانه‌روزی ۲۴/۷
+          </span>
+        </div>
       </div>
     </div>
-  </footer>
+  </section>
 
-  <!-- ==================== SCRIPTS ==================== -->
+  <!-- ===================== ۹. RULES ===================== -->
+  <section id="rules" class="max-w-4xl mx-auto px-6 py-12">
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-amber-200 bg-amber-50 text-amber-700 text-xs font-semibold mb-3">
+        <i class="fa-solid fa-scale-balanced"></i> اصول و انضباط مجموعه
+      </div>
+      <h2 class="text-3xl font-extrabold text-amber-900 mb-2">قوانین و استانداردهای پذیرش</h2>
+      <p class="text-xs sm:text-sm text-amber-600">رعایت این اصول ضامن آرامش و آسایش پایدار تمام ساکنین محترم است</p>
+    </div>
+
+    <div class="glass-card rounded-2xl p-4 sm:p-6 divide-y divide-amber-100">
+      <div class="footer-link" onclick="toggleAccordion(this)">
+        <span class="font-semibold text-amber-900"><i class="fa-solid fa-volume-xmark text-amber-600 ml-2"></i> سکوت و آرامش مطلق</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+      <div class="accordion-content">
+        رعایت سکوت در اتاق‌ها و راهروها به ویژه پس از ساعت ۲۳ الزامی است تا محیط مطالعه مختل نشود.
+      </div>
+
+      <div class="footer-link" onclick="toggleAccordion(this)">
+        <span class="font-semibold text-amber-900"><i class="fa-solid fa-id-card text-amber-600 ml-2"></i> پذیرش گزینش‌شده</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+      <div class="accordion-content">
+        پذیرش منحصراً متعلق به دانشجویان تحصیلات تکمیلی، پژوهشگران و افراد شاغل موجه با مدارک معتبر است.
+      </div>
+
+      <div class="footer-link" onclick="toggleAccordion(this)">
+        <span class="font-semibold text-amber-900"><i class="fa-solid fa-clock text-amber-600 ml-2"></i> ساعت تردد مجاز</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+      <div class="accordion-content">
+        ساعت بازگشایی درب صبح‌ها ساعت ۶:۰۰ و زمان بسته شدن درب شب‌ها ساعت ۲۳:۳۰ می‌باشد.
+      </div>
+
+      <div class="footer-link" onclick="toggleAccordion(this)">
+        <span class="font-semibold text-amber-900"><i class="fa-solid fa-ban-smoking text-amber-600 ml-2"></i> محیط کاملاً پاک و سلامت</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+      <div class="accordion-content">
+        استعمال هرگونه دخانیات در تمامی اتاق‌ها و فضاهای بسته اقامتگاه اکیداً ممنوع می‌باشد.
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ۱۰. FAQ ===================== -->
+  <section id="faq" class="max-w-4xl mx-auto px-6 py-12">
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-amber-200 bg-amber-50 text-amber-700 text-xs font-semibold mb-3">
+        <i class="fa-solid fa-circle-question"></i> راهنما و پاسخ‌ها
+      </div>
+      <h2 class="text-3xl font-extrabold text-amber-900 mb-2">پرسش‌های متداول شما</h2>
+      <p class="text-xs sm:text-sm text-amber-600">پاسخ به سوالات پرتکرار قبل از اقدام به رزرو</p>
+    </div>
+
+    <div class="space-y-3">
+      <div class="glass-card rounded-2xl overflow-hidden border border-amber-100">
+        <button onclick="toggleFaq(1)" class="w-full p-4 sm:p-5 flex items-center justify-between text-right hover:bg-amber-50/50 transition-colors">
+          <span class="text-sm font-bold text-amber-900 flex items-center gap-2">
+            <i class="fa-solid fa-circle-dot text-amber-500 text-xs"></i>
+            آیا امکان بازدید حضوری قبل از واریز بیعانه وجود دارد؟
+          </span>
+          <i id="faq-icon-1" class="fa-solid fa-chevron-down text-amber-400 text-xs transition-transform duration-300"></i>
+        </button>
+        <div id="faq-ans-1" class="hidden px-5 pb-5 text-xs text-amber-700 leading-relaxed border-t border-amber-100 pt-3">
+          بله، با هماهنگی تلفنی قبلی با سرکار خانم دلاوری یا تیم پشتیبانی، همه‌روزه از ساعت ۱۰ صبح الی ۲۰ امکان بازدید حضوری از اتاق‌ها و امکانات فراهم است.
+        </div>
+      </div>
+
+      <div class="glass-card rounded-2xl overflow-hidden border border-amber-100">
+        <button onclick="toggleFaq(2)" class="w-full p-4 sm:p-5 flex items-center justify-between text-right hover:bg-amber-50/50 transition-colors">
+          <span class="text-sm font-bold text-amber-900 flex items-center gap-2">
+            <i class="fa-solid fa-circle-dot text-amber-500 text-xs"></i>
+            حداقل مدت قرارداد و شیوه پرداخت به چه صورت است؟
+          </span>
+          <i id="faq-icon-2" class="fa-solid fa-chevron-down text-amber-400 text-xs transition-transform duration-300"></i>
+        </button>
+        <div id="faq-ans-2" class="hidden px-5 pb-5 text-xs text-amber-700 leading-relaxed border-t border-amber-100 pt-3">
+          قراردادها به صورت ماهانه، فصلی و سالانه تنظیم می‌شود. مبلغ ودیعه و اجاره ماه اول در بدو ورود و تسویه مابقی ماهانه انجام می‌پذیرد.
+        </div>
+      </div>
+
+      <div class="glass-card rounded-2xl overflow-hidden border border-amber-100">
+        <button onclick="toggleFaq(3)" class="w-full p-4 sm:p-5 flex items-center justify-between text-right hover:bg-amber-50/50 transition-colors">
+          <span class="text-sm font-bold text-amber-900 flex items-center gap-2">
+            <i class="fa-solid fa-circle-dot text-amber-500 text-xs"></i>
+            هزینه قبوض، شارژ و اینترنت به چه صورت محاسبه می‌شود؟
+          </span>
+          <i id="faq-icon-3" class="fa-solid fa-chevron-down text-amber-400 text-xs transition-transform duration-300"></i>
+        </button>
+        <div id="faq-ans-3" class="hidden px-5 pb-5 text-xs text-amber-700 leading-relaxed border-t border-amber-100 pt-3">
+          کلیه هزینه‌های مصرفی (آب، برق، گاز، نظافت مستمر مشاعات و اینترنت فیبر نوری پرسرعت) در مبلغ اجاره لحاظ شده و هزینه مازادی دریافت نمی‌شود.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ۱۱. LOCATION & MAP ===================== -->
+  <section id="location" class="max-w-5xl mx-auto px-6 py-12">
+    <div class="text-center mb-8">
+      <h2 class="text-3xl font-extrabold text-amber-900 mb-2">موقعیت دقیق و دسترسی‌های شهری</h2>
+      <p class="text-xs sm:text-sm text-amber-600">تهران، میدان آرژانتین، بلوار بیهقی، کوچه ۱۴ شرقی، پلاک ۱۸</p>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+      <div class="glass-card p-3 rounded-xl text-center">
+        <span class="text-amber-700 text-xs font-bold block mb-1"><i class="fa-solid fa-train-subway"></i> مترو مصلی</span>
+        <span class="text-[11px] text-amber-600">کمتر از ۵ دقیقه پیاده</span>
+      </div>
+      <div class="glass-card p-3 rounded-xl text-center">
+        <span class="text-blue-600 text-xs font-bold block mb-1"><i class="fa-solid fa-bus-simple"></i> پایانه بیهقی (BRT)</span>
+        <span class="text-[11px] text-amber-600">دسترسی مستقیم و آسان</span>
+      </div>
+      <div class="glass-card p-3 rounded-xl text-center">
+        <span class="text-emerald-600 text-xs font-bold block mb-1"><i class="fa-solid fa-hospital"></i> مراکز درمانی</span>
+        <span class="text-[11px] text-amber-600">بیمارستان کسری و گاندی</span>
+      </div>
+      <div class="glass-card p-3 rounded-xl text-center">
+        <span class="text-amber-600 text-xs font-bold block mb-1"><i class="fa-solid fa-bag-shopping"></i> مراکز رفاهی</span>
+        <span class="text-[11px] text-amber-600">سوپرمارکت و نانوایی در دسترس</span>
+      </div>
+    </div>
+
+    <div class="glass-card rounded-3xl border border-amber-200 p-3 sm:p-4 shadow-2xl">
+      <div id="venus-map" class="w-full h-80 sm:h-96 rounded-2xl bg-amber-50 border border-amber-100 z-0"></div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 px-2 pt-5 pb-2">
+        <span class="text-xs text-amber-600 text-center sm:text-right">
+          <i class="fa-solid fa-circle-info text-amber-500 ml-1"></i> برای مسیریابی خودرویی یا پیاده‌روی دکمه‌های زیر را انتخاب کنید:
+        </span>
+        <div class="flex items-center gap-3">
+          <a href="https://neshan.org/maps/municipal/b0c9db852d1d4bae9e158d23c92730f0#c35.735-51.425-15z-0p"
+             target="_blank" rel="noopener noreferrer"
+             class="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold transition-all flex items-center gap-2 shadow-lg shadow-amber-600/20">
+            <i class="fa-solid fa-diamond-turn-right"></i> مشاهده در نشان
+          </a>
+          <a href="https://maps.google.com/?q=35.7348,51.4206"
+             target="_blank" rel="noopener noreferrer"
+             class="px-4 py-2 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-700 text-xs font-semibold transition-all flex items-center gap-2 border border-amber-200">
+            <i class="fa-brands fa-google"></i> گوگل مپ
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FLOATING ACTION BUTTONS ===================== -->
+  <div class="fixed bottom-6 left-6 z-40 flex flex-col gap-3">
+    <a href="https://wa.me/989126801450" target="_blank" rel="noopener noreferrer"
+       class="w-12 h-12 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white shadow-xl shadow-emerald-500/40 flex items-center justify-center transition-all transform hover:scale-110"
+       title="ارتباط در واتساپ مدیریت">
+      <i class="fa-brands fa-whatsapp text-2xl"></i>
+    </a>
+    <a href="tel:+982188731810"
+       class="w-12 h-12 rounded-full bg-white border border-amber-300 hover:bg-amber-600 text-amber-600 hover:text-white shadow-xl shadow-amber-500/20 flex items-center justify-center transition-all transform hover:scale-110"
+       title="تماس ۲۴ ساعته (02188731810)">
+      <i class="fa-solid fa-phone-volume text-base"></i>
+    </a>
+    <a href="tel:09126801450"
+       class="w-12 h-12 rounded-full bg-gradient-to-r from-amber-600 to-amber-500 text-white shadow-xl shadow-amber-500/40 flex items-center justify-center transition-all transform hover:scale-110"
+       title="تماس مستقیم با مدیریت">
+      <i class="fa-solid fa-phone text-lg"></i>
+    </a>
+  </div>
+
+  <!-- ===================== PAYMENT MODAL ===================== -->
+  <div id="paymentModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm items-center justify-center p-4">
+    <div class="bg-white border border-amber-200 rounded-3xl max-w-md w-full p-6 relative shadow-2xl text-right">
+      <button onclick="closePaymentModal()" class="absolute top-4 left-4 w-8 h-8 rounded-full bg-amber-50 text-amber-500 hover:text-amber-900 flex items-center justify-center transition-all" aria-label="بستن">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-5 border-b border-amber-100 pb-4">
+        <div class="w-10 h-10 rounded-xl bg-amber-500 flex items-center justify-center text-white shadow-lg shadow-amber-500/40 text-lg">
+          <i class="fa-solid fa-receipt"></i>
+        </div>
+        <div>
+          <h3 class="text-base font-bold text-amber-900">اطلاعات واریز بیعانه</h3>
+          <span id="modalRoomTitle" class="text-xs text-amber-600 font-medium">۳ تخته (شماره ۱۲)</span>
+        </div>
+      </div>
+
+      <div class="bg-amber-50 rounded-2xl p-4 mb-4 border border-amber-100 space-y-2 text-xs">
+        <div class="flex justify-between items-center text-amber-700">
+          <span>مبلغ ودیعه:</span>
+          <span id="modalDeposit" class="font-bold text-amber-900">۱۲ میلیون تومان</span>
+        </div>
+        <div class="flex justify-between items-center text-amber-700">
+          <span>اجاره ماهانه:</span>
+          <span id="modalRent" class="font-bold text-amber-900">۱۲ میلیون تومان</span>
+        </div>
+      </div>
+
+      <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 mb-4 text-center">
+        <span class="text-[11px] text-amber-700 block mb-1">شماره کارت جهت واریز بیعانه</span>
+        <div class="text-lg font-black tracking-widest text-amber-800 my-1 select-all" dir="ltr" id="cardNumber">
+          ۵۰۲۹-۳۸۱۰-۲۷۱۶-۹۲۸۳
+        </div>
+        <span class="text-xs text-amber-700 block mb-3">به نام: <strong class="text-amber-900">خانم فاطمه دلاوری (مدیریت ونوس)</strong></span>
+        <button onclick="copyCardNumber()" id="copyBtn" class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-xl bg-amber-200 hover:bg-amber-600 text-amber-800 hover:text-white border border-amber-300 text-xs font-semibold transition-all">
+          <i class="fa-regular fa-copy"></i>
+          <span id="copyText">کپی شماره کارت</span>
+        </button>
+      </div>
+
+      <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 mb-5 text-center">
+        <span class="text-[11px] text-amber-700 block mb-1">شماره شبا جهت واریز پایا و ساتنا</span>
+        <div class="text-sm font-mono font-bold tracking-wider text-amber-800 my-1 select-all" dir="ltr" id="shabaNumber">
+          IR080660000000204637576008
+        </div>
+        <span class="text-xs text-amber-700 block mb-3">به نام: <strong class="text-amber-900">آقای سپهر شکرچیان</strong></span>
+        <button onclick="copyShabaNumber()" id="copyShabaBtn" class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-xl bg-amber-200 hover:bg-amber-600 text-amber-800 hover:text-white border border-amber-300 text-xs font-semibold transition-all">
+          <i class="fa-regular fa-copy"></i>
+          <span id="copyShabaText">کپی شماره شبا</span>
+        </button>
+      </div>
+
+      <div class="space-y-2">
+        <a id="whatsappLink" href="https://wa.me/989126801450?text=%D8%B3%D9%84%D8%A7%D9%85%D8%8C%20%D9%81%DB%8C%D8%B4%20%D9%88%D8%A7%D8%B1%DB%8C%D8%B2%20%D8%A8%DB%8C%D8%B9%D8%A7%D9%86%D9%87%20%D8%B1%D8%A7%20%D8%A7%D8%B1%D8%B3%D8%A7%D9%84%20%D9%85%DB%8C%E2%80%8C%DA%A9%D9%86%D9%85" target="_blank" rel="noopener noreferrer" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-lg shadow-emerald-600/20">
+          <i class="fa-brands fa-whatsapp text-base"></i> ارسال فیش واریزی در واتساپ
+        </a>
+        <a href="tel:09126801450" class="w-full py-2.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-800 font-semibold text-xs flex items-center justify-center gap-2 transition-all border border-amber-200">
+          <i class="fa-solid fa-phone text-xs"></i> تماس مستقیم با مدیریت (۰۹۱۲۶۸۰۱۴۵۰)
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== SCRIPTS ===================== -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
   <script>
-    // ---------- MOBILE MENU ----------
-    const burger = document.getElementById('burger');
-    const mobileMenu = document.getElementById('mobileMenu');
-    burger.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-      burger.innerHTML = mobileMenu.classList.contains('hidden')
-        ? '<i class="fa-solid fa-bars"></i>'
-        : '<i class="fa-solid fa-xmark"></i>';
+    new Swiper(".myGallerySwiper", {
+      loop: true,
+      autoplay: { delay: 4000, disableOnInteraction: false },
+      pagination: { el: ".swiper-pagination", clickable: true },
     });
-    mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
-        burger.innerHTML = '<i class="fa-solid fa-bars"></i>';
+
+    function toggleBookingTable() {
+      const content = document.getElementById('bookingTableContent');
+      const icon = document.getElementById('toggleIcon');
+      content.classList.toggle('hidden');
+      icon.classList.toggle('rotate-180');
+    }
+
+    function toggleFaq(id) {
+      const ans = document.getElementById(`faq-ans-${id}`);
+      const icon = document.getElementById(`faq-icon-${id}`);
+      ans.classList.toggle('hidden');
+      icon.classList.toggle('rotate-180');
+    }
+
+    function toggleAccordion(el) {
+      const content = el.nextElementSibling;
+      const isOpen = content.classList.contains('open');
+      document.querySelectorAll('.accordion-content.open').forEach(c => c.classList.remove('open'));
+      document.querySelectorAll('.footer-link.open').forEach(l => l.classList.remove('open'));
+      if (!isOpen) {
+        content.classList.add('open');
+        el.classList.add('open');
+      }
+    }
+
+    function toggleFormAccordion() {
+      const content = document.getElementById('requestFormContent');
+      const icon = document.getElementById('formToggleIcon');
+      content.classList.toggle('open');
+      icon.classList.toggle('rotate-180');
+    }
+
+    function openPaymentModal(roomTitle, deposit, rent, date = '') {
+      document.getElementById('modalRoomTitle').innerText = roomTitle + (date ? ` (تحویل ${date})` : '');
+      document.getElementById('modalDeposit').innerText = deposit;
+      document.getElementById('modalRent').innerText = rent;
+
+      const text = encodeURIComponent(`سلام، فیش واریز بیعانه برای ${roomTitle} را ارسال می‌کنم.`);
+      document.getElementById('whatsappLink').href = `https://wa.me/989126801450?text=${text}`;
+
+      const modal = document.getElementById('paymentModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closePaymentModal() {
+      const modal = document.getElementById('paymentModal');
+      modal.classList.remove('flex');
+      modal.classList.add('hidden');
+    }
+
+    function copyCardNumber() {
+      navigator.clipboard.writeText("5029381027169283").then(() => {
+        const t = document.getElementById('copyText');
+        t.innerText = "کپی شد!";
+        setTimeout(() => { t.innerText = "کپی شماره کارت"; }, 2000);
+      });
+    }
+
+    function copyShabaNumber() {
+      navigator.clipboard.writeText("IR080660000000204637576008").then(() => {
+        const t = document.getElementById('copyShabaText');
+        t.innerText = "کپی شد!";
+        setTimeout(() => { t.innerText = "کپی شماره شبا"; }, 2000);
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const lat = 35.7348;
+      const lng = 51.4206;
+      const map = L.map('venus-map').setView([lat, lng], 16);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap'
+      }).addTo(map);
+
+      const customPopup = `
+        <div style="font-weight: bold; margin-bottom: 4px; color: #7c5606; font-family: Vazirmatn;">پانسیون لوکس ونوس</div>
+        <div style="font-size: 11px; color: #8b6f47; font-family: Vazirmatn;">تهران، میدان آرژانتین، بلوار بیهقی، کوچه ۱۴ شرقی، پلاک ۱۸</div>
+      `;
+
+      L.marker([lat, lng]).addTo(map).bindPopup(customPopup).openPopup();
+    });
+
+    document.querySelectorAll('a[href="#request-form"]').forEach(link => {
+      link.addEventListener('click', function() {
+        setTimeout(() => {
+          const content = document.getElementById('requestFormContent');
+          const icon = document.getElementById('formToggleIcon');
+          if (!content.classList.contains('open')) {
+            content.classList.add('open');
+            icon.classList.add('rotate-180');
+          }
+        }, 400);
       });
     });
-
-    // ---------- HERO SWIPER ----------
-    new Swiper('.heroSwiper', {
-      loop: true,
-      autoplay: { delay: 3500, disableOnInteraction: false },
-      pagination: { el: '.heroSwiper .swiper-pagination', clickable: true },
-      navigation: {
-        nextEl: '.heroSwiper .swiper-button-next',
-        prevEl: '.heroSwiper .swiper-button-prev',
-      },
-      effect: 'fade',
-      fadeEffect: { crossFade: true },
-    });
-
-    // ---------- GALLERY SWIPER ----------
-    new Swiper('.gallerySwiper', {
-      loop: true,
-      slidesPerView: 1,
-      spaceBetween: 16,
-      autoplay: { delay: 2800, disableOnInteraction: false },
-      pagination: { el: '.gallerySwiper .swiper-pagination', clickable: true },
-      breakpoints: {
-        640: { slidesPerView: 2, spaceBetween: 18 },
-        1024: { slidesPerView: 3, spaceBetween: 20 },
-      },
-    });
-
-    // ---------- LEAFLET MAP ----------
-    const map = L.map('map', {
-      scrollWheelZoom: false,
-      attributionControl: true,
-      zoomControl: true,
-    }).setView([35.7195, 51.3835], 15);
-
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; CartoDB',
-      subdomains: 'abcd',
-      maxZoom: 19,
-    }).addTo(map);
-
-    const customIcon = L.divIcon({
-      className: 'custom-marker',
-      html: `<div style="background:#e6b8c9; width:36px; height:36px; border-radius:50% 50% 50% 0; transform: rotate(-45deg); display:flex; align-items:center; justify-content:center; box-shadow:0 6px 16px rgba(200,120,130,0.3); border:2px solid white;">
-        <i class="fa-solid fa-heart" style="transform: rotate(45deg); color:white; font-size:16px;"></i>
-      </div>`,
-      iconSize: [36, 36],
-      iconAnchor: [18, 36],
-      popupAnchor: [0, -30],
-    });
-
-    L.marker([35.7195, 51.3835], { icon: customIcon }).addTo(map)
-      .bindPopup('<div style="font-family:Vazirmatn; text-align:center; direction:rtl; font-size:13px; color:#7d4b5c;"><b>پانسیون دخترانه ونوس</b><br>خیابان کارگر شمالی، کوچه شهید فلاح</div>')
-      .openPopup();
-
-    // ---------- FORM FEEDBACK (اختیاری - برای نمایش پیام موفقیت بدون رفرش) ----------
-    const form = document.getElementById('reserveForm');
-    const feedback = document.getElementById('formFeedback');
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const data = new FormData(form);
-
-      try {
-        const response = await fetch(form.action, {
-          method: 'POST',
-          body: data,
-          headers: { 'Accept': 'application/json' }
-        });
-
-        if (response.ok) {
-          form.reset();
-          feedback.classList.remove('hidden');
-          setTimeout(() => feedback.classList.add('hidden'), 6000);
-        } else {
-          alert('خطا در ارسال فرم. لطفاً دوباره تلاش کنید.');
-        }
-      } catch (error) {
-        alert('خطا در ارتباط با سرور. لطفاً اتصال اینترنت خود را بررسی کنید.');
-      }
-    });
   </script>
+
+  <!-- ===== Statcounter ===== -->
+  <script type="text/javascript">
+    var sc_project = 13356731;
+    var sc_invisible = 1;
+    var sc_security = "01159f06";
+  </script>
+  <script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
+  <noscript>
+    <div class="statcounter">
+      <a title="Web Analytics Made Easy - Statcounter" href="https://statcounter.com/" target="_blank" rel="noopener">
+        <img class="statcounter" src="https://c.statcounter.com/13356731/0/01159f06/1/" alt="Web Analytics Made Easy - Statcounter" referrerpolicy="no-referrer-when-downgrade">
+      </a>
+    </div>
+  </noscript>
 </body>
 </html>
