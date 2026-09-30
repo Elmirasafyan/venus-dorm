@@ -632,40 +632,44 @@
           </button>
         </form>
 
-        <script>
-          const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyt2unsjOe4zquWxkvbuqSkNTEyIPT6Wa5VcZz7VnJ8D_qNeTRN2WSkxbCNB4xHzkMbuw/exec";
+       <script>
+  const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyt2unsjOe4zquWxkvbuqSkNTEyIPT6Wa5VcZz7VnJ8D_qNeTRN2WSkxbCNB4xHzkMbuw/exec";
 
-          document.getElementById('dormPreRegisterForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const btn = document.getElementById('submitBtn');
-            const statusMsg = document.getElementById('formStatusMsg');
-            
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال ثبت اطلاعات...';
-            statusMsg.classList.add('hidden');
+  document.getElementById('dormPreRegisterForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    const statusMsg = document.getElementById('formStatusMsg');
+    
+    // غیرفعال‌سازی دکمه و نمایش لودینگ
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال ثبت اطلاعات...';
+    statusMsg.classList.add('hidden');
 
-            const formData = new FormData(this);
+    const formData = new FormData(this);
 
-            fetch(GOOGLE_SCRIPT_URL, {
-              method: 'POST',
-              body: formData
-            })
-            .then(res => res.json())
-            .then(data => {
-              btn.disabled = false;
-              btn.innerHTML = '<i class="fas fa-paper-plane"></i> ثبت درخواست پیش‌ثبت‌نام';
-              statusMsg.className = "text-center text-sm py-3 px-4 rounded-xl font-bold bg-emerald-100 text-emerald-800 border border-emerald-300 block";
-              statusMsg.innerText = "✓ اطلاعات شما با موفقیت در سیستم ثبت شد. کارشناسان ما به زودی با شما تماس خواهند گرفت.";
-              document.getElementById('dormPreRegisterForm').reset();
-            })
-            .catch(err => {
-              btn.disabled = false;
-              btn.innerHTML = '<i class="fas fa-paper-plane"></i> تلاش مجدد';
-              statusMsg.className = "text-center text-sm py-3 px-4 rounded-xl font-bold bg-rose-100 text-rose-800 border border-rose-300 block";
-              statusMsg.innerText = "خطا در برقراری ارتباط. لطفاً مجدداً امتحان کنید یا از طریق واتساپ پیام دهید.";
-            });
-          });
-        </script>
+    // ارسال داده‌ها با حالت no-cors
+    fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      body: formData,
+      mode: 'no-cors'
+    })
+    .then(() => {
+      // در حالت no-cors، بلافاصله پس از ارسال موفق، پیام سبز نمایش داده می‌شود
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-paper-plane"></i> ثبت درخواست پیش‌ثبت‌نام';
+      statusMsg.className = "text-center text-sm py-3 px-4 rounded-xl font-bold bg-emerald-100 text-emerald-800 border border-emerald-300 block";
+      statusMsg.innerText = "✓ اطلاعات شما با موفقیت در سیستم ثبت شد. کارشناسان ما به زودی با شما تماس خواهند گرفت.";
+      document.getElementById('dormPreRegisterForm').reset();
+    })
+    .catch(err => {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-paper-plane"></i> تلاش مجدد';
+      statusMsg.className = "text-center text-sm py-3 px-4 rounded-xl font-bold bg-rose-100 text-rose-800 border border-rose-300 block";
+      statusMsg.innerText = "خطا در برقراری ارتباط. لطفاً مجدداً امتحان کنید یا از طریق واتساپ پیام دهید.";
+    });
+  });
+</script>
+
 
   <!-- ===================== ۸. CONTACTS (اطلاعات تماس — بعد از ظرفیت‌ها) ===================== -->
   <section id="contacts" class="max-w-7xl mx-auto px-6 py-12">
