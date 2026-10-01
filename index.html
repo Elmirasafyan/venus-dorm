@@ -557,17 +557,29 @@
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
+                       <div>
               <label class="block text-xs font-bold text-amber-900 mb-1">نوع اتاق مد نظر</label>
               <div class="relative">
-                <select name="roomType" class="w-full bg-amber-50/50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200 appearance-none">
-                  <option value="اتاق ۴ تخته ">اتاق ۴ تخته روزانه</option>
-                  <option value="اتاق ۱ تخته اختصاصی (VIP)">اتاق ۱ تخته اختصاصی (VIP)</option>
-                  <option value="اتاق ۲ تخته مستر">اتاق ۲ تخته مستر</option>
-                  <option value="اتاق ۳ تخته دلباز">اتاق ۳ تخته دلباز</option>
-                  <option value="اتاق ۴ یا ۶ تخته ">اتاق ۴ یا ۶ تخته عمومی</option>
-                  <option value="اتاق مهمان ">اتاق ۴ یا ۶ تخته عمومی</option>
+                <select name="roomType" id="roomType" class="w-full bg-amber-50 border-2 border-amber-400 rounded-xl px-4 py-3 text-sm text-amber-900 focus:outline-none focus:border-amber-600 appearance-none font-medium" required>
+                    <option value="" disabled selected>انتخاب نوع اتاق</option>
+                    <option value="اتاق ۱ تخته اختصاصی (VIP)">اتاق ۱ تخته اختصاصی (VIP)</option>
+                    <option value="اتاق ۲ تخته مستر">اتاق ۲ تخته مستر</option>
+                    <option value="اتاق ۲ تخته ساده">اتاق ۲ تخته ساده</option>
+                    <option value="اتاق مهمان ۲ تخته مستر">اتاق مهمان ۲ تخته مستر</option>
+                    <option value="اتاق ۳ تخته ساده">اتاق ۳ تخته ساده</option>
+                    <option value="اتاق ۳ تخته مستر">اتاق ۳ تخته مستر</option>
+                    <option value="اتاق ۴ تخته">اتاق ۴ تخته</option>
+                    <option value="اتاق ۶ تخته ساده">اتاق ۶ تخته ساده</option>
+                    <option value="اتاق ۶ تخته مستر">اتاق ۶ تخته مستر</option>
                 </select>
+                <!-- آیکون فلش برای هماهنگی با سایر فیلدها -->
+                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center px-4 text-amber-600">
+                    <i class="fas fa-chevron-down text-xs"></i>
+                </div>
+              </div>
+            </div>
+
+
                 <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center px-4 text-amber-500">
                   <i class="fas fa-chevron-down text-xs"></i>
                 </div>
@@ -836,7 +848,7 @@
         <i class="fa-solid fa-chevron-down"></i>
       </div>
       <div class="accordion-content">
-        استعمال هرگونه دخانیات در تمامی اتاق‌ها و فضاهای بسته اقامتگاه اکیداً ممنوع می‌باشد.
+        استعمال هرگونه دخانیات در تمامی اتاق‌ها و فضاهای اقامتگاه اکیداً ممنوع می‌باشد.
       </div>
     </div>
   </section>
@@ -1131,37 +1143,4 @@
     });
   </script>
 
-  <!-- ===== Statcounter ===== -->
-  <!-- کادر بزرگ و برجسته آمار بازدید -->
-<div style="
-    background: #ffffff; 
-    border: 3px solid #3498db; 
-    border-radius: 20px; 
-    padding: 30px; 
-    text-align: center; 
-    max-width: 300px; 
-    margin: 40px auto; 
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    font-family: Tahoma, sans-serif;">
-    
-    <h3 style="margin: 0 0 15px 0; color: #2c3e50; font-size: 1.2rem;">📊 تعداد بازدیدهای وب‌سایت</h3>
-    
-    <div id="statcounter-box" style="font-size: 2rem; font-weight: bold; color: #3498db;">
-        <!-- اسکریپت شمارنده در اینجا قرار می‌گیرد -->
-        <script type="text/javascript">
-            var sc_project = 13356731;
-            var sc_invisible = 0; 
-            var sc_security = "01159f06";
-            var sc_text = 2; // نمایش به صورت عدد
-        </script>
-        <script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
-        <noscript>
-            <div class="statcounter">
-                <a title="Web Analytics" href="https://statcounter.com/" target="_blank">
-                    <img src="https://c.statcounter.com/13356731/0/01159f06/0/" alt="Web Analytics">
-                </a>
-            </div>
-        </noscript>
-    </div>
-</div>
 
