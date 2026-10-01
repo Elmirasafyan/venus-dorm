@@ -531,14 +531,14 @@
   </section>
 
   <!-- ===================== ۷. فرم پیش‌ثبت‌نام (کشویی — بعد از ظرفیت‌ها) ===================== -->
-         <form id="dormPreRegisterForm" class="space-y-5 text-right pb-8">
+                 <form id="dormPreRegisterForm" class="space-y-5 text-right pb-8">
           <div>
             <label class="block text-xs font-bold text-amber-900 mb-1">انتخاب شعبه مورد نظر</label>
             <div class="relative">
               <select name="branch" class="w-full bg-amber-50 border-2 border-amber-400 rounded-xl px-4 py-3 text-sm text-amber-900 focus:outline-none focus:border-amber-600 appearance-none font-medium">
                 <option value="پانسیون دخترانه ونوس">پانسیون دخترانه ونوس (میدان آرژانتین - بیهقی)</option>
-                <option value="خوابگاه دخترانه آوین">خوابگاه دخترانه آوین (جردن - تندگویان)</option>
-                <option value="خوابگاه دخترانه جردن">خوابگاه دخترانه جردن (بالاتر از میرداماد)</option>
+            
+               
               </select>
               <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center px-4 text-amber-600">
                 <i class="fas fa-chevron-down text-xs"></i>
@@ -548,7 +548,7 @@
 
           <div>
             <label class="block text-xs font-bold text-amber-900 mb-1">نام و نام خانوادگی <span class="text-rose-500">*</span></label>
-            <input type="text" name="fullName" required placeholder="مثلاً: سارا محمدی" class="w-full bg-amber-50/50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 placeholder-amber-400 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition">
+            <input type="text" name="fullName" required placeholder="مثلاً: المیرا" class="w-full bg-amber-50/50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 placeholder-amber-400 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition">
           </div>
 
           <div>
@@ -561,11 +561,12 @@
               <label class="block text-xs font-bold text-amber-900 mb-1">نوع اتاق مد نظر</label>
               <div class="relative">
                 <select name="roomType" class="w-full bg-amber-50/50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200 appearance-none">
-                  <option value="اتاق ۴ تخته روزانه">اتاق ۴ تخته روزانه</option>
+                  <option value="اتاق ۴ تخته ">اتاق ۴ تخته روزانه</option>
                   <option value="اتاق ۱ تخته اختصاصی (VIP)">اتاق ۱ تخته اختصاصی (VIP)</option>
                   <option value="اتاق ۲ تخته مستر">اتاق ۲ تخته مستر</option>
                   <option value="اتاق ۳ تخته دلباز">اتاق ۳ تخته دلباز</option>
-                  <option value="اتاق ۴ یا ۶ تخته عمومی">اتاق ۴ یا ۶ تخته عمومی</option>
+                  <option value="اتاق ۴ یا ۶ تخته ">اتاق ۴ یا ۶ تخته عمومی</option>
+                  <option value="اتاق مهمان ">اتاق ۴ یا ۶ تخته عمومی</option>
                 </select>
                 <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center px-4 text-amber-500">
                   <i class="fas fa-chevron-down text-xs"></i>
@@ -631,6 +632,41 @@
             <span>ثبت درخواست پیش‌ثبت‌نام</span>
           </button>
         </form>
+
+        <script>
+          const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzdBQFt2Qxfq4XaQ0Vfp-JGK6w_jBH3RtOuxML6duNednJUeJeGeeu4TjsgnUkfSAleSA/exec";
+
+          document.getElementById('dormPreRegisterForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const statusMsg = document.getElementById('formStatusMsg');
+            
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال ثبت اطلاعات...';
+            statusMsg.classList.add('hidden');
+
+            const formData = new FormData(this);
+
+            fetch(GOOGLE_SCRIPT_URL, {
+              method: 'POST',
+              body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+              btn.disabled = false;
+              btn.innerHTML = '<i class="fas fa-paper-plane"></i> ثبت درخواست پیش‌ثبت‌نام';
+              statusMsg.className = "text-center text-sm py-3 px-4 rounded-xl font-bold bg-emerald-100 text-emerald-800 border border-emerald-300 block";
+              statusMsg.innerText = "✓ اطلاعات شما با موفقیت در سیستم ثبت شد. کارشناسان ما به زودی با شما تماس خواهند گرفت.";
+              document.getElementById('dormPreRegisterForm').reset();
+            })
+            .catch(err => {
+              btn.disabled = false;
+              btn.innerHTML = '<i class="fas fa-paper-plane"></i> تلاش مجدد';
+              statusMsg.className = "text-center text-sm py-3 px-4 rounded-xl font-bold bg-rose-100 text-rose-800 border border-rose-300 block";
+              statusMsg.innerText = "خطا در برقراری ارتباط. لطفاً مجدداً امتحان کنید یا از طریق واتساپ پیام دهید.";
+            });
+          });
+        </script>
 
        <script>
   const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyt2unsjOe4zquWxkvbuqSkNTEyIPT6Wa5VcZz7VnJ8D_qNeTRN2WSkxbCNB4xHzkMbuw/exec";
