@@ -409,7 +409,7 @@
               <th class="py-3.5 px-4 rounded-l-xl text-center">وضعیت ظرفیت</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-amber-100 text-amber-800">
+          <tbody id="tableBody" class="divide-y divide-amber-100 text-amber-800">
             <tr class="hover:bg-amber-50/50 transition-colors">
               <td class="py-3.5 px-4 font-semibold text-amber-900">۳ تخته (شماره ۱۲)</td>
               <td class="py-3.5 px-4">۱۲</td>
@@ -644,16 +644,11 @@
             <span>ثبت درخواست پیش‌ثبت‌نام</span>
           </button>
         </form>
-<script>
+  <script>
   // =========================================================
-  // آدرس وب‌اپ یکپارچه گوگل‌اسکریپت (Deploy جدید با دسترسی Anyone)
+  // آدرس وب‌اپ یکپارچه گوگل‌اسکریپت (Deploy با دسترسی Anyone)
   // =========================================================
- 
-<script>
-  // =========================================================
-  // آدرس وب‌اپ یکپارچه گوگل‌اسکریپت (که با /exec تمام می‌شود)
-  // =========================================================
-  const SCRIPT_URL = "https://script.google.com/macros/library/d/1SbI1c4sY5iqsZwn7VvMoKNiejQHJpWhW6l9uKNub-LVo_dhjyour0VzY/6";
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwa86yHKSaj1cI7Cr60_A2Jx8_DzYXiOlFFQRhn3vhdT637McCkZMuGTWJL3zXynYY7yA/exec";
 
   // ۱. ارسال فرم پیش‌ثبت‌نام (doPost)
   const regForm = document.getElementById('dormPreRegisterForm');
@@ -725,6 +720,7 @@
       });
   });
 </script>
+
 
 
   <!-- ===================== ۸. CONTACTS (اطلاعات تماس — بعد از ظرفیت‌ها) ===================== -->
