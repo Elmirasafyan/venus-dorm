@@ -684,36 +684,30 @@
     });
   }
 
-    // ۲. دریافت پویای اطلاعات جدول ظرفیت‌ها (doGet)
+  // ۲. دریافت پویای اطلاعات جدول ظرفیت‌ها (doGet)
   document.addEventListener('DOMContentLoaded', function () {
     const tbody = document.getElementById('tableBody');
     if (!tbody) return;
 
-    // افزودن پارامتر زمان برای جلوگیری از کش شدن داده‌ها توسط مرورگر
-    fetch(SCRIPT_URL + '?t=' + new Date().getTime())
+    fetch(SCRIPT_URL)
       .then(res => res.json())
       .then(data => {
         if (data && data.rows && data.rows.length > 0) {
           tbody.innerHTML = data.rows.map(row => {
-            const roomName = String(row[0] || '').trim();
-            const deposit = String(row[1] || '').trim();
-            const rent = String(row[2] || '').trim();
-            const statusRaw = String(row[3] || 'رزرو').trim();
-
-            // امن‌سازی متن برای جلوگیری از شکستن دکمه رزرو
-            const safeRoom = roomName.replace(/'/g, "\\'");
-            const safeDeposit = deposit ? deposit + ' میلیون تومان' : '-';
-            const safeRent = rent ? rent + ' میلیون تومان' : '-';
+            const roomName = row[0] || '';
+            const deposit = row[1] || '';
+            const rent = row[2] || '';
+            const status = row[3] || 'رزرو';
 
             return `
               <tr class="hover:bg-amber-50/50 transition-colors">
                 <td class="py-3.5 px-4 font-semibold text-amber-900">${roomName}</td>
-                <td class="py-3.5 px-4 font-medium">${deposit}</td>
-                <td class="py-3.5 px-4 font-medium">${rent}</td>
+                <td class="py-3.5 px-4">${deposit}</td>
+                <td class="py-3.5 px-4">${rent}</td>
                 <td class="py-3.5 px-4 text-center">
-                  <button type="button" onclick="openPaymentModal('${safeRoom}', '${safeDeposit}', '${safeRent}')"
-                    class="px-3.5 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-500 text-emerald-700 hover:text-white border border-emerald-200 transition-all font-semibold shadow-sm">
-                    <i class="fa-solid fa-credit-card text-[11px] ml-1"></i> ${statusRaw}
+                  <button type="button" onclick="openPaymentModal('${roomName}', '${deposit} میلیون تومان', '${rent} میلیون تومان')"
+                    class="px-3.5 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-500 text-emerald-700 hover:text-white border border-emerald-200 transition-all font-semibold">
+                    <i class="fa-solid fa-credit-card text-[11px]"></i> ${status}
                   </button>
                 </td>
               </tr>
@@ -725,7 +719,7 @@
         console.warn("جدول آنلاین لود نشد، محتوای پیش‌فرض نمایش داده شد:", err);
       });
   });
-
+</script>
 
 
 
@@ -1152,5 +1146,4 @@
       });
     });
   </script>
-
 
