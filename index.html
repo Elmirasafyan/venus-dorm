@@ -648,7 +648,12 @@
   // =========================================================
   // آدرس وب‌اپ یکپارچه گوگل‌اسکریپت (Deploy جدید با دسترسی Anyone)
   // =========================================================
-  const SCRIPT_URL = "GAPGPTMASKTOKENmymllp5w2uX0X";
+ 
+<script>
+  // =========================================================
+  // آدرس وب‌اپ یکپارچه گوگل‌اسکریپت (که با /exec تمام می‌شود)
+  // =========================================================
+  const SCRIPT_URL = "https://script.google.com/macros/library/d/1SbI1c4sY5iqsZwn7VvMoKNiejQHJpWhW6l9uKNub-LVo_dhjyour0VzY/6";
 
   // ۱. ارسال فرم پیش‌ثبت‌نام (doPost)
   const regForm = document.getElementById('dormPreRegisterForm');
@@ -662,11 +667,10 @@
       btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال ثبت اطلاعات...';
       statusMsg.className = "hidden";
 
-      // ارسال مستقیم FormData به متد doPost
       fetch(SCRIPT_URL, {
         method: 'POST',
         body: new FormData(this),
-        mode: 'no-cors' // رفع خطای CORS بدون ایجاد تداخل در ذخیره‌سازی داده
+        mode: 'no-cors'
       })
       .then(() => {
         btn.disabled = false;
@@ -693,7 +697,6 @@
     fetch(SCRIPT_URL)
       .then(res => res.json())
       .then(data => {
-        // اگر داده‌ها به صورت آرایه‌ای از ردیف‌ها ارسال شده باشند
         if (data && data.rows && data.rows.length > 0) {
           tbody.innerHTML = data.rows.map(row => {
             const roomName = row[0] || '';
@@ -718,7 +721,6 @@
         }
       })
       .catch(err => {
-        // در صورت بروز هرگونه اختلال اینترنتی، داده‌های استاتیک بدون تغییر باقی می‌مانند
         console.warn("جدول آنلاین لود نشد، محتوای پیش‌فرض نمایش داده شد:", err);
       });
   });
