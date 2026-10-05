@@ -376,7 +376,28 @@
   </section>
 
   <!-- ===================== ۶. BOOKING TABLE (ظرفیت‌ها) ===================== -->
-  
+  <div id="bookingTableContent" class="overflow-x-auto">
+  <table class="w-full text-right text-sm text-slate-700 min-w-[620px]">
+    <thead class="bg-amber-100/60 text-amber-900 border-b border-amber-200/80 font-bold">
+      <tr>
+        <th class="py-3 px-4">نوع و شماره اتاق</th>
+        <th class="py-3 px-4">ودیعه (میلیون)</th>
+        <th class="py-3 px-4">اجاره ماهانه (میلیون)</th>
+        <th class="py-3 px-4">وضعیت ظرفیت</th>
+        <th class="py-3 px-4 text-center">عملیات</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody" class="divide-y divide-amber-100/80">
+      <!-- داده‌ها زنده و خودکار از گوگل‌شیت لود می‌شوند -->
+      <tr>
+        <td colspan="5" class="py-8 text-center text-amber-800 animate-pulse font-medium">
+          ⏳ در حال دریافت آخرین ظرفیت اتاق‌ها از سرور...
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 
   <!-- ===================== ۷. فرم پیش‌ثبت‌نام (کشویی — بعد از ظرفیت‌ها) ===================== -->
                  <form id="dormPreRegisterForm" class="space-y-5 text-right pb-8">
