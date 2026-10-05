@@ -376,7 +376,8 @@
   </section>
 
   <!-- ===================== ۶. BOOKING TABLE (ظرفیت‌ها) ===================== -->
-  <div id="bookingTableContent" class="overflow-x-auto">
+  <!-- ===================== ۶. BOOKING TABLE (ظرفیت‌ها) ===================== -->
+<div id="bookingTableContent" class="overflow-x-auto rounded-xl border border-amber-200/80 shadow-sm bg-white">
   <table class="w-full text-right text-sm text-slate-700 min-w-[620px]">
     <thead class="bg-amber-100/60 text-amber-900 border-b border-amber-200/80 font-bold">
       <tr>
@@ -397,16 +398,126 @@
     </tbody>
   </table>
 </div>
- <!-- 👇 کد گام دوم را دقیقاً از اینجا پیست کن 👇 -->
-  <script>
-    const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT9YXQhUK152G0b0GuEjfbvA8N2kBIs3CV_G-TvGIXKQAu4ahlSbuJ_G7dvKoknm8kOln0gn4ps8RX/pub?output=csvا';
 
-    async function fetchRoomsCapacity() {
-      // بقیه کدهای گام دوم ...
+<!-- اسکریپت دریافت، تجزیه و رندر داده‌ها -->
+<script>
+  // لینک خروجی CSV منتشر شده از گوگل شیت (کاراکتر اضافی تصحیح شده است)
+  const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT9YXQhUK152G0b0GuEjfbvA8N2kBIs3CV_G-TvGIXKQAu4ahlSbuJ_G7dvKoknm8kOln0gn4ps8RX/pub?output=csv';
+
+  // تابع پارس استاندارد فایل CSV با پشتیبانی از کاما درون کوتیشن‌ها
+  function parseCSV(text) {
+    const lines = text.trim().split(/\r\n|\n/);
+    return lines.map(line => {
+      const values = [];
+      let current = '';
+      let insideQuote = false;
+
+      for (let i = 0; i < line.length; i++) {
+        const char = line[i];
+        if (char === '"' && (i === 0 || line[i - 1] !== '\\')) {
+          insideQuote = !insideQuote;
+        } else if (char === ',' && !insideQuote) {
+          values.push(current.trim().replace(/^"|"$/g, ''));
+          current = '';
+        } else {
+          current += char;
+        }
+      }
+      values.push(current.trim().replace(/^"|"$/g, ''));
+      return values;
+    });
+  }
+
+  // تابع باز کردن فرآیند رزرو برای اتاق انتخاب‌شده
+  function handleBooking(roomTitle) {
+    // امکان اسکرول به فرم ثبت‌نام یا پرکردن خودکار فیلد اتاق در فرم
+    const roomInput = document.getElementById('selectedRoomInput') || document.querySelector('input[name="room"]');
+    if (roomInput) {
+      roomInput.value = roomTitle;
     }
+    
+    const bookingSection = document.getElementById('bookingForm') || document.getElementById('reservation');
+    if (bookingSection) {
+      bookingSection.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      alert(`اتاق «${roomTitle}» انتخاب شد. لطفاً فرم ثبت‌نام را تکمیل فرمایید.`);
+    }
+  }
 
-    document.addEventListener('DOMContentLoaded', fetchRoomsCapacity);
-  </script>
+  async function fetchRoomsCapacity() {
+    const tableBody = document.getElementById('tableBody');
+
+    try {
+      // استفاده از کش بومی یا پارامتر ضد کش برای دریافت لحظه‌ای
+      const response = await fetch(`${GOOGLE_SHEET_CSV_URL}&_t=${Date.now()}`);
+      if (!response.ok) throw new Error('خطا در برقراری ارتباط با شیت');
+
+      const csvData = await response.text();
+      const rows = parseCSV(csvData);
+
+      // بررسی وجود داده (حداقل یک سطر سربرگ و یک سطر داده)
+      if (!rows || rows.length <= 1) {
+        tableBody.innerHTML = `
+          <tr>
+            <td colspan="5" class="py-6 text-center text-slate-500 font-medium">
+              در حال حاضر اطلاعاتی برای نمایش یافت نشد.
+            </td>
+          </tr>`;
+        return;
+      }
+
+      // حذف ردیف هدر
+      const dataRows = rows.slice(1);
+      tableBody.innerHTML = '';
+
+      dataRows.forEach(row => {
+        // ساختار ستون‌ها در شیت:
+        // ستون ۰: عنوان/شماره اتاق | ستون ۱: ودیعه | ستون ۲: اجاره | ستون ۳: وضعیت یا تعداد ظرفیت
+        const roomTitle = row[0] || '—';
+        const deposit   = row[1] || '—';
+        const rent      = row[2] || '—';
+        const statusRaw = (row[3] || '').trim();
+
+        // بررسی تکمیل بودن ظرفیت
+        const isFull = statusRaw.includes('تکمیل') || statusRaw === '0' || statusRaw.toLowerCase().includes('full');
+
+        // بج/نشان وضعیت
+        const badgeMarkup = isFull
+          ? `<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-rose-100 text-rose-700">تکمیل ظرفیت</span>`
+          : `<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-700">${statusRaw || 'دارای ظرفیت'}</span>`;
+
+        // دکمه عملیات
+        const actionButton = isFull
+          ? `<button disabled class="px-3.5 py-1.5 rounded-lg text-xs font-medium bg-slate-100 text-slate-400 cursor-not-allowed border border-slate-200">غیرقابل رزرو</button>`
+          : `<button onclick="handleBooking('${roomTitle}')" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-amber-600 hover:bg-amber-700 active:scale-95 text-white transition-all shadow-sm shadow-amber-600/20">رزرو اتاق</button>`;
+
+        // الحاق ردیف به جدول
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-amber-50/50 transition-colors duration-150';
+        tr.innerHTML = `
+          <td class="py-3.5 px-4 font-semibold text-slate-800">${roomTitle}</td>
+          <td class="py-3.5 px-4 text-slate-600 font-medium">${deposit}</td>
+          <td class="py-3.5 px-4 text-slate-600 font-medium">${rent}</td>
+          <td class="py-3.5 px-4">${badgeMarkup}</td>
+          <td class="py-3.5 px-4 text-center">${actionButton}</td>
+        `;
+        tableBody.appendChild(tr);
+      });
+
+    } catch (error) {
+      console.error('Error fetching sheet data:', error);
+      tableBody.innerHTML = `
+        <tr>
+          <td colspan="5" class="py-6 text-center text-rose-600 font-medium">
+            ⚠️ اختلال در دریافت اطلاعات. لطفاً صفحه را مجدداً بارگذاری کنید.
+          </td>
+        </tr>`;
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', fetchRoomsCapacity);
+</script>
+
 
   <!-- ===================== ۷. فرم پیش‌ثبت‌نام (کشویی — بعد از ظرفیت‌ها) ===================== -->
                  <form id="dormPreRegisterForm" class="space-y-5 text-right pb-8">
