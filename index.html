@@ -513,7 +513,7 @@
             <span>ثبت درخواست پیش‌ثبت‌نام</span>
           </button>
         </form>
-  <script>
+<script>
   // =========================================================
   // آدرس وب‌اپ یکپارچه گوگل‌اسکریپت (Deploy با دسترسی Anyone)
   // =========================================================
@@ -529,7 +529,7 @@
 
       btn.disabled = true;
       btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال ثبت اطلاعات...';
-      statusMsg.className = "hidden";
+      if (statusMsg) statusMsg.className = "hidden";
 
       fetch(SCRIPT_URL, {
         method: 'POST',
@@ -539,55 +539,88 @@
       .then(() => {
         btn.disabled = false;
         btn.innerHTML = '<i class="fas fa-paper-plane"></i> ثبت درخواست پیش‌ثبت‌نام';
-        statusMsg.className = "text-center text-sm py-3 px-4 rounded-xl font-bold bg-emerald-100 text-emerald-800 border border-emerald-300 block";
-        statusMsg.innerText = "✓ اطلاعات شما با موفقیت در سیستم ثبت شد. کارشناسان ما به زودی با شما تماس خواهند گرفت.";
+        if (statusMsg) {
+          statusMsg.className = "text-center text-sm py-3 px-4 rounded-xl font-bold bg-emerald-100 text-emerald-800 border border-emerald-300 block";
+          statusMsg.innerText = "✓ اطلاعات شما با موفقیت در سیستم ثبت شد. کارشناسان ما به زودی با شما تماس خواهند گرفت.";
+        }
         regForm.reset();
       })
       .catch(err => {
         console.error(err);
         btn.disabled = false;
         btn.innerHTML = '<i class="fas fa-paper-plane"></i> تلاش مجدد';
-        statusMsg.className = "text-center text-sm py-3 px-4 rounded-xl font-bold bg-rose-100 text-rose-800 border border-rose-300 block";
-        statusMsg.innerText = "خطا در برقراری ارتباط. لطفاً مجدداً امتحان کنید یا از طریق پیام‌رسان با ما در ارتباط باشید.";
+        if (statusMsg) {
+          statusMsg.className = "text-center text-sm py-3 px-4 rounded-xl font-bold bg-rose-100 text-rose-800 border border-rose-300 block";
+          statusMsg.innerText = "خطا در برقراری ارتباط. لطفاً مجدداً امتحان کنید یا از طریق پیام‌رسان با ما در ارتباط باشید.";
+        }
       });
     });
   }
 
-  // ۲. دریافت پویای اطلاعات جدول ظرفیت‌ها (doGet)
-  document.addEventListener('DOMContentLoaded', function () {
+  // ۲. دریافت و رندر هوشمند داده‌های جدول و عکس‌ها از گوگل‌شیت
+  function renderData(data) {
     const tbody = document.getElementById('tableBody');
     if (!tbody) return;
 
-    fetch(SCRIPT_URL)
-      .then(res => res.json())
-      .then(data => {
-        if (data && data.rows && data.rows.length > 0) {
-          tbody.innerHTML = data.rows.map(row => {
-            const roomName = row[0] || '';
-            const deposit = row[1] || '';
-            const rent = row[2] || '';
-            const status = row[3] || 'رزرو';
+    if (!data || !data.ok || !data.rooms || data.rooms.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="5" class="py-6 text-center text-rose-500 font-medium">خطا در دریافت اطلاعات یا داده‌ای در شیت یافت نشد.</td></tr>';
+      return;
+    }
 
-            return `
-              <tr class="hover:bg-amber-50/50 transition-colors">
-                <td class="py-3.5 px-4 font-semibold text-amber-900">${roomName}</td>
-                <td class="py-3.5 px-4">${deposit}</td>
-                <td class="py-3.5 px-4">${rent}</td>
-                <td class="py-3.5 px-4 text-center">
-                  <button type="button" onclick="openPaymentModal('${roomName}', '${deposit} میلیون تومان', '${rent} میلیون تومان')"
-                    class="px-3.5 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-500 text-emerald-700 hover:text-white border border-emerald-200 transition-all font-semibold">
-                    <i class="fa-solid fa-credit-card text-[11px]"></i> ${status}
-                  </button>
-                </td>
-              </tr>
-            `;
-          }).join('');
-        }
-      })
-      .catch(err => {
-        console.warn("جدول آنلاین لود نشد، محتوای پیش‌فرض نمایش داده شد:", err);
-      });
-  });
+    let html = "";
+    data.rooms.forEach(r => {
+      // تشخیص تکمیل یا خالی بودن
+      const isFull = String(r.vacants) === "0" || String(r.status).includes("تکمیل") || String(r.status).includes("ندارد");
+      
+      const depositText = (r.deposit !== undefined && String(r.deposit).trim() !== "") ? (r.deposit + " م.ت") : "—";
+      const rentText = (r.rent !== undefined && String(r.rent).trim() !== "") ? (r.rent + " م.ت") : "—";
+
+      // دکمه وضعیت/رزرو با هماهنگی کامل مودال پرداخت قبلی
+      const actionBtn = isFull
+        ? `<span class="px-3 py-1 rounded-lg bg-slate-100 text-slate-400 text-xs font-semibold">تکمیل</span>`
+        : `<button type="button" onclick="openPaymentModal('${r.room} (${r.type})', '${depositText}', '${rentText}')"
+             class="px-3.5 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-500 text-emerald-700 hover:text-white border border-emerald-200 transition-all font-semibold text-xs shadow-sm">
+             <i class="fa-solid fa-credit-card text-[11px] ml-1"></i> ${r.status || 'رزرو'}
+           </button>`;
+
+      html += `
+        <tr class="hover:bg-amber-50/50 transition-colors ${isFull ? 'opacity-60 bg-slate-50/30' : ''}">
+          <td class="py-3 px-4 font-semibold text-amber-900">${r.room} <span class="text-xs text-slate-500 font-normal">(${r.type})</span></td>
+          <td class="py-3 px-4 text-slate-700">${depositText}</td>
+          <td class="py-3 px-4 text-slate-700">${rentText}</td>
+          <td class="py-3 px-4 text-center font-bold ${isFull ? 'text-slate-400' : 'text-emerald-700'}">${isFull ? '۰' : r.vacants}</td>
+          <td class="py-3 px-4 text-center">${actionBtn}</td>
+        </tr>
+      `;
+    });
+
+    tbody.innerHTML = html;
+
+    // --- لود تصاویر در گالری در صورت وجود ---
+    if (data.gallery && data.gallery.length > 0 && document.getElementById("gallery")) {
+      const g = document.getElementById("gallery");
+      let idx = 0;
+      function showImg() {
+        const item = data.gallery[idx];
+        g.innerHTML = `<img src="${item.url}" alt="${item.title}" class="rounded-xl shadow-md w-full h-[380px] object-cover transition-all duration-500">
+                       <p class="text-center text-slate-600 font-medium mt-2">${item.title}</p>`;
+        idx = (idx + 1) % data.gallery.length;
+      }
+      showImg();
+      if (!window.galleryInterval) window.galleryInterval = setInterval(showImg, 4000);
+    }
+  }
+
+  // ۳. فراخوانی داده‌ها از گوگل‌شیت
+  function loadDashboard() {
+    const s = document.createElement("script");
+    s.src = `${SCRIPT_URL}?action=getData&callback=renderData&t=${Date.now()}`;
+    document.body.appendChild(s);
+  }
+
+  // لود هنگام باز شدن صفحه + رفرش خودکار هر ۱ دقیقه
+  document.addEventListener('DOMContentLoaded', loadDashboard);
+  setInterval(loadDashboard, 60000);
 </script>
 
 
