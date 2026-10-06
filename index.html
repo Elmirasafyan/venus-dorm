@@ -1166,6 +1166,32 @@
       });
     });
   </script>
+<script>
+  (function() {
+    // شناسه یکتا برای سایت ونوس
+    const namespace = 'venusdorm_ir';
+    const key = 'visits';
+
+    fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`)
+      .then(response => response.json())
+      .then(data => {
+        const counterEl = document.getElementById('visit-counter');
+        if (counterEl && data && typeof data.count !== 'undefined') {
+          // تبدیل اعداد به فارسی برای ظاهر هماهنگ
+          const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+          const countStr = data.count.toLocaleString('fa-IR');
+          counterEl.textContent = countStr;
+        }
+      })
+      .catch(err => {
+        // در صورت اختلال شبکه، متن جایگزین ساده قرار گیرد
+        const counterEl = document.getElementById('visit-counter');
+        if (counterEl) {
+          counterEl.textContent = 'ـ';
+        }
+      });
+  })();
+</script>
 
 <!-- بخش شمارنده بازدید -->
 <div style="text-align: center; margin-top: 15px; font-size: 14px; color: #666; direction: rtl;">
