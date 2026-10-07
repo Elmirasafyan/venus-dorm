@@ -30,33 +30,41 @@
 <body class="min-h-screen">
 
   <!-- ===================== HEADER ===================== -->
-  <header class="fixed top-0 inset-x-0 z-50 glass-nav">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-      
-      <!-- ۱. بخش راست -->
-      <div class="flex items-center gap-3">
-        <button id="mobile-menu-btn" type="button" class="lg:hidden p-2 text-amber-900 hover:text-amber-600 focus:outline-none">
-          <i class="fas fa-bars text-xl"></i>
-        </button>
-        <nav class="hidden lg:flex items-center gap-1 font-medium text-sm text-amber-800">
-          <a href="#hero" class="px-3 py-2 rounded-xl hover:text-amber-600 hover:bg-amber-50">صفحه اصلی</a>
-          <a href="#amenities" class="px-3 py-2 rounded-xl hover:text-amber-600 hover:bg-amber-50">امکانات</a>
-          <a href="#rooms" class="px-3 py-2 rounded-xl hover:text-amber-600 hover:bg-amber-50">اتاق‌ها و قیمت</a>
-        </nav>
-      </div>
+  <!-- ===================== HEADER ===================== -->
+<header class="fixed top-0 inset-x-0 z-50 glass-nav">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+    
+    <!-- ۱. بخش راست: لوگوی ونوس (حالا در سمت راست قرار می‌گیرد) -->
+    <div class="flex items-center">
+      <a href="#hero" class="flex items-center">
+        <img src="venus-logo.png (2).png" alt="لوگوی خوابگاه ونوس" class="h-8 sm:h-10 w-auto object-contain hover:scale-105 transition-transform duration-200">
+      </a>
+    </div>
 
-      <!-- ۲. بخش چپ: لوگو کوچک شده -->
-      <div class="flex items-center gap-2 sm:gap-3">
+    <!-- ۲. بخش وسط و چپ: منو و دکمه‌ها -->
+    <div class="flex items-center gap-2 sm:gap-4">
+      <!-- منوی دسکتاپ (مخفی در موبایل) -->
+      <nav class="hidden lg:flex items-center gap-1 font-medium text-sm text-amber-800">
+        <a href="#hero" class="px-3 py-2 rounded-xl hover:text-amber-600 hover:bg-amber-50">صفحه اصلی</a>
+        <a href="#amenities" class="px-3 py-2 rounded-xl hover:text-amber-600 hover:bg-amber-50">امکانات</a>
+        <a href="#rooms" class="px-3 py-2 rounded-xl hover:text-amber-600 hover:bg-amber-50">اتاق‌ها و قیمت</a>
+      </nav>
+
+      <!-- دکمه‌های اکشن -->
+      <div class="flex items-center gap-2">
         <a href="#request-form" class="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold text-amber-700 bg-amber-50 rounded-xl border border-amber-200">پیش‌ثبت‌نام</a>
         <a href="tel:88731810" class="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-bold text-white bg-amber-600 rounded-xl shadow-sm">تماس</a>
-
-        <!-- لوگوی کوچک شده: تغییر h-9 به h-7 و h-12 به h-9 -->
-        <a href="#hero" class="flex items-center pr-3 border-r border-amber-200/60 mr-1">
-          <img src="venus-logo.png (2).png" alt="لوگوی خوابگاه ونوس" class="h-7 sm:h-9 w-auto object-contain hover:scale-105 transition-transform duration-200">
-        </a>
       </div>
+
+      <!-- دکمه موبایل (سمت چپ) -->
+      <button id="mobile-menu-btn" type="button" class="lg:hidden p-2 text-amber-900 hover:text-amber-600 focus:outline-none">
+        <i class="fas fa-bars text-xl"></i>
+      </button>
     </div>
-  </header>
+
+  </div>
+</header>
+
   
 
 <!-- ===================== ۱. HERO (معرفی اصلی) ===================== -->
