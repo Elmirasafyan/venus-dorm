@@ -275,33 +275,46 @@
       </div>
     </div>
   </section>
-<!-- بخش جدول نمایش ظرفیت -->
-<div id="bookingTableContent" class="overflow-x-auto rounded-xl border border-blue-100 shadow-sm bg-white">
-  <table class="w-full text-right text-xs text-slate-700 min-w-[500px]">
-    <thead class="bg-blue-50 text-blue-900 border-b border-blue-100 font-bold">
-      <tr>
-        <th class="py-2.5 px-3">شماره اتاق</th>
-        <th class="py-2.5 px-3">نوع اتاق</th>
-        <th class="py-2.5 px-3">اجاره</th>
-        <th class="py-2.5 px-3">ودیعه</th>
-        <th class="py-2.5 px-3 text-center">ظرفیت</th>
-        <th class="py-2.5 px-3 text-center">عملیات</th>
-      </tr>
-    </thead>
-    <tbody id="tableBody" class="divide-y divide-blue-50">
-      <tr>
-        <td colspan="6" class="py-8 text-center text-blue-800 animate-pulse font-medium">
-          ⏳ در حال دریافت اطلاعات از سرور...
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<!-- بخش کنترل و جدول (یکپارچه) -->
+<div class="space-y-4">
+  <!-- باکس جستجو و فیلتر -->
+  <div class="flex flex-col sm:flex-row gap-3">
+    <input type="text" id="searchInput" placeholder="🔍 جستجوی شماره اتاق یا نوع اتاق..." 
+           class="flex-1 px-4 py-2 rounded-xl border border-blue-200 focus:ring-2 focus:ring-blue-500 focus:outline-none text-sm">
+    
+    <select id="capacityFilter" class="px-4 py-2 rounded-xl border border-blue-200 text-slate-700 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none">
+      <option value="all">همه اتاق‌ها</option>
+      <option value="available">فقط دارای ظرفیت</option>
+      <option value="full">تکمیل ظرفیت</option>
+    </select>
+  </div>
+
+  <!-- جدول -->
+  <div id="bookingTableContent" class="overflow-x-auto rounded-xl border border-blue-100 shadow-sm bg-white">
+    <table class="w-full text-right text-xs text-slate-700 min-w-[500px]">
+      <thead class="bg-blue-50 text-blue-900 border-b border-blue-100 font-bold">
+        <tr>
+          <th class="py-2.5 px-3">شماره اتاق</th>
+          <th class="py-2.5 px-3">نوع اتاق</th>
+          <th class="py-2.5 px-3">اجاره</th>
+          <th class="py-2.5 px-3">ودیعه</th>
+          <th class="py-2.5 px-3 text-center">ظرفیت</th>
+          <th class="py-2.5 px-3 text-center">عملیات</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody" class="divide-y divide-blue-50">
+        <tr>
+          <td colspan="6" class="py-8 text-center text-blue-800 animate-pulse">⏳ در حال دریافت اطلاعات...</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <script>
   const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT9YXQhUK152G0b0GuEjfbvA8N2kBIs3CV_G-TvGIXKQAu4ahlSbuJ_G7dvKoknm8kOln0gn4ps8RX/pub?output=csv&gid=865030458';
+  let allRoomsData = [];
 
-  // تابع تحلیل داده‌های CSV
   function parseCSV(text) {
     const lines = text.trim().split(/\r\n|\n/);
     return lines.map(line => {
@@ -311,73 +324,82 @@
       for (let i = 0; i < line.length; i++) {
         const char = line[i];
         if (char === '"' && (i === 0 || line[i - 1] !== '\\')) insideQuote = !insideQuote;
-        else if (char === ',' && !insideQuote) {
-          values.push(current.trim().replace(/^"|"$/g, ''));
-          current = '';
-        } else current += char;
+        else if (char === ',' && !insideQuote) { values.push(current.trim().replace(/^"|"$/g, '')); current = ''; }
+        else current += char;
       }
       values.push(current.trim().replace(/^"|"$/g, ''));
       return values;
     });
   }
 
-  // تابع پیمایش به فرم رزرو
+  function renderTable(data) {
+    const tableBody = document.getElementById('tableBody');
+    tableBody.innerHTML = '';
+    if (data.length === 0) {
+      tableBody.innerHTML = '<tr><td colspan="6" class="py-6 text-center text-slate-500">موردی یافت نشد.</td></tr>';
+      return;
+    }
+    data.forEach(row => {
+      const roomNumber = row[0] || '—';
+      const roomType = row[1] || '—';
+      const rent = row[2] || '—';
+      const deposit = row[3] || '—';
+      const capacity = (row[4] || '').trim();
+      const isFull = capacity.includes('تکمیل') || capacity === '0' || capacity.toLowerCase().includes('full');
+
+      const badge = isFull 
+        ? `<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-100">تکمیل</span>`
+        : `<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-100">آزاد</span>`;
+
+      const btn = isFull 
+        ? `<button disabled class="px-3 py-1 rounded-md text-[10px] font-medium bg-slate-50 text-slate-400 cursor-not-allowed border border-slate-100">پر</button>`
+        : `<button onclick="handleBooking('${roomNumber} - ${roomType}')" class="px-3 py-1 rounded-md text-[10px] font-semibold bg-blue-600 hover:bg-blue-700 text-white transition-all shadow-sm">رزرو</button>`;
+
+      const tr = document.createElement('tr');
+      tr.className = isFull ? 'bg-slate-50/50 opacity-75' : 'hover:bg-blue-50/30';
+      tr.innerHTML = `<td class="py-2 px-3 font-semibold text-slate-800">${roomNumber}</td><td class="py-2 px-3 text-slate-600">${roomType}</td><td class="py-2 px-3 text-slate-600">${rent}</td><td class="py-2 px-3 text-slate-600">${deposit}</td><td class="py-2 px-3 text-center">${badge}</td><td class="py-2 px-3 text-center">${btn}</td>`;
+      tableBody.appendChild(tr);
+    });
+  }
+
+  function filterData() {
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    const filterValue = document.getElementById('capacityFilter').value;
+    const filtered = allRoomsData.filter(row => {
+      const roomNumber = (row[0] || '').toLowerCase();
+      const roomType = (row[1] || '').toLowerCase();
+      const capacity = (row[4] || '').toLowerCase();
+      const isFull = capacity.includes('تکمیل') || capacity === '0' || capacity.includes('full');
+      const matchesSearch = roomNumber.includes(searchTerm) || roomType.includes(searchTerm);
+      const matchesFilter = filterValue === 'all' || (filterValue === 'available' ? !isFull : isFull);
+      return matchesSearch && matchesFilter;
+    });
+    renderTable(filtered);
+  }
+
+  async function init() {
+    try {
+      const response = await fetch(`${GOOGLE_SHEET_CSV_URL}&_t=${Date.now()}`);
+      const csvData = await response.text();
+      const rows = parseCSV(csvData);
+      allRoomsData = rows.slice(1).filter(r => r.some(cell => cell && cell.trim() !== ''));
+      renderTable(allRoomsData);
+      document.getElementById('searchInput').addEventListener('input', filterData);
+      document.getElementById('capacityFilter').addEventListener('change', filterData);
+    } catch (e) {
+      document.getElementById('tableBody').innerHTML = '<tr><td colspan="6" class="py-6 text-center text-rose-600">خطا در بارگذاری</td></tr>';
+    }
+  }
+
   function handleBooking(roomTitle) {
     const roomInput = document.getElementById('selectedRoomInput') || document.querySelector('input[name="room"]');
     if (roomInput) roomInput.value = roomTitle;
     const bookingSection = document.getElementById('bookingForm') || document.getElementById('reservation');
     if (bookingSection) bookingSection.scrollIntoView({ behavior: 'smooth' });
-    else alert(`اتاق «${roomTitle}» انتخاب شد. لطفاً فرم رزرو را تکمیل کنید.`);
   }
 
-  // تابع اصلی دریافت اطلاعات
-  async function fetchRoomsCapacity() {
-    const tableBody = document.getElementById('tableBody');
-    try {
-      const response = await fetch(`${GOOGLE_SHEET_CSV_URL}&_t=${Date.now()}`);
-      if (!response.ok) throw new Error(`کد خطا: ${response.status}`);
-
-      const csvData = await response.text();
-      const rows = parseCSV(csvData);
-      const dataRows = rows.slice(1).filter(r => r.some(cell => cell && cell.trim() !== ''));
-      
-      tableBody.innerHTML = '';
-
-      if (dataRows.length === 0) {
-        tableBody.innerHTML = '<tr><td colspan="6" class="py-6 text-center text-slate-500">اطلاعاتی یافت نشد.</td></tr>';
-        return;
-      }
-
-      dataRows.forEach(row => {
-        const roomNumber = row[0] || '—';
-        const roomType = row[1] || '—';
-        const rent = row[2] || '—';
-        const deposit = row[3] || '—';
-        const capacity = (row[4] || '').trim();
-        const isFull = capacity.includes('تکمیل') || capacity === '0' || capacity.toLowerCase().includes('full');
-
-        const badge = isFull 
-          ? `<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-100">تکمیل</span>`
-          : `<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-100">آزاد</span>`;
-
-        const btn = isFull 
-          ? `<button disabled class="px-3 py-1 rounded-md text-[10px] font-medium bg-slate-50 text-slate-400 cursor-not-allowed border border-slate-100">پر</button>`
-          : `<button onclick="handleBooking('${roomNumber} - ${roomType}')" class="px-3 py-1 rounded-md text-[10px] font-semibold bg-blue-600 hover:bg-blue-700 text-white transition-all shadow-sm">رزرو</button>`;
-
-        const tr = document.createElement('tr');
-        tr.className = isFull ? 'bg-slate-50/50 opacity-75' : 'hover:bg-blue-50/30';
-        tr.innerHTML = `<td class="py-2 px-3 font-semibold text-slate-800">${roomNumber}</td><td class="py-2 px-3 text-slate-600">${roomType}</td><td class="py-2 px-3 text-slate-600">${rent}</td><td class="py-2 px-3 text-slate-600">${deposit}</td><td class="py-2 px-3 text-center">${badge}</td><td class="py-2 px-3 text-center">${btn}</td>`;
-        tableBody.appendChild(tr);
-      });
-    } catch (error) {
-      console.error('Fetch Error:', error); // برای دیدن خطا در کنسول (F12)
-      tableBody.innerHTML = `<tr><td colspan="6" class="py-6 text-center text-rose-600">⚠️ خطا در بارگذاری: ${error.message}</td></tr>`;
-    }
-  }
-
-  document.addEventListener('DOMContentLoaded', fetchRoomsCapacity);
+  document.addEventListener('DOMContentLoaded', init);
 </script>
-
 
   <!-- ===================== ۷. فرم پیش‌ثبت‌نام (کشویی — بعد از ظرفیت‌ها) ===================== -->
                  <form id="dormPreRegisterForm" class="space-y-5 text-right pb-8">
