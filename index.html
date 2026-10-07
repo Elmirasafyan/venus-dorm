@@ -30,7 +30,9 @@
 <body class="min-h-screen">
 
  <!-- ===================== HEADER ===================== -->
-<header class="fixed top-0 inset-x-0 z-50 glass-nav bg-white/80 backdrop-blur-md border-b border-amber-100">
+<!-- ===================== HEADER ===================== -->
+<!-- اضافه شدن کلاس relative به هدر برای محدود کردن منوی موبایل -->
+<header class="fixed top-0 inset-x-0 z-50 glass-nav bg-white/80 backdrop-blur-md border-b border-amber-100 relative">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
     
     <!-- ۱. بخش راست: لوگو -->
@@ -42,7 +44,7 @@
 
     <!-- ۲. بخش وسط و چپ: منو و دکمه‌ها -->
     <div class="flex items-center gap-2 sm:gap-4">
-      <!-- منوی دسکتاپ (مخفی در موبایل) -->
+      <!-- منوی دسکتاپ -->
       <nav class="hidden lg:flex items-center gap-1 font-medium text-sm text-amber-800">
         <a href="#hero" class="px-3 py-2 rounded-xl hover:text-amber-600 hover:bg-amber-50">صفحه اصلی</a>
         <a href="#amenities" class="px-3 py-2 rounded-xl hover:text-amber-600 hover:bg-amber-50">امکانات</a>
@@ -62,8 +64,8 @@
     </div>
   </div>
 
-  <!-- منوی موبایل (انیمیشنی) - داخل هدر قرار گرفته تا با absolute زیر آن جای بگیرد -->
-  <div id="mobile-menu" class="absolute top-16 left-0 w-full bg-white border-b border-amber-100 overflow-hidden transition-all duration-300 ease-in-out max-h-0 opacity-0 invisible shadow-lg">
+  <!-- منوی موبایل: اضافه شدن lg:hidden برای حذف کامل در دسکتاپ -->
+  <div id="mobile-menu" class="lg:hidden absolute top-16 left-0 w-full bg-white border-b border-amber-100 overflow-hidden transition-all duration-300 ease-in-out max-h-0 opacity-0 invisible shadow-lg">
     <div class="px-4 py-4 space-y-2">
       <a href="#hero" class="block px-4 py-3 rounded-xl text-amber-800 hover:bg-amber-50 font-medium">صفحه اصلی</a>
       <a href="#amenities" class="block px-4 py-3 rounded-xl text-amber-800 hover:bg-amber-50 font-medium">امکانات</a>
@@ -71,21 +73,6 @@
     </div>
   </div>
 </header>
-
-<!-- اسکریپت کنترل انیمیشن -->
-<script>
-  const btn = document.getElementById('mobile-menu-btn');
-  const menu = document.getElementById('mobile-menu');
-
-  btn.addEventListener('click', () => {
-    // تغییر کلاس‌ها برای ایجاد انیمیشن باز و بسته شدن
-    menu.classList.toggle('max-h-0');
-    menu.classList.toggle('max-h-96'); 
-    menu.classList.toggle('opacity-0');
-    menu.classList.toggle('opacity-100');
-    menu.classList.toggle('invisible');
-  });
-</script>
 
 
   
