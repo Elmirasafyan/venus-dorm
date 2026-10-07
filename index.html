@@ -279,97 +279,9 @@
 <div class="max-w-5xl mx-auto p-4 space-y-6">
   
   <!-- بخش جستجو و فیلتر -->
-  <script>
-  // متغیر عمومی برای ذخیره داده‌ها جهت فیلتر بهتر
-  let currentRows = [];
-
-  const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT9YXQhUK152G0b0GuEjfbvA8N2kBIs3CV_G-TvGIXKQAu4ahlSbuJ_G7dvKoknm8kOln0gn4ps8RX/pub?output=csv&gid=865030458';
-
-  // این تابع مسئول جستجو و فیلتر است
-  function filterData() {
-    const searchTerm = document.getElementById('searchInput').value.trim().toLowerCase();
-    const capacityFilter = document.getElementById('capacityFilter').value;
-    const tableBody = document.getElementById('tableBody');
-    const rows = tableBody.querySelectorAll('tr');
-
-    rows.forEach(row => {
-      // ستون اول شماره اتاق (خانه 0) و ستون پنجم وضعیت (خانه 4)
-      const roomNumber = row.cells[0]?.textContent.toLowerCase() || '';
-      const statusText = row.cells[4]?.textContent.toLowerCase() || '';
-      
-      const matchesSearch = roomNumber.includes(searchTerm);
-      let matchesCapacity = true;
-      
-      if (capacityFilter === 'available') {
-        matchesCapacity = !statusText.includes('تکمیل');
-      } else if (capacityFilter === 'full') {
-        matchesCapacity = statusText.includes('تکمیل');
-      }
-
-      // اگر هم جستجو و هم فیلتر درست بود، نمایش بده
-      row.style.display = (matchesSearch && matchesCapacity) ? '' : 'none';
-    });
-  }
-
-  // اضافه کردن Event Listener به محض لود شدن صفحه
-  document.getElementById('searchInput').addEventListener('input', filterData);
-
-  function parseCSV(text) {
-    const lines = text.trim().split(/\r\n|\n/);
-    return lines.map(line => {
-      const values = [];
-      let current = '';
-      let insideQuote = false;
-      for (let i = 0; i < line.length; i++) {
-        const char = line[i];
-        if (char === '"' && (i === 0 || line[i - 1] !== '\\')) insideQuote = !insideQuote;
-        else if (char === ',' && !insideQuote) {
-          values.push(current.trim().replace(/^"|"$/g, ''));
-          current = '';
-        } else current += char;
-      }
-      values.push(current.trim().replace(/^"|"$/g, ''));
-      return values;
-    });
-  }
-
-  async function fetchRoomsCapacity() {
-    const tableBody = document.getElementById('tableBody');
-    try {
-      const response = await fetch(`${GOOGLE_SHEET_CSV_URL}&_t=${Date.now()}`);
-      const csvData = await response.text();
-      const rows = parseCSV(csvData).slice(1).filter(r => r.some(c => c));
-      
-      tableBody.innerHTML = '';
-      rows.forEach(row => {
-        // چک کردن وضعیت تکمیل بودن
-        const isFull = (row[4] || '').includes('تکمیل');
-        
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td class="py-3.5 px-4 font-semibold text-slate-800">${row[0]}</td>
-          <td class="py-3.5 px-4 text-slate-600">${row[1]}</td>
-          <td class="py-3.5 px-4 text-slate-600">${row[2]}</td>
-          <td class="py-3.5 px-4 text-slate-600">${row[3]}</td>
-          <td class="py-3.5 px-4 text-center">
-            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold ${isFull ? 'bg-rose-100 text-rose-700' : 'bg-emerald-100 text-emerald-700'}">
-              ${row[4] || ''}
-            </span>
-          </td>
-          <td class="py-3.5 px-4 text-center">${isFull ? '<span class="text-xs text-slate-400">پر</span>' : `<button onclick="handleBooking('${row[0]}')" class="px-3 py-1 bg-amber-600 text-white rounded-lg text-xs hover:bg-amber-700">رزرو</button>`}</td>
-        `;
-        tableBody.appendChild(tr);
-      });
-      // بعد از اینکه ردیف‌ها ساخته شدند، یک بار فیلتر را صدا می‌زنیم تا اگر چیزی در سرچ‌باکس نوشته شده، اعمال شود
-      filterData();
-    } catch (e) {
-      tableBody.innerHTML = '<tr><td colspan="6" class="text-center py-6 text-rose-600">خطا در بارگذاری</td></tr>';
-    }
-  }
-
-  document.addEventListener('DOMContentLoaded', fetchRoomsCapacity);
-</script>
-
+  <div class="flex flex-col sm:flex-row gap-3 bg-amber-50/50 p-4 rounded-xl border border-amber-100">
+    <input type="text" id="searchInput" placeholder="🔍 جستجوی شماره اتاق..." 
+           class="flex-1 p-2.5 border border-amber-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400">
     
     <select id="capacityFilter" onchange="filterData()"
             class="p-2.5 border border-amber-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400 text-slate-700">
@@ -379,8 +291,8 @@
     </select>
   </div>
 
-  <!-- جدول داده‌ها (متصل به گوگل شیت) -->
-  <div id="bookingTableContent" class="overflow-x-auto rounded-xl border border-amber-200/80 shadow-sm bg-white">
+  <!-- جدول داده‌ها -->
+  <div class="overflow-x-auto rounded-xl border border-amber-200/80 shadow-sm bg-white">
     <table class="w-full text-right text-sm text-slate-700 min-w-[620px]">
       <thead class="bg-amber-100/60 text-amber-900 border-b border-amber-200/80 font-bold">
         <tr>
@@ -395,7 +307,7 @@
       <tbody id="tableBody" class="divide-y divide-amber-100/80">
         <tr>
           <td colspan="6" class="py-8 text-center text-amber-800 animate-pulse font-medium">
-            ⏳ در حال دریافت آخرین ظرفیت اتاق‌ها...
+            ⏳ در حال بارگذاری اطلاعات از سرور...
           </td>
         </tr>
       </tbody>
@@ -406,14 +318,13 @@
 <script>
   const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT9YXQhUK152G0b0GuEjfbvA8N2kBIs3CV_G-TvGIXKQAu4ahlSbuJ_G7dvKoknm8kOln0gn4ps8RX/pub?output=csv&gid=865030458';
 
-  // تابع فیلتر کردن (جستجو)
+  // تابع فیلتر کردن
   function filterData() {
     const searchTerm = document.getElementById('searchInput').value.trim().toLowerCase();
     const capacityFilter = document.getElementById('capacityFilter').value;
     const rows = document.querySelectorAll('#tableBody tr');
 
     rows.forEach(row => {
-      // پیدا کردن سلول‌های شماره اتاق و وضعیت (وضعیت ستون 5 است)
       const roomInfo = row.cells[0]?.textContent.toLowerCase() || '';
       const statusText = row.cells[4]?.textContent.toLowerCase() || '';
       
@@ -430,9 +341,7 @@
     });
   }
 
-  // گوش دادن به تغییرات سرچ
-  document.getElementById('searchInput').addEventListener('input', filterData);
-
+  // تابع تحلیل CSV
   function parseCSV(text) {
     const lines = text.trim().split(/\r\n|\n/);
     return lines.map(line => {
@@ -452,14 +361,16 @@
     });
   }
 
+  // تابع رزرو
   function handleBooking(roomTitle) {
     const roomInput = document.getElementById('selectedRoomInput') || document.querySelector('input[name="room"]');
-    if (roomInput) roomInput.value = roomTitle;
+    if (roomInput) { roomInput.value = roomTitle; }
     const bookingSection = document.getElementById('bookingForm') || document.getElementById('reservation');
-    if (bookingSection) bookingSection.scrollIntoView({ behavior: 'smooth' });
-    else alert(`اتاق «${roomTitle}» انتخاب شد.`);
+    if (bookingSection) { bookingSection.scrollIntoView({ behavior: 'smooth' }); }
+    else { alert(`اتاق «${roomTitle}» انتخاب شد.`); }
   }
 
+  // دریافت داده‌ها
   async function fetchRoomsCapacity() {
     const tableBody = document.getElementById('tableBody');
     try {
@@ -486,11 +397,15 @@
         tableBody.appendChild(tr);
       });
     } catch (e) {
-      tableBody.innerHTML = '<tr><td colspan="6" class="text-center py-6 text-rose-600">خطا در بارگذاری</td></tr>';
+      tableBody.innerHTML = '<tr><td colspan="6" class="text-center py-6 text-rose-600">خطا در بارگذاری جدول</td></tr>';
     }
   }
 
-  document.addEventListener('DOMContentLoaded', fetchRoomsCapacity);
+  // اجرای اولیه
+  document.addEventListener('DOMContentLoaded', () => {
+    fetchRoomsCapacity();
+    document.getElementById('searchInput').addEventListener('input', filterData);
+  });
 </script>
 
 
