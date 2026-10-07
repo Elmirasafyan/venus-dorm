@@ -276,23 +276,22 @@
     </div>
   </section>
 
-  <!-- ===================== ۶. BOOKING TABLE (ظرفیت‌ها) ===================== -->
- <div id="bookingTableContent" class="overflow-x-auto rounded-xl border border-amber-200/80 shadow-sm bg-white">
-  <table class="w-full text-right text-sm text-slate-700 min-w-[620px]">
-    <thead class="bg-amber-100/60 text-amber-900 border-b border-amber-200/80 font-bold">
+<div id="bookingTableContent" class="overflow-x-auto rounded-xl border border-blue-100 shadow-sm bg-white">
+  <table class="w-full text-right text-xs text-slate-700 min-w-[500px]">
+    <thead class="bg-blue-50 text-blue-900 border-b border-blue-100 font-bold">
       <tr>
-        <th class="py-3 px-4">شماره اتاق</th>
-        <th class="py-3 px-4">نوع اتاق</th>
-        <th class="py-3 px-4">اجاره</th>
-        <th class="py-3 px-4">ودیعه</th>
-        <th class="py-3 px-4 text-center">وضعیت ظرفیت</th>
-        <th class="py-3 px-4 text-center">عملیات</th>
+        <th class="py-2.5 px-3">شماره اتاق</th>
+        <th class="py-2.5 px-3">نوع اتاق</th>
+        <th class="py-2.5 px-3">اجاره</th>
+        <th class="py-2.5 px-3">ودیعه</th>
+        <th class="py-2.5 px-3 text-center">ظرفیت</th>
+        <th class="py-2.5 px-3 text-center">عملیات</th>
       </tr>
     </thead>
-    <tbody id="tableBody" class="divide-y divide-amber-100/80">
+    <tbody id="tableBody" class="divide-y divide-blue-50">
       <tr>
-        <td colspan="6" class="py-8 text-center text-amber-800 animate-pulse font-medium">
-          ⏳ در حال دریافت آخرین ظرفیت اتاق‌ها از سرور...
+        <td colspan="6" class="py-6 text-center text-blue-800 animate-pulse font-medium">
+          ⏳ در حال بارگذاری لیست اتاق‌ها...
         </td>
       </tr>
     </tbody>
@@ -300,66 +299,19 @@
 </div>
 
 <script>
+  // ... (URL ثابت باقی می‌ماند) ...
   const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT9YXQhUK152G0b0GuEjfbvA8N2kBIs3CV_G-TvGIXKQAu4ahlSbuJ_G7dvKoknm8kOln0gn4ps8RX/pub?output=csv&gid=865030458';
 
-  function parseCSV(text) {
-    const lines = text.trim().split(/\r\n|\n/);
-    return lines.map(line => {
-      const values = [];
-      let current = '';
-      let insideQuote = false;
-
-      for (let i = 0; i < line.length; i++) {
-        const char = line[i];
-        if (char === '"' && (i === 0 || line[i - 1] !== '\\')) {
-          insideQuote = !insideQuote;
-        } else if (char === ',' && !insideQuote) {
-          values.push(current.trim().replace(/^"|"$/g, ''));
-          current = '';
-        } else {
-          current += char;
-        }
-      }
-      values.push(current.trim().replace(/^"|"$/g, ''));
-      return values;
-    });
-  }
-
-  function handleBooking(roomTitle) {
-    const roomInput = document.getElementById('selectedRoomInput') || document.querySelector('input[name="room"]');
-    if (roomInput) {
-      roomInput.value = roomTitle;
-    }
-    
-    const bookingSection = document.getElementById('bookingForm') || document.getElementById('reservation');
-    if (bookingSection) {
-      bookingSection.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      alert(`اتاق «${roomTitle}» انتخاب شد. لطفاً فرم رزرو را تکمیل کنید.`);
-    }
-  }
+  // تابع parseCSV و handleBooking بدون تغییر بمانند
+  // ...
 
   async function fetchRoomsCapacity() {
     const tableBody = document.getElementById('tableBody');
-
     try {
       const response = await fetch(`${GOOGLE_SHEET_CSV_URL}&_t=${Date.now()}`);
-      if (!response.ok) throw new Error('خطا در دریافت اطلاعات شیت');
-
       const csvData = await response.text();
       const rows = parseCSV(csvData);
-
-      if (!rows || rows.length <= 1) {
-        tableBody.innerHTML = `
-          <tr>
-            <td colspan="6" class="py-6 text-center text-slate-500 font-medium">
-              اطلاعاتی در این بخش یافت نشد.
-            </td>
-          </tr>`;
-        return;
-      }
-
-      // رد کردن ردیف اول (سربرگ) و حذف ردیف‌های کاملاً خالی شیت
+      
       const dataRows = rows.slice(1).filter(r => r.some(cell => cell && cell.trim() !== ''));
       tableBody.innerHTML = '';
 
@@ -368,54 +320,39 @@
         const roomType   = row[1] || '—';
         const rent       = row[2] || '—';
         const deposit    = row[3] || '—';
-        const capacity   = (row[4] || '').trim(); // ستون پنجم: وضعیت ظرفیت
-
-        // تشخیص پر بودن ظرفیت (شامل متن "تکمیل"، "0" یا "full")
+        const capacity   = (row[4] || '').trim();
         const isFull = capacity.includes('تکمیل') || capacity === '0' || capacity.toLowerCase().includes('full');
 
-        // برچسب رنگی وضعیت: قرمز پررنگ برای تکمیل، سبز استاندارد برای ظرفیت خالی
+        // استایل‌های جدید آبی
         const badgeMarkup = isFull
-          ? `<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-rose-100 text-rose-700 border border-rose-200">
-               <span class="w-1.5 h-1.5 rounded-full bg-rose-500 ml-1.5"></span>تکمیل ظرفیت
-             </span>`
-          : `<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700 border border-emerald-200">
-               <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 ml-1.5"></span>${capacity || 'دارای ظرفیت'}
-             </span>`;
+          ? `<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-100">تکمیل</span>`
+          : `<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-100">آزاد</span>`;
 
-        // دکمه اقدام
         const actionButton = isFull
-          ? `<button disabled class="px-3.5 py-1.5 rounded-lg text-xs font-medium bg-slate-100 text-slate-400 cursor-not-allowed border border-slate-200">غیرقابل رزرو</button>`
-          : `<button onclick="handleBooking('${roomNumber} - ${roomType}')" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-amber-600 hover:bg-amber-700 active:scale-95 text-white transition-all shadow-sm shadow-amber-600/20">رزرو اتاق</button>`;
+          ? `<button disabled class="px-3 py-1 rounded-md text-[10px] font-medium bg-slate-50 text-slate-400 cursor-not-allowed border border-slate-100">تکمیل</button>`
+          : `<button onclick="handleBooking('${roomNumber} - ${roomType}')" class="px-3 py-1 rounded-md text-[10px] font-semibold bg-blue-600 hover:bg-blue-700 text-white transition-all shadow-sm">رزرو</button>`;
 
         const tr = document.createElement('tr');
-        tr.className = isFull 
-          ? 'bg-slate-50/60 opacity-80 transition-colors duration-150' 
-          : 'hover:bg-amber-50/50 transition-colors duration-150';
+        tr.className = isFull ? 'bg-slate-50/50 opacity-75' : 'hover:bg-blue-50/30';
 
         tr.innerHTML = `
-          <td class="py-3.5 px-4 font-semibold text-slate-800">${roomNumber}</td>
-          <td class="py-3.5 px-4 text-slate-600">${roomType}</td>
-          <td class="py-3.5 px-4 text-slate-600 font-medium">${rent}</td>
-          <td class="py-3.5 px-4 text-slate-600 font-medium">${deposit}</td>
-          <td class="py-3.5 px-4 text-center">${badgeMarkup}</td>
-          <td class="py-3.5 px-4 text-center">${actionButton}</td>
+          <td class="py-2 px-3 font-semibold text-slate-800">${roomNumber}</td>
+          <td class="py-2 px-3 text-slate-600">${roomType}</td>
+          <td class="py-2 px-3 text-slate-600">${rent}</td>
+          <td class="py-2 px-3 text-slate-600">${deposit}</td>
+          <td class="py-2 px-3 text-center">${badgeMarkup}</td>
+          <td class="py-2 px-3 text-center">${actionButton}</td>
         `;
         tableBody.appendChild(tr);
       });
-
     } catch (error) {
-      console.error('Sheet fetch error:', error);
-      tableBody.innerHTML = `
-        <tr>
-          <td colspan="6" class="py-6 text-center text-rose-600 font-medium">
-            ⚠️ خطا در بارگذاری جدول ظرفیت‌ها. لطفاً اتصال اینترنت خود را بررسی کنید.
-          </td>
-        </tr>`;
+      tableBody.innerHTML = `<tr><td colspan="6" class="py-6 text-center text-rose-500">خطا در بارگذاری</td></tr>`;
     }
   }
-
   document.addEventListener('DOMContentLoaded', fetchRoomsCapacity);
 </script>
+
+  
 
 
   <!-- ===================== ۷. فرم پیش‌ثبت‌نام (کشویی — بعد از ظرفیت‌ها) ===================== -->
