@@ -8,11 +8,15 @@
   
 <title>خوابگاه دانشجویی و کارمندی دخترانه ونوس (آرژانتین) | پانسیون ونوس</title>
   
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>خوابگاه دانشجویی و کارمندی دخترانه ونوس (آرژانتین) | پانسیون ونوس</title>
+  
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="venus-logo.png">
+  <link rel="icon" type="image/png" href="venus-logo.png%20(2).png">
 
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- Font Awesome & Swiper & Vazirmatn -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -151,40 +155,74 @@
 <body class="min-h-screen">
 
   <!-- ===================== HEADER ===================== -->
+    <!-- ===================== HEADER ===================== -->
   <header class="fixed top-0 inset-x-0 z-50 glass-nav">
-    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-      <!-- منوی دسکتاپ -->
-      <nav class="hidden lg:flex items-center gap-1 font-medium text-sm text-amber-800">
-        <a href="#hero" class="px-3.5 py-2 rounded-xl hover:text-amber-600 hover:bg-amber-50 transition-colors">صفحه اصلی</a>
-        <a href="#amenities" class="px-3.5 py-2 rounded-xl hover:text-amber-600 hover:bg-amber-50 transition-colors">امکانات</a>
-        <a href="#rooms" class="px-3.5 py-2 rounded-xl hover:text-amber-600 hover:bg-amber-50 transition-colors">اتاق‌ها و قیمت</a>
-
-        <div class="relative group">
-          <button type="button" class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl hover:text-amber-600 hover:bg-amber-50 transition-colors focus:outline-none">
-            <span>راهنما و اطلاعات</span>
-            <i class="fas fa-chevron-down text-xs text-amber-400 group-hover:text-amber-600 group-hover:rotate-180 transition-transform duration-200"></i>
-          </button>
-          <div class="absolute right-0 mt-1 w-48 bg-white/98 backdrop-blur-md rounded-2xl shadow-xl border border-amber-100 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 z-50">
-            <a href="#rules" class="flex items-center gap-2.5 px-4 py-2.5 text-xs text-amber-900 hover:bg-amber-50 hover:text-amber-700 transition-colors">
-              <i class="fas fa-clipboard-list text-amber-500 text-sm w-4"></i> قوانین و مقررات
-            </a>
-            <a href="#location" class="flex items-center gap-2.5 px-4 py-2.5 text-xs text-amber-900 hover:bg-amber-50 hover:text-amber-700 transition-colors">
-              <i class="fas fa-map-marked-alt text-amber-500 text-sm w-4"></i> موقعیت مکانی
-            </a>
-            <a href="#contacts" class="flex items-center gap-2.5 px-4 py-2.5 text-xs text-amber-900 hover:bg-amber-50 hover:text-amber-700 transition-colors">
-              <i class="fas fa-headset text-amber-500 text-sm w-4"></i> تماس با ما
-            </a>
-          </div>
-        </div>
-      </nav>
-
-      <!-- اکشن‌ها -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      
+      <!-- ۱. بخش راست: دکمه همبرگری موبایل + منوی ناوبری دسکتاپ -->
       <div class="flex items-center gap-3">
-        <a href="#request-form" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-amber-700 bg-amber-50 hover:bg-amber-100 rounded-xl transition-colors border border-amber-200">
+        <!-- دکمه منو برای موبایل -->
+        <button id="mobile-menu-btn" type="button" class="lg:hidden p-2 text-amber-900 hover:text-amber-600 focus:outline-none" aria-label="باز کردن منو">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+
+        <!-- منوی دسکتاپ -->
+        <nav class="hidden lg:flex items-center gap-1 font-medium text-sm text-amber-800">
+          <a href="#hero" class="px-3.5 py-2 rounded-xl hover:text-amber-600 hover:bg-amber-50 transition-colors">صفحه اصلی</a>
+          <a href="#amenities" class="px-3.5 py-2 rounded-xl hover:text-amber-600 hover:bg-amber-50 transition-colors">امکانات</a>
+          <a href="#rooms" class="px-3.5 py-2 rounded-xl hover:text-amber-600 hover:bg-amber-50 transition-colors">اتاق‌ها و قیمت</a>
+
+          <!-- منوی آبشاری اطلاعات -->
+          <div class="relative group">
+            <button type="button" class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl hover:text-amber-600 hover:bg-amber-50 transition-colors focus:outline-none">
+              <span>راهنما و اطلاعات</span>
+              <i class="fas fa-chevron-down text-xs text-amber-400 group-hover:text-amber-600 group-hover:rotate-180 transition-transform duration-200"></i>
+            </button>
+            <div class="absolute right-0 mt-1 w-48 bg-white/98 backdrop-blur-md rounded-2xl shadow-xl border border-amber-100 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0 z-50">
+              <a href="#rules" class="flex items-center gap-2.5 px-4 py-2.5 text-xs text-amber-900 hover:bg-amber-50 hover:text-amber-700 transition-colors">
+                <i class="fas fa-clipboard-list text-amber-500 text-sm w-4"></i> قوانین و مقررات
+              </a>
+              <a href="#location" class="flex items-center gap-2.5 px-4 py-2.5 text-xs text-amber-900 hover:bg-amber-50 hover:text-amber-700 transition-colors">
+                <i class="fas fa-map-marked-alt text-amber-500 text-sm w-4"></i> موقعیت مکانی
+              </a>
+              <a href="#contacts" class="flex items-center gap-2.5 px-4 py-2.5 text-xs text-amber-900 hover:bg-amber-50 hover:text-amber-700 transition-colors">
+                <i class="fas fa-headset text-amber-500 text-sm w-4"></i> تماس با ما
+              </a>
+            </div>
+          </div>
+        </nav>
+      </div>
+
+      <!-- ۲. بخش چپ: اکشن‌ها + لوگوی ونوس -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="#request-form" class="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold text-amber-700 bg-amber-50 hover:bg-amber-100 rounded-xl transition-colors border border-amber-200">
           <i class="fas fa-calendar-check"></i> پیش‌ثبت‌نام
         </a>
-        <a href="tel:88731810" class="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-700 hover:to-amber-600 rounded-xl shadow-sm shadow-amber-500/20 transition-all hover:shadow-md">
-          <i class="fas fa-phone"></i> تماس فوری
+        <a href="tel:88731810" class="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-4 sm:py-2 text-xs font-bold text-white bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-700 hover:to-amber-600 rounded-xl shadow-sm shadow-amber-500/20 transition-all hover:shadow-md">
+          <i class="fas fa-phone"></i> تماس
+        </a>
+
+        <!-- لوگوی ونوس در منتهاالیه سمت چپ -->
+        <a href="#hero" class="flex items-center gap-2 pr-2 border-r border-amber-200/60 mr-1">
+          <img src="venus-logo.png%20(2).png" alt="لوگوی خوابگاه ونوس" class="h-9 sm:h-12 w-auto object-contain hover:scale-105 transition-transform duration-200">
+        </a>
+      </div>
+
+    </div>
+
+    <!-- منوی کشویی موبایل -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-white/95 backdrop-blur-md border-b border-amber-100 px-6 py-4 space-y-3">
+      <a href="#hero" class="block text-sm font-medium text-amber-900 hover:text-amber-600 py-1">صفحه اصلی</a>
+      <a href="#amenities" class="block text-sm font-medium text-amber-900 hover:text-amber-600 py-1">امکانات</a>
+      <a href="#rooms" class="block text-sm font-medium text-amber-900 hover:text-amber-600 py-1">اتاق‌ها و قیمت</a>
+      <div class="border-t border-amber-100 pt-2 space-y-2">
+        <a href="#rules" class="block text-xs text-amber-800 hover:text-amber-600"><i class="fas fa-clipboard-list ml-1.5 text-amber-500"></i> قوانین و مقررات</a>
+        <a href="#location" class="block text-xs text-amber-800 hover:text-amber-600"><i class="fas fa-map-marked-alt ml-1.5 text-amber-500"></i> موقعیت مکانی</a>
+        <a href="#contacts" class="block text-xs text-amber-800 hover:text-amber-600"><i class="fas fa-headset ml-1.5 text-amber-500"></i> تماس با ما</a>
+      </div>
+      <div class="pt-2">
+        <a href="#request-form" class="block text-center py-2 text-xs font-semibold text-amber-700 bg-amber-50 rounded-xl border border-amber-200">
+          <i class="fas fa-calendar-check ml-1"></i> فرم پیش‌ثبت‌نام آنلاین
         </a>
       </div>
     </div>
