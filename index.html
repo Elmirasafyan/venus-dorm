@@ -29,15 +29,14 @@
 
 <body class="min-h-screen">
 
-  <!-- ===================== HEADER ===================== -->
-  <!-- ===================== HEADER ===================== -->
-<header class="fixed top-0 inset-x-0 z-50 glass-nav">
+ <!-- ===================== HEADER ===================== -->
+<header class="fixed top-0 inset-x-0 z-50 glass-nav bg-white/80 backdrop-blur-md border-b border-amber-100">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
     
-    <!-- ۱. بخش راست: لوگوی ونوس (حالا در سمت راست قرار می‌گیرد) -->
+    <!-- ۱. بخش راست: لوگو -->
     <div class="flex items-center">
       <a href="#hero" class="flex items-center">
-        <img src="venus-logo.png (2).png" alt="لوگوی خوابگاه ونوس" class="h-8 sm:h-10 w-auto object-contain hover:scale-105 transition-transform duration-200">
+        <img src="venus-logo.png (2).png" alt="لوگوی خوابگاه ونوس" class="h-10 sm:h-14 w-auto object-contain hover:scale-105 transition-transform duration-200">
       </a>
     </div>
 
@@ -56,14 +55,38 @@
         <a href="tel:88731810" class="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-bold text-white bg-amber-600 rounded-xl shadow-sm">تماس</a>
       </div>
 
-      <!-- دکمه موبایل (سمت چپ) -->
+      <!-- دکمه موبایل -->
       <button id="mobile-menu-btn" type="button" class="lg:hidden p-2 text-amber-900 hover:text-amber-600 focus:outline-none">
         <i class="fas fa-bars text-xl"></i>
       </button>
     </div>
+  </div>
 
+  <!-- منوی موبایل (انیمیشنی) - داخل هدر قرار گرفته تا با absolute زیر آن جای بگیرد -->
+  <div id="mobile-menu" class="absolute top-16 left-0 w-full bg-white border-b border-amber-100 overflow-hidden transition-all duration-300 ease-in-out max-h-0 opacity-0 invisible shadow-lg">
+    <div class="px-4 py-4 space-y-2">
+      <a href="#hero" class="block px-4 py-3 rounded-xl text-amber-800 hover:bg-amber-50 font-medium">صفحه اصلی</a>
+      <a href="#amenities" class="block px-4 py-3 rounded-xl text-amber-800 hover:bg-amber-50 font-medium">امکانات</a>
+      <a href="#rooms" class="block px-4 py-3 rounded-xl text-amber-800 hover:bg-amber-50 font-medium">اتاق‌ها و قیمت</a>
+    </div>
   </div>
 </header>
+
+<!-- اسکریپت کنترل انیمیشن -->
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+
+  btn.addEventListener('click', () => {
+    // تغییر کلاس‌ها برای ایجاد انیمیشن باز و بسته شدن
+    menu.classList.toggle('max-h-0');
+    menu.classList.toggle('max-h-96'); 
+    menu.classList.toggle('opacity-0');
+    menu.classList.toggle('opacity-100');
+    menu.classList.toggle('invisible');
+  });
+</script>
+
 
   
 
