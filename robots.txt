@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>خوابگاه دانشجویی و کارمندی دخترانه ونوس (آرژانتین) | پانسیون ونوس</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="venus-logo.png (2).png">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome & Swiper & Vazirmatn -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/misc/Farsi-Digits/font-face.css" rel="stylesheet" type="text/css">
+
+  <script>
+    tailwind.config = { theme: { extend: { fontFamily: { sans: ['Vazirmatn FD', 'sans-serif'] } } } }
+  </script>
+
+  <style>
+    html, body { direction: rtl; font-family: 'Vazirmatn FD', sans-serif; background-color: #fdfaf3; color: #3d2f1a; overflow-x: hidden; }
+    .glass-nav { background: rgba(253, 250, 243, 0.96); backdrop-filter: blur(12px); border-bottom: 1px solid #f0e4c8; }
+  </style>
+</head>
+
+<body class="min-h-screen">
+
+<header class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-amber-100 relative">
+  <!-- کانتینر اصلی هدر -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+    
+    <!-- لوگو -->
+    <div class="flex items-center shrink-0">
+      <a href="#hero" class="flex items-center">
+        <img src="venus-logo.png (2).png" alt="لوگوی خوابگاه ونوس" class="h-10 sm:h-14 w-auto object-contain">
+      </a>
+    </div>
+
+    <!-- منوی دسکتاپ -->
+    <div class="hidden lg:flex items-center gap-1 font-medium text-sm text-amber-800">
+      <a href="#hero" class="px-3 py-2 rounded-xl hover:text-amber-600 hover:bg-amber-50">صفحه اصلی</a>
+      <a href="#amenities" class="px-3 py-2 rounded-xl hover:text-amber-600 hover:bg-amber-50">امکانات</a>
+      <a href="#rooms" class="px-3 py-2 rounded-xl hover:text-amber-600 hover:bg-amber-50">اتاق‌ها و قیمت</a>
+    </div>
+
+    <!-- دکمه‌های اکشن -->
+    <div class="flex items-center gap-2">
+      <a href="#request-form" class="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold text-amber-700 bg-amber-50 rounded-xl border border-amber-200">پیش‌ثبت‌نام</a>
+      <a href="tel:88731810" class="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-bold text-white bg-amber-600 rounded-xl shadow-sm">تماس</a>
+      
+      <!-- دکمه موبایل -->
+      <button id="mobile-menu-btn" type="button" class="lg:hidden p-2 text-amber-900 hover:text-amber-600">
+        <i class="fas fa-bars text-xl"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- منوی موبایل (به صورت absolute و فقط در موبایل) -->
+  <div id="mobile-menu" class="lg:hidden absolute top-full left-0 w-full bg-white border-b border-amber-100 overflow-hidden transition-all duration-300 ease-in-out max-h-0 opacity-0 invisible shadow-lg">
+    <div class="px-4 py-4 space-y-2">
+      <a href="#hero" class="block px-4 py-3 rounded-xl text-amber-800 hover:bg-amber-50 font-medium">صفحه اصلی</a>
+      <a href="#amenities" class="block px-4 py-3 rounded-xl text-amber-800 hover:bg-amber-50 font-medium">امکانات</a>
+      <a href="#rooms" class="block px-4 py-3 rounded-xl text-amber-800 hover:bg-amber-50 font-medium">اتاق‌ها و قیمت</a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn.addEventListener('click', () => {
+    menu.classList.toggle('max-h-0');
+    menu.classList.toggle('max-h-96'); 
+    menu.classList.toggle('opacity-0');
+    menu.classList.toggle('opacity-100');
+    menu.classList.toggle('invisible');
+  });
+</script>
+
+  
+
+<!-- ===================== ۱. HERO (معرفی اصلی) ===================== -->
+<section class="relative pt-28 pb-16 px-4 md:px-8 bg-slate-50/70">
+  <div class="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row items-center gap-10">
+    
+    <!-- ستون متن -->
+    <div class="w-full lg:w-5/12 text-right space-y-6">
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 leading-tight">
+        خوابگاه دانشجویی و کارمندی <br class="hidden sm:inline">
+        <span class="text-amber-600">ونوس شعبه اصلی آرژانتین</span>
+      </h1>
+
+      <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+        اتاق‌های آماده با امنیت ۲۴ ساعته، نظافت روزانه هتلی و دسترسی فوق‌العاده سریع به ایستگاه مترو مصلی، بی‌آرتی و دانشگاه‌های برتر تهران.
+      </p>
+
+      <div class="flex items-center gap-6 text-xs sm:text-sm text-slate-600 font-semibold pt-1 flex-wrap">
+        <div class="flex items-center gap-1.5">
+          <span class="text-amber-600 font-bold">📍</span>
+          <span>میدان آرژانتین، بلوار بیهقی</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ستون تصویر شاخص (بزرگ‌تر) -->
+    <div class="w-full lg:w-7/12">
+      <div class="relative mx-auto w-full">
+        <div class="absolute -inset-2 bg-gradient-to-tr from-amber-400/20 to-teal-400/20 rounded-[2.5rem] filter blur-xl opacity-70"></div>
+        
+        <img 
+          src="hero-room.webp" 
+          alt="اتاق‌های لوکس خوابگاه دانشجویی و کارمندی ونوس در تهران میدان آرژانتین" 
+          class="relative rounded-[2rem] shadow-2xl border-4 border-white w-full object-cover aspect-[16/10] transform hover:scale-[1.01] transition-transform duration-300"
+        >
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+  <!-- ===================== ۳. پیام مدیریت (بعد از خوش‌آمد) ===================== -->
+<section id="message" class="max-w-4xl mx-auto px-6 py-12">
+  <!-- کارت اصلی با استایل آبی -->
+  <div class="bg-white rounded-3xl p-8 sm:p-10 border-r-4 border-r-blue-600 relative overflow-hidden shadow-xl shadow-blue-50/50">
+    
+    <!-- آیکون پس‌زمینه (نقل‌قول) -->
+    <div class="absolute -left-8 -bottom-8 text-blue-50 text-9xl font-black pointer-events-none">
+      <i class="fa-solid fa-quote-left"></i>
+    </div>
+
+    <!-- سرتیتر بخش مدیریت -->
+    <div class="flex items-center gap-4 mb-8">
+      <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-blue-700 to-blue-500 flex items-center justify-center text-white text-2xl shadow-lg shadow-blue-500/30">
+        <i class="fa-solid fa-user-tie"></i>
+      </div>
+      <div>
+        <h3 class="text-xl font-black text-blue-950 tracking-tight">پیام مدیریت مجموعه</h3>
+        <span class="text-sm text-blue-600 font-medium"> ,    خانم فاطمه دلاوری سابقه مدیریت و بنیانگذار بیش از دو دهه خوابگاه‌های زنجیره‌ای ونوس، آوین، جردن </span>
+      </div>
+    </div>
+
+    <!-- متن پیام با خوانایی بالا -->
+    <p class="text-blue-900/80 leading-loose text-justify relative z-10 font-medium">
+      «سلام و درود به شما پژوهشگران، دانشجویان و مهمانان گرامی. در پانسیون دخترانه ونوس، تمام تلاش ما بر این متمرکز بوده تا محیطی کاملاً امن، آرام و شبیه به خانه شخصی برای شما فراهم سازیم تا با خیالی آسوده به تحصیل و کار بپردازید. رعایت نظم، بهداشت و سکوت، اولویت قطعی مجموعه ماست و خرسندیم که میزبان شما فرهیختگان گرامی هستیم.»
+    </p>
+  </div>
+</section>
+
+
+  <!-- ===================== ۴. AMENITIES ===================== -->
+  <section id="amenities" class="max-w-7xl mx-auto px-6 py-12">
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-amber-200 bg-amber-50 text-amber-700 text-xs font-semibold mb-3">
+        <i class="fa-solid fa-wand-magic-sparkles"></i> امکانات و تسهیلات
+      </div>
+      <h2 class="text-3xl font-extrabold text-amber-900 mb-2">امکانات رفاهی اقامتگاه ونوس</h2>
+      <p class="text-xs sm:text-sm text-amber-600">تمام آنچه برای یک زندگی آرام، بی‌دغدغه و متمرکز بر تحصیل و کار نیاز دارید</p>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+      <div class="glass-card p-5 rounded-2xl text-center">
+        <div class="w-12 h-12 mx-auto rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl mb-3"><i class="fa-solid fa-wifi"></i></div>
+        <h4 class="text-sm font-bold text-amber-900 mb-1">اینترنت پرسرعت</h4>
+        <p class="text-[11px] text-amber-600">وای‌فای پایدار فیبر نوری اختصاصی</p>
+      </div>
+      <div class="glass-card p-5 rounded-2xl text-center">
+        <div class="w-12 h-12 mx-auto rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl mb-3"><i class="fa-solid fa-book-open-reader"></i></div>
+        <h4 class="text-sm font-bold text-amber-900 mb-1">سالن مطالعه مجزا</h4>
+        <p class="text-[11px] text-amber-600">محیطی بدون سر و صدا با نورپردازی مهندسی</p>
+      </div>
+      <div class="glass-card p-5 rounded-2xl text-center">
+        <div class="w-12 h-12 mx-auto rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl mb-3"><i class="fa-solid fa-shield-halved"></i></div>
+        <h4 class="text-sm font-bold text-amber-900 mb-1">امنیت و حراست ۲۴ ساعته</h4>
+        <p class="text-[11px] text-amber-600">سرپرست مقیم، ورود و خروج کنترل‌شده</p>
+      </div>
+      <div class="glass-card p-5 rounded-2xl text-center">
+        <div class="w-12 h-12 mx-auto rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl mb-3"><i class="fa-solid fa-broom"></i></div>
+        <h4 class="text-sm font-bold text-amber-900 mb-1">نظافت دائمی هتلینگ</h4>
+        <p class="text-[11px] text-amber-600">ضدعفونی و پاکیزگی منظم مشاعات</p>
+      </div>
+      <div class="glass-card p-5 rounded-2xl text-center">
+        <div class="w-12 h-12 mx-auto rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl mb-3"><i class="fa-solid fa-kitchen-set"></i></div>
+        <h4 class="text-sm font-bold text-amber-900 mb-1">آشپزخانه‌های مدرن</h4>
+        <p class="text-[11px] text-amber-600">مایکروویو، اجاق، چای‌ساز و فضاهای مجزا</p>
+      </div>
+      <div class="glass-card p-5 rounded-2xl text-center">
+        <div class="w-12 h-12 mx-auto rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl mb-3"><i class="fa-solid fa-shirt"></i></div>
+        <h4 class="text-sm font-bold text-amber-900 mb-1">لاندری و شستشو</h4>
+        <p class="text-[11px] text-amber-600">ماشین‌های لباسشویی اتوماتیک و اتو</p>
+      </div>
+      <div class="glass-card p-5 rounded-2xl text-center">
+        <div class="w-12 h-12 mx-auto rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl mb-3"><i class="fa-solid fa-snowflake"></i></div>
+        <h4 class="text-sm font-bold text-amber-900 mb-1">سرمایش و گرمایش</h4>
+        <p class="text-[11px] text-amber-600">اسپلیت مدرن و پکیج جهت آسایش فصلی</p>
+      </div>
+      <div class="glass-card p-5 rounded-2xl text-center">
+        <div class="w-12 h-12 mx-auto rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl mb-3"><i class="fa-solid fa-bed"></i></div>
+        <h4 class="text-sm font-bold text-amber-900 mb-1">تجهیزات نو و استاندارد</h4>
+        <p class="text-[11px] text-amber-600">تشک‌های طبی نو، کمد شخصی و قفل ایمن</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ۵. ROOMS ===================== -->
+  <section id="rooms" class="max-w-7xl mx-auto px-6 py-12">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-extrabold text-amber-900 mb-2">اتاق‌ها و ظرفیت‌ها</h2>
+      <p class="text-xs sm:text-sm text-amber-600">تنوع اتاق‌های تک‌تخته، مستر و چندتخته با امکانات مجزا</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between border-t-4 border-t-amber-500 group">
+        <div>
+          <div class="h-56 w-full overflow-hidden relative bg-amber-50 flex items-center justify-center">
+            <img src="room1.jpg" alt="اتاق یک تخته" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
+            <span class="absolute top-3 right-3 px-3 py-1 bg-amber-500 text-white rounded-full text-xs font-bold z-10">VIP</span>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-amber-900 mb-2">اتاق ۱ تخته اختصاصی</h3>
+            <p class="text-xs text-amber-600 mb-4 leading-relaxed">فضای آرام و کاملاً مستقل با کمد اختصاصی، میز مطالعه و یخچال مجزا.</p>
+            <ul class="text-xs text-amber-800 space-y-2 mb-6">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-500"></i> میز مطالعه و کمد اختصاصی</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-500"></i> یخچال هتلی اختصاصی</li>
+            </ul>
+          </div>
+        </div>
+        <div class="p-6 pt-0">
+          <a href="#booking" class="block w-full py-3 text-center rounded-xl bg-amber-50 hover:bg-amber-500 hover:text-white text-amber-700 text-xs font-bold border border-amber-200 transition-all">بررسی ظرفیت و رزرو</a>
+        </div>
+      </div>
+
+      <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between border-t-4 border-t-amber-600 group">
+        <div>
+          <div class="h-56 w-full overflow-hidden relative bg-amber-50 flex items-center justify-center">
+            <img src="room2.jpg" alt="اتاق دو تخته مستر" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
+            <span class="absolute top-3 right-3 px-3 py-1 bg-amber-600 text-white rounded-full text-xs font-bold z-10">مستر</span>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-amber-900 mb-2">اتاق ۲ تخته مستر</h3>
+            <p class="text-xs text-amber-600 mb-4 leading-relaxed">همراه با سرویس بهداشتی و حمام مستر داخل واحد برای راحتی دوچندان شما.</p>
+            <ul class="text-xs text-amber-800 space-y-2 mb-6">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-600"></i> سرویس و حمام مستر داخل اتاق</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-600"></i> تشک‌های ارتوپدیک نو و استاندارد</li>
+            </ul>
+          </div>
+        </div>
+        <div class="p-6 pt-0">
+          <a href="#booking" class="block w-full py-3 text-center rounded-xl bg-amber-50 hover:bg-amber-600 hover:text-white text-amber-700 text-xs font-bold border border-amber-200 transition-all">بررسی ظرفیت و رزرو</a>
+        </div>
+      </div>
+
+      <div class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between border-t-4 border-t-amber-400 group">
+        <div>
+          <div class="h-56 w-full overflow-hidden relative bg-amber-50 flex items-center justify-center">
+            <img src="room3.jpg" alt="اتاق سه تخته" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500">
+            <span class="absolute top-3 right-3 px-3 py-1 bg-amber-400 text-white rounded-full text-xs font-bold z-10">پذیرش فعال</span>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-amber-900 mb-2">اتاق ۳ تخته دلباز</h3>
+            <p class="text-xs text-amber-600 mb-4 leading-relaxed">فضای بزرگ، پنجره‌های قدی و نورگیری عالی به همراه کمدهای اختصاصی جادار.</p>
+            <ul class="text-xs text-amber-800 space-y-2 mb-6">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> بالکن و نور طبیعی عالی</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> سیستم سرمایش و گرمایش مدرن</li>
+            </ul>
+          </div>
+        </div>
+        <div class="p-6 pt-0">
+          <a href="#booking" class="block w-full py-3 text-center rounded-xl bg-amber-50 hover:bg-amber-400 hover:text-white text-amber-700 text-xs font-bold border border-amber-200 transition-all">بررسی ظرفیت و رزرو</a>
+        </div>
+      </div>
+    </div>
+  </section>
+<!-- کانتینر اصلی -->
+<div class="max-w-5xl mx-auto p-4 space-y-6">
+  
+  <!-- بخش جستجو و فیلتر -->
+  <div class="flex flex-col sm:flex-row gap-3 bg-amber-50/50 p-4 rounded-xl border border-amber-100">
+    <input type="text" id="searchInput" placeholder="🔍 جستجوی شماره اتاق..." 
+           class="flex-1 p-2.5 border border-amber-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400">
+    
+    <select id="capacityFilter" onchange="filterData()"
+            class="p-2.5 border border-amber-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400 text-slate-700">
+      <option value="all">همه اتاق‌ها</option>
+      <option value="available">فقط دارای ظرفیت</option>
+      <option value="full">تکمیل ظرفیت</option>
+    </select>
+  </div>
+
+  <!-- جدول داده‌ها -->
+  <div class="overflow-x-auto rounded-xl border border-amber-200/80 shadow-sm bg-white">
+    <table class="w-full text-right text-sm text-slate-700 min-w-[620px]">
+      <thead class="bg-amber-100/60 text-amber-900 border-b border-amber-200/80 font-bold">
+        <tr>
+          <th class="py-3 px-4">شماره اتاق</th>
+          <th class="py-3 px-4">نوع اتاق</th>
+          <th class="py-3 px-4">اجاره</th>
+          <th class="py-3 px-4">ودیعه</th>
+          <th class="py-3 px-4 text-center">وضعیت ظرفیت</th>
+          <th class="py-3 px-4 text-center">عملیات</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody" class="divide-y divide-amber-100/80">
+        <tr>
+          <td colspan="6" class="py-8 text-center text-amber-800 animate-pulse font-medium">
+            ⏳ در حال بارگذاری اطلاعات از سرور...
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT9YXQhUK152G0b0GuEjfbvA8N2kBIs3CV_G-TvGIXKQAu4ahlSbuJ_G7dvKoknm8kOln0gn4ps8RX/pub?output=csv&gid=865030458';
+
+  // تابع فیلتر کردن
+  function filterData() {
+    const searchTerm = document.getElementById('searchInput').value.trim().toLowerCase();
+    const capacityFilter = document.getElementById('capacityFilter').value;
+    const rows = document.querySelectorAll('#tableBody tr');
+
+    rows.forEach(row => {
+      const roomInfo = row.cells[0]?.textContent.toLowerCase() || '';
+      const statusText = row.cells[4]?.textContent.toLowerCase() || '';
+      
+      const matchesSearch = roomInfo.includes(searchTerm);
+      let matchesCapacity = true;
+      
+      if (capacityFilter === 'available') {
+        matchesCapacity = !statusText.includes('تکمیل');
+      } else if (capacityFilter === 'full') {
+        matchesCapacity = statusText.includes('تکمیل');
+      }
+
+      row.style.display = (matchesSearch && matchesCapacity) ? '' : 'none';
+    });
+  }
+
+  // تابع تحلیل CSV
+  function parseCSV(text) {
+    const lines = text.trim().split(/\r\n|\n/);
+    return lines.map(line => {
+      const values = [];
+      let current = '';
+      let insideQuote = false;
+      for (let i = 0; i < line.length; i++) {
+        const char = line[i];
+        if (char === '"' && (i === 0 || line[i - 1] !== '\\')) insideQuote = !insideQuote;
+        else if (char === ',' && !insideQuote) {
+          values.push(current.trim().replace(/^"|"$/g, ''));
+          current = '';
+        } else current += char;
+      }
+      values.push(current.trim().replace(/^"|"$/g, ''));
+      return values;
+    });
+  }
+
+  // تابع رزرو
+  function handleBooking(roomTitle) {
+    const roomInput = document.getElementById('selectedRoomInput') || document.querySelector('input[name="room"]');
+    if (roomInput) { roomInput.value = roomTitle; }
+    const bookingSection = document.getElementById('bookingForm') || document.getElementById('reservation');
+    if (bookingSection) { bookingSection.scrollIntoView({ behavior: 'smooth' }); }
+    else { alert(`اتاق «${roomTitle}» انتخاب شد.`); }
+  }
+
+  // دریافت داده‌ها
+  async function fetchRoomsCapacity() {
+    const tableBody = document.getElementById('tableBody');
+    try {
+      const response = await fetch(`${GOOGLE_SHEET_CSV_URL}&_t=${Date.now()}`);
+      const csvData = await response.text();
+      const rows = parseCSV(csvData).slice(1).filter(r => r.some(c => c));
+      
+      tableBody.innerHTML = '';
+      rows.forEach(row => {
+        const isFull = (row[4] || '').toLowerCase().includes('تکمیل') || row[4] === '0';
+        const badge = isFull 
+          ? `<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-rose-100 text-rose-700">تکمیل ظرفیت</span>`
+          : `<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700">${row[4] || 'دارای ظرفیت'}</span>`;
+        
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="py-3.5 px-4 font-semibold text-slate-800">${row[0]}</td>
+          <td class="py-3.5 px-4 text-slate-600">${row[1]}</td>
+          <td class="py-3.5 px-4 text-slate-600">${row[2]}</td>
+          <td class="py-3.5 px-4 text-slate-600">${row[3]}</td>
+          <td class="py-3.5 px-4 text-center">${badge}</td>
+          <td class="py-3.5 px-4 text-center">${isFull ? '<span class="text-xs text-slate-400">پر</span>' : `<button onclick="handleBooking('${row[0]}')" class="px-3 py-1 bg-amber-600 text-white rounded-lg text-xs hover:bg-amber-700">رزرو</button>`}</td>
+        `;
+        tableBody.appendChild(tr);
+      });
+    } catch (e) {
+      tableBody.innerHTML = '<tr><td colspan="6" class="text-center py-6 text-rose-600">خطا در بارگذاری جدول</td></tr>';
+    }
+  }
+
+  // اجرای اولیه
+  document.addEventListener('DOMContentLoaded', () => {
+    fetchRoomsCapacity();
+    document.getElementById('searchInput').addEventListener('input', filterData);
+  });
+</script>
+
+
+  <!-- ===================== ۷. فرم پیش‌ثبت‌نام (کشویی — بعد از ظرفیت‌ها) ===================== -->
+                 <form id="dormPreRegisterForm" class="space-y-5 text-right pb-8">
+          <div>
+            <label class="block text-xs font-bold text-amber-900 mb-1">انتخاب شعبه مورد نظر</label>
+            <div class="relative">
+              <select name="branch" class="w-full bg-amber-50 border-2 border-amber-400 rounded-xl px-4 py-3 text-sm text-amber-900 focus:outline-none focus:border-amber-600 appearance-none font-medium">
+                <option value="پانسیون دخترانه ونوس">پانسیون دخترانه ونوس (میدان آرژانتین - بیهقی)</option>
+            
+               
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center px-4 text-amber-600">
+                <i class="fas fa-chevron-down text-xs"></i>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-amber-900 mb-1">نام و نام خانوادگی <span class="text-rose-500">*</span></label>
+            <input type="text" name="fullName" required placeholder="مثلاً: المیرا" class="w-full bg-amber-50/50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 placeholder-amber-400 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-amber-900 mb-1">شماره همراه (جهت هماهنگی) <span class="text-rose-500">*</span></label>
+            <input type="tel" name="phone" required placeholder="۰۹۱۲۳۴۵۶۷۸۹" dir="ltr" class="w-full bg-amber-50/50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 placeholder-amber-400 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition text-right">
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                       <div>
+              <label class="block text-xs font-bold text-amber-900 mb-1">نوع اتاق مد نظر</label>
+              <div class="relative">
+                <select name="roomType" id="roomType" class="w-full bg-amber-50 border-2 border-amber-400 rounded-xl px-4 py-3 text-sm text-amber-900 focus:outline-none focus:border-amber-600 appearance-none font-medium" required>
+                    <option value="" disabled selected>انتخاب نوع اتاق</option>
+                    <option value="اتاق ۱ تخته اختصاصی (VIP)">اتاق ۱ تخته اختصاصی (VIP)</option>
+                    <option value="اتاق ۲ تخته مستر">اتاق ۲ تخته مستر</option>
+                    <option value="اتاق ۲ تخته ساده">اتاق ۲ تخته ساده</option>
+                    <option value="اتاق مهمان ۲ تخته مستر">اتاق مهمان ۲ تخته مستر</option>
+                    <option value="اتاق ۳ تخته ساده">اتاق ۳ تخته ساده</option>
+                    <option value="اتاق ۳ تخته مستر">اتاق ۳ تخته مستر</option>
+                    <option value="اتاق ۴ تخته">اتاق ۴ تخته</option>
+                    <option value="اتاق ۶ تخته ساده">اتاق ۶ تخته ساده</option>
+                    <option value="اتاق ۶ تخته مستر">اتاق ۶ تخته مستر</option>
+                </select>
+                <!-- آیکون فلش برای هماهنگی با سایر فیلدها -->
+                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center px-4 text-amber-600">
+                    <i class="fas fa-chevron-down text-xs"></i>
+                </div>
+              </div>
+            </div>
+
+
+                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center px-4 text-amber-500">
+                  <i class="fas fa-chevron-down text-xs"></i>
+                </div>
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-amber-900 mb-1">تعداد متقاضیان</label>
+              <div class="relative">
+                <select name="guests" class="w-full bg-amber-50/50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200 appearance-none">
+                  <option value="۱ نفر">۱ نفر</option>
+                  <option value="۲ نفر (دوست یا همکار)">۲ نفر (دوست یا همکار)</option>
+                  <option value="۳ نفر به بالا">۳ نفر به بالا</option>
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center px-4 text-amber-500">
+                  <i class="fas fa-chevron-down text-xs"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-amber-900 mb-1">زمان ورود تقریبی</label>
+              <div class="relative">
+                <select name="entryDate" class="w-full bg-amber-50/50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200 appearance-none">
+                  <option value="هرچه سریع‌تر (ظرف ۲ روز آینده)">هرچه سریع‌تر (ظرف ۲ روز آینده)</option>
+                  <option value="اوایل ماه جاری">اوایل ماه جاری</option>
+                  <option value="ماه آینده">ماه آینده</option>
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center px-4 text-amber-500">
+                  <i class="fas fa-chevron-down text-xs"></i>
+                </div>
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-amber-900 mb-1">مدت زمان حدودی سکونت</label>
+              <div class="relative">
+                <select name="duration" class="w-full bg-amber-50/50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200 appearance-none">
+                  <option value="مشخص نیست / نیاز به مشاوره">مشخص نیست / نیاز به مشاوره</option>
+                  <option value="یک ماه یا آزمایشی">یک ماه یا آزمایشی</option>
+                  <option value="۳ ماه (یک فصل)">۳ ماه (یک فصل)</option>
+                  <option value="۶ ماه">۶ ماه</option>
+                  <option value="یک سال کامل تحصیلی/کاری">یک سال کامل تحصیلی/کاری</option>
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center px-4 text-amber-500">
+                  <i class="fas fa-chevron-down text-xs"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-amber-900 mb-1">توضیحات تکمیلی یا شرایط خاص (اختیاری)</label>
+            <textarea name="notes" rows="3" placeholder="مثلاً: نیاز به پارکینگ، ساعت کاری خاص، رشته تحصیلی..." class="w-full bg-amber-50/50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 placeholder-amber-400 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200 resize-none transition"></textarea>
+          </div>
+
+          <!-- پیام وضعیت ثبت فرم -->
+          <div id="formStatusMsg" class="hidden text-center text-sm py-2 px-4 rounded-xl font-bold"></div>
+
+          <button id="submitBtn" type="submit" class="w-full py-4 bg-gradient-to-l from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-bold rounded-xl shadow-lg shadow-amber-900/10 hover:shadow-amber-900/20 active:scale-[0.99] transition flex items-center justify-center gap-2">
+            <i class="fas fa-paper-plane"></i>
+            <span>ثبت درخواست پیش‌ثبت‌نام</span>
+          </button>
+        </form>
+<script>
+  // =========================================================
+  // آدرس وب‌اپ یکپارچه گوگل‌اسکریپت (Deploy با دسترسی Anyone)
+  // =========================================================
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwa86yHKSaj1cI7Cr60_A2Jx8_DzYXiOlFFQRhn3vhdT637McCkZMuGTWJL3zXynYY7yA/exec";
+
+  // ۱. ارسال فرم پیش‌ثبت‌نام (doPost)
+  const regForm = document.getElementById('dormPreRegisterForm');
+  if (regForm) {
+    regForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      const statusMsg = document.getElementById('formStatusMsg');
+
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال ثبت اطلاعات...';
+      if (statusMsg) statusMsg.className = "hidden";
+
+      fetch(SCRIPT_URL, {
+        method: 'POST',
+        body: new FormData(this),
+        mode: 'no-cors'
+      })
+      .then(() => {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> ثبت درخواست پیش‌ثبت‌نام';
+        if (statusMsg) {
+          statusMsg.className = "text-center text-sm py-3 px-4 rounded-xl font-bold bg-emerald-100 text-emerald-800 border border-emerald-300 block";
+          statusMsg.innerText = "✓ اطلاعات شما با موفقیت در سیستم ثبت شد. کارشناسان ما به زودی با شما تماس خواهند گرفت.";
+        }
+        regForm.reset();
+      })
+      .catch(err => {
+        console.error(err);
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> تلاش مجدد';
+        if (statusMsg) {
+          statusMsg.className = "text-center text-sm py-3 px-4 rounded-xl font-bold bg-rose-100 text-rose-800 border border-rose-300 block";
+          statusMsg.innerText = "خطا در برقراری ارتباط. لطفاً مجدداً امتحان کنید یا از طریق پیام‌رسان با ما در ارتباط باشید.";
+        }
+      });
+    });
+  }
+
+  // ۲. دریافت و رندر هوشمند داده‌های جدول و عکس‌ها از گوگل‌شیت
+  function renderData(data) {
+    const tbody = document.getElementById('tableBody');
+    if (!tbody) return;
+
+    if (!data || !data.ok || !data.rooms || data.rooms.length === 0) {
+      tbody.innerHTML = '<tr><td colspan="5" class="py-6 text-center text-rose-500 font-medium">خطا در دریافت اطلاعات یا داده‌ای در شیت یافت نشد.</td></tr>';
+      return;
+    }
+
+    let html = "";
+    data.rooms.forEach(r => {
+      // تشخیص تکمیل یا خالی بودن
+      const isFull = String(r.vacants) === "0" || String(r.status).includes("تکمیل") || String(r.status).includes("ندارد");
+      
+      const depositText = (r.deposit !== undefined && String(r.deposit).trim() !== "") ? (r.deposit + " م.ت") : "—";
+      const rentText = (r.rent !== undefined && String(r.rent).trim() !== "") ? (r.rent + " م.ت") : "—";
+
+      // دکمه وضعیت/رزرو با هماهنگی کامل مودال پرداخت قبلی
+      const actionBtn = isFull
+        ? `<span class="px-3 py-1 rounded-lg bg-slate-100 text-slate-400 text-xs font-semibold">تکمیل</span>`
+        : `<button type="button" onclick="openPaymentModal('${r.room} (${r.type})', '${depositText}', '${rentText}')"
+             class="px-3.5 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-500 text-emerald-700 hover:text-white border border-emerald-200 transition-all font-semibold text-xs shadow-sm">
+             <i class="fa-solid fa-credit-card text-[11px] ml-1"></i> ${r.status || 'رزرو'}
+           </button>`;
+
+      html += `
+        <tr class="hover:bg-amber-50/50 transition-colors ${isFull ? 'opacity-60 bg-slate-50/30' : ''}">
+          <td class="py-3 px-4 font-semibold text-amber-900">${r.room} <span class="text-xs text-slate-500 font-normal">(${r.type})</span></td>
+          <td class="py-3 px-4 text-slate-700">${depositText}</td>
+          <td class="py-3 px-4 text-slate-700">${rentText}</td>
+          <td class="py-3 px-4 text-center font-bold ${isFull ? 'text-slate-400' : 'text-emerald-700'}">${isFull ? '۰' : r.vacants}</td>
+          <td class="py-3 px-4 text-center">${actionBtn}</td>
+        </tr>
+      `;
+    });
+
+    tbody.innerHTML = html;
+
+    // --- لود تصاویر در گالری در صورت وجود ---
+    if (data.gallery && data.gallery.length > 0 && document.getElementById("gallery")) {
+      const g = document.getElementById("gallery");
+      let idx = 0;
+      function showImg() {
+        const item = data.gallery[idx];
+        g.innerHTML = `<img src="${item.url}" alt="${item.title}" class="rounded-xl shadow-md w-full h-[380px] object-cover transition-all duration-500">
+                       <p class="text-center text-slate-600 font-medium mt-2">${item.title}</p>`;
+        idx = (idx + 1) % data.gallery.length;
+      }
+      showImg();
+      if (!window.galleryInterval) window.galleryInterval = setInterval(showImg, 4000);
+    }
+  }
+
+  // ۳. فراخوانی داده‌ها از گوگل‌شیت
+  function loadDashboard() {
+    const s = document.createElement("script");
+    s.src = `${SCRIPT_URL}?action=getData&callback=renderData&t=${Date.now()}`;
+    document.body.appendChild(s);
+  }
+
+  // لود هنگام باز شدن صفحه + رفرش خودکار هر ۱ دقیقه
+  document.addEventListener('DOMContentLoaded', loadDashboard);
+  setInterval(loadDashboard, 60000);
+</script>
+
+
+
+  <!-- ===================== ۸. CONTACTS (اطلاعات تماس — بعد از ظرفیت‌ها) ===================== -->
+  <section id="contacts" class="max-w-7xl mx-auto px-6 py-12">
+    <div class="text-center mb-10">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-amber-200 bg-amber-50 text-amber-700 text-xs font-semibold mb-3">
+        <i class="fa-solid fa-address-book"></i> ارتباط با مسئولین مجموعه
+      </div>
+      <h2 class="text-3xl font-extrabold text-amber-900 mb-2">اطلاعات تماس و پشتیبانی</h2>
+      <p class="text-xs sm:text-sm text-amber-600">پاسخگویی سریع جهت مشاوره، رزرو و بازدید حضوری</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div class="glass-card p-6 rounded-3xl border-t-4 border-t-amber-500 text-center flex flex-col justify-between">
+        <div>
+          <div class="w-14 h-14 mx-auto rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-2xl mb-4">
+            <i class="fa-solid fa-user-gear"></i>
+          </div>
+          <h4 class="text-base font-bold text-amber-900 mb-1">مدیریت اقامتگاه</h4>
+          <p class="text-xs text-amber-600 font-medium mb-1">خانم فاطمه دلاوری</p>
+          <p class="text-[11px] text-amber-500 mb-4">خوابگاه‌های زنجیره‌ای آوین، جردن و ونوس</p>
+        </div>
+        <div class="space-y-2 pt-2 border-t border-amber-100">
+          <a href="tel:09126801450" class="block w-full py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs transition-all shadow-lg shadow-amber-600/20" dir="ltr">
+            <i class="fa-solid fa-phone mr-1"></i> 09126801450
+          </a>
+          <a href="https://wa.me/989126801450" target="_blank" rel="noopener noreferrer" class="block w-full py-2 rounded-xl bg-emerald-50 hover:bg-emerald-500 text-emerald-700 hover:text-white border border-emerald-200 font-semibold text-xs transition-all">
+            <i class="fa-brands fa-whatsapp ml-1"></i> پیام در واتساپ
+          </a>
+        </div>
+      </div>
+
+      <div class="glass-card p-6 rounded-3xl border-t-4 border-t-amber-600 text-center flex flex-col justify-between">
+        <div>
+          <div class="w-14 h-14 mx-auto rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-2xl mb-4">
+            <i class="fa-solid fa-headset"></i>
+          </div>
+          <h4 class="text-base font-bold text-amber-900 mb-1">پشتیبانی و پذیرش</h4>
+          <p class="text-xs text-amber-600 font-medium mb-1">آقای شکرچیان</p>
+          <p class="text-[11px] text-amber-500 mb-4">پشتیبانی رزرو و مسائل مالی</p>
+        </div>
+        <div class="space-y-2 pt-2 border-t border-amber-100">
+          <a href="tel:09128506405" class="block w-full py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs transition-all shadow-lg shadow-amber-600/20" dir="ltr">
+            <i class="fa-solid fa-phone mr-1"></i> 09128506405
+          </a>
+          <a href="https://wa.me/989128506405" target="_blank" rel="noopener noreferrer" class="block w-full py-2 rounded-xl bg-emerald-50 hover:bg-emerald-500 text-emerald-700 hover:text-white border border-emerald-200 font-semibold text-xs transition-all">
+            <i class="fa-brands fa-whatsapp ml-1"></i> پیام در واتساپ
+          </a>
+        </div>
+      </div>
+
+      <div class="glass-card p-6 rounded-3xl border-t-4 border-t-amber-400 text-center flex flex-col justify-between">
+        <div>
+          <div class="w-14 h-14 mx-auto rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-2xl mb-4">
+            <i class="fa-solid fa-clipboard-user"></i>
+          </div>
+          <h4 class="text-base font-bold text-amber-900 mb-1">پشتیبانی و اسکان</h4>
+          <p class="text-xs text-amber-600 font-medium mb-1">خانم فرزی</p>
+          <p class="text-[11px] text-amber-500 mb-4">هماهنگی بازدید و امور اقامتگاه</p>
+        </div>
+        <div class="space-y-2 pt-2 border-t border-amber-100">
+          <a href="tel:09144841315" class="block w-full py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs transition-all shadow-lg shadow-amber-500/20" dir="ltr">
+            <i class="fa-solid fa-phone mr-1"></i> 09194841315
+          </a>
+          <a href="https://wa.me/989144841315" target="_blank" rel="noopener noreferrer" class="block w-full py-2 rounded-xl bg-emerald-50 hover:bg-emerald-500 text-emerald-700 hover:text-white border border-emerald-200 font-semibold text-xs transition-all">
+            <i class="fa-brands fa-whatsapp ml-1"></i> پیام در واتساپ
+          </a>
+        </div>
+      </div>
+
+      <div class="glass-card p-6 rounded-3xl border-t-4 border-t-emerald-500 text-center flex flex-col justify-between">
+        <div>
+          <div class="w-14 h-14 mx-auto rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl mb-4">
+            <i class="fa-solid fa-phone-volume"></i>
+          </div>
+          <h4 class="text-base font-bold text-amber-900 mb-1">تلفن ثابت مجموعه</h4>
+          <p class="text-xs text-emerald-600 font-medium mb-1">پذیرش شبانه‌روزی</p>
+          <p class="text-[11px] text-amber-500 mb-4">پاسخگویی ۲۴ ساعته به سوالات</p>
+        </div>
+        <div class="space-y-2 pt-2 border-t border-amber-100">
+          <a href="tel:+982188731810" class="block w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition-all shadow-lg shadow-emerald-600/20" dir="ltr">
+            <i class="fa-solid fa-phone mr-1"></i> 02188731810
+          </a>
+          <span class="inline-flex items-center justify-center gap-1.5 w-full py-2 rounded-xl bg-amber-50 text-amber-600 text-[11px]">
+            <i class="fa-solid fa-clock text-emerald-500"></i> شبانه‌روزی ۲۴/۷
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ۹. RULES ===================== -->
+  <section id="rules" class="max-w-4xl mx-auto px-6 py-12">
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-amber-200 bg-amber-50 text-amber-700 text-xs font-semibold mb-3">
+        <i class="fa-solid fa-scale-balanced"></i> اصول و انضباط مجموعه
+      </div>
+      <h2 class="text-3xl font-extrabold text-amber-900 mb-2">قوانین و استانداردهای پذیرش</h2>
+      <p class="text-xs sm:text-sm text-amber-600">رعایت این اصول ضامن آرامش و آسایش پایدار تمام ساکنین محترم است</p>
+    </div>
+
+    <div class="glass-card rounded-2xl p-4 sm:p-6 divide-y divide-amber-100">
+      <div class="footer-link" onclick="toggleAccordion(this)">
+        <span class="font-semibold text-amber-900"><i class="fa-solid fa-volume-xmark text-amber-600 ml-2"></i> سکوت و آرامش مطلق</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+      <div class="accordion-content">
+        رعایت سکوت در اتاق‌ها و راهروها به ویژه پس از ساعت ۲۳ الزامی است تا محیط مطالعه مختل نشود.
+      </div>
+
+      <div class="footer-link" onclick="toggleAccordion(this)">
+        <span class="font-semibold text-amber-900"><i class="fa-solid fa-id-card text-amber-600 ml-2"></i> پذیرش گزینش‌شده</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+      <div class="accordion-content">
+        پذیرش منحصراً متعلق به دانشجویان تحصیلات تکمیلی، پژوهشگران و افراد شاغل موجه با مدارک معتبر است.
+      </div>
+
+      <div class="footer-link" onclick="toggleAccordion(this)">
+        <span class="font-semibold text-amber-900"><i class="fa-solid fa-clock text-amber-600 ml-2"></i> ساعت تردد مجاز</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+      <div class="accordion-content">
+        ساعت بازگشایی درب صبح‌ها ساعت ۶:۰۰ و زمان بسته شدن درب شب‌ها ساعت ۲۳:۳۰ می‌باشد.
+      </div>
+
+      <div class="footer-link" onclick="toggleAccordion(this)">
+        <span class="font-semibold text-amber-900"><i class="fa-solid fa-ban-smoking text-amber-600 ml-2"></i> محیط کاملاً پاک و سلامت</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+      <div class="accordion-content">
+        استعمال هرگونه دخانیات در تمامی اتاق‌ها و فضاهای اقامتگاه اکیداً ممنوع می‌باشد.
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ۱۰. FAQ ===================== -->
+  <section id="faq" class="max-w-4xl mx-auto px-6 py-12">
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-amber-200 bg-amber-50 text-amber-700 text-xs font-semibold mb-3">
+        <i class="fa-solid fa-circle-question"></i> راهنما و پاسخ‌ها
+      </div>
+      <h2 class="text-3xl font-extrabold text-amber-900 mb-2">پرسش‌های متداول شما</h2>
+      <p class="text-xs sm:text-sm text-amber-600">پاسخ به سوالات پرتکرار قبل از اقدام به رزرو</p>
+    </div>
+
+    <div class="space-y-3">
+      <div class="glass-card rounded-2xl overflow-hidden border border-amber-100">
+        <button onclick="toggleFaq(1)" class="w-full p-4 sm:p-5 flex items-center justify-between text-right hover:bg-amber-50/50 transition-colors">
+          <span class="text-sm font-bold text-amber-900 flex items-center gap-2">
+            <i class="fa-solid fa-circle-dot text-amber-500 text-xs"></i>
+            آیا امکان بازدید حضوری قبل از واریز بیعانه وجود دارد؟
+          </span>
+          <i id="faq-icon-1" class="fa-solid fa-chevron-down text-amber-400 text-xs transition-transform duration-300"></i>
+        </button>
+        <div id="faq-ans-1" class="hidden px-5 pb-5 text-xs text-amber-700 leading-relaxed border-t border-amber-100 pt-3">
+          بله، با هماهنگی تلفنی قبلی با سرکار خانم دلاوری یا تیم پشتیبانی، همه‌روزه از ساعت ۱۰ صبح الی ۲۰ امکان بازدید حضوری از اتاق‌ها و امکانات فراهم است.
+        </div>
+      </div>
+
+      <div class="glass-card rounded-2xl overflow-hidden border border-amber-100">
+        <button onclick="toggleFaq(2)" class="w-full p-4 sm:p-5 flex items-center justify-between text-right hover:bg-amber-50/50 transition-colors">
+          <span class="text-sm font-bold text-amber-900 flex items-center gap-2">
+            <i class="fa-solid fa-circle-dot text-amber-500 text-xs"></i>
+            حداقل مدت قرارداد و شیوه پرداخت به چه صورت است؟
+          </span>
+          <i id="faq-icon-2" class="fa-solid fa-chevron-down text-amber-400 text-xs transition-transform duration-300"></i>
+        </button>
+        <div id="faq-ans-2" class="hidden px-5 pb-5 text-xs text-amber-700 leading-relaxed border-t border-amber-100 pt-3">
+          قراردادها به صورت ماهانه، فصلی و سالانه تنظیم می‌شود. مبلغ ودیعه و اجاره ماه اول در بدو ورود و تسویه مابقی ماهانه انجام می‌پذیرد.
+        </div>
+      </div>
+
+      <div class="glass-card rounded-2xl overflow-hidden border border-amber-100">
+        <button onclick="toggleFaq(3)" class="w-full p-4 sm:p-5 flex items-center justify-between text-right hover:bg-amber-50/50 transition-colors">
+          <span class="text-sm font-bold text-amber-900 flex items-center gap-2">
+            <i class="fa-solid fa-circle-dot text-amber-500 text-xs"></i>
+            هزینه قبوض، شارژ و اینترنت به چه صورت محاسبه می‌شود؟
+          </span>
+          <i id="faq-icon-3" class="fa-solid fa-chevron-down text-amber-400 text-xs transition-transform duration-300"></i>
+        </button>
+        <div id="faq-ans-3" class="hidden px-5 pb-5 text-xs text-amber-700 leading-relaxed border-t border-amber-100 pt-3">
+          کلیه هزینه‌های مصرفی (آب، برق، گاز، نظافت مستمر مشاعات و اینترنت فیبر نوری پرسرعت) در مبلغ اجاره لحاظ شده و هزینه مازادی دریافت نمی‌شود.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ۱۱. LOCATION & MAP ===================== -->
+  <section id="location" class="max-w-5xl mx-auto px-6 py-12">
+    <div class="text-center mb-8">
+      <h2 class="text-3xl font-extrabold text-amber-900 mb-2">موقعیت دقیق و دسترسی‌های شهری</h2>
+      <p class="text-xs sm:text-sm text-amber-600">تهران، میدان آرژانتین، بلوار بیهقی، کوچه ۱۴ شرقی، پلاک ۱۸</p>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+      <div class="glass-card p-3 rounded-xl text-center">
+        <span class="text-amber-700 text-xs font-bold block mb-1"><i class="fa-solid fa-train-subway"></i> مترو مصلی</span>
+        <span class="text-[11px] text-amber-600">کمتر از ۵ دقیقه پیاده</span>
+      </div>
+      <div class="glass-card p-3 rounded-xl text-center">
+        <span class="text-blue-600 text-xs font-bold block mb-1"><i class="fa-solid fa-bus-simple"></i> پایانه بیهقی (BRT)</span>
+        <span class="text-[11px] text-amber-600">دسترسی مستقیم و آسان</span>
+      </div>
+      <div class="glass-card p-3 rounded-xl text-center">
+        <span class="text-emerald-600 text-xs font-bold block mb-1"><i class="fa-solid fa-hospital"></i> مراکز درمانی</span>
+        <span class="text-[11px] text-amber-600">بیمارستان کسری و گاندی</span>
+      </div>
+      <div class="glass-card p-3 rounded-xl text-center">
+        <span class="text-amber-600 text-xs font-bold block mb-1"><i class="fa-solid fa-bag-shopping"></i> مراکز رفاهی</span>
+        <span class="text-[11px] text-amber-600">سوپرمارکت و نانوایی در دسترس</span>
+      </div>
+    </div>
+
+    <div class="glass-card rounded-3xl border border-amber-200 p-3 sm:p-4 shadow-2xl">
+      <div id="venus-map" class="w-full h-80 sm:h-96 rounded-2xl bg-amber-50 border border-amber-100 z-0"></div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 px-2 pt-5 pb-2">
+        <span class="text-xs text-amber-600 text-center sm:text-right">
+          <i class="fa-solid fa-circle-info text-amber-500 ml-1"></i> برای مسیریابی خودرویی یا پیاده‌روی دکمه‌های زیر را انتخاب کنید:
+        </span>
+        <div class="flex items-center gap-3">
+          <a href="https://neshan.org/maps/municipal/b0c9db852d1d4bae9e158d23c92730f0#c35.735-51.425-15z-0p"
+             target="_blank" rel="noopener noreferrer"
+             class="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold transition-all flex items-center gap-2 shadow-lg shadow-amber-600/20">
+            <i class="fa-solid fa-diamond-turn-right"></i> مشاهده در نشان
+          </a>
+          <a href="https://maps.google.com/?q=35.7348,51.4206"
+             target="_blank" rel="noopener noreferrer"
+             class="px-4 py-2 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-700 text-xs font-semibold transition-all flex items-center gap-2 border border-amber-200">
+            <i class="fa-brands fa-google"></i> گوگل مپ
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FLOATING ACTION BUTTONS ===================== -->
+  <div class="fixed bottom-6 left-6 z-40 flex flex-col gap-3">
+    <a href="https://wa.me/989126801450" target="_blank" rel="noopener noreferrer"
+       class="w-12 h-12 rounded-full bg-emerald-500 hover:bg-emerald-400 text-white shadow-xl shadow-emerald-500/40 flex items-center justify-center transition-all transform hover:scale-110"
+       title="ارتباط در واتساپ مدیریت">
+      <i class="fa-brands fa-whatsapp text-2xl"></i>
+    </a>
+    <a href="tel:+982188731810"
+       class="w-12 h-12 rounded-full bg-white border border-amber-300 hover:bg-amber-600 text-amber-600 hover:text-white shadow-xl shadow-amber-500/20 flex items-center justify-center transition-all transform hover:scale-110"
+       title="تماس ۲۴ ساعته (02188731810)">
+      <i class="fa-solid fa-phone-volume text-base"></i>
+    </a>
+    <a href="tel:09126801450"
+       class="w-12 h-12 rounded-full bg-gradient-to-r from-amber-600 to-amber-500 text-white shadow-xl shadow-amber-500/40 flex items-center justify-center transition-all transform hover:scale-110"
+       title="تماس مستقیم با مدیریت">
+      <i class="fa-solid fa-phone text-lg"></i>
+    </a>
+  </div>
+
+  <!-- ===================== PAYMENT MODAL ===================== -->
+  <div id="paymentModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm items-center justify-center p-4">
+    <div class="bg-white border border-amber-200 rounded-3xl max-w-md w-full p-6 relative shadow-2xl text-right">
+      <button onclick="closePaymentModal()" class="absolute top-4 left-4 w-8 h-8 rounded-full bg-amber-50 text-amber-500 hover:text-amber-900 flex items-center justify-center transition-all" aria-label="بستن">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-5 border-b border-amber-100 pb-4">
+        <div class="w-10 h-10 rounded-xl bg-amber-500 flex items-center justify-center text-white shadow-lg shadow-amber-500/40 text-lg">
+          <i class="fa-solid fa-receipt"></i>
+        </div>
+        <div>
+          <h3 class="text-base font-bold text-amber-900">اطلاعات واریز بیعانه</h3>
+          <span id="modalRoomTitle" class="text-xs text-amber-600 font-medium">۳ تخته (شماره ۱۲)</span>
+        </div>
+      </div>
+
+      <div class="bg-amber-50 rounded-2xl p-4 mb-4 border border-amber-100 space-y-2 text-xs">
+        <div class="flex justify-between items-center text-amber-700">
+          <span>مبلغ ودیعه:</span>
+          <span id="modalDeposit" class="font-bold text-amber-900">۱۲ میلیون تومان</span>
+        </div>
+        <div class="flex justify-between items-center text-amber-700">
+          <span>اجاره ماهانه:</span>
+          <span id="modalRent" class="font-bold text-amber-900">۱۲ میلیون تومان</span>
+        </div>
+      </div>
+
+      <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 mb-4 text-center">
+        <span class="text-[11px] text-amber-700 block mb-1">شماره کارت جهت واریز بیعانه</span>
+        <div class="text-lg font-black tracking-widest text-amber-800 my-1 select-all" dir="ltr" id="cardNumber">
+          ۵۰۲۹-۳۸۱۰-۲۷۱۶-۹۲۸۳
+        </div>
+        <span class="text-xs text-amber-700 block mb-3">به نام: <strong class="text-amber-900">خانم فاطمه دلاوری (مدیریت ونوس)</strong></span>
+        <button onclick="copyCardNumber()" id="copyBtn" class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-xl bg-amber-200 hover:bg-amber-600 text-amber-800 hover:text-white border border-amber-300 text-xs font-semibold transition-all">
+          <i class="fa-regular fa-copy"></i>
+          <span id="copyText">کپی شماره کارت</span>
+        </button>
+      </div>
+
+      <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 mb-5 text-center">
+        <span class="text-[11px] text-amber-700 block mb-1">شماره شبا جهت واریز پایا و ساتنا</span>
+        <div class="text-sm font-mono font-bold tracking-wider text-amber-800 my-1 select-all" dir="ltr" id="shabaNumber">
+          IR080660000000204637576008
+        </div>
+        <span class="text-xs text-amber-700 block mb-3">به نام: <strong class="text-amber-900">آقای سپهر شکرچیان</strong></span>
+        <button onclick="copyShabaNumber()" id="copyShabaBtn" class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-xl bg-amber-200 hover:bg-amber-600 text-amber-800 hover:text-white border border-amber-300 text-xs font-semibold transition-all">
+          <i class="fa-regular fa-copy"></i>
+          <span id="copyShabaText">کپی شماره شبا</span>
+        </button>
+      </div>
+
+      <div class="space-y-2">
+        <a id="whatsappLink" href="https://wa.me/989126801450?text=%D8%B3%D9%84%D8%A7%D9%85%D8%8C%20%D9%81%DB%8C%D8%B4%20%D9%88%D8%A7%D8%B1%DB%8C%D8%B2%20%D8%A8%DB%8C%D8%B9%D8%A7%D9%86%D9%87%20%D8%B1%D8%A7%20%D8%A7%D8%B1%D8%B3%D8%A7%D9%84%20%D9%85%DB%8C%E2%80%8C%DA%A9%D9%86%D9%85" target="_blank" rel="noopener noreferrer" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-lg shadow-emerald-600/20">
+          <i class="fa-brands fa-whatsapp text-base"></i> ارسال فیش واریزی در واتساپ
+        </a>
+        <a href="tel:09126801450" class="w-full py-2.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-800 font-semibold text-xs flex items-center justify-center gap-2 transition-all border border-amber-200">
+          <i class="fa-solid fa-phone text-xs"></i> تماس مستقیم با مدیریت (۰۹۱۲۶۸۰۱۴۵۰)
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== SCRIPTS ===================== -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    new Swiper(".myGallerySwiper", {
+      loop: true,
+      autoplay: { delay: 4000, disableOnInteraction: false },
+      pagination: { el: ".swiper-pagination", clickable: true },
+    });
+
+    function toggleBookingTable() {
+      const content = document.getElementById('bookingTableContent');
+      const icon = document.getElementById('toggleIcon');
+      content.classList.toggle('hidden');
+      icon.classList.toggle('rotate-180');
+    }
+
+    function toggleFaq(id) {
+      const ans = document.getElementById(`faq-ans-${id}`);
+      const icon = document.getElementById(`faq-icon-${id}`);
+      ans.classList.toggle('hidden');
+      icon.classList.toggle('rotate-180');
+    }
+
+    function toggleAccordion(el) {
+      const content = el.nextElementSibling;
+      const isOpen = content.classList.contains('open');
+      document.querySelectorAll('.accordion-content.open').forEach(c => c.classList.remove('open'));
+      document.querySelectorAll('.footer-link.open').forEach(l => l.classList.remove('open'));
+      if (!isOpen) {
+        content.classList.add('open');
+        el.classList.add('open');
+      }
+    }
+
+    function toggleFormAccordion() {
+      const content = document.getElementById('requestFormContent');
+      const icon = document.getElementById('formToggleIcon');
+      content.classList.toggle('open');
+      icon.classList.toggle('rotate-180');
+    }
+
+    function openPaymentModal(roomTitle, deposit, rent, date = '') {
+      document.getElementById('modalRoomTitle').innerText = roomTitle + (date ? ` (تحویل ${date})` : '');
+      document.getElementById('modalDeposit').innerText = deposit;
+      document.getElementById('modalRent').innerText = rent;
+
+      const text = encodeURIComponent(`سلام، فیش واریز بیعانه برای ${roomTitle} را ارسال می‌کنم.`);
+      document.getElementById('whatsappLink').href = `https://wa.me/989126801450?text=${text}`;
+
+      const modal = document.getElementById('paymentModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closePaymentModal() {
+      const modal = document.getElementById('paymentModal');
+      modal.classList.remove('flex');
+      modal.classList.add('hidden');
+    }
+
+    function copyCardNumber() {
+      navigator.clipboard.writeText("5029381027169283").then(() => {
+        const t = document.getElementById('copyText');
+        t.innerText = "کپی شد!";
+        setTimeout(() => { t.innerText = "کپی شماره کارت"; }, 2000);
+      });
+    }
+
+    function copyShabaNumber() {
+      navigator.clipboard.writeText("IR080660000000204637576008").then(() => {
+        const t = document.getElementById('copyShabaText');
+        t.innerText = "کپی شد!";
+        setTimeout(() => { t.innerText = "کپی شماره شبا"; }, 2000);
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const lat = 35.7348;
+      const lng = 51.4206;
+      const map = L.map('venus-map').setView([lat, lng], 16);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap'
+      }).addTo(map);
+
+      const customPopup = `
+        <div style="font-weight: bold; margin-bottom: 4px; color: #7c5606; font-family: Vazirmatn;">پانسیون لوکس ونوس</div>
+        <div style="font-size: 11px; color: #8b6f47; font-family: Vazirmatn;">تهران، میدان آرژانتین، بلوار بیهقی، کوچه ۱۴ شرقی، پلاک ۱۸</div>
+      `;
+
+      L.marker([lat, lng]).addTo(map).bindPopup(customPopup).openPopup();
+    });
+
+    document.querySelectorAll('a[href="#request-form"]').forEach(link => {
+      link.addEventListener('click', function() {
+        setTimeout(() => {
+          const content = document.getElementById('requestFormContent');
+          const icon = document.getElementById('formToggleIcon');
+          if (!content.classList.contains('open')) {
+            content.classList.add('open');
+            icon.classList.add('rotate-180');
+          }
+        }, 400);
+      });
+    });
+  </script>
+<script>
+  (function() {
+    // شناسه یکتا برای سایت ونوس
+    const namespace = 'venusdorm_ir';
+    const key = 'visits';
+
+    fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`)
+      .then(response => response.json())
+      .then(data => {
+        const counterEl = document.getElementById('visit-counter');
+        if (counterEl && data && typeof data.count !== 'undefined') {
+          // تبدیل اعداد به فارسی برای ظاهر هماهنگ
+          const farsiDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+          const countStr = data.count.toLocaleString('fa-IR');
+          counterEl.textContent = countStr;
+        }
+      })
+      .catch(err => {
+        // در صورت اختلال شبکه، متن جایگزین ساده قرار گیرد
+        const counterEl = document.getElementById('visit-counter');
+        if (counterEl) {
+          counterEl.textContent = 'ـ';
+        }
+      });
+  })();
+</script>
+
+<!-- بخش شمارنده بازدید -->
+<div style="text-align: center; margin-top: 15px; font-size: 14px; color: #666; direction: rtl;">
+  👁️ تعداد بازدیدهای سایت: 
+  <span id="visit-counter" style="font-weight: bold; color: #2c3e50; background: #f0f3f6; padding: 2px 8px; border-radius: 4px;">
+    در حال بارگذاری...
+  </span>
+</div>
