@@ -99,20 +99,27 @@
       }
     }
   </script>
+    <style>
+    /* تعریف فونت بی اصفهان */
+    @font-face {
+      font-family: 'B Isfahan';
+      src: local('B Isfahan'), local('BIsfahan'),
+           url('fonts/BIsfahan.woff2') format('woff2'),
+           url('fonts/BIsfahan.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
 
-  <style>
+    /* اعمال سراسری فونت بی اصفهان به کل صفحه */
+    *, html, body, input, button, select, textarea, h1, h2, h3, h4, h5, h6, p, span, a, label {
+      font-family: 'B Isfahan', 'BIsfahan', Tahoma, sans-serif !important;
+    }
+
     html, body {
-      direction: rtl;
-      font-family: 'Vazirmatn FD', sans-serif;
-      background-color: #fdfaf3;
-      color: #3d2f1a;
+      font-family: 'B Isfahan', 'BIsfahan', Tahoma, sans-serif !important;
       overflow-x: hidden;
     }
-    .glass-nav {
-      background: rgba(253, 250, 243, 0.96);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid #f0e4c8;
-    }
+
     /* استایل‌های بخش کشویی قوانین و سوالات */
     .accordion-content {
       max-height: 0;
