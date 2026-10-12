@@ -858,8 +858,6 @@
     initRoomsTable();
   }
 </script>
-
-  <!-- ===================== ۷. فرم پیش‌ثبت‌نام (کشویی — بعد از ظرفیت‌ها) ===================== -->
                
 <!-- ===================== فرم پیش‌ثبت‌نام ===================== -->
 <section id="preRegisterSection"
@@ -938,7 +936,7 @@
           type="text"
           name="fullName"
           required
-          placeholder="مثلاً: المیرا"
+          placeholder=" مثلاً: المیرا"
           class="w-full bg-amber-50/50 border border-amber-200
                  rounded-xl px-4 py-3 text-sm text-amber-800
                  placeholder-amber-400 focus:outline-none
@@ -965,73 +963,7 @@
                  focus:ring-amber-200 transition text-right">
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-
-        <div>
-          <label class="block text-xs font-bold text-amber-900 mb-1">
-            نوع اتاق مدنظر
-          </label>
-
-          <div class="relative">
-            <select
-              name="roomType"
-              id="roomType"
-              required
-              class="w-full bg-amber-50 border-2 border-amber-400
-                     rounded-xl px-4 py-3 text-sm text-amber-900
-                     focus:outline-none focus:border-amber-600
-                     appearance-none font-medium">
-
-              <option value="" disabled selected>
-                انتخاب نوع اتاق
-              </option>
-
-              <option value="اتاق ۱ تخته اختصاصی (VIP)">
-                اتاق ۱ تخته اختصاصی (VIP)
-              </option>
-
-              <option value="اتاق ۲ تخته مستر">
-                اتاق ۲ تخته مستر
-              </option>
-
-              <option value="اتاق ۲ تخته ساده">
-                اتاق ۲ تخته ساده
-              </option>
-
-              <option value="اتاق مهمان ۲ تخته مستر">
-                اتاق مهمان ۲ تخته مستر
-              </option>
-
-              <option value="اتاق ۳ تخته ساده">
-                اتاق ۳ تخته ساده
-              </option>
-
-              <option value="اتاق ۳ تخته مستر">
-                اتاق ۳ تخته مستر
-              </option>
-
-              <option value="اتاق ۴ تخته">
-                اتاق ۴ تخته
-              </option>
-
-              <option value="اتاق ۶ تخته ساده">
-                اتاق ۶ تخته ساده
-              </option>
-
-              <option value="اتاق ۶ تخته مستر">
-                اتاق ۶ تخته مستر
-              </option>
-            </select>
-
-            <div class="pointer-events-none absolute inset-y-0 left-0
-                        flex items-center px-4 text-amber-600">
-              <i class="fas fa-chevron-down text-xs"></i>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <label class="block text-xs font-bold text-amber-900 mb-1">
+      
             تعداد متقاضیان
           </label>
 
