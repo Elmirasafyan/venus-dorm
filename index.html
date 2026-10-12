@@ -860,69 +860,15 @@
 </script>
 
 // دریافت داده‌ها
-async function fetchRoomsCapacity() {
-  const tableBody = document.getElementById('tableBody');
-
-  try {
-    const response = await fetch(`${GOOGLE_SHEET_CSV_URL}&_t=${Date.now()}`);
-    const csvData = await response.text();
-    const rows = parseCSV(csvData)
-      .slice(1)
-      .filter(r => r.some(c => c));
-
-    tableBody.innerHTML = '';
-
-    rows.forEach(row => {
-      const isFull =
-        (row[4] || '').toLowerCase().includes('تکمیل') ||
-        row[4] === '0';
-
-      const badge = isFull
-        ? `<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-rose-100 text-rose-700">تکمیل ظرفیت</span>`
-        : `<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700">${row[4] || 'دارای ظرفیت'}</span>`;
-
-      const tr = document.createElement('tr');
-
-      tr.innerHTML = `
-        <td class="py-3.5 px-4 font-semibold text-slate-800">${row[0]}</td>
-        <td class="py-3.5 px-4 text-slate-600">${row[1]}</td>
-        <td class="py-3.5 px-4 text-slate-600">${row[2]}</td>
-        <td class="py-3.5 px-4 text-slate-600">${row[3]}</td>
-        <td class="py-3.5 px-4 text-center">${badge}</td>
-        <td class="py-3.5 px-4 text-center">
-          ${
-            isFull
-              ? '<span class="text-xs text-slate-400">پر</span>'
-              : `<button
-                  type="button"
-                  onclick="handleBooking('${row[0]}', '${row[1]}')"
-                  class="px-3 py-1 bg-amber-600 text-white rounded-lg text-xs hover:bg-amber-700">
-                  رزرو
-                </button>`
-          }
-        </td>
-      `;
-
-      tableBody.appendChild(tr);
-    });
-  <!-- } catch (e) {
-    console.error(e);
-    tableBody.innerHTML = -->
-      '<tr><td colspan="6" class="text-center py-6 text-rose-600">خطا در بارگذاری جدول</td></tr>';
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initRoomsTable);
+  } else {
+    initRoomsTable();
   }
-}
+</script>
 
-// اجرای اولیه
-document.addEventListener('DOMContentLoaded', () => {
-  fetchRoomsCapacity();
-
-  const searchInput = document.getElementById('searchInput');
-
-  if (searchInput) {
-    searchInput.addEventListener('input', filterData);
-  }
-});
-
+<!-- ===================== ۷. فرم پیش‌ثبت‌نام (کشویی — بعد از ظرفیت‌ها) ===================== -->
+<form id="dormPreRegisterForm" class="space-y-5 text-right pb-8">
 
 
   <!-- ===================== ۷. فرم پیش‌ثبت‌نام (کشویی — بعد از ظرفیت‌ها) ===================== -->
@@ -968,11 +914,45 @@ document.addEventListener('DOMContentLoaded', () => {
                     <option value="اتاق ۶ تخته مستر">اتاق ۶ تخته مستر</option>
                 </select>
                 <!-- آیکون فلش برای هماهنگی با سایر فیلدها -->
-                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center px-4 text-amber-600">
-                    <i class="fas fa-chevron-down text-xs"></i>
-                </div>
-              </div>
-            </div>
+               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+  <div>
+    <label class="block text-xs font-bold text-amber-900 mb-1">نوع اتاق مد نظر</label>
+    <div class="relative">
+      <select name="roomType" id="roomType"
+              class="w-full bg-amber-50 border-2 border-amber-400 rounded-xl px-4 py-3 text-sm text-amber-900 focus:outline-none focus:border-amber-600 appearance-none font-medium"
+              required>
+        <option value="" disabled selected>انتخاب نوع اتاق</option>
+        <option value="اتاق ۱ تخته اختصاصی (VIP)">اتاق ۱ تخته اختصاصی (VIP)</option>
+        <option value="اتاق ۲ تخته مستر">اتاق ۲ تخته مستر</option>
+        <option value="اتاق ۲ تخته ساده">اتاق ۲ تخته ساده</option>
+        <option value="اتاق مهمان ۲ تخته مستر">اتاق مهمان ۲ تخته مستر</option>
+        <option value="اتاق ۳ تخته ساده">اتاق ۳ تخته ساده</option>
+        <option value="اتاق ۳ تخته مستر">اتاق ۳ تخته مستر</option>
+        <option value="اتاق ۴ تخته">اتاق ۴ تخته</option>
+        <option value="اتاق ۶ تخته ساده">اتاق ۶ تخته ساده</option>
+        <option value="اتاق ۶ تخته مستر">اتاق ۶ تخته مستر</option>
+      </select>
+      <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center px-4 text-amber-600">
+        <i class="fas fa-chevron-down text-xs"></i>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <label class="block text-xs font-bold text-amber-900 mb-1">تعداد متقاضیان</label>
+    <div class="relative">
+      <select name="guests" class="w-full bg-amber-50/50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200 appearance-none">
+        <option value="۱ نفر">۱ نفر</option>
+        <option value="۲ نفر (دوست یا همکار)">۲ نفر (دوست یا همکار)</option>
+        <option value="۳ نفر به بالا">۳ نفر به بالا</option>
+      </select>
+      <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center px-4 text-amber-500">
+        <i class="fas fa-chevron-down text-xs"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
                 <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center px-4 text-amber-500">
