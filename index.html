@@ -638,17 +638,15 @@
     });
   }
 
- // تابع رزرو — جایگزین تابع handleBooking فعلی
 function handleBooking(roomTitle) {
   const form = document.getElementById('dormPreRegisterForm');
 
   if (!form) {
-    console.error('فرم پیش‌ثبت‌نام پیدا نشد.');
+    console.error('فرم پیش‌ثبت‌نام در صفحه پیدا نشد.');
     return;
   }
 
-  // شماره اتاق انتخاب‌شده را داخل فرم نگه می‌داریم
-  // تا هنگام ثبت، همراه سایر اطلاعات ارسال شود.
+  // نگهداری شماره اتاق انتخاب‌شده برای ارسال همراه فرم
   let roomInput = form.querySelector('input[name="room"]');
 
   if (!roomInput) {
@@ -660,13 +658,12 @@ function handleBooking(roomTitle) {
 
   roomInput.value = roomTitle;
 
-  // رفتن به فرم پیش‌ثبت‌نام
+  // انتقال در همان صفحه به فرم پیش‌ثبت‌نام
   form.scrollIntoView({
     behavior: 'smooth',
     block: 'start'
   });
 }
-
 
   // دریافت داده‌ها
   async function fetchRoomsCapacity() {
