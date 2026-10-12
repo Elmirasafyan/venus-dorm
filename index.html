@@ -554,21 +554,27 @@
   </section>
 <!-- کانتینر اصلی -->
 <div class="max-w-5xl mx-auto p-4 space-y-6">
-  
-  <!-- بخش جستجو و فیلتر -->
+
+  <!-- جست‌وجو و فیلتر -->
   <div class="flex flex-col sm:flex-row gap-3 bg-amber-50/50 p-4 rounded-xl border border-amber-100">
-    <input type="text" id="searchInput" placeholder="🔍 جستجوی شماره اتاق..." 
-           class="flex-1 p-2.5 border border-amber-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400">
-    
-    <select id="capacityFilter" onchange="filterData()"
-            class="p-2.5 border border-amber-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400 text-slate-700">
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="جستجوی شماره اتاق..."
+      class="flex-1 p-2.5 border border-amber-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400"
+    >
+
+    <select
+      id="capacityFilter"
+      class="p-2.5 border border-amber-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400 text-slate-700"
+    >
       <option value="all">همه اتاق‌ها</option>
       <option value="available">فقط دارای ظرفیت</option>
       <option value="full">تکمیل ظرفیت</option>
     </select>
   </div>
 
-  <!-- جدول داده‌ها -->
+  <!-- جدول اتاق‌ها -->
   <div class="overflow-x-auto rounded-xl border border-amber-200/80 shadow-sm bg-white">
     <table class="w-full text-right text-sm text-slate-700 min-w-[620px]">
       <thead class="bg-amber-100/60 text-amber-900 border-b border-amber-200/80 font-bold">
@@ -583,99 +589,275 @@
       </thead>
       <tbody id="tableBody" class="divide-y divide-amber-100/80">
         <tr>
-          <td colspan="6" class="py-8 text-center text-amber-800 animate-pulse font-medium">
-            ⏳ در حال بارگذاری اطلاعات از سرور...
+          <td colspan="6" class="py-8 text-center text-amber-800">
+            در حال بارگذاری اطلاعات...
           </td>
         </tr>
       </tbody>
     </table>
   </div>
+
 </div>
 
 <script>
-  const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT9YXQhUK152G0b0GuEjfbvA8N2kBIs3CV_G-TvGIXKQAu4ahlSbuJ_G7dvKoknm8kOln0gn4ps8RX/pub?output=csv&gid=865030458';
+  const GOOGLE_SHEET_CSV_URL =
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT9YXQhUK152G0b0GuEjfbvA8N2kBIs3CV_G-TvGIXKQAu4ahlSbuJ_G7dvKoknm8kOln0gn4ps8RX/pub?output=csv&gid=865030458';
 
-  // تابع فیلتر کردن
+  let roomRows = [];
+
+  // خواندن CSV، از جمله مقدارهای نقل‌قول‌دار و سطرهای چندخطی
+  function parseCSV(text) {
+    const rows = [];
+    let row = [];
+    let value = '';
+    let inQuotes = false;
+
+    for (let i = 0; i < text.length; i++) {
+      const char = text[i];
+
+      if (char === '"') {
+        if (inQuotes && text[i + 1] === '"') {
+          value += '"';
+          i++;
+        } else {
+          inQuotes = !inQuotes;
+        }
+      } else if (char === ',' && !inQuotes) {
+        row.push(value.trim());
+        value = '';
+      } else if ((char === '\n' || char === '\r') && !inQuotes) {
+        if (char === '\r' && text[i + 1] === '\n') i++;
+        row.push(value.trim());
+        if (row.some(cell => cell !== '')) rows.push(row);
+        row = [];
+        value = '';
+      } else {
+        value += char;
+      }
+    }
+
+    row.push(value.trim());
+    if (row.some(cell => cell !== '')) rows.push(row);
+
+    return rows;
+  }
+
+  function isRoomFull(row) {
+    const status = (row[4] || '').trim();
+    return status.includes('تکمیل') || status === '0' || status === '۰';
+  }
+
+  function makeCell(text, className = '') {
+    const cell = document.createElement('td');
+    cell.className = className;
+    cell.textContent = text || '—';
+    return cell;
+  }
+
   function filterData() {
-    const searchTerm = document.getElementById('searchInput').value.trim().toLowerCase();
-    const capacityFilter = document.getElementById('capacityFilter').value;
-    const rows = document.querySelectorAll('#tableBody tr');
+    const searchTerm = document
+      .getElementById('searchInput')
+      .value.trim()
+      .toLowerCase();
+
+    const capacityFilter =
+      document.getElementById('capacityFilter').value;
+
+    document.querySelectorAll('#tableBody tr[data-room-row]').forEach(tr => {
+      const matchesSearch =
+        tr.dataset.roomNumber.toLowerCase().includes(searchTerm);
+
+      const isFull = tr.dataset.full === 'true';
+
+      const matchesCapacity =
+        capacityFilter === 'all' ||
+        (capacityFilter === 'full' && isFull) ||
+        (capacityFilter === 'available' && !isFull);
+
+      tr.hidden = !(matchesSearch && matchesCapacity);
+    });
+  }
+
+  function handleBooking(roomNumber, roomType) {
+    const form = document.getElementById('dormPreRegisterForm');
+
+    if (!form) {
+      console.error('فرم dormPreRegisterForm پیدا نشد.');
+      return;
+    }
+
+    // شماره اتاق همراه سایر فیلدهای فرم ارسال می‌شود.
+    let roomInput = form.querySelector('input[name="room"]');
+
+    if (!roomInput) {
+      roomInput = document.createElement('input');
+      roomInput.type = 'hidden';
+      roomInput.name = 'room';
+      form.appendChild(roomInput);
+    }
+
+    roomInput.value = roomNumber;
+
+    const roomTypeSelect = form.querySelector('#roomType');
+
+    if (roomTypeSelect && roomType) {
+      const normalize = value =>
+        value
+          .trim()
+          .replace(/[۰-۹]/g, digit => '۰۱۲۳۴۵۶۷۸۹'.indexOf(digit))
+          .replace(/[٠-٩]/g, digit => '٠١٢٣٤٥٦٧٨٩'.indexOf(digit))
+          .replace(/\s+/g, ' ');
+
+      const wanted = normalize(roomType);
+
+      const matchingOption = Array.from(roomTypeSelect.options).find(option => {
+        const optionValue = normalize(option.value);
+        const optionText = normalize(option.textContent);
+
+        return optionValue === wanted || optionText === wanted;
+      });
+
+      if (matchingOption) {
+        roomTypeSelect.value = matchingOption.value;
+        roomTypeSelect.dispatchEvent(
+          new Event('change', { bubbles: true })
+        );
+      } else {
+        console.warn('نوع اتاق در گزینه‌های فرم پیدا نشد:', roomType);
+      }
+    }
+
+    form.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }
+
+  function renderRooms(rows) {
+    const tableBody = document.getElementById('tableBody');
+    tableBody.replaceChildren();
+
+    if (!rows.length) {
+      const tr = document.createElement('tr');
+      const td = makeCell(
+        'اطلاعات اتاقی در گوگل‌شیت پیدا نشد.',
+        'py-8 text-center text-slate-600'
+      );
+      td.colSpan = 6;
+      tr.appendChild(td);
+      tableBody.appendChild(tr);
+      return;
+    }
 
     rows.forEach(row => {
-      const roomInfo = row.cells[0]?.textContent.toLowerCase() || '';
-      const statusText = row.cells[4]?.textContent.toLowerCase() || '';
-      
-      const matchesSearch = roomInfo.includes(searchTerm);
-      let matchesCapacity = true;
-      
-      if (capacityFilter === 'available') {
-        matchesCapacity = !statusText.includes('تکمیل');
-      } else if (capacityFilter === 'full') {
-        matchesCapacity = statusText.includes('تکمیل');
+      const roomNumber = row[0] || '';
+      const roomType = row[1] || '';
+      const full = isRoomFull(row);
+
+      const tr = document.createElement('tr');
+      tr.dataset.roomRow = 'true';
+      tr.dataset.roomNumber = roomNumber;
+      tr.dataset.full = String(full);
+
+      tr.appendChild(makeCell(roomNumber, 'py-3.5 px-4 font-semibold text-slate-800'));
+      tr.appendChild(makeCell(roomType, 'py-3.5 px-4 text-slate-600'));
+      tr.appendChild(makeCell(row[2], 'py-3.5 px-4 text-slate-600'));
+      tr.appendChild(makeCell(row[3], 'py-3.5 px-4 text-slate-600'));
+
+      const statusCell = document.createElement('td');
+      statusCell.className = 'py-3.5 px-4 text-center';
+
+      const badge = document.createElement('span');
+      badge.className = full
+        ? 'inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-rose-100 text-rose-700'
+        : 'inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700';
+
+      badge.textContent = full
+        ? 'تکمیل ظرفیت'
+        : (row[4] || 'دارای ظرفیت');
+
+      statusCell.appendChild(badge);
+      tr.appendChild(statusCell);
+
+      const actionCell = document.createElement('td');
+      actionCell.className = 'py-3.5 px-4 text-center';
+
+      if (full) {
+        actionCell.textContent = 'پر';
+      } else {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.textContent = 'رزرو';
+        button.className =
+          'px-3 py-1 bg-amber-600 text-white rounded-lg text-xs hover:bg-amber-700';
+
+        button.addEventListener('click', () => {
+          handleBooking(roomNumber, roomType);
+        });
+
+        actionCell.appendChild(button);
       }
 
-      row.style.display = (matchesSearch && matchesCapacity) ? '' : 'none';
+      tr.appendChild(actionCell);
+      tableBody.appendChild(tr);
     });
+
+    filterData();
   }
 
-  // تابع تحلیل CSV
-  function parseCSV(text) {
-    const lines = text.trim().split(/\r\n|\n/);
-    return lines.map(line => {
-      const values = [];
-      let current = '';
-      let insideQuote = false;
-      for (let i = 0; i < line.length; i++) {
-        const char = line[i];
-        if (char === '"' && (i === 0 || line[i - 1] !== '\\')) insideQuote = !insideQuote;
-        else if (char === ',' && !insideQuote) {
-          values.push(current.trim().replace(/^"|"$/g, ''));
-          current = '';
-        } else current += char;
+  async function fetchRoomsCapacity() {
+    const tableBody = document.getElementById('tableBody');
+
+    try {
+      const url = new URL(GOOGLE_SHEET_CSV_URL);
+      url.searchParams.set('_t', Date.now());
+
+      const response = await fetch(url.toString());
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
       }
-      values.push(current.trim().replace(/^"|"$/g, ''));
-      return values;
-    });
-  }
 
-// تابع رزرو
-function handleBooking(roomNumber, roomType) {
-  const form = document.getElementById('dormPreRegisterForm');
+      const csvData = await response.text();
+      const parsedRows = parseCSV(csvData);
 
-  if (!form) {
-    console.error('فرم پیش‌ثبت‌نام در صفحه پیدا نشد.');
-    return;
-  }
+      // سطر اول گوگل‌شیت عنوان ستون‌هاست.
+      roomRows = parsedRows.slice(1);
+      renderRooms(roomRows);
+    } catch (error) {
+      console.error('خطا در دریافت CSV اتاق‌ها:', error);
+      tableBody.replaceChildren();
 
-  let roomInput = form.querySelector('input[name="room"]');
+      const tr = document.createElement('tr');
+      const td = makeCell(
+        'اطلاعات اتاق‌ها بارگذاری نشد. صفحه را تازه‌سازی کنید.',
+        'py-8 text-center text-rose-600'
+      );
 
-  if (!roomInput) {
-    roomInput = document.createElement('input');
-    roomInput.type = 'hidden';
-    roomInput.name = 'room';
-    form.appendChild(roomInput);
-  }
-
-  roomInput.value = roomNumber;
-
-  const roomTypeSelect = form.querySelector('#roomType');
-
-  if (roomTypeSelect && roomType) {
-    const matchingOption = [...roomTypeSelect.options].find(
-      option => option.value.trim() === roomType.trim()
-    );
-
-    if (matchingOption) {
-      roomTypeSelect.value = matchingOption.value;
-      roomTypeSelect.dispatchEvent(new Event('change', { bubbles: true }));
+      td.colSpan = 6;
+      tr.appendChild(td);
+      tableBody.appendChild(tr);
     }
   }
 
-  form.scrollIntoView({
-    behavior: 'smooth',
-    block: 'start'
-  });
-}
+  function initRoomsTable() {
+    document
+      .getElementById('searchInput')
+      .addEventListener('input', filterData);
+
+    document
+      .getElementById('capacityFilter')
+      .addEventListener('change', filterData);
+
+    fetchRoomsCapacity();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initRoomsTable);
+  } else {
+    initRoomsTable();
+  }
+</script>
 
 // دریافت داده‌ها
 async function fetchRoomsCapacity() {
@@ -723,9 +905,9 @@ async function fetchRoomsCapacity() {
 
       tableBody.appendChild(tr);
     });
-  } catch (e) {
+  <!-- } catch (e) {
     console.error(e);
-    tableBody.innerHTML =
+    tableBody.innerHTML = -->
       '<tr><td colspan="6" class="text-center py-6 text-rose-600">خطا در بارگذاری جدول</td></tr>';
   }
 }
