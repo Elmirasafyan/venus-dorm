@@ -552,40 +552,34 @@
       </div>
     </div>
   </section>
-<!-- کانتینر اصلی -->
+<!-- بخش جدول و فرم با اصلاح تگ‌های اسکریپت -->
 <div class="max-w-5xl mx-auto p-4 space-y-6">
-  
-  <!-- بخش جستجو و فیلتر -->
+  <!-- بخش فیلتر -->
   <div class="flex flex-col sm:flex-row gap-3 bg-amber-50/50 p-4 rounded-xl border border-amber-100">
-    <input type="text" id="searchInput" placeholder="🔍 جستجوی شماره اتاق..." 
-           class="flex-1 p-2.5 border border-amber-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400">
-    
-    <select id="capacityFilter" onchange="filterData()"
-            class="p-2.5 border border-amber-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400 text-slate-700">
+    <input type="text" id="searchInput" oninput="filterData()" placeholder="🔍 جستجوی شماره اتاق..." 
+           class="flex-1 p-2.5 border border-amber-200 rounded-lg focus:outline-none">
+    <select id="capacityFilter" onchange="filterData()" class="p-2.5 border border-amber-200 rounded-lg">
       <option value="all">همه اتاق‌ها</option>
       <option value="available">فقط دارای ظرفیت</option>
       <option value="full">تکمیل ظرفیت</option>
     </select>
   </div>
 
-  <!-- جدول داده‌ها -->
-  <div class="overflow-x-auto rounded-xl border border-amber-200/80 shadow-sm bg-white">
+  <!-- جدول -->
+  <div class="overflow-x-auto rounded-xl border border-amber-200 bg-white">
     <table class="w-full text-right text-sm text-slate-700 min-w-[620px]">
-      <thead class="bg-amber-100/60 text-amber-900 border-b border-amber-200/80 font-bold">
+      <thead class="bg-amber-100 text-amber-900 border-b border-amber-200 font-bold">
         <tr>
           <th class="py-3 px-4">شماره اتاق</th>
-          <th class="py-3 px-4">نوع اتاق</th>
-          <th class="py-3 px-4">اجاره</th>
           <th class="py-3 px-4">ودیعه</th>
-          <th class="py-3 px-4 text-center">وضعیت ظرفیت</th>
+          <th class="py-3 px-4">اجاره</th>
+          <th class="py-3 px-4 text-center">ظرفیت خالی</th>
           <th class="py-3 px-4 text-center">عملیات</th>
         </tr>
       </thead>
-      <tbody id="tableBody" class="divide-y divide-amber-100/80">
+      <tbody id="tableBody" class="divide-y divide-amber-100">
         <tr>
-          <td colspan="6" class="py-8 text-center text-amber-800 animate-pulse font-medium">
-            ⏳ در حال بارگذاری اطلاعات از سرور...
-          </td>
+          <td colspan="5" class="py-8 text-center text-amber-800 animate-pulse">⏳ در حال دریافت آخرین وضعیت ظرفیت...</td>
         </tr>
       </tbody>
     </table>
@@ -593,9 +587,28 @@
 </div>
 
 <script>
-  const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT9YXQhUK152G0b0GuEjfbvA8N2kBIs3CV_G-TvGIXKQAu4ahlSbuJ_G7dvKoknm8kOln0gn4ps8RX/pub?output=csv&gid=865030458';
+  // ۱. تنظیمات و متغیرها
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwa86yHKSaj1cI7Cr60_A2Jx8_DzYXiOlFFQRhn3vhdT637McCkZMuGTWJL3zXynYY7yA/exec";
 
-  // تابع فیلتر کردن
+  // ۲. تابع رزرو و اسکرول به فرم
+  function handleBooking(roomTitle) {
+    const form = document.getElementById('dormPreRegisterForm');
+    if (!form) return;
+
+    let roomInput = document.getElementById('selectedRoomInput');
+    if (!roomInput) {
+      roomInput = document.createElement('input');
+      roomInput.type = 'hidden';
+      roomInput.id = 'selectedRoomInput';
+      roomInput.name = 'room';
+      form.appendChild(roomInput);
+    }
+    roomInput.value = roomTitle;
+    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(() => { form.querySelector('input[name="fullName"]')?.focus(); }, 500);
+  }
+
+  // ۳. تابع فیلتر کردن هوشمند
   function filterData() {
     const searchTerm = document.getElementById('searchInput').value.trim().toLowerCase();
     const capacityFilter = document.getElementById('capacityFilter').value;
@@ -603,234 +616,52 @@
 
     rows.forEach(row => {
       const roomInfo = row.cells[0]?.textContent.toLowerCase() || '';
-      const statusText = row.cells[4]?.textContent.toLowerCase() || '';
-      
+      const statusText = row.cells[3]?.textContent.toLowerCase() || '';
       const matchesSearch = roomInfo.includes(searchTerm);
-      let matchesCapacity = true;
-      
-      if (capacityFilter === 'available') {
-        matchesCapacity = !statusText.includes('تکمیل');
-      } else if (capacityFilter === 'full') {
-        matchesCapacity = statusText.includes('تکمیل');
-      }
-
+      let matchesCapacity = (capacityFilter === 'all') || 
+                           (capacityFilter === 'available' && statusText !== '۰') || 
+                           (capacityFilter === 'full' && statusText === '۰');
       row.style.display = (matchesSearch && matchesCapacity) ? '' : 'none';
     });
   }
 
-  // تابع تحلیل CSV
-  function parseCSV(text) {
-    const lines = text.trim().split(/\r\n|\n/);
-    return lines.map(line => {
-      const values = [];
-      let current = '';
-      let insideQuote = false;
-      for (let i = 0; i < line.length; i++) {
-        const char = line[i];
-        if (char === '"' && (i === 0 || line[i - 1] !== '\\')) insideQuote = !insideQuote;
-        else if (char === ',' && !insideQuote) {
-          values.push(current.trim().replace(/^"|"$/g, ''));
-          current = '';
-        } else current += char;
-      }
-      values.push(current.trim().replace(/^"|"$/g, ''));
-      return values;
+  // ۴. رندر کردن داده‌های دریافتی از گوگل‌شیت
+  function renderData(data) {
+    const tbody = document.getElementById('tableBody');
+    if (!tbody || !data.ok) return;
+
+    let html = "";
+    data.rooms.forEach(r => {
+      const isFull = String(r.vacants) === "0" || String(r.status).includes("تکمیل");
+      const depositText = r.deposit ? (r.deposit + " م.ت") : "—";
+      const rentText = r.rent ? (r.rent + " م.ت") : "—";
+
+      const actionBtn = isFull
+        ? `<span class="px-3 py-1 rounded-lg bg-slate-100 text-slate-400 text-xs">تکمیل</span>`
+        : `<button onclick="handleBooking('${r.room}')" class="px-4 py-1.5 rounded-xl bg-emerald-500 text-white text-xs hover:bg-emerald-600">رزرو اتاق</button>`;
+
+      html += `
+        <tr class="${isFull ? 'opacity-60 bg-slate-50' : ''}">
+          <td class="py-3 px-4 font-bold">${r.room} <small class="text-slate-400">(${r.type})</small></td>
+          <td class="py-3 px-4">${depositText}</td>
+          <td class="py-3 px-4">${rentText}</td>
+          <td class="py-3 px-4 text-center font-bold">${r.vacants}</td>
+          <td class="py-3 px-4 text-center">${actionBtn}</td>
+        </tr>`;
     });
+    tbody.innerHTML = html;
   }
 
- <script>
-function handleBooking(roomTitle) {
-  const form = document.getElementById('dormPreRegisterForm');
-
-  if (!form) {
-    console.error('فرم پیش‌ثبت‌نام پیدا نشد.');
-    return;
+  // ۵. فراخوانی داده‌ها
+  function loadDashboard() {
+    const s = document.createElement("script");
+    s.src = `${SCRIPT_URL}?action=getData&callback=renderData&t=${Date.now()}`;
+    document.body.appendChild(s);
   }
 
-  // اگر فیلد شماره اتاق از قبل در فرم وجود ندارد، آن را بساز.
-  let roomInput = document.getElementById('selectedRoomInput');
-
-  if (!roomInput) {
-    roomInput = document.createElement('input');
-    roomInput.type = 'hidden';
-    roomInput.id = 'selectedRoomInput';
-    roomInput.name = 'room';
-    form.appendChild(roomInput);
-  }
-
-  // ثبت شماره اتاق انتخاب‌شده برای ارسال همراه فرم
-  roomInput.value = roomTitle;
-
-  // رفتن به فرم پیش‌ثبت‌نام
-  form.scrollIntoView({
-    behavior: 'smooth',
-    block: 'start'
-  });
-
-  // قرارگرفتن نشانگر روی فیلد نام، بعد از اسکرول
-  setTimeout(() => {
-    form.querySelector('input[name="fullName"]')?.focus({
-      preventScroll: true
-    });
-  }, 500);
-}
+  document.addEventListener('DOMContentLoaded', loadDashboard);
 </script>
 
-
-  // دریافت داده‌ها
-  async function fetchRoomsCapacity() {
-    const tableBody = document.getElementById('tableBody');
-    try {
-      const response = await fetch(`${GOOGLE_SHEET_CSV_URL}&_t=${Date.now()}`);
-      const csvData = await response.text();
-      const rows = parseCSV(csvData).slice(1).filter(r => r.some(c => c));
-      
-      tableBody.innerHTML = '';
-      rows.forEach(row => {
-        const isFull = (row[4] || '').toLowerCase().includes('تکمیل') || row[4] === '0';
-        const badge = isFull 
-          ? `<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-rose-100 text-rose-700">تکمیل ظرفیت</span>`
-          : `<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700">${row[4] || 'دارای ظرفیت'}</span>`;
-        
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td class="py-3.5 px-4 font-semibold text-slate-800">${row[0]}</td>
-          <td class="py-3.5 px-4 text-slate-600">${row[1]}</td>
-          <td class="py-3.5 px-4 text-slate-600">${row[2]}</td>
-          <td class="py-3.5 px-4 text-slate-600">${row[3]}</td>
-          <td class="py-3.5 px-4 text-center">${badge}</td>
-          <td class="py-3.5 px-4 text-center">${isFull ? '<span class="text-xs text-slate-400">پر</span>' : `<button onclick="handleBooking('${row[0]}')" class="px-3 py-1 bg-amber-600 text-white rounded-lg text-xs hover:bg-amber-700">رزرو</button>`}</td>
-        `;
-        tableBody.appendChild(tr);
-      });
-    } catch (e) {
-      tableBody.innerHTML = '<tr><td colspan="6" class="text-center py-6 text-rose-600">خطا در بارگذاری جدول</td></tr>';
-    }
-  }
-
-  // اجرای اولیه
-  document.addEventListener('DOMContentLoaded', () => {
-    fetchRoomsCapacity();
-    document.getElementById('searchInput').addEventListener('input', filterData);
-  });
-</script>
-
-
-  <!-- ===================== ۷. فرم پیش‌ثبت‌نام (کشویی — بعد از ظرفیت‌ها) ===================== -->
-                 <form id="dormPreRegisterForm" class="space-y-5 text-right pb-8">
-          <div>
-            <label class="block text-xs font-bold text-amber-900 mb-1">انتخاب شعبه مورد نظر</label>
-            <div class="relative">
-              <select name="branch" class="w-full bg-amber-50 border-2 border-amber-400 rounded-xl px-4 py-3 text-sm text-amber-900 focus:outline-none focus:border-amber-600 appearance-none font-medium">
-                <option value="خوابگاه دخترانه ونوس">خوابگاه دخترانه ونوس (میدان آرژانتین - بیهقی)</option>
-            
-               
-              </select>
-              <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center px-4 text-amber-600">
-                <i class="fas fa-chevron-down text-xs"></i>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-xs font-bold text-amber-900 mb-1">نام و نام خانوادگی <span class="text-rose-500">*</span></label>
-            <input type="text" name="fullName" required placeholder="مثلاً: المیرا" class="w-full bg-amber-50/50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 placeholder-amber-400 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition">
-          </div>
-
-          <div>
-            <label class="block text-xs font-bold text-amber-900 mb-1">شماره همراه (جهت هماهنگی) <span class="text-rose-500">*</span></label>
-            <input type="tel" name="phone" required placeholder="۰۹۱۲۳۴۵۶۷۸۹" dir="ltr" class="w-full bg-amber-50/50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 placeholder-amber-400 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition text-right">
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                       <div>
-              <label class="block text-xs font-bold text-amber-900 mb-1">نوع اتاق مد نظر</label>
-              <div class="relative">
-                <select name="roomType" id="roomType" class="w-full bg-amber-50 border-2 border-amber-400 rounded-xl px-4 py-3 text-sm text-amber-900 focus:outline-none focus:border-amber-600 appearance-none font-medium" required>
-                    <option value="" disabled selected>انتخاب نوع اتاق</option>
-                    <option value="اتاق ۱ تخته اختصاصی (VIP)">اتاق ۱ تخته اختصاصی (VIP)</option>
-                    <option value="اتاق ۲ تخته مستر">اتاق ۲ تخته مستر</option>
-                    <option value="اتاق ۲ تخته ساده">اتاق ۲ تخته ساده</option>
-                    <option value="اتاق مهمان ۲ تخته مستر">اتاق مهمان ۲ تخته مستر</option>
-                    <option value="اتاق ۳ تخته ساده">اتاق ۳ تخته ساده</option>
-                    <option value="اتاق ۳ تخته مستر">اتاق ۳ تخته مستر</option>
-                    <option value="اتاق ۴ تخته">اتاق ۴ تخته</option>
-                    <option value="اتاق ۶ تخته ساده">اتاق ۶ تخته ساده</option>
-                    <option value="اتاق ۶ تخته مستر">اتاق ۶ تخته مستر</option>
-                </select>
-                <!-- آیکون فلش برای هماهنگی با سایر فیلدها -->
-                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center px-4 text-amber-600">
-                    <i class="fas fa-chevron-down text-xs"></i>
-                </div>
-              </div>
-            </div>
-
-
-                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center px-4 text-amber-500">
-                  <i class="fas fa-chevron-down text-xs"></i>
-                </div>
-              </div>
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-amber-900 mb-1">تعداد متقاضیان</label>
-              <div class="relative">
-                <select name="guests" class="w-full bg-amber-50/50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200 appearance-none">
-                  <option value="۱ نفر">۱ نفر</option>
-                  <option value="۲ نفر (دوست یا همکار)">۲ نفر (دوست یا همکار)</option>
-                  <option value="۳ نفر به بالا">۳ نفر به بالا</option>
-                </select>
-                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center px-4 text-amber-500">
-                  <i class="fas fa-chevron-down text-xs"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-bold text-amber-900 mb-1">زمان ورود تقریبی</label>
-              <div class="relative">
-                <select name="entryDate" class="w-full bg-amber-50/50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200 appearance-none">
-                  <option value="هرچه سریع‌تر (ظرف ۲ روز آینده)">هرچه سریع‌تر (ظرف ۲ روز آینده)</option>
-                  <option value="اوایل ماه جاری">اوایل ماه جاری</option>
-                  <option value="ماه آینده">ماه آینده</option>
-                </select>
-                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center px-4 text-amber-500">
-                  <i class="fas fa-chevron-down text-xs"></i>
-                </div>
-              </div>
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-amber-900 mb-1">مدت زمان حدودی سکونت</label>
-              <div class="relative">
-                <select name="duration" class="w-full bg-amber-50/50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200 appearance-none">
-                  <option value="مشخص نیست / نیاز به مشاوره">مشخص نیست / نیاز به مشاوره</option>
-                  <option value="یک ماه یا آزمایشی">یک ماه یا آزمایشی</option>
-                  <option value="۳ ماه (یک فصل)">۳ ماه (یک فصل)</option>
-                  <option value="۶ ماه">۶ ماه</option>
-                  <option value="یک سال کامل تحصیلی/کاری">یک سال کامل تحصیلی/کاری</option>
-                </select>
-                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center px-4 text-amber-500">
-                  <i class="fas fa-chevron-down text-xs"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-xs font-bold text-amber-900 mb-1">توضیحات تکمیلی یا شرایط خاص (اختیاری)</label>
-            <textarea name="notes" rows="3" placeholder="مثلاً: نیاز به پارکینگ، ساعت کاری خاص، رشته تحصیلی..." class="w-full bg-amber-50/50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 placeholder-amber-400 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200 resize-none transition"></textarea>
-          </div>
-
-          <!-- پیام وضعیت ثبت فرم -->
-          <div id="formStatusMsg" class="hidden text-center text-sm py-2 px-4 rounded-xl font-bold"></div>
-
-          <button id="submitBtn" type="submit" class="w-full py-4 bg-gradient-to-l from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-bold rounded-xl shadow-lg shadow-amber-900/10 hover:shadow-amber-900/20 active:scale-[0.99] transition flex items-center justify-center gap-2">
-            <i class="fas fa-paper-plane"></i>
-            <span>ثبت درخواست پیش‌ثبت‌نام</span>
-          </button>
-        </form>
-<script>
   // =========================================================
   // آدرس وب‌اپ یکپارچه گوگل‌اسکریپت (Deploy با دسترسی Anyone)
   // =========================================================
