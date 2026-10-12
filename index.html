@@ -638,14 +638,44 @@
     });
   }
 
-  // تابع رزرو
-  function handleBooking(roomTitle) {
-    const roomInput = document.getElementById('selectedRoomInput') || document.querySelector('input[name="room"]');
-    if (roomInput) { roomInput.value = roomTitle; }
-    const bookingSection = document.getElementById('bookingForm') || document.getElementById('reservation');
-    if (bookingSection) { bookingSection.scrollIntoView({ behavior: 'smooth' }); }
-    else { alert(`اتاق «${roomTitle}» انتخاب شد.`); }
+ <script>
+function handleBooking(roomTitle) {
+  const form = document.getElementById('dormPreRegisterForm');
+
+  if (!form) {
+    console.error('فرم پیش‌ثبت‌نام پیدا نشد.');
+    return;
   }
+
+  // اگر فیلد شماره اتاق از قبل در فرم وجود ندارد، آن را بساز.
+  let roomInput = document.getElementById('selectedRoomInput');
+
+  if (!roomInput) {
+    roomInput = document.createElement('input');
+    roomInput.type = 'hidden';
+    roomInput.id = 'selectedRoomInput';
+    roomInput.name = 'room';
+    form.appendChild(roomInput);
+  }
+
+  // ثبت شماره اتاق انتخاب‌شده برای ارسال همراه فرم
+  roomInput.value = roomTitle;
+
+  // رفتن به فرم پیش‌ثبت‌نام
+  form.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start'
+  });
+
+  // قرارگرفتن نشانگر روی فیلد نام، بعد از اسکرول
+  setTimeout(() => {
+    form.querySelector('input[name="fullName"]')?.focus({
+      preventScroll: true
+    });
+  }, 500);
+}
+</script>
+
 
   // دریافت داده‌ها
   async function fetchRoomsCapacity() {
