@@ -638,7 +638,8 @@
     });
   }
 
-function handleBooking(roomTitle) {
+// تابع رزرو
+function handleBooking(roomNumber, roomType) {
   const form = document.getElementById('dormPreRegisterForm');
 
   if (!form) {
@@ -646,7 +647,6 @@ function handleBooking(roomTitle) {
     return;
   }
 
-  // نگهداری شماره اتاق انتخاب‌شده برای ارسال همراه فرم
   let roomInput = form.querySelector('input[name="room"]');
 
   if (!roomInput) {
@@ -656,52 +656,91 @@ function handleBooking(roomTitle) {
     form.appendChild(roomInput);
   }
 
-  roomInput.value = roomTitle;
+  roomInput.value = roomNumber;
 
-  // انتقال در همان صفحه به فرم پیش‌ثبت‌نام
+  const roomTypeSelect = form.querySelector('#roomType');
+
+  if (roomTypeSelect && roomType) {
+    const matchingOption = [...roomTypeSelect.options].find(
+      option => option.value.trim() === roomType.trim()
+    );
+
+    if (matchingOption) {
+      roomTypeSelect.value = matchingOption.value;
+      roomTypeSelect.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+  }
+
   form.scrollIntoView({
     behavior: 'smooth',
     block: 'start'
   });
 }
 
-  // دریافت داده‌ها
-  async function fetchRoomsCapacity() {
-    const tableBody = document.getElementById('tableBody');
-    try {
-      const response = await fetch(`${GOOGLE_SHEET_CSV_URL}&_t=${Date.now()}`);
-      const csvData = await response.text();
-      const rows = parseCSV(csvData).slice(1).filter(r => r.some(c => c));
-      
-      tableBody.innerHTML = '';
-      rows.forEach(row => {
-        const isFull = (row[4] || '').toLowerCase().includes('تکمیل') || row[4] === '0';
-        const badge = isFull 
-          ? `<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-rose-100 text-rose-700">تکمیل ظرفیت</span>`
-          : `<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700">${row[4] || 'دارای ظرفیت'}</span>`;
-        
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td class="py-3.5 px-4 font-semibold text-slate-800">${row[0]}</td>
-          <td class="py-3.5 px-4 text-slate-600">${row[1]}</td>
-          <td class="py-3.5 px-4 text-slate-600">${row[2]}</td>
-          <td class="py-3.5 px-4 text-slate-600">${row[3]}</td>
-          <td class="py-3.5 px-4 text-center">${badge}</td>
-          <td class="py-3.5 px-4 text-center">${isFull ? '<span class="text-xs text-slate-400">پر</span>' : `<button onclick="handleBooking('${row[0]}')" class="px-3 py-1 bg-amber-600 text-white rounded-lg text-xs hover:bg-amber-700">رزرو</button>`}</td>
-        `;
-        tableBody.appendChild(tr);
-      });
-    } catch (e) {
-      tableBody.innerHTML = '<tr><td colspan="6" class="text-center py-6 text-rose-600">خطا در بارگذاری جدول</td></tr>';
-    }
-  }
+// دریافت داده‌ها
+async function fetchRoomsCapacity() {
+  const tableBody = document.getElementById('tableBody');
 
-  // اجرای اولیه
-  document.addEventListener('DOMContentLoaded', () => {
-    fetchRoomsCapacity();
-    document.getElementById('searchInput').addEventListener('input', filterData);
-  });
-</script>
+  try {
+    const response = await fetch(`${GOOGLE_SHEET_CSV_URL}&_t=${Date.now()}`);
+    const csvData = await response.text();
+    const rows = parseCSV(csvData)
+      .slice(1)
+      .filter(r => r.some(c => c));
+
+    tableBody.innerHTML = '';
+
+    rows.forEach(row => {
+      const isFull =
+        (row[4] || '').toLowerCase().includes('تکمیل') ||
+        row[4] === '0';
+
+      const badge = isFull
+        ? `<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-rose-100 text-rose-700">تکمیل ظرفیت</span>`
+        : `<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700">${row[4] || 'دارای ظرفیت'}</span>`;
+
+      const tr = document.createElement('tr');
+
+      tr.innerHTML = `
+        <td class="py-3.5 px-4 font-semibold text-slate-800">${row[0]}</td>
+        <td class="py-3.5 px-4 text-slate-600">${row[1]}</td>
+        <td class="py-3.5 px-4 text-slate-600">${row[2]}</td>
+        <td class="py-3.5 px-4 text-slate-600">${row[3]}</td>
+        <td class="py-3.5 px-4 text-center">${badge}</td>
+        <td class="py-3.5 px-4 text-center">
+          ${
+            isFull
+              ? '<span class="text-xs text-slate-400">پر</span>'
+              : `<button
+                  type="button"
+                  onclick="handleBooking('${row[0]}', '${row[1]}')"
+                  class="px-3 py-1 bg-amber-600 text-white rounded-lg text-xs hover:bg-amber-700">
+                  رزرو
+                </button>`
+          }
+        </td>
+      `;
+
+      tableBody.appendChild(tr);
+    });
+  } catch (e) {
+    console.error(e);
+    tableBody.innerHTML =
+      '<tr><td colspan="6" class="text-center py-6 text-rose-600">خطا در بارگذاری جدول</td></tr>';
+  }
+}
+
+// اجرای اولیه
+document.addEventListener('DOMContentLoaded', () => {
+  fetchRoomsCapacity();
+
+  const searchInput = document.getElementById('searchInput');
+
+  if (searchInput) {
+    searchInput.addEventListener('input', filterData);
+  }
+});
+
 
 
   <!-- ===================== ۷. فرم پیش‌ثبت‌نام (کشویی — بعد از ظرفیت‌ها) ===================== -->
