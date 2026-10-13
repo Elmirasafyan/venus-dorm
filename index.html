@@ -617,6 +617,7 @@
     </div>
   </section>
 <!-- کانتینر اصلی -->
+<!-- ===================== بخش جدول ظرفیت‌ها و فیلتر ===================== -->
 <div class="max-w-5xl mx-auto p-4 space-y-6">
   
   <!-- بخش جستجو و فیلتر -->
@@ -639,7 +640,7 @@
         <tr>
           <th class="py-3 px-4">شماره اتاق</th>
           <th class="py-3 px-4">نوع اتاق</th>
-          <th class="py-3 px-4">اجاره</th>
+          <th class="py-3 px-4">اجاره ماهیانه</th>
           <th class="py-3 px-4">ودیعه</th>
           <th class="py-3 px-4 text-center">وضعیت ظرفیت</th>
           <th class="py-3 px-4 text-center">عملیات</th>
@@ -656,18 +657,204 @@
   </div>
 </div>
 
+<!-- ===================== بخش فرم پیش‌ثبت‌نام و واریز ===================== -->
+<section id="bookingSection" class="max-w-3xl mx-auto px-4 py-8">
+  <div id="formContainer" class="bg-white rounded-3xl p-6 sm:p-10 border border-amber-200 shadow-xl transition-all duration-300">
+    
+    <div class="text-center mb-6">
+      <h3 class="text-2xl font-black text-amber-950">فرم پیش‌ثبت‌نام و نهایی‌سازی رزرو</h3>
+      <p class="text-xs text-amber-700 mt-1">پس از تکمیل مشخصات، دستورالعمل واریز و تأیید نهایی برای شما فعال خواهد شد.</p>
+    </div>
+
+    <!-- باکس نمایش اتاق انتخاب‌شده -->
+    <div id="selectedRoomBanner" class="hidden mb-6 p-4 rounded-2xl bg-amber-50 border border-amber-300 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-amber-600 text-white flex items-center justify-center font-bold">
+          <i class="fas fa-door-open"></i>
+        </div>
+        <div>
+          <span class="text-xs text-amber-800 font-semibold block">اتاق انتخاب‌شده جهت رزرو:</span>
+          <span id="bannerRoomName" class="text-base font-black text-amber-950">—</span>
+        </div>
+      </div>
+      <button type="button" onclick="clearSelectedRoom()" class="text-xs text-rose-600 hover:underline">تغییر اتاق</button>
+    </div>
+
+    <form id="dormPreRegisterForm" class="space-y-5 text-right">
+      <!-- فیلد مخفی مشخصات اتاق -->
+      <input type="hidden" name="selectedRoomNumber" id="selectedRoomNumber" value="">
+
+      <!-- انتخاب شعبه -->
+      <div>
+        <label class="block text-xs font-bold text-amber-900 mb-1">انتخاب شعبه مورد نظر</label>
+        <div class="relative">
+          <select name="branch" class="w-full bg-amber-50/50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-900 focus:outline-none focus:ring-2 focus:ring-amber-400 font-medium appearance-none">
+            <option value="خوابگاه دخترانه ونوس">خوابگاه دخترانه ونوس (میدان آرژانتین - بیهقی)</option>
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center px-4 text-amber-600">
+            <i class="fas fa-chevron-down text-xs"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- مشخصات فردی -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-xs font-bold text-amber-900 mb-1">نام و نام خانوادگی <span class="text-rose-500">*</span></label>
+          <input type="text" name="fullName" required placeholder="مثلاً: المیرا صوفیان" 
+                 class="w-full bg-amber-50/30 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-900 focus:outline-none focus:ring-2 focus:ring-amber-400">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-amber-900 mb-1">شماره همراه (جهت هماهنگی) <span class="text-rose-500">*</span></label>
+          <input type="tel" name="phone" required placeholder="۰۹۱۲۳۴۵۶۷۸۹" dir="ltr" 
+                 class="w-full bg-amber-50/30 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-900 focus:outline-none focus:ring-2 focus:ring-amber-400 text-right">
+        </div>
+      </div>
+
+      <!-- نوع اتاق و تعداد متقاضیان -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-xs font-bold text-amber-900 mb-1">نوع اتاق مد نظر <span class="text-rose-500">*</span></label>
+          <div class="relative">
+            <select name="roomType" id="roomType" required class="w-full bg-amber-50/30 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-900 focus:outline-none focus:ring-2 focus:ring-amber-400 appearance-none font-medium">
+              <option value="" disabled selected>انتخاب نوع اتاق</option>
+              <option value="اتاق ۱ تخته اختصاصی (VIP)">اتاق ۱ تخته اختصاصی (VIP)</option>
+              <option value="اتاق ۲ تخته مستر">اتاق ۲ تخته مستر</option>
+              <option value="اتاق ۲ تخته ساده">اتاق ۲ تخته ساده</option>
+              <option value="اتاق مهمان ۲ تخته مستر">اتاق مهمان ۲ تخته مستر</option>
+              <option value="اتاق ۳ تخته ساده">اتاق ۳ تخته ساده</option>
+              <option value="اتاق ۳ تخته مستر">اتاق ۳ تخته مستر</option>
+              <option value="اتاق ۴ تخته">اتاق ۴ تخته</option>
+              <option value="اتاق ۶ تخته ساده">اتاق ۶ تخته ساده</option>
+              <option value="اتاق ۶ تخته مستر">اتاق ۶ تخته مستر</option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center px-4 text-amber-600">
+              <i class="fas fa-chevron-down text-xs"></i>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-amber-900 mb-1">تعداد متقاضیان</label>
+          <div class="relative">
+            <select name="guests" class="w-full bg-amber-50/30 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-900 focus:outline-none focus:ring-2 focus:ring-amber-400 appearance-none">
+              <option value="۱ نفر">۱ نفر</option>
+              <option value="۲ نفر (دوست یا همکار)">۲ نفر (دوست یا همکار)</option>
+              <option value="۳ نفر به بالا">۳ نفر به بالا</option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center px-4 text-amber-600">
+              <i class="fas fa-chevron-down text-xs"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- زمان ورود و مدت سکونت -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-xs font-bold text-amber-900 mb-1">زمان ورود تقریبی</label>
+          <div class="relative">
+            <select name="entryDate" class="w-full bg-amber-50/30 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-900 focus:outline-none focus:ring-2 focus:ring-amber-400 appearance-none">
+              <option value="هرچه سریع‌تر (ظرف ۲ روز آینده)">هرچه سریع‌تر (ظرف ۲ روز آینده)</option>
+              <option value="اوایل ماه جاری">اوایل ماه جاری</option>
+              <option value="ماه آینده">ماه آینده</option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center px-4 text-amber-600">
+              <i class="fas fa-chevron-down text-xs"></i>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-amber-900 mb-1">مدت زمان حدودی سکونت</label>
+          <div class="relative">
+            <select name="duration" class="w-full bg-amber-50/30 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-900 focus:outline-none focus:ring-2 focus:ring-amber-400 appearance-none">
+              <option value="مشخص نیست / نیاز به مشاوره">مشخص نیست / نیاز به مشاوره</option>
+              <option value="یک ماه یا آزمایشی">یک ماه یا آزمایشی</option>
+              <option value="۳ ماه (یک فصل)">۳ ماه (یک فصل)</option>
+              <option value="۶ ماه">۶ ماه</option>
+              <option value="یک سال کامل تحصیلی/کاری">یک سال کامل تحصیلی/کاری</option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center px-4 text-amber-600">
+              <i class="fas fa-chevron-down text-xs"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- توضیحات -->
+      <div>
+        <label class="block text-xs font-bold text-amber-900 mb-1">توضیحات تکمیلی یا شرایط خاص (اختیاری)</label>
+        <textarea name="notes" rows="3" placeholder="مثلاً: نیاز به پارکینگ، ساعت کاری خاص، رشته تحصیلی..." 
+                  class="w-full bg-amber-50/30 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-900 focus:outline-none focus:ring-2 focus:ring-amber-400 resize-none"></textarea>
+      </div>
+
+      <!-- بخش اطلاعات واریز بیعانه / رزرو قطعی -->
+      <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl space-y-2">
+        <div class="flex items-center gap-2 text-emerald-900 font-bold text-sm">
+          <i class="fas fa-credit-card"></i>
+          <span>اطلاعات واریز بیعانه جهت رزرو قطعی</span>
+        </div>
+        <p class="text-xs text-emerald-800 leading-relaxed">
+          پس از ثبت فرم، جهت تثبیت اتاق می‌توانید مبلغ ودیعه/بیعانه را به شماره کارت رسمی مدیریت واریز کرده و تصویر فیش را در ایتا یا واتس‌اپ ارسال نمایید:
+        </p>
+        <div class="bg-white p-3 rounded-xl border border-emerald-200 flex flex-col sm:flex-row justify-between items-center text-xs font-mono font-bold text-emerald-950 gap-2">
+          <span>شماره کارت: ۶۰۳۷-۹۹۷۵-xxxx-xxxx</span>
+          <span class="font-sans text-emerald-800 font-medium">به نام فاطمه دلاوری (مدیریت ونوس)</span>
+        </div>
+      </div>
+
+      <!-- پیام وضعیت -->
+      <div id="formStatusMsg" class="hidden text-center text-sm py-3 px-4 rounded-xl font-bold"></div>
+
+      <!-- دکمه ارسال -->
+      <button id="submitBtn" type="submit" 
+              class="w-full py-4 bg-gradient-to-l from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition flex items-center justify-center gap-2">
+        <i class="fas fa-paper-plane"></i>
+        <span>ثبت درخواست و انتقال به پشتیبانی</span>
+      </button>
+    </form>
+  </div>
+</section>
+
+<!-- ===================== اسکریپت یکپارچه و بهینه‌سازی‌شده ===================== -->
 <script>
   const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQT9YXQhUK152G0b0GuEjfbvA8N2kBIs3CV_G-TvGIXKQAu4ahlSbuJ_G7dvKoknm8kOln0gn4ps8RX/pub?output=csv&gid=865030458';
 
-  // تابع فیلتر کردن
+  // ۱. تجزیه متن CSV
+  function parseCSV(text) {
+    const lines = text.trim().split(/\r\n|\n/);
+    return lines.map(line => {
+      const values = [];
+      let current = '';
+      let insideQuote = false;
+      for (let i = 0; i < line.length; i++) {
+        const char = line[i];
+        if (char === '"' && (i === 0 || line[i - 1] !== '\\')) {
+          insideQuote = !insideQuote;
+        } else if (char === ',' && !insideQuote) {
+          values.push(current.trim().replace(/^"|"$/g, ''));
+          current = '';
+        } else {
+          current += char;
+        }
+      }
+      values.push(current.trim().replace(/^"|"$/g, ''));
+      return values;
+    });
+  }
+
+  // ۲. فیلتر کردن اتاق‌ها در جدول
   function filterData() {
     const searchTerm = document.getElementById('searchInput').value.trim().toLowerCase();
     const capacityFilter = document.getElementById('capacityFilter').value;
     const rows = document.querySelectorAll('#tableBody tr');
 
     rows.forEach(row => {
-      const roomInfo = row.cells[0]?.textContent.toLowerCase() || '';
-      const statusText = row.cells[4]?.textContent.toLowerCase() || '';
+      if (row.cells.length < 5) return;
+      const roomInfo = (row.cells[0]?.textContent || '').toLowerCase();
+      const statusText = (row.cells[4]?.textContent || '').toLowerCase();
       
       const matchesSearch = roomInfo.includes(searchTerm);
       let matchesCapacity = true;
@@ -682,60 +869,57 @@
     });
   }
 
-  // تابع تحلیل CSV
-  function parseCSV(text) {
-    const lines = text.trim().split(/\r\n|\n/);
-    return lines.map(line => {
-      const values = [];
-      let current = '';
-      let insideQuote = false;
-      for (let i = 0; i < line.length; i++) {
-        const char = line[i];
-        if (char === '"' && (i === 0 || line[i - 1] !== '\\')) insideQuote = !insideQuote;
-        else if (char === ',' && !insideQuote) {
-          values.push(current.trim().replace(/^"|"$/g, ''));
-          current = '';
-        } else current += char;
+  // ۳. کلیک روی دکمه رزرو و هدایت به فرم
+  function handleBooking(roomNumber, roomType = '') {
+    // تنظیم شماره اتاق در فیلد پنهان
+    const hiddenRoomInput = document.getElementById('selectedRoomNumber');
+    if (hiddenRoomInput) hiddenRoomInput.value = roomNumber;
+
+    // نمایش در بنر بالای فرم
+    const banner = document.getElementById('selectedRoomBanner');
+    const bannerText = document.getElementById('bannerRoomName');
+    if (banner && bannerText) {
+      bannerText.textContent = `${roomNumber} ${roomType ? '(' + roomType + ')' : ''}`;
+      banner.classList.remove('hidden');
+    }
+
+    // هماهنگ‌سازی منوی کشویی نوع اتاق
+    const roomTypeSelect = document.getElementById('roomType');
+    if (roomTypeSelect && roomType) {
+      for (let i = 0; i < roomTypeSelect.options.length; i++) {
+        if (roomType.includes(roomTypeSelect.options[i].value) || roomTypeSelect.options[i].value.includes(roomType)) {
+          roomTypeSelect.selectedIndex = i;
+          break;
+        }
       }
-      values.push(current.trim().replace(/^"|"$/g, ''));
-      return values;
-    });
-  function handleBooking(roomTitle) {
-  // ۱. ثبت شماره اتاق در فیلد پنهان
-  const hiddenRoomInput = document.getElementById('selectedRoomNumber');
-  if (hiddenRoomInput) {
-    hiddenRoomInput.value = roomTitle;
+    }
+
+    // اسکرول نرم به سمت فرم پیش‌ثبت‌نام
+    const targetSection = document.getElementById('bookingSection');
+    const formContainer = document.getElementById('formContainer');
+
+    if (targetSection) {
+      targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // هایلایت بصری زیبا
+    if (formContainer) {
+      formContainer.classList.add('ring-4', 'ring-amber-500', 'shadow-2xl');
+      setTimeout(() => {
+        formContainer.classList.remove('ring-4', 'ring-amber-500', 'shadow-2xl');
+      }, 1600);
+    }
   }
 
-  // ۲. هدایت کاربر به فرم پیش‌ثبت‌نام
-  const dormForm = document.getElementById('dormPreRegisterForm');
-  if (dormForm) {
-    dormForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    
-    // جلوه بصری کوتاه (هایلایت) برای جلب توجه کاربر به فرم
-    dormForm.classList.add('ring-2', 'ring-amber-500', 'p-2', 'rounded-2xl', 'transition-all');
-    setTimeout(() => {
-      dormForm.classList.remove('ring-2', 'ring-amber-500', 'p-2');
-    }, 2000);
+  // لغو انتخاب اتاق
+  function clearSelectedRoom() {
+    const hiddenRoomInput = document.getElementById('selectedRoomNumber');
+    if (hiddenRoomInput) hiddenRoomInput.value = '';
+    const banner = document.getElementById('selectedRoomBanner');
+    if (banner) banner.classList.add('hidden');
   }
-}
 
-
-  // ۲. هدایت کاربر به فرم پیش‌ثبت‌نام
-  const dormForm = document.getElementById('dormPreRegisterForm');
-  if (dormForm) {
-    dormForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    
-    // جلوه بصری کوتاه (هایلایت) برای جلب توجه کاربر به فرم
-    dormForm.classList.add('ring-2', 'ring-amber-500', 'p-2', 'rounded-2xl', 'transition-all');
-    setTimeout(() => {
-      dormForm.classList.remove('ring-2', 'ring-amber-500', 'p-2');
-    }, 2000);
-  }
-}
-
-
-  // دریافت داده‌ها
+  // ۴. دریافت داده‌های زنده از گوگل شیت
   async function fetchRoomsCapacity() {
     const tableBody = document.getElementById('tableBody');
     try {
@@ -745,153 +929,47 @@
       
       tableBody.innerHTML = '';
       rows.forEach(row => {
-        const isFull = (row[4] || '').toLowerCase().includes('تکمیل') || row[4] === '0';
+        const roomNum = row[0] || '—';
+        const roomType = row[1] || '—';
+        const rent = row[2] || '—';
+        const deposit = row[3] || '—';
+        const capacityText = row[4] || 'دارای ظرفیت';
+
+        const isFull = capacityText.toLowerCase().includes('تکمیل') || capacityText === '0';
+        
         const badge = isFull 
           ? `<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-rose-100 text-rose-700">تکمیل ظرفیت</span>`
-          : `<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700">${row[4] || 'دارای ظرفیت'}</span>`;
+          : `<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700">${capacityText}</span>`;
         
+        const actionBtn = isFull
+          ? `<span class="text-xs text-slate-400 font-bold">تکمیل</span>`
+          : `<button onclick="handleBooking('${roomNum}', '${roomType}')" class="px-3.5 py-1.5 bg-amber-600 hover:bg-amber-700 text-white rounded-xl text-xs font-bold shadow-sm transition">رزرو و واریز</button>`;
+
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td class="py-3.5 px-4 font-semibold text-slate-800">${row[0]}</td>
-          <td class="py-3.5 px-4 text-slate-600">${row[1]}</td>
-          <td class="py-3.5 px-4 text-slate-600">${row[2]}</td>
-          <td class="py-3.5 px-4 text-slate-600">${row[3]}</td>
+          <td class="py-3.5 px-4 font-bold text-slate-900">${roomNum}</td>
+          <td class="py-3.5 px-4 text-slate-600">${roomType}</td>
+          <td class="py-3.5 px-4 text-slate-600">${rent}</td>
+          <td class="py-3.5 px-4 text-slate-600">${deposit}</td>
           <td class="py-3.5 px-4 text-center">${badge}</td>
-          <td class="py-3.5 px-4 text-center">${isFull ? '<span class="text-xs text-slate-400">پر</span>' : `<button onclick="handleBooking('${row[0]}')" class="px-3 py-1 bg-amber-600 text-white rounded-lg text-xs hover:bg-amber-700">رزرو</button>`}</td>
+          <td class="py-3.5 px-4 text-center">${actionBtn}</td>
         `;
         tableBody.appendChild(tr);
       });
     } catch (e) {
-      tableBody.innerHTML = '<tr><td colspan="6" class="text-center py-6 text-rose-600">خطا در بارگذاری جدول</td></tr>';
+      console.error(e);
+      tableBody.innerHTML = '<tr><td colspan="6" class="text-center py-6 text-rose-600 font-bold">خطا در بارگذاری جدول اطلاعات اتاق‌ها</td></tr>';
     }
   }
 
-  // اجرای اولیه
+  // ۵. راه‌اندازی اولیه رویدادها
   document.addEventListener('DOMContentLoaded', () => {
     fetchRoomsCapacity();
-    document.getElementById('searchInput').addEventListener('input', filterData);
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) searchInput.addEventListener('input', filterData);
   });
 </script>
 
-
-  <!-- ===================== ۷. فرم پیش‌ثبت‌نام (کشویی — بعد از ظرفیت‌ها) ===================== -->
-  <!-- این خط را دقیقاً بعد از تگ <form id="dormPreRegisterForm"> قرار دهید -->
-<input type="hidden" name="selectedRoomNumber" id="selectedRoomNumber" value="">
-
-                 <form id="dormPreRegisterForm" class="space-y-5 text-right pb-8">
-          <div>
-            <label class="block text-xs font-bold text-amber-900 mb-1">انتخاب شعبه مورد نظر</label>
-            <div class="relative">
-              <select name="branch" class="w-full bg-amber-50 border-2 border-amber-400 rounded-xl px-4 py-3 text-sm text-amber-900 focus:outline-none focus:border-amber-600 appearance-none font-medium">
-                <option value="خوابگاه دخترانه ونوس">خوابگاه دخترانه ونوس (میدان آرژانتین - بیهقی)</option>
-            
-               
-              </select>
-              <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center px-4 text-amber-600">
-                <i class="fas fa-chevron-down text-xs"></i>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-xs font-bold text-amber-900 mb-1">نام و نام خانوادگی <span class="text-rose-500">*</span></label>
-            <input type="text" name="fullName" required placeholder="مثلاً: المیرا" class="w-full bg-amber-50/50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 placeholder-amber-400 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition">
-          </div>
-
-          <div>
-            <label class="block text-xs font-bold text-amber-900 mb-1">شماره همراه (جهت هماهنگی) <span class="text-rose-500">*</span></label>
-            <input type="tel" name="phone" required placeholder="۰۹۱۲۳۴۵۶۷۸۹" dir="ltr" class="w-full bg-amber-50/50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 placeholder-amber-400 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200 transition text-right">
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                       <div>
-              <label class="block text-xs font-bold text-amber-900 mb-1">نوع اتاق مد نظر</label>
-              <div class="relative">
-                <select name="roomType" id="roomType" class="w-full bg-amber-50 border-2 border-amber-400 rounded-xl px-4 py-3 text-sm text-amber-900 focus:outline-none focus:border-amber-600 appearance-none font-medium" required>
-                    <option value="" disabled selected>انتخاب نوع اتاق</option>
-                    <option value="اتاق ۱ تخته اختصاصی (VIP)">اتاق ۱ تخته اختصاصی (VIP)</option>
-                    <option value="اتاق ۲ تخته مستر">اتاق ۲ تخته مستر</option>
-                    <option value="اتاق ۲ تخته ساده">اتاق ۲ تخته ساده</option>
-                    <option value="اتاق مهمان ۲ تخته مستر">اتاق مهمان ۲ تخته مستر</option>
-                    <option value="اتاق ۳ تخته ساده">اتاق ۳ تخته ساده</option>
-                    <option value="اتاق ۳ تخته مستر">اتاق ۳ تخته مستر</option>
-                    <option value="اتاق ۴ تخته">اتاق ۴ تخته</option>
-                    <option value="اتاق ۶ تخته ساده">اتاق ۶ تخته ساده</option>
-                    <option value="اتاق ۶ تخته مستر">اتاق ۶ تخته مستر</option>
-                </select>
-                <!-- آیکون فلش برای هماهنگی با سایر فیلدها -->
-                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center px-4 text-amber-600">
-                    <i class="fas fa-chevron-down text-xs"></i>
-                </div>
-              </div>
-            </div>
-
-
-                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center px-4 text-amber-500">
-                  <i class="fas fa-chevron-down text-xs"></i>
-                </div>
-              </div>
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-amber-900 mb-1">تعداد متقاضیان</label>
-              <div class="relative">
-                <select name="guests" class="w-full bg-amber-50/50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200 appearance-none">
-                  <option value="۱ نفر">۱ نفر</option>
-                  <option value="۲ نفر (دوست یا همکار)">۲ نفر (دوست یا همکار)</option>
-                  <option value="۳ نفر به بالا">۳ نفر به بالا</option>
-                </select>
-                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center px-4 text-amber-500">
-                  <i class="fas fa-chevron-down text-xs"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-bold text-amber-900 mb-1">زمان ورود تقریبی</label>
-              <div class="relative">
-                <select name="entryDate" class="w-full bg-amber-50/50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200 appearance-none">
-                  <option value="هرچه سریع‌تر (ظرف ۲ روز آینده)">هرچه سریع‌تر (ظرف ۲ روز آینده)</option>
-                  <option value="اوایل ماه جاری">اوایل ماه جاری</option>
-                  <option value="ماه آینده">ماه آینده</option>
-                </select>
-                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center px-4 text-amber-500">
-                  <i class="fas fa-chevron-down text-xs"></i>
-                </div>
-              </div>
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-amber-900 mb-1">مدت زمان حدودی سکونت</label>
-              <div class="relative">
-                <select name="duration" class="w-full bg-amber-50/50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200 appearance-none">
-                  <option value="مشخص نیست / نیاز به مشاوره">مشخص نیست / نیاز به مشاوره</option>
-                  <option value="یک ماه یا آزمایشی">یک ماه یا آزمایشی</option>
-                  <option value="۳ ماه (یک فصل)">۳ ماه (یک فصل)</option>
-                  <option value="۶ ماه">۶ ماه</option>
-                  <option value="یک سال کامل تحصیلی/کاری">یک سال کامل تحصیلی/کاری</option>
-                </select>
-                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center px-4 text-amber-500">
-                  <i class="fas fa-chevron-down text-xs"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-xs font-bold text-amber-900 mb-1">توضیحات تکمیلی یا شرایط خاص (اختیاری)</label>
-            <textarea name="notes" rows="3" placeholder="مثلاً: نیاز به پارکینگ، ساعت کاری خاص، رشته تحصیلی..." class="w-full bg-amber-50/50 border border-amber-200 rounded-xl px-4 py-3 text-sm text-amber-800 placeholder-amber-400 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200 resize-none transition"></textarea>
-          </div>
-
-          <!-- پیام وضعیت ثبت فرم -->
-          <div id="formStatusMsg" class="hidden text-center text-sm py-2 px-4 rounded-xl font-bold"></div>
-
-          <button id="submitBtn" type="submit" class="w-full py-4 bg-gradient-to-l from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white font-bold rounded-xl shadow-lg shadow-amber-900/10 hover:shadow-amber-900/20 active:scale-[0.99] transition flex items-center justify-center gap-2">
-            <i class="fas fa-paper-plane"></i>
-            <span>ثبت درخواست پیش‌ثبت‌نام</span>
-          </button>
-        </form>
-<script>
   // =========================================================
   // آدرس وب‌اپ یکپارچه گوگل‌اسکریپت (Deploy با دسترسی Anyone)
   // =========================================================
