@@ -79,6 +79,70 @@
       { "@type": "LocationFeatureSpecification", "name": "سالن مطالعه مجزا", "value": true }
     ]
   }
+    document.getElementById('dormPreRegisterForm').addEventListener('submit', async function (e) {
+  e.preventDefault();
+
+  const submitBtn = document.getElementById('submitBtn');
+  const statusMsg = document.getElementById('formStatusMsg');
+  const formData = new FormData(this);
+
+  // تبدیل داده‌های فرم به شیء
+  const data = Object.fromEntries(formData.entries());
+
+  // بررسی انتخاب اتاق
+  if (!data.selectedRoomNumber) {
+    statusMsg.className = 'text-center text-sm py-2 px-4 rounded-xl font-bold bg-amber-100 text-amber-800 block';
+    statusMsg.innerText = 'لطفاً ابتدا از جدول بالا، یک اتاق را انتخاب کنید.';
+    return;
+  }
+
+  // تغییر وضعیت دکمه در حال پردازش
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = `
+    <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+    </svg>
+    در حال اتصال به درگاه پرداخت شاپرک...
+  `;
+
+  try {
+    /* 
+      نکته فنی:
+      به دلیل مسائل امنیتی (کلید مرچنت و درگاه)، درخواست درگاه باید از سمت سرور/بک‌اند ارسال شود.
+      آدرس بک‌اند خود را جایگزین /api/create-payment کنید:
+    */
+    const response = await fetch('/api/create-payment', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        room: data.selectedRoomNumber,
+        roomType: data.roomType,
+        fullName: data.fullName,
+        phone: data.phone,
+        amount: 500000 // مبلغ پیش‌پرداخت به تومان (مثلاً ۵۰۰ هزار تومان ودیعه اولیه)
+      })
+    });
+
+    const result = await response.json();
+
+    if (result.success && result.paymentUrl) {
+      // هدایت مستقیم کاربر به درگاه بانکی
+      window.location.href = result.paymentUrl;
+    } else {
+      throw new Error(result.message || 'خطا در ایجاد تراکنش');
+    }
+
+  } catch (error) {
+    statusMsg.className = 'text-center text-sm py-2 px-4 rounded-xl font-bold bg-rose-100 text-rose-700 block';
+    statusMsg.innerText = 'خطا در برقراری ارتباط با درگاه پرداخت. لطفاً دوباره تلاش کنید.';
+    
+    // بازگردانی دکمه به حالت عادی
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = `<i class="fas fa-paper-plane ml-2"></i><span>ثبت و پرداخت پیش‌ثبت‌نام</span>`;
+  }
+});
+
   </script>
 
   <script>
