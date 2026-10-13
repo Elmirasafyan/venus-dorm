@@ -637,15 +637,26 @@
       return values;
     });
   }
-
-  // تابع رزرو
-  function handleBooking(roomTitle) {
-    const roomInput = document.getElementById('selectedRoomInput') || document.querySelector('input[name="room"]');
-    if (roomInput) { roomInput.value = roomTitle; }
-    const bookingSection = document.getElementById('bookingForm') || document.getElementById('reservation');
-    if (bookingSection) { bookingSection.scrollIntoView({ behavior: 'smooth' }); }
-    else { alert(`اتاق «${roomTitle}» انتخاب شد.`); }
+function handleBooking(roomTitle) {
+  // ۱. ثبت شماره اتاق در فیلد پنهان
+  const hiddenRoomInput = document.getElementById('selectedRoomNumber');
+  if (hiddenRoomInput) {
+    hiddenRoomInput.value = roomTitle;
   }
+
+  // ۲. هدایت کاربر به فرم پیش‌ثبت‌نام
+  const dormForm = document.getElementById('dormPreRegisterForm');
+  if (dormForm) {
+    dormForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    
+    // جلوه بصری کوتاه (هایلایت) برای جلب توجه کاربر به فرم
+    dormForm.classList.add('ring-2', 'ring-amber-500', 'p-2', 'rounded-2xl', 'transition-all');
+    setTimeout(() => {
+      dormForm.classList.remove('ring-2', 'ring-amber-500', 'p-2');
+    }, 2000);
+  }
+}
+
 
   // دریافت داده‌ها
   async function fetchRoomsCapacity() {
@@ -687,6 +698,9 @@
 
 
   <!-- ===================== ۷. فرم پیش‌ثبت‌نام (کشویی — بعد از ظرفیت‌ها) ===================== -->
+  <!-- این خط را دقیقاً بعد از تگ <form id="dormPreRegisterForm"> قرار دهید -->
+<input type="hidden" name="selectedRoomNumber" id="selectedRoomNumber" value="">
+
                  <form id="dormPreRegisterForm" class="space-y-5 text-right pb-8">
           <div>
             <label class="block text-xs font-bold text-amber-900 mb-1">انتخاب شعبه مورد نظر</label>
