@@ -636,13 +636,26 @@
       values.push(current.trim().replace(/^"|"$/g, ''));
       return values;
     });
-  }
-function handleBooking(roomTitle) {
+  function handleBooking(roomTitle) {
   // ۱. ثبت شماره اتاق در فیلد پنهان
   const hiddenRoomInput = document.getElementById('selectedRoomNumber');
   if (hiddenRoomInput) {
     hiddenRoomInput.value = roomTitle;
   }
+
+  // ۲. هدایت کاربر به فرم پیش‌ثبت‌نام
+  const dormForm = document.getElementById('dormPreRegisterForm');
+  if (dormForm) {
+    dormForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    
+    // جلوه بصری کوتاه (هایلایت) برای جلب توجه کاربر به فرم
+    dormForm.classList.add('ring-2', 'ring-amber-500', 'p-2', 'rounded-2xl', 'transition-all');
+    setTimeout(() => {
+      dormForm.classList.remove('ring-2', 'ring-amber-500', 'p-2');
+    }, 2000);
+  }
+}
+
 
   // ۲. هدایت کاربر به فرم پیش‌ثبت‌نام
   const dormForm = document.getElementById('dormPreRegisterForm');
